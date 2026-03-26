@@ -18,7 +18,7 @@ Estimated Time: x
 2. Navigate to Custom Images in the Self Service portal.
     ![Image](./images/register-listing-1.png)
 
-3. Click "Register Listing" and fill in the following information regarding the listing you created in Lab 2. 
+3. Click "Register Listing" and fill in the following information for the Marketplace listing you created in the previous image-publication lab.
     * Listing Name (_please be sure to use the listing's name as it is in OMP_)
     * Listing OCID
     * App Catalog OCID
@@ -36,7 +36,7 @@ Estimated Time: x
 1. Under "Your Listings", find the listing your image belongs to and press the plus icon.
     ![Image](./images/add-image-1.png)
 
-2. Using information from the image you created in lab 2, fill out the following:
+2. Using information from the image you created in the earlier Marketplace image workflow, fill out the following:
     * Image OCID
     * Version
     > TIP: For help finding the image OCID, expand the "Can't find the OCID?" section at the bottom of the form.

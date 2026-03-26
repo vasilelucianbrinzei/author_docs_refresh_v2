@@ -1,29 +1,30 @@
-# Tools
+# Tools and Productivity
 
 ## Introduction
 
-Use this section for the tools that support authoring, screenshot preparation, and workshop cleanup. These labs focus on practical tools rather than the main author workflow itself.
+Use this section for the practical tools that improve screenshot quality, reduce asset size, and speed up cleanup. These labs support the main author workflow instead of replacing it.
 
 Estimated Time: 5 minutes
 
 ### Objectives
 
-* Know which tools support workshop authoring and QA
-* Use screenshot, image, and cleanup tools at the correct point in the workflow
-* Understand where tool-specific guidance lives
+* Know which tool to use for each common authoring problem
+* Use screenshot and cleanup tools at the right point in the workflow
+* Keep the tool choices connected to review, QA, and publish needs
 
-## Task 1: Use Tools When They Add Value
+## Task 1: Match The Tool To The Problem
 
-1. Use these labs as support references while you build and polish workshop content.
-2. Apply screenshot and optimization guidance before you open a pull request.
-3. Use cleanup tools when you need help fixing Markdown issues or reducing image size before QA.
-4. Return to the validation and publish section when tool-driven cleanup is complete.
+| Lab | Use it for | Best time to use it | Result |
+| --- | --- | --- | --- |
+| Lab 5: Capture effective screens | Better screenshots and clearer step visuals | While documenting the product flow | Cleaner and more consistent screenshots |
+| Lab 6: Optimize screenshots with OptiShot | Smaller, lighter image files | After you capture screenshots and before review | Faster-loading pages and smaller assets |
+| Lab 7: Clean up content with Fixomat | Markdown and asset cleanup | Before QA, pull request review, or publish | Cleaner content with fewer avoidable issues |
 
-## Included Labs
+## Task 2: Keep Tools Connected To The Workflow
 
-* Lab 4a: Capture effective screens - Best practices
-* Lab 4b: How to use OptiShot to optimize screenshots
-* Lab 5d: Fixomat 2000
+1. Use these labs while you are developing or polishing content, not as a separate disconnected track.
+2. Return to **Core Workflow -> Lab 4** after tool-driven changes if you need to update manifests, Markdown, or images.
+3. Move into **Validation and Publish** once the screenshots and cleanup work are done.
 
 ## Acknowledgements
 

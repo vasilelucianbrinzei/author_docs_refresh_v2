@@ -1,34 +1,30 @@
-# Help, FAQ, and Support
+# Help and Support
 
 ## Introduction
 
-Use this section when you are blocked, need response expectations, or want a quick reference answer that does not belong in the main author workflow. It is the support layer for the guide, not the default reading path.
+Use this section when you need answers, escalation paths, or response-time guidance while developing, reviewing, or maintaining a workshop.
 
 Estimated Time: 5 minutes
 
 ### Objectives
 
-* Know which support page to use for which kind of question
-* Understand how support content fits around the main author workflow
-* Get the answer you need and return to the workflow quickly
+* Know where to go for practical support
+* Know which page answers which type of question
+* Know where response expectations are documented
 
-## Task 1: Pick The Right Support Page
+## Task 1: Open The Right Support Page
 
-1. Use **Need Help?** when you are blocked and need the fastest path to the right support channel.
-2. Use **LiveLabs FAQ** when you have a common authoring, QA, or publishing question that may already have a documented answer.
-3. Use **LiveLabs SLAs** when your question is really about expected turnaround time, review windows, or when follow-up is reasonable.
+| Page | Use it for | Typical moment |
+| --- | --- | --- |
+| Need Help? | The practical support path for workshop authors | When you are blocked and need the right contact or channel |
+| LiveLabs FAQ | Common process and policy questions | When you need a fast answer before asking for help |
+| LiveLabs SLAs | Review, publishing, and support response expectations | When you need timing expectations or follow-up context |
 
-## Task 2: Use Support Material Efficiently
+## Task 2: Use Support Without Losing Momentum
 
-1. Prefer the main author workflow for normal authoring steps and use this section only when support context is required.
-2. Once you find the answer or support path you need, return to the relevant workflow, QA, or publish lab.
-3. Keep workshop-specific context in WMS or the pull request when the issue affects review history, approvals, or production handoff.
-
-## Included Labs
-
-* Need Help?
-* LiveLabs FAQ
-* LiveLabs SLAs
+1. Check the FAQ first for common questions.
+2. Use **Need Help?** when you are blocked, need the right owner, or need to escalate.
+3. Use **LiveLabs SLAs** to set expectations for review and publishing timelines.
 
 ## Acknowledgements
 

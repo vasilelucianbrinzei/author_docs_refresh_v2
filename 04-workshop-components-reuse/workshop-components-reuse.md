@@ -1,27 +1,29 @@
-# Workshop Components and Reuse
+# Reuse and Enhancements
 
 ## Introduction
 
-Use this section for reusable workshop building blocks and optional enhancements. These labs are useful when you want to extend a workshop with quizzes, integrations, shared content, or reusable delivery patterns.
+Use this section for optional additions that extend a workshop after the core author path is already in place. These labs are not required for every workshop, but they are useful when a specific learning pattern adds real value.
 
 Estimated Time: 5 minutes
 
 ### Objectives
 
-* Identify optional components you can add to a workshop
-* Know which reuse patterns are available in this documentation set
-* Decide when a component belongs in your workshop versus in a specialized workflow
+* Identify optional enhancements that fit your workshop
+* Know when a reusable component is worth the added complexity
+* Keep optional components separate from the required author workflow
 
-## Task 1: Choose The Right Component
+## Task 1: Choose The Right Enhancement
 
-1. Review this section only after the core workshop flow is understood.
-2. Pick the components that improve the learning experience without adding unnecessary complexity.
-3. Return to the main workflow, QA, and publish sections after integrating any selected component.
+| Lab | Use it when | What it adds |
+| --- | --- | --- |
+| Lab 8: Embed SQL Developer with FreeSQL | Learners need a lightweight SQL editor inside the flow | An embedded SQL interaction inside a lab task |
+| Lab 9: Add LiveLabs quizzes | You want quick knowledge checks or recap questions | Interactive quiz blocks inside the workshop |
 
-## Included Labs
+## Task 2: Keep Enhancements In Proportion
 
-* Lab 5b: Embedd SQL Developer using freesql.com
-* Lab 5c: Add LiveLabs Quizzes to your workshops
+1. Finish the core author path before you add optional components.
+2. Add only the components that improve comprehension or task completion.
+3. After integrating a component, return to **Validation and Publish** so the workshop is reviewed as a complete experience.
 
 ## Acknowledgements
 

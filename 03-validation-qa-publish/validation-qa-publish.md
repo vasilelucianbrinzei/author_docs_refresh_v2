@@ -1,28 +1,32 @@
-# Validation, QA, and Publish
+# Validation and Publish
 
 ## Introduction
 
-Use this section after your workshop content is in place. These labs cover review readiness, automated checks, self-QA, Quarterly QA, and the final publish path into production.
+Use this section when your workshop draft is ready for review. These labs cover the quality gates between "the content works in my fork" and "the workshop is ready for production."
 
-Estimated Time: 5 minutes
+Estimated Time: 10 minutes
 
 ### Objectives
 
-* Understand how LiveLabs validates workshop quality
-* Know what to check before requesting publication
-* Follow the correct path from QA through publish
+* Know the sequence from review-ready content to production publish
+* Know where self-QA, automated pull request checks, and publishing fit
+* Know when to loop back to earlier sections to fix issues
 
-## Task 1: Use This Section At The Right Time
+## Task 1: Follow The Readiness Gates In Order
 
-1. Review these labs after the workshop structure and Markdown content are in place.
-2. Use the QA and PR check guidance to identify blockers before publishing.
-3. Complete the publish lab only after the workshop is ready for production.
+| Step | Open this lab | Use it for | Outcome |
+| --- | --- | --- | --- |
+| 1 | Lab 10: QA checks and steps | Share a reviewable preview, update WMS status, and complete self-QA or quarterly QA | A workshop ready for stakeholder review |
+| 2 | Lab 11: Pull Request automated checks | Understand and fix CI failures that block your pull request | A clean or explainable PR status |
+| 3 | Lab 12: Publish your workshop | Open the final PR and complete the WMS publishing request | Content ready for production deployment |
 
-## Included Labs
+## Task 2: Return To Earlier Sections When QA Finds Gaps
 
-* Lab 6a: QA checks and steps
-* Lab 6b: Pull Request Automated Checks
-* Lab 7: Publish your workshop
+| If QA or review finds... | Go back to... | Why |
+| --- | --- | --- |
+| Missing or weak screenshots | Tools and Productivity | Fix capture quality and image optimization |
+| Markdown or manifest issues | Core Workflow -> Lab 4 | Repair content structure and authoring issues |
+| Optional component confusion | Reuse and Enhancements | Revisit whether FreeSQL or quizzes belong in the workshop |
 
 ## Acknowledgements
 
