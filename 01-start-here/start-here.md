@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Use this opening section to understand how the guide is organized before you move into execution. The section pages in this guide are navigation anchors: they group related pages and labs, explain when to use them, and make it easier to find the right content quickly.
+Use this opening section to understand how the guide is organized before you move into execution. The section pages in this guide are navigation anchors: they group related pages and labs, explain when to use them, and make it easier to find the right content quickly. Use the visual map below as a fast orientation pass before you go into the detailed tasks.
 
 Estimated Time: 10 minutes
 
@@ -12,6 +12,16 @@ Estimated Time: 10 minutes
 * Understand the main author path through the guide
 * Know which introductory labs to read before the hands-on workflow
 * Know which later sections are optional support or specialized workflows
+
+## Quick Visual Guide
+
+Use this map to understand the guide at a glance before you start reading in detail. The top lane shows the main author path, the middle lane shows where WMS and GitHub context matter, and the bottom lane shows support material you can use when it becomes relevant.
+
+<p align="center">
+  <img src="./images/author-guide-quick-flow.png" alt="Quick visual guide to the author workflow and support paths." width="1100">
+</p>
+
+Read this image once now, then return to it whenever you need to reorient yourself or decide which section to open next.
 
 ## Task 1: Know The Core LiveLabs Content Types
 
