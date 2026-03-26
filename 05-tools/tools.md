@@ -1,4 +1,4 @@
-# Section 3: Tools and Productivity
+# Tools and Productivity
 
 ## Introduction
 

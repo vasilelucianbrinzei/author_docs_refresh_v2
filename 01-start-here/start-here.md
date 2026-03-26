@@ -1,4 +1,4 @@
-# Section 1: Start Here
+# Start Here
 
 ## Introduction
 

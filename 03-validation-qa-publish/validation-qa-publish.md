@@ -1,4 +1,4 @@
-# Section 5: Validation and Publish
+# Validation and Publish
 
 ## Introduction
 
