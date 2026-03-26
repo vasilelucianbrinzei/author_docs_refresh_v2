@@ -17,9 +17,7 @@ Estimated Time: 10 minutes
 
 Use this map to understand the guide at a glance before you start reading in detail. The top lane shows the main author path, the middle lane shows where WMS and GitHub context matter, and the bottom lane shows support material you can use when it becomes relevant.
 
-<p align="center">
-  <img src="01-start-here/images/author-guide-quick-flow.png" alt="Quick visual guide to the author workflow and support paths." style="display:block; margin:0 auto; width:100%; max-width:1100px; height:auto;">
-</p>
+![Quick visual guide to the author workflow and support paths.](./images/author-guide-quick-flow.png " ")
 
 Read this image once now, then return to it whenever you need to reorient yourself or decide which section to open next.
 
