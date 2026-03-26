@@ -16,7 +16,7 @@ Estimated Time: x
 * Git Environment Setup
 * GitHub Desktop client
 
-This lab assumes you have completed **Lab 10: QA checks and steps** in the **Contents** menu on the right, and have a **Self QA Complete** status in WMS.
+This lab assumes you have completed **Lab 5: QA checks and steps** in the **Contents** menu on the right, and have a **Self QA Complete** status in WMS.
 
 
 ## Task 1: Create a Pull Request to Upload Your Content to the Main Repository
@@ -233,7 +233,7 @@ For workshops in Quarterly QA status with a last qa date of more than 105 days a
 
 ![Republish request process](./images/republish-request-process.png " ")
 
-1. Perform all the steps in **Lab 10: QA checks and steps**, especially the self-QA and checklist work. Ensure you have completed the self QA checklist and updated your workshop status to Quarterly QA Complete.
+1. Perform all the steps in **Lab 5: QA checks and steps**, especially the self-QA and checklist work. Ensure you have completed the self QA checklist and updated your workshop status to Quarterly QA Complete.
 
 2. After that, update your publishing entry **Publish type** to either *Public/Event* based on your requirement and click **Save**.
 

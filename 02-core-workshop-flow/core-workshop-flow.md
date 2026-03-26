@@ -16,9 +16,9 @@ Estimated Time: 10 minutes
 
 | Step | Open this page or lab | Use it for | Outcome |
 | --- | --- | --- | --- |
-| 1 | Background: WMS lifecycle | Understand statuses, handoffs, and where WMS fits before you start execution | A clear picture of the approval and QA path |
+| 1 | Overview: WMS lifecycle and publishing path | Understand statuses, handoffs, and where WMS fits before you start execution | A clear picture of the approval, QA, and publishing path |
 | 2 | Lab 1: Submit new workshop in WMS | Create or update the WMS entry and ownership details | A correct workshop record and status path |
-| 3 | Background: GitHub foundations | Understand repositories, forks, clones, and the safe authoring model | A clear picture of where and how the work should happen |
+| 3 | Overview: GitHub foundations | Understand repositories, forks, clones, and the safe authoring model | A clear picture of where and how the work should happen |
 | 4 | Lab 2: Set up GitHub and install tools | Prepare GitHub, GitHub Desktop, VS Code, and core extensions | A ready authoring workstation |
 | 5 | Lab 3: Stay in sync with GitHub | Fork, clone, sync, preview, and understand repository structure | A safe working repo and preview path |
 | 6 | Lab 4: Develop Markdown and content | Build the workshop structure, manifests, content, images, and reuse patterns | A reviewable workshop draft |
@@ -27,9 +27,9 @@ Estimated Time: 10 minutes
 
 | If you need... | Go to... | Why |
 | --- | --- | --- |
-| Better screenshots or smaller image files | Tools and Productivity | It covers capture standards, optimization, and cleanup |
+| Review, self-QA, publishing, or timeline expectations | Validation and Publish | It covers QA, publishing, and the timeline reference page |
 | Optional interactive or reusable workshop elements | Reuse and Enhancements | It covers FreeSQL and quizzes |
-| Review, self-QA, and production handoff | Validation and Publish | It picks up once the draft is ready for review |
+| Better screenshots or smaller image files | Tools and Productivity | It covers capture standards, optimization, and cleanup |
 
 ## Acknowledgements
 

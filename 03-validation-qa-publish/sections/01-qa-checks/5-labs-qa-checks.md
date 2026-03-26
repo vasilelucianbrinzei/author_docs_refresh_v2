@@ -84,7 +84,7 @@ You have finished developing your workshop. To publish it, perform Self QA.
     ![Completed Checklist](./images/completed-checklist-2.png " ")
     ![Last QA details populated](./images/last-qa-details-populated.png " ")
 
-8. Your stakeholders will verify the QA. They will reach out via WMS if more changes are needed. Otherwise, they will move the workshop to **Completed** status. If you have not heard back from your stakeholders 2 business days after submitting the Self QA form, message them via WMS. While waiting to hear back, you can move to **Lab 12: Publish your workshop** and prepare the publishing request.
+8. Your stakeholders will verify the QA. They will reach out via WMS if more changes are needed. Otherwise, they will move the workshop to **Completed** status. If you have not heard back from your stakeholders 2 business days after submitting the Self QA form, message them via WMS. While waiting to hear back, you can move to **Lab 7: Publish your workshop** and prepare the publishing request.
 
     ![Message](images/message-team.png " ")
 

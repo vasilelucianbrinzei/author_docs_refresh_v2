@@ -101,7 +101,7 @@ A workshop progresses through the following phases (statuses) in WMS before reac
 
     ![Self QA](./images/self-qa.png " ")
 
-6. Complete the **Self QA Checklist** tab. See **Lab 10: QA checks and steps** for self-QA details.
+6. Complete the **Self QA Checklist** tab. See **Lab 5: QA checks and steps** for self-QA details.
 
     ![Self QA Checklist](./images/self-qa-checklist-1.png " ")
     ![Self QA Checklist](./images/self-qa-checklist-2.png " ")
@@ -112,7 +112,7 @@ A workshop progresses through the following phases (statuses) in WMS before reac
 
     Stakeholders verify QA within 2 business days. They either return issues to fix or move the workshop to *Completed* status.
 
-8. The workshop is *completed* and ready for publishing. Submit a publishing request by following **Lab 12: Publish your workshop**. After approval, the workshop goes live within one business day.
+8. The workshop is *completed* and ready for publishing. Submit a publishing request by following **Lab 7: Publish your workshop**. After approval, the workshop goes live within one business day.
 
     ![Completed](./images/completed.png " ")
 

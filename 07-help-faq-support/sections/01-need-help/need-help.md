@@ -16,7 +16,7 @@ Estimated Time: 5 minutes
 
 1. Check the section landing page for the topic you are working on so you do not ask a support question that the documentation already answers.
 2. Review **LiveLabs FAQ** for common author and publishing questions.
-3. Review **LiveLabs SLAs** if your question is about expected response times or handoff timing.
+3. Review **Review and Publishing Timelines** if your question is about expected response times or handoff timing.
 4. If the issue is tied to a non-standard environment or specialized flow, check the **Specialized Workflows and Reference** section before escalating.
 
 ## Task 2: Use The Right Support Channel

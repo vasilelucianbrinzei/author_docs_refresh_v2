@@ -10,15 +10,17 @@ Estimated Time: 10 minutes
 
 * Know the sequence from review-ready content to production publish
 * Know where self-QA, automated pull request checks, and publishing fit
+* Know where to find the timeline expectations for review and publishing handoffs
 * Know when to loop back to earlier sections to fix issues
 
 ## Task 1: Follow The Readiness Gates In Order
 
-| Step | Open this lab | Use it for | Outcome |
+| Step | Open this page or lab | Use it for | Outcome |
 | --- | --- | --- | --- |
-| 1 | Lab 10: QA checks and steps | Share a reviewable preview, update WMS status, and complete self-QA or quarterly QA | A workshop ready for stakeholder review |
-| 2 | Lab 11: Pull Request automated checks | Understand and fix CI failures that block your pull request | A clean or explainable PR status |
-| 3 | Lab 12: Publish your workshop | Open the final PR and complete the WMS publishing request | Content ready for production deployment |
+| 1 | Lab 5: QA checks and steps | Share a reviewable preview, update WMS status, and complete self-QA or quarterly QA | A workshop ready for stakeholder review |
+| 2 | Lab 6: Pull Request automated checks | Understand and fix CI failures that block your pull request | A clean or explainable PR status |
+| 3 | Lab 7: Publish your workshop | Open the final PR and complete the WMS publishing request | Content ready for production deployment |
+| 4 | Reference: Review and publishing timelines | Check expected turnaround times for review, stakeholder QA, publishing, and follow-up | Better planning and cleaner escalation timing |
 
 ## Task 2: Return To Earlier Sections When QA Finds Gaps
 

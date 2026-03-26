@@ -113,7 +113,7 @@ You will push the updated content from your clone to the origin of your clone (y
 
 3. Set up GitHub Pages for your fork by following the preview workflow in **Lab 3: Stay in sync with GitHub** so you can test or review your sprint content.
 
-4. Create a pull request to upload your content to the main repository, **https://github.com/oracle-livelabs/sprints**, by following the pull request workflow in **Lab 12: Publish your workshop**, and then follow the steps in Task 5 to request sprint publishing in WMS.
+4. Create a pull request to upload your content to the main repository, **https://github.com/oracle-livelabs/sprints**, by following the pull request workflow in **Lab 7: Publish your workshop**, and then follow the steps in Task 5 to request sprint publishing in WMS.
 
 5. Once the PR is approved, it takes a few minutes for the changes to reflect on the **oracle-livelabs.github.io/sprints** GitHub Pages site. You can access your sprint on GitHub by using the same preview pattern described in **Lab 3: Stay in sync with GitHub**.
 

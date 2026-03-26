@@ -1,8 +1,8 @@
-# LiveLabs SLAs
+# Review and Publishing Timelines
 
 ## Introduction
 
-Use this page when you need the expected turnaround time for common LiveLabs handoffs such as request review, PR review, stakeholder QA verification, and publishing. Treat these as planning expectations, not guarantees.
+Use this page when you need the expected turnaround time for common LiveLabs handoffs such as request review, PR review, stakeholder QA verification, and publishing. This reference belongs with the validation and publish workflow. Treat these as planning expectations, not guarantees.
 
 Estimated Time: 5 minutes
 
@@ -25,7 +25,7 @@ Estimated Time: 5 minutes
 | WMS to production sync | Within 1 day | Metadata changes may take time to appear in production. |
 | Email support response | 1-2 business days | Shared mailbox support response window. |
 | Slack support response | Same day when available | Best for quick unblockers, not for forcing queue jumps. |
-{: title="LiveLabs SLAs"}
+{: title="Review and Publishing Timelines"}
 
 ## Task 2: Use SLA Expectations Correctly
 
