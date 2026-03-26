@@ -15,7 +15,7 @@ Estimated Time: 10 minutes
 
 ## Quick Visual Guide
 
-![Quick visual guide to the author workflow and support paths.](./images/author-guide-quick-flow.png " ")
+![Quick visual guide to the author workflow and support paths.](authorguidequickflow.png " ")
 
 ## Task 1: Know The Core LiveLabs Content Types
 
