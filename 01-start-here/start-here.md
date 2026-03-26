@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Use this opening section to understand how the guide is organized before you move into execution. The section pages in this guide are navigation anchors: they group related labs, explain when to use them, and make it easier to find the right content quickly.
+Use this opening section to understand how the guide is organized before you move into execution. The section pages in this guide are navigation anchors: they group related pages and labs, explain when to use them, and make it easier to find the right content quickly.
 
 Estimated Time: 10 minutes
 
@@ -10,8 +10,8 @@ Estimated Time: 10 minutes
 
 * Understand the difference between a LiveLabs workshop, lab, and sprint
 * Understand the main author path through the guide
-* Know which background pages to read before the hands-on labs
-* Know which later sections are optional support or specialized reference
+* Know which context pages to read before the hands-on labs
+* Know which later sections are optional support or specialized workflows
 
 ## Task 1: Know The Core LiveLabs Content Types
 
@@ -31,29 +31,30 @@ Estimated Time: 10 minutes
 
 | Section | Use it for | Read it now? |
 | --- | --- | --- |
-| Start Here | Orientation and guide structure | Yes |
-| Core Workflow | The required author path | Yes |
+| Start Here | Orientation, context, and guide structure | Yes |
+| Core Workflow | The required hands-on author path | Next |
 | Validation and Publish | Review readiness, QA, and production handoff | Yes, after your draft is working |
 | Reuse and Enhancements | Optional components such as FreeSQL and quizzes | As needed |
 | Tools and Productivity | Screenshots, image optimization, and cleanup | As needed during development |
 | Specialized Workflows | Sprints, remote desktop, and Marketplace image flows | Only if your workshop needs them |
 | Help and FAQ | FAQ, support routes, and quick unblockers | As needed |
 
-## Task 4: Use The Background Pages Before The Main Workflow When Needed
+## Task 4: Read The Key Context Pages Before The Hands-On Workflow
 
 | Page | Open it when | Then continue with |
 | --- | --- | --- |
-| Overview: WMS lifecycle and publishing path | You need context on statuses, approvals, QA, or publishing handoffs | Lab 1 or Validation and Publish |
-| Overview: GitHub foundations | You need context on repositories, forks, clones, or previews | Lab 2 or Lab 3 |
+| WMS lifecycle, QA, and publishing flow | You need context on statuses, approvals, QA, or publishing handoffs | Core Workflow or Validation and Publish |
+| GitHub foundations | You need context on repositories, forks, clones, or previews | Core Workflow |
 
 ## Task 5: Follow The Main Author Path
 
-1. Start with **Core Workflow**.
-2. Use the two overview pages in the **Core Workflow** sequence right before the labs they support.
-3. Move into **Validation and Publish** once your content, images, and manifests are ready for review.
-4. Use **Reuse and Enhancements** and **Tools and Productivity** only when those topics become relevant to the workshop you are building.
-5. Use **Specialized Workflows** only when your workshop needs sprint, desktop, or Marketplace-specific steps.
-6. Return to **Help and FAQ** whenever you need FAQ, support, or escalation guidance.
+1. Start with **Start Here** to understand the guide and the core LiveLabs context.
+2. Read **WMS lifecycle, QA, and publishing flow** and **GitHub foundations** before the hands-on authoring labs.
+3. Move into **Core Workflow** for the actual author path.
+4. Move into **Validation and Publish** once your content, images, and manifests are ready for review.
+5. Use **Reuse and Enhancements** and **Tools and Productivity** only when those topics become relevant to the workshop you are building.
+6. Use **Specialized Workflows** only when your workshop needs sprint, desktop, or Marketplace-specific steps.
+7. Return to **Help and FAQ** whenever you need FAQ, support, or escalation guidance.
 
 ## Acknowledgements
 

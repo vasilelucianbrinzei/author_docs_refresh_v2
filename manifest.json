@@ -8,28 +8,28 @@
     "tutorials":  [
                       {
                           "title":  "Section 1: Start Here",
-                          "description":  "Use this opening section to understand the guide structure, the main author path, and when to use each later section.",
+                          "description":  "Use this opening section to understand the guide structure, the core author context, and when to use each later section.",
                           "filename":  "./01-start-here/start-here.md"
                       },
                       {
-                          "title":  "Section 2: Core Workflow",
-                          "description":  "The required author path from workshop request through GitHub setup, repository sync, and Markdown development.",
-                          "filename":  "./02-core-workshop-flow/core-workflow.md"
-                      },
-                      {
-                          "title":  "Overview: WMS lifecycle and publishing path",
+                          "title":  "WMS lifecycle, QA, and publishing flow",
                           "description":  "Explains workshop statuses, approval handoffs, stakeholder QA, and publishing flow before authors begin execution.",
                           "filename":  "./02-core-workshop-flow/sections/00-understand-wms-lifecycle/wms-workflows.md"
+                      },
+                      {
+                          "title":  "GitHub foundations",
+                          "description":  "Explains the Oracle LiveLabs GitHub model, including repositories, forks, clones, and the safe authoring flow.",
+                          "filename":  "./02-core-workshop-flow/sections/01a-understand-github-foundations/github-introduction.md"
+                      },
+                      {
+                          "title":  "Section 2: Core Workflow",
+                          "description":  "Use this section for the hands-on author path from workshop request through GitHub setup, repository sync, and Markdown development.",
+                          "filename":  "./02-core-workshop-flow/core-workflow.md"
                       },
                       {
                           "title":  "Lab 1: Submit new workshop in WMS",
                           "description":  "Walks authors through the workshop request, required metadata, ownership fields, and WMS workflow setup.",
                           "filename":  "./02-core-workshop-flow/sections/01-submit-new-workshop-in-wms/1-labs-wms.md"
-                      },
-                      {
-                          "title":  "Overview: GitHub foundations",
-                          "description":  "Explains the Oracle LiveLabs GitHub model, including repositories, forks, clones, and the safe authoring flow.",
-                          "filename":  "./02-core-workshop-flow/sections/01a-understand-github-foundations/github-introduction.md"
                       },
                       {
                           "title":  "Lab 2: Set up GitHub and install tools",
@@ -57,6 +57,11 @@
                           "filename":  "./03-validation-qa-publish/sections/01-qa-checks/5-labs-qa-checks.md"
                       },
                       {
+                          "title":  "Review, QA, and publishing timelines",
+                          "description":  "Summarizes expected turnaround times for review, stakeholder QA, publishing, and support follow-up.",
+                          "filename":  "./07-help-faq-support/sections/03-sla/sla.md"
+                      },
+                      {
                           "title":  "Lab 6: Pull Request automated checks",
                           "description":  "Explains the automated checks that can block a pull request and how to interpret their output.",
                           "filename":  "./03-validation-qa-publish/sections/02-pull-request-automated-checks/prcheck.md"
@@ -65,11 +70,6 @@
                           "title":  "Lab 7: Publish your workshop",
                           "description":  "Walks authors through the final pull request and WMS publishing steps that move content into production.",
                           "filename":  "./03-validation-qa-publish/sections/03-publish-workshop/6-labs-publish.md"
-                      },
-                      {
-                          "title":  "Reference: Review and publishing timelines",
-                          "description":  "Summarizes expected turnaround times for review, stakeholder QA, publishing, and support follow-up.",
-                          "filename":  "./07-help-faq-support/sections/03-sla/sla.md"
                       },
                       {
                           "title":  "Section 4: Reuse and Enhancements",

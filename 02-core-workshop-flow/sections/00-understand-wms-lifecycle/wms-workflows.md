@@ -1,4 +1,4 @@
-# Understanding WMS Status Workflow
+# WMS lifecycle, QA, and publishing flow
 
 Estimated Time: x
 

@@ -66,7 +66,7 @@ Estimated Time: 10 minutes
 
 2. If you are blocked and need a channel or escalation path, use **Need Help?**
 
-3. If the real question is about response times, handoff timing, or when to follow up, use **Review and Publishing Timelines**.
+3. If the real question is about response times, handoff timing, or when to follow up, use **Review, QA, and publishing timelines**.
 
 4. If the question is about event-style, sandbox, secure desktop, or other non-standard author paths, use the **Specialized Workflows and Reference** section.
 

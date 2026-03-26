@@ -18,9 +18,9 @@ Estimated Time: 10 minutes
 | Step | Open this page or lab | Use it for | Outcome |
 | --- | --- | --- | --- |
 | 1 | Lab 5: QA checks and steps | Share a reviewable preview, update WMS status, and complete self-QA or quarterly QA | A workshop ready for stakeholder review |
-| 2 | Lab 6: Pull Request automated checks | Understand and fix CI failures that block your pull request | A clean or explainable PR status |
-| 3 | Lab 7: Publish your workshop | Open the final PR and complete the WMS publishing request | Content ready for production deployment |
-| 4 | Reference: Review and publishing timelines | Check expected turnaround times for review, stakeholder QA, publishing, and follow-up | Better planning and cleaner escalation timing |
+| 2 | Review, QA, and publishing timelines | Check expected turnaround times for review, stakeholder QA, publishing, and follow-up | Better planning and cleaner escalation timing |
+| 3 | Lab 6: Pull Request automated checks | Understand and fix CI failures that block your pull request | A clean or explainable PR status |
+| 4 | Lab 7: Publish your workshop | Open the final PR and complete the WMS publishing request | Content ready for production deployment |
 
 ## Task 2: Return To Earlier Sections When QA Finds Gaps
 

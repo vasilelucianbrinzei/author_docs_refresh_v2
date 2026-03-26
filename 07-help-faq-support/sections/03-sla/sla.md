@@ -1,4 +1,4 @@
-# Review and Publishing Timelines
+# Review, QA, and publishing timelines
 
 ## Introduction
 
@@ -25,7 +25,7 @@ Estimated Time: 5 minutes
 | WMS to production sync | Within 1 day | Metadata changes may take time to appear in production. |
 | Email support response | 1-2 business days | Shared mailbox support response window. |
 | Slack support response | Same day when available | Best for quick unblockers, not for forcing queue jumps. |
-{: title="Review and Publishing Timelines"}
+{: title="Review, QA, and publishing timelines"}
 
 ## Task 2: Use SLA Expectations Correctly
 

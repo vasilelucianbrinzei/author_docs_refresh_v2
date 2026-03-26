@@ -1,4 +1,4 @@
-# Introduction to Oracle LiveLabs GitHub Project Repository
+# GitHub foundations
 
 ## What Is GitHub?
 
