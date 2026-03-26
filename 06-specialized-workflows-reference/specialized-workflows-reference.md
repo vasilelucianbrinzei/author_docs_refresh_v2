@@ -1,4 +1,4 @@
-# Specialized Workflows
+# Section 6: Specialized Workflows
 
 ## Introduction
 

@@ -1,4 +1,4 @@
-# Reuse and Enhancements
+# Section 4: Reuse and Enhancements
 
 ## Introduction
 

@@ -1,4 +1,4 @@
-# Core Workflow
+# Section 2: Core Workflow
 
 ## Introduction
 

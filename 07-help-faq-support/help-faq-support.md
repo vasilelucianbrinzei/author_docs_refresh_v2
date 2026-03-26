@@ -1,4 +1,4 @@
-# Help and Support
+# Section 7: Help and Support
 
 ## Introduction
 

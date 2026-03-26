@@ -7,12 +7,12 @@
   ],
   "tutorials": [
     {
-      "title": "Start Here",
+      "title": "Section 1: Start Here",
       "description": "Use this opening section to understand the guide structure, the main author path, and when to use each later section.",
       "filename": "./../../01-start-here/start-here.md"
     },
     {
-      "title": "Core Workflow",
+      "title": "Section 2: Core Workflow",
       "description": "The required author path from workshop request through GitHub setup, repository sync, and Markdown development.",
       "filename": "./../../02-core-workshop-flow/core-workshop-flow.md"
     },
@@ -47,7 +47,7 @@
       "filename": "./../../02-core-workshop-flow/sections/04-develop-markdown-and-content/4-labs-markdown-develop-content.md"
     },
     {
-      "title": "Tools and Productivity",
+      "title": "Section 3: Tools and Productivity",
       "description": "Use these labs when you need better screenshots, lighter images, or content-cleanup help while authoring.",
       "filename": "./../../05-tools/tools.md"
     },
@@ -67,7 +67,7 @@
       "filename": "./../../05-tools/sections/03-fixomat/fixomat.md"
     },
     {
-      "title": "Reuse and Enhancements",
+      "title": "Section 4: Reuse and Enhancements",
       "description": "Optional components and reusable patterns that extend a workshop after the core flow is in place.",
       "filename": "./../../04-workshop-components-reuse/workshop-components-reuse.md"
     },
@@ -82,7 +82,7 @@
       "filename": "./../../04-workshop-components-reuse/sections/02-add-quizzes/quiz.md"
     },
     {
-      "title": "Validation and Publish",
+      "title": "Section 5: Validation and Publish",
       "description": "Use this section for review readiness, pull request checks, self-QA, and final publishing actions.",
       "filename": "./../../03-validation-qa-publish/validation-qa-publish.md"
     },
@@ -102,7 +102,7 @@
       "filename": "./../../03-validation-qa-publish/sections/03-publish-workshop/6-labs-publish.md"
     },
     {
-      "title": "Specialized Workflows",
+      "title": "Section 6: Specialized Workflows",
       "description": "Advanced or niche workflows that only apply when a workshop needs sprint, remote desktop, or Marketplace-specific steps.",
       "filename": "./../../06-specialized-workflows-reference/specialized-workflows-reference.md"
     },
@@ -142,7 +142,7 @@
       "filename": "./../../06-specialized-workflows-reference/sections/06-secure-desktop/secure-desktop-how-to-request.md"
     },
     {
-      "title": "Help and Support",
+      "title": "Section 7: Help and Support",
       "description": "Use this section for support paths, FAQs, and response-time expectations while developing or maintaining workshops.",
       "filename": "./../../07-help-faq-support/help-faq-support.md"
     },
