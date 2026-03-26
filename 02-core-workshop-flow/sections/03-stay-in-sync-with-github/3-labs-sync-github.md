@@ -235,7 +235,7 @@ If you are the **workshop team** of the workshop that you want to create an even
 
 >**Note**: Steps 1 - 6 are optional - only if you want to customize the workshop content for your events. If you only want to customize the workshop's meta info, you can go directly to Step 7.
 
-1.  Depending on which repo your workshop is in, merge content from GitHub by following Lab 3: Stay in sync with GitHub environment -> **Task 3: Merge content from Git before you start editing your content**.
+1.  Depending on which repo your workshop is in, merge content from GitHub by following **Lab 5: Stay in sync with GitHub** -> **Task 3: Merge content from Git before you start editing your content**.
 
 2.  Go to Visual Studio Code, under the **workshops** folder, where you can see a **freetier/tenancy** folder and/or a **livelabs/sandbox** folder, create a new folder and give it a descriptive name (lowercase) for the event (e.g. cloudworld, training, event, etc.)
 

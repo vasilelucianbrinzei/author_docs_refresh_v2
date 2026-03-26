@@ -16,10 +16,10 @@ Estimated Time: 10 minutes
 
 | Step | Open this page or lab | Use it for | Outcome |
 | --- | --- | --- | --- |
-| 1 | Lab 1: Submit new workshop in WMS | Create or update the WMS entry and ownership details | A correct workshop record and status path |
-| 2 | Lab 2: Set up GitHub and install tools | Prepare GitHub, GitHub Desktop, VS Code, and core extensions | A ready authoring workstation |
-| 3 | Lab 3: Stay in sync with GitHub | Fork, clone, sync, preview, and understand repository structure | A safe working repo and preview path |
-| 4 | Lab 4: Develop Markdown and content | Build the workshop structure, manifests, content, images, and reuse patterns | A reviewable workshop draft |
+| 1 | Lab 3: Submit new workshop in WMS | Create or update the WMS entry and ownership details | A correct workshop record and status path |
+| 2 | Lab 4: Set up GitHub and install tools | Prepare GitHub, GitHub Desktop, VS Code, and core extensions | A ready authoring workstation |
+| 3 | Lab 5: Stay in sync with GitHub | Fork, clone, sync, preview, and understand repository structure | A safe working repo and preview path |
+| 4 | Lab 6: Develop Markdown and content | Build the workshop structure, manifests, content, images, and reuse patterns | A reviewable workshop draft |
 
 ## Task 2: Pull In Supporting Sections At The Right Time
 

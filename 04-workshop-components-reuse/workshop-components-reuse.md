@@ -16,8 +16,8 @@ Estimated Time: 5 minutes
 
 | Lab | Use it when | What it adds |
 | --- | --- | --- |
-| Lab 8: Embed SQL Developer with FreeSQL | Learners need a lightweight SQL editor inside the flow | An embedded SQL interaction inside a lab task |
-| Lab 9: Add LiveLabs quizzes | You want quick knowledge checks or recap questions | Interactive quiz blocks inside the workshop |
+| Lab 11: Embed SQL Developer with FreeSQL | Learners need a lightweight SQL editor inside the flow | An embedded SQL interaction inside a lab task |
+| Lab 12: Add LiveLabs quizzes | You want quick knowledge checks or recap questions | Interactive quiz blocks inside the workshop |
 
 ## Task 2: Keep Enhancements In Proportion
 

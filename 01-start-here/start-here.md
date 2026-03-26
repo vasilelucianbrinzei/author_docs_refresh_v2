@@ -10,7 +10,7 @@ Estimated Time: 10 minutes
 
 * Understand the difference between a LiveLabs workshop, lab, and sprint
 * Understand the main author path through the guide
-* Know which context pages to read before the hands-on labs
+* Know which introductory labs to read before the hands-on workflow
 * Know which later sections are optional support or specialized workflows
 
 ## Task 1: Know The Core LiveLabs Content Types
@@ -39,17 +39,17 @@ Estimated Time: 10 minutes
 | Specialized Workflows | Sprints, remote desktop, and Marketplace image flows | Only if your workshop needs them |
 | Help and FAQ | FAQ, support routes, and quick unblockers | As needed |
 
-## Task 4: Read The Key Context Pages Before The Hands-On Workflow
+## Task 4: Read The Key Introductory Labs Before The Hands-On Workflow
 
-| Page | Open it when | Then continue with |
+| Lab | Open it when | Then continue with |
 | --- | --- | --- |
-| WMS lifecycle, QA, and publishing flow | You need context on statuses, approvals, QA, or publishing handoffs | Core Workflow or Validation and Publish |
-| GitHub foundations | You need context on repositories, forks, clones, or previews | Core Workflow |
+| Lab 1: WMS lifecycle, QA, and publishing flow | You need context on statuses, approvals, QA, or publishing handoffs | Core Workflow or Validation and Publish |
+| Lab 2: GitHub foundations | You need context on repositories, forks, clones, or previews | Core Workflow |
 
 ## Task 5: Follow The Main Author Path
 
 1. Start with **Start Here** to understand the guide and the core LiveLabs context.
-2. Read **WMS lifecycle, QA, and publishing flow** and **GitHub foundations** before the hands-on authoring labs.
+2. Read **Lab 1: WMS lifecycle, QA, and publishing flow** and **Lab 2: GitHub foundations** before the hands-on authoring labs.
 3. Move into **Core Workflow** for the actual author path.
 4. Move into **Validation and Publish** once your content, images, and manifests are ready for review.
 5. Use **Reuse and Enhancements** and **Tools and Productivity** only when those topics become relevant to the workshop you are building.

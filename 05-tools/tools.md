@@ -16,14 +16,14 @@ Estimated Time: 5 minutes
 
 | Lab | Use it for | Best time to use it | Result |
 | --- | --- | --- | --- |
-| Lab 5: Capture effective screens | Better screenshots and clearer step visuals | While documenting the product flow | Cleaner and more consistent screenshots |
-| Lab 6: Optimize screenshots with OptiShot | Smaller, lighter image files | After you capture screenshots and before review | Faster-loading pages and smaller assets |
-| Lab 7: Clean up content with Fixomat | Markdown and asset cleanup | Before QA, pull request review, or publish | Cleaner content with fewer avoidable issues |
+| Lab 13: Capture effective screens | Better screenshots and clearer step visuals | While documenting the product flow | Cleaner and more consistent screenshots |
+| Lab 14: Optimize screenshots with OptiShot | Smaller, lighter image files | After you capture screenshots and before review | Faster-loading pages and smaller assets |
+| Lab 15: Clean up content with Fixomat | Markdown and asset cleanup | Before QA, pull request review, or publish | Cleaner content with fewer avoidable issues |
 
 ## Task 2: Keep Tools Connected To The Workflow
 
 1. Use these labs while you are developing or polishing content, not as a separate disconnected track.
-2. Return to **Core Workflow -> Lab 4** after tool-driven changes if you need to update manifests, Markdown, or images.
+2. Return to **Core Workflow -> Lab 6** after tool-driven changes if you need to update manifests, Markdown, or images.
 3. Move into **Validation and Publish** once the screenshots and cleanup work are done.
 
 ## Acknowledgements

@@ -12,13 +12,13 @@
                           "filename":  "./../../01-start-here/start-here.md"
                       },
                       {
-                          "title":  "WMS lifecycle, QA, and publishing flow",
-                          "description":  "Explains workshop statuses, approval handoffs, stakeholder QA, and publishing flow before authors begin execution.",
+                          "title":  "Lab 1: WMS lifecycle, QA, and publishing flow",
+                          "description":  "Explains workshop statuses, approval handoffs, stakeholder QA, and publishing flow before authors begin the hands-on workflow.",
                           "filename":  "./../../02-core-workshop-flow/sections/00-understand-wms-lifecycle/wms-workflows.md"
                       },
                       {
-                          "title":  "GitHub foundations",
-                          "description":  "Explains the Oracle LiveLabs GitHub model, including repositories, forks, clones, and the safe authoring flow.",
+                          "title":  "Lab 2: GitHub foundations",
+                          "description":  "Explains the Oracle LiveLabs GitHub model, including repositories, forks, clones, and the safe authoring flow before authors start execution labs.",
                           "filename":  "./../../02-core-workshop-flow/sections/01a-understand-github-foundations/github-introduction.md"
                       },
                       {
@@ -27,22 +27,22 @@
                           "filename":  "./../../02-core-workshop-flow/core-workflow.md"
                       },
                       {
-                          "title":  "Lab 1: Submit new workshop in WMS",
+                          "title":  "Lab 3: Submit new workshop in WMS",
                           "description":  "Walks authors through the workshop request, required metadata, ownership fields, and WMS workflow setup.",
                           "filename":  "./../../02-core-workshop-flow/sections/01-submit-new-workshop-in-wms/1-labs-wms.md"
                       },
                       {
-                          "title":  "Lab 2: Set up GitHub and install tools",
+                          "title":  "Lab 4: Set up GitHub and install tools",
                           "description":  "Covers GitHub account setup, GitHub Desktop, Visual Studio Code, and the core extensions most authors need.",
                           "filename":  "./../../02-core-workshop-flow/sections/02-setup-github-and-install-tools/2-labs-github.md"
                       },
                       {
-                          "title":  "Lab 3: Stay in sync with GitHub",
+                          "title":  "Lab 5: Stay in sync with GitHub",
                           "description":  "Shows authors how to fork, clone, sync, structure their repository, and preview workshop content safely.",
                           "filename":  "./../../02-core-workshop-flow/sections/03-stay-in-sync-with-github/3-labs-sync-github.md"
                       },
                       {
-                          "title":  "Lab 4: Develop Markdown and content",
+                          "title":  "Lab 6: Develop Markdown and content",
                           "description":  "Covers workshop structure, manifests, shared content reuse, Markdown rules, images, and validation-oriented authoring practices.",
                           "filename":  "./../../02-core-workshop-flow/sections/04-develop-markdown-and-content/4-labs-markdown-develop-content.md"
                       },
@@ -52,22 +52,22 @@
                           "filename":  "./../../03-validation-qa-publish/validation-qa-publish.md"
                       },
                       {
-                          "title":  "Lab 5: QA checks and steps",
+                          "title":  "Lab 7: QA checks and steps",
                           "description":  "Explains how to share previews, complete self-QA, handle quarterly QA, and prepare the workshop for stakeholder review.",
                           "filename":  "./../../03-validation-qa-publish/sections/01-qa-checks/5-labs-qa-checks.md"
                       },
                       {
-                          "title":  "Review, QA, and publishing timelines",
+                          "title":  "Lab 8: Review, QA, and publishing timelines",
                           "description":  "Summarizes expected turnaround times for review, stakeholder QA, publishing, and support follow-up.",
                           "filename":  "./../../07-help-faq-support/sections/03-sla/sla.md"
                       },
                       {
-                          "title":  "Lab 6: Pull Request automated checks",
+                          "title":  "Lab 9: Pull Request automated checks",
                           "description":  "Explains the automated checks that can block a pull request and how to interpret their output.",
                           "filename":  "./../../03-validation-qa-publish/sections/02-pull-request-automated-checks/prcheck.md"
                       },
                       {
-                          "title":  "Lab 7: Publish your workshop",
+                          "title":  "Lab 10: Publish your workshop",
                           "description":  "Walks authors through the final pull request and WMS publishing steps that move content into production.",
                           "filename":  "./../../03-validation-qa-publish/sections/03-publish-workshop/6-labs-publish.md"
                       },
@@ -77,12 +77,12 @@
                           "filename":  "./../../04-workshop-components-reuse/workshop-components-reuse.md"
                       },
                       {
-                          "title":  "Lab 8: Embed SQL Developer with FreeSQL",
+                          "title":  "Lab 11: Embed SQL Developer with FreeSQL",
                           "description":  "Shows how to embed a FreeSQL editor directly into a workshop task when that interaction adds value.",
                           "filename":  "./../../04-workshop-components-reuse/sections/01-embed-sql-developer/freesqlembed.md"
                       },
                       {
-                          "title":  "Lab 9: Add LiveLabs quizzes",
+                          "title":  "Lab 12: Add LiveLabs quizzes",
                           "description":  "Shows how to add quizzes and knowledge checks to a LiveLabs workshop.",
                           "filename":  "./../../04-workshop-components-reuse/sections/02-add-quizzes/quiz.md"
                       },
@@ -92,17 +92,17 @@
                           "filename":  "./../../05-tools/tools.md"
                       },
                       {
-                          "title":  "Lab 10: Capture effective screens",
+                          "title":  "Lab 13: Capture effective screens",
                           "description":  "Covers screenshot best practices so workshop steps are visually clear and reviewable.",
                           "filename":  "./../../05-tools/sections/01-capture-screens-best-practices/13-labs-capture-screens-best-practices.md"
                       },
                       {
-                          "title":  "Lab 11: Optimize screenshots with OptiShot",
+                          "title":  "Lab 14: Optimize screenshots with OptiShot",
                           "description":  "Shows authors how to reduce image size and keep screenshots clean without losing readability.",
                           "filename":  "./../../05-tools/sections/02-optishot/optishot.md"
                       },
                       {
-                          "title":  "Lab 12: Clean up content with Fixomat",
+                          "title":  "Lab 15: Clean up content with Fixomat",
                           "description":  "Explains how to use Fixomat for Markdown cleanup and asset optimization before review or QA.",
                           "filename":  "./../../05-tools/sections/03-fixomat/fixomat.md"
                       },
@@ -112,37 +112,37 @@
                           "filename":  "./../../06-specialized-workflows-reference/specialized-workflows-reference.md"
                       },
                       {
-                          "title":  "Lab 13: Develop LiveLabs Sprints",
+                          "title":  "Lab 16: Develop LiveLabs Sprints",
                           "description":  "Shows how to structure, author, preview, and publish LiveLabs Sprint content.",
                           "filename":  "./../../06-specialized-workflows-reference/sections/01-create-sprints-workflow/10-create-sprints-workflow.md"
                       },
                       {
-                          "title":  "Lab 14: Set up graphical remote desktop",
+                          "title":  "Lab 17: Set up graphical remote desktop",
                           "description":  "Explains how to configure and use a graphical remote desktop for a workshop environment.",
                           "filename":  "./../../06-specialized-workflows-reference/sections/02-setup-graphical-remote-desktop/6-labs-setup-graphical-remote-desktop.md"
                       },
                       {
-                          "title":  "Lab 15: Create custom image for Marketplace",
+                          "title":  "Lab 18: Create custom image for Marketplace",
                           "description":  "Explains how to create and prepare a Marketplace image for workshop use.",
                           "filename":  "./../../06-specialized-workflows-reference/sections/03-create-custom-image-for-marketplace/7-labs-create-custom-image-for-marketplace.md"
                       },
                       {
-                          "title":  "Lab 16: Publish your image to Oracle Marketplace",
+                          "title":  "Lab 19: Publish your image to Oracle Marketplace",
                           "description":  "Shows how to publish a prepared image to Oracle Marketplace.",
                           "filename":  "./../../06-specialized-workflows-reference/sections/04-publish-custom-image-to-marketplace/8-labs-publish-custom-image-to-marketplace.md"
                       },
                       {
-                          "title":  "Lab 17: Update the image on your sandbox environment",
+                          "title":  "Lab 20: Update the image on your sandbox environment",
                           "description":  "Shows how to register a published Marketplace listing and update the image used by a LiveLabs sandbox environment.",
                           "filename":  "./../../06-specialized-workflows-reference/sections/05-add-custom-image-to-workshop/12-add-custom-image-to-workshop.md"
                       },
                       {
-                          "title":  "Lab 18: Secure Desktop environments in LiveLabs",
+                          "title":  "Lab 21: Secure Desktop environments in LiveLabs",
                           "description":  "Explains when OCI Secure Desktops make sense for LiveLabs workshops and what they change in delivery.",
                           "filename":  "./../../06-specialized-workflows-reference/sections/06-secure-desktop/secure-desktop.md"
                       },
                       {
-                          "title":  "Lab 19: Request and access Secure Desktop environments",
+                          "title":  "Lab 22: Request and access Secure Desktop environments",
                           "description":  "Explains how to request and access OCI Secure Desktop environments for a LiveLabs workshop.",
                           "filename":  "./../../06-specialized-workflows-reference/sections/06-secure-desktop/secure-desktop-how-to-request.md"
                       },

@@ -23,7 +23,7 @@ Estimated Time: 5 minutes
 
 1. Check the FAQ first for common questions.
 2. Use **Need Help?** when you are blocked, need the right owner, or need to escalate.
-3. If your question is about review timing or publishing handoffs, go back to **Validation and Publish** and use **Review, QA, and publishing timelines** there.
+3. If your question is about review timing or publishing handoffs, go back to **Validation and Publish** and use **Lab 8: Review, QA, and publishing timelines** there.
 
 ## Acknowledgements
 

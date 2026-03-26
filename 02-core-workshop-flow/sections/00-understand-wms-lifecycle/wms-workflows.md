@@ -32,7 +32,7 @@ A workshop progresses through several phases (statuses) in WMS before reaching p
 
     ![In Development](./images/in-development.png " ")
 
-5. After development, the workshop team moves the status to *Self QA*. Follow **Lab 5: QA checks and steps** to complete self-QA. Then move to *Self QA Complete* and send the completed Self QA form to stakeholders. Automated emails notify stakeholders when this status is set.
+5. After development, the workshop team moves the status to *Self QA*. Follow **Lab 7: QA checks and steps** to complete self-QA. Then move to *Self QA Complete* and send the completed Self QA form to stakeholders. Automated emails notify stakeholders when this status is set.
 
     ![Self QA](./images/self-qa.png " ")
 
@@ -40,7 +40,7 @@ A workshop progresses through several phases (statuses) in WMS before reaching p
 
     ![Self QA Complete](./images/self-qa-complete.png " ")
 
-7. The workshop is *completed* and ready for publishing. Submit a publishing request by following **Lab 7: Publish your workshop**, and the LiveLabs team will approve it. After approval, the workshop goes live within one business day.
+7. The workshop is *completed* and ready for publishing. Submit a publishing request by following **Lab 10: Publish your workshop**, and the LiveLabs team will approve it. After approval, the workshop goes live within one business day.
 
     ![Completed](./images/completed.png " ")
 
@@ -50,7 +50,7 @@ A workshop progresses through several phases (statuses) in WMS before reaching p
 
 ### **What's Next?**
 
-You now understand the Oracle LiveLabs GitHub project repository and workshop development workflow. Click **Lab 1: Submit new workshop in WMS** in the Contents menu to begin.
+You now understand the Oracle LiveLabs GitHub project repository and workshop development workflow. Click **Lab 3: Submit new workshop in WMS** in the Contents menu to begin.
 
 ## Learn More
 

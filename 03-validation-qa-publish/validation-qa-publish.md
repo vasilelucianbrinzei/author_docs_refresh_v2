@@ -17,17 +17,17 @@ Estimated Time: 10 minutes
 
 | Step | Open this page or lab | Use it for | Outcome |
 | --- | --- | --- | --- |
-| 1 | Lab 5: QA checks and steps | Share a reviewable preview, update WMS status, and complete self-QA or quarterly QA | A workshop ready for stakeholder review |
-| 2 | Review, QA, and publishing timelines | Check expected turnaround times for review, stakeholder QA, publishing, and follow-up | Better planning and cleaner escalation timing |
-| 3 | Lab 6: Pull Request automated checks | Understand and fix CI failures that block your pull request | A clean or explainable PR status |
-| 4 | Lab 7: Publish your workshop | Open the final PR and complete the WMS publishing request | Content ready for production deployment |
+| 1 | Lab 7: QA checks and steps | Share a reviewable preview, update WMS status, and complete self-QA or quarterly QA | A workshop ready for stakeholder review |
+| 2 | Lab 8: Review, QA, and publishing timelines | Check expected turnaround times for review, stakeholder QA, publishing, and follow-up | Better planning and cleaner escalation timing |
+| 3 | Lab 9: Pull Request automated checks | Understand and fix CI failures that block your pull request | A clean or explainable PR status |
+| 4 | Lab 10: Publish your workshop | Open the final PR and complete the WMS publishing request | Content ready for production deployment |
 
 ## Task 2: Return To Earlier Sections When QA Finds Gaps
 
 | If QA or review finds... | Go back to... | Why |
 | --- | --- | --- |
 | Missing or weak screenshots | Tools and Productivity | Fix capture quality and image optimization |
-| Markdown or manifest issues | Core Workflow -> Lab 4 | Repair content structure and authoring issues |
+| Markdown or manifest issues | Core Workflow -> Lab 6 | Repair content structure and authoring issues |
 | Optional component confusion | Reuse and Enhancements | Revisit whether FreeSQL or quizzes belong in the workshop |
 
 ## Acknowledgements
