@@ -15,11 +15,7 @@ Estimated Time: 10 minutes
 
 ## Quick Visual Guide
 
-Use this map to understand the guide at a glance before you start reading in detail. The top lane shows the main author path, the middle lane shows where WMS and GitHub context matter, and the bottom lane shows support material you can use when it becomes relevant.
-
-![Quick visual guide to the author workflow and support paths.](./images/author-guide-quick-flow.png " ")
-
-Read this image once now, then return to it whenever you need to reorient yourself or decide which section to open next.
+![Quick visual guide to the author workflow and support paths.](01-start-here/images/author-guide-quick-flow.png " ")
 
 ## Task 1: Know The Core LiveLabs Content Types
 
