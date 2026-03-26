@@ -14,7 +14,7 @@
                       {
                           "title":  "Section 2: Core Workflow",
                           "description":  "The required author path from workshop request through GitHub setup, repository sync, and Markdown development.",
-                          "filename":  "./../../02-core-workshop-flow/core-workshop-flow.md"
+                          "filename":  "./../../02-core-workshop-flow/core-workflow.md"
                       },
                       {
                           "title":  "Overview: WMS lifecycle and publishing path",
