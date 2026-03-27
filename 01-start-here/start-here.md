@@ -6,18 +6,25 @@ Use this opening section to understand how the guide is organized before you mov
 
 Estimated Time: 10 minutes
 
-### Objectives
+## Quick Visual Guide
+
+![Quick visual guide to the author workflow and support paths.](author-guide-quick-flow.png " ")
+
+## Task 1: Read The Key Introductory Labs Before The Hands-On Workflow
+
+| Lab | Open it when | Then continue with | Link |
+| --- | --- | --- | --- |
+| Lab 1: WMS lifecycle, QA, and publishing flow | You need context on statuses, approvals, QA, or publishing handoffs | Core Workflow or Validation and Publish | [Open](../workshops/start-here/index.html?lab=wms-workflows) |
+| Lab 2: GitHub foundations | You need context on repositories, forks, clones, or previews | Core Workflow | [Open](../workshops/start-here/index.html?lab=github-introduction) |
+
+## Objectives
 
 * Understand the difference between a LiveLabs workshop, lab, and sprint
 * Understand the main author path through the guide
 * Know which introductory labs to read before the hands-on workflow
 * Know which later sections are optional support or specialized workflows
 
-## Quick Visual Guide
-
-![Quick visual guide to the author workflow and support paths.](author-guide-quick-flow.png " ")
-
-## Task 1: Know The Core LiveLabs Content Types
+## Task 2: Know The Core LiveLabs Content Types
 
 | Term | Summary | How it differs |
 | --- | --- | --- |
@@ -25,13 +32,13 @@ Estimated Time: 10 minutes
 | Lab | A guided part of a workshop that covers one major topic or stage in the flow. Labs contain the actual step-by-step tasks learners follow. | A lab is part of a workshop, not a separate publishing model. |
 | Sprint | A shorter, narrower LiveLabs experience built for one focused outcome and faster completion. | A sprint is lighter than a full workshop and uses a more specialized workflow. |
 
-## Task 2: Know Where Workflow, QA, and SLAs Fit
+## Task 3: Know Where Workflow, QA, and SLAs Fit
 
 * **WMS workflow** tracks the workshop from submission through approval, development, QA, and publishing.
 * **QA** checks whether the workshop is complete, accurate, and ready for stakeholder review or production.
 * **SLA** sets the expected turnaround time for reviews, approvals, publishing, and support follow-up.
 
-## Task 3: Use The Guide In The Right Order
+## Task 4: Use The Guide In The Right Order
 
 | Section | Use it for | Read it now? |
 | --- | --- | --- |
@@ -42,13 +49,6 @@ Estimated Time: 10 minutes
 | Tools and Productivity | Screenshots, image optimization, and cleanup | As needed during development |
 | Specialized Workflows | Sprints, remote desktop, and Marketplace image flows | Only if your workshop needs them |
 | Help and FAQ | FAQ, support routes, and quick unblockers | As needed |
-
-## Task 4: Read The Key Introductory Labs Before The Hands-On Workflow
-
-| Lab | Open it when | Then continue with | Link |
-| --- | --- | --- | --- |
-| Lab 1: WMS lifecycle, QA, and publishing flow | You need context on statuses, approvals, QA, or publishing handoffs | Core Workflow or Validation and Publish | [Open](../workshops/start-here/index.html?lab=wms-workflows) |
-| Lab 2: GitHub foundations | You need context on repositories, forks, clones, or previews | Core Workflow | [Open](../workshops/start-here/index.html?lab=github-introduction) |
 
 ## Task 5: Follow The Main Author Path
 
