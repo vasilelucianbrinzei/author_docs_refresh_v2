@@ -1,0 +1,25 @@
+{
+  "workshoptitle": "New Workshop Step by Step",
+  "help": "livelabs-help-db_us@oracle.com",
+  "variables": [
+    "./../../02-core-workshop-flow/sections/04-develop-markdown-and-content/variables.json",
+    "./../../02-core-workshop-flow/sections/04-develop-markdown-and-content/variables-in-another-file.json"
+  ],
+  "tutorials": [
+    {
+      "title": "Section 4: Reuse and Enhancements",
+      "description": "Optional components and reusable patterns that extend a workshop after the core flow is in place.",
+      "filename": "./../../04-workshop-components-reuse/workshop-components-reuse.md"
+    },
+    {
+      "title": "Lab 11: Embed SQL Developer with FreeSQL",
+      "description": "Shows how to embed a FreeSQL editor directly into a workshop task when that interaction adds value.",
+      "filename": "./../../04-workshop-components-reuse/sections/01-embed-sql-developer/freesqlembed.md"
+    },
+    {
+      "title": "Lab 12: Add LiveLabs quizzes",
+      "description": "Shows how to add quizzes and knowledge checks to a LiveLabs workshop.",
+      "filename": "./../../04-workshop-components-reuse/sections/02-add-quizzes/quiz.md"
+    }
+  ]
+}

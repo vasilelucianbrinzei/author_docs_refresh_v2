@@ -1,0 +1,35 @@
+{
+  "workshoptitle": "New Workshop Step by Step",
+  "help": "livelabs-help-db_us@oracle.com",
+  "variables": [
+    "./../../02-core-workshop-flow/sections/04-develop-markdown-and-content/variables.json",
+    "./../../02-core-workshop-flow/sections/04-develop-markdown-and-content/variables-in-another-file.json"
+  ],
+  "tutorials": [
+    {
+      "title": "Section 3: Validation and Publish",
+      "description": "Use this section for review readiness, pull request checks, self-QA, publishing, and timeline expectations.",
+      "filename": "./../../03-validation-qa-publish/validation-qa-publish.md"
+    },
+    {
+      "title": "Lab 7: QA checks and steps",
+      "description": "Explains how to share previews, complete self-QA, handle quarterly QA, and prepare the workshop for stakeholder review.",
+      "filename": "./../../03-validation-qa-publish/sections/01-qa-checks/5-labs-qa-checks.md"
+    },
+    {
+      "title": "Lab 8: Review, QA, and publishing timelines",
+      "description": "Summarizes expected turnaround times for review, stakeholder QA, publishing, and support follow-up.",
+      "filename": "./../../07-help-faq-support/sections/03-sla/sla.md"
+    },
+    {
+      "title": "Lab 9: Pull Request automated checks",
+      "description": "Explains the automated checks that can block a pull request and how to interpret their output.",
+      "filename": "./../../03-validation-qa-publish/sections/02-pull-request-automated-checks/prcheck.md"
+    },
+    {
+      "title": "Lab 10: Publish your workshop",
+      "description": "Walks authors through the final pull request and WMS publishing steps that move content into production.",
+      "filename": "./../../03-validation-qa-publish/sections/03-publish-workshop/6-labs-publish.md"
+    }
+  ]
+}

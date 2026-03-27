@@ -1,0 +1,35 @@
+{
+  "workshoptitle": "New Workshop Step by Step",
+  "help": "livelabs-help-db_us@oracle.com",
+  "variables": [
+    "./../../02-core-workshop-flow/sections/04-develop-markdown-and-content/variables.json",
+    "./../../02-core-workshop-flow/sections/04-develop-markdown-and-content/variables-in-another-file.json"
+  ],
+  "tutorials": [
+    {
+      "title": "Section 2: Core Workflow",
+      "description": "Use this section for the hands-on author path from workshop request through GitHub setup, repository sync, and Markdown development.",
+      "filename": "./../../02-core-workshop-flow/core-workflow.md"
+    },
+    {
+      "title": "Lab 3: Submit new workshop in WMS",
+      "description": "Walks authors through the workshop request, required metadata, ownership fields, and WMS workflow setup.",
+      "filename": "./../../02-core-workshop-flow/sections/01-submit-new-workshop-in-wms/1-labs-wms.md"
+    },
+    {
+      "title": "Lab 4: Set up GitHub and install tools",
+      "description": "Covers GitHub account setup, GitHub Desktop, Visual Studio Code, and the core extensions most authors need.",
+      "filename": "./../../02-core-workshop-flow/sections/02-setup-github-and-install-tools/2-labs-github.md"
+    },
+    {
+      "title": "Lab 5: Stay in sync with GitHub",
+      "description": "Shows authors how to fork, clone, sync, structure their repository, and preview workshop content safely.",
+      "filename": "./../../02-core-workshop-flow/sections/03-stay-in-sync-with-github/3-labs-sync-github.md"
+    },
+    {
+      "title": "Lab 6: Develop Markdown and content",
+      "description": "Covers workshop structure, manifests, shared content reuse, Markdown rules, images, and validation-oriented authoring practices.",
+      "filename": "./../../02-core-workshop-flow/sections/04-develop-markdown-and-content/4-labs-markdown-develop-content.md"
+    }
+  ]
+}

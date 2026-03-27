@@ -1,0 +1,25 @@
+{
+  "workshoptitle": "New Workshop Step by Step",
+  "help": "livelabs-help-db_us@oracle.com",
+  "variables": [
+    "./../../02-core-workshop-flow/sections/04-develop-markdown-and-content/variables.json",
+    "./../../02-core-workshop-flow/sections/04-develop-markdown-and-content/variables-in-another-file.json"
+  ],
+  "tutorials": [
+    {
+      "title": "Section 1: Start Here",
+      "description": "Use this opening section to understand the guide structure, the core author context, and when to use each later section.",
+      "filename": "./../../01-start-here/start-here.md"
+    },
+    {
+      "title": "Lab 1: WMS lifecycle, QA, and publishing flow",
+      "description": "Explains workshop statuses, approval handoffs, stakeholder QA, and publishing flow before authors begin the hands-on workflow.",
+      "filename": "./../../02-core-workshop-flow/sections/00-understand-wms-lifecycle/wms-workflows.md"
+    },
+    {
+      "title": "Lab 2: GitHub foundations",
+      "description": "Explains the Oracle LiveLabs GitHub model, including repositories, forks, clones, and the safe authoring flow before authors start execution labs.",
+      "filename": "./../../02-core-workshop-flow/sections/01a-understand-github-foundations/github-introduction.md"
+    }
+  ]
+}

@@ -16,14 +16,14 @@ Estimated Time: 5 minutes
 
 | Lab | Use it when | What it adds |
 | --- | --- | --- |
-| Lab 11: Embed SQL Developer with FreeSQL | Learners need a lightweight SQL editor inside the flow | An embedded SQL interaction inside a lab task |
-| Lab 12: Add LiveLabs quizzes | You want quick knowledge checks or recap questions | Interactive quiz blocks inside the workshop |
+| [Lab 11: Embed SQL Developer with FreeSQL](../workshops/workshop-components-reuse/index.html?lab=freesqlembed) | Learners need a lightweight SQL editor inside the flow | An embedded SQL interaction inside a lab task |
+| [Lab 12: Add LiveLabs quizzes](../workshops/workshop-components-reuse/index.html?lab=quiz) | You want quick knowledge checks or recap questions | Interactive quiz blocks inside the workshop |
 
 ## Task 2: Keep Enhancements In Proportion
 
 1. Finish the core author path before you add optional components.
 2. Add only the components that improve comprehension or task completion.
-3. After integrating a component, return to **Validation and Publish** so the workshop is reviewed as a complete experience.
+3. After integrating a component, return to [**Validation and Publish**](../workshops/validation-qa-publish/index.html) so the workshop is reviewed as a complete experience.
 
 ## Acknowledgements
 

@@ -1,0 +1,30 @@
+{
+  "workshoptitle": "New Workshop Step by Step",
+  "help": "livelabs-help-db_us@oracle.com",
+  "variables": [
+    "./../../02-core-workshop-flow/sections/04-develop-markdown-and-content/variables.json",
+    "./../../02-core-workshop-flow/sections/04-develop-markdown-and-content/variables-in-another-file.json"
+  ],
+  "tutorials": [
+    {
+      "title": "Section 5: Tools and Productivity",
+      "description": "Use these labs when you need better screenshots, lighter images, or content-cleanup help while authoring.",
+      "filename": "./../../05-tools/tools.md"
+    },
+    {
+      "title": "Lab 13: Capture effective screens",
+      "description": "Covers screenshot best practices so workshop steps are visually clear and reviewable.",
+      "filename": "./../../05-tools/sections/01-capture-screens-best-practices/13-labs-capture-screens-best-practices.md"
+    },
+    {
+      "title": "Lab 14: Optimize screenshots with OptiShot",
+      "description": "Shows authors how to reduce image size and keep screenshots clean without losing readability.",
+      "filename": "./../../05-tools/sections/02-optishot/optishot.md"
+    },
+    {
+      "title": "Lab 15: Clean up content with Fixomat",
+      "description": "Explains how to use Fixomat for Markdown cleanup and asset optimization before review or QA.",
+      "filename": "./../../05-tools/sections/03-fixomat/fixomat.md"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "workshoptitle": "New Workshop Step by Step",
+  "help": "livelabs-help-db_us@oracle.com",
+  "variables": [
+    "./../../02-core-workshop-flow/sections/04-develop-markdown-and-content/variables.json",
+    "./../../02-core-workshop-flow/sections/04-develop-markdown-and-content/variables-in-another-file.json"
+  ],
+  "tutorials": [
+    {
+      "title": "Section 7: Help and FAQ",
+      "description": "Use this section for support paths and common authoring questions when you are blocked or need a quick answer.",
+      "filename": "./../../07-help-faq-support/help-faq-support.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Explains where workshop authors should go for support, office hours, email help, and Slack assistance.",
+      "filename": "./../../07-help-faq-support/sections/01-need-help/need-help.md"
+    },
+    {
+      "title": "LiveLabs FAQ",
+      "description": "Collects common questions about LiveLabs production, development, workshop structure, and event workflows.",
+      "filename": "./../../07-help-faq-support/sections/02-livelabs-faq/livelabs-faq.md"
+    }
+  ]
+}

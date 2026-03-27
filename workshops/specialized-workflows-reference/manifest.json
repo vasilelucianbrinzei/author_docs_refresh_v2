@@ -1,0 +1,50 @@
+{
+  "workshoptitle": "New Workshop Step by Step",
+  "help": "livelabs-help-db_us@oracle.com",
+  "variables": [
+    "./../../02-core-workshop-flow/sections/04-develop-markdown-and-content/variables.json",
+    "./../../02-core-workshop-flow/sections/04-develop-markdown-and-content/variables-in-another-file.json"
+  ],
+  "tutorials": [
+    {
+      "title": "Section 6: Specialized Workflows",
+      "description": "Advanced or niche workflows that only apply when a workshop needs sprint, remote desktop, or Marketplace-specific steps.",
+      "filename": "./../../06-specialized-workflows-reference/specialized-workflows-reference.md"
+    },
+    {
+      "title": "Lab 16: Develop LiveLabs Sprints",
+      "description": "Shows how to structure, author, preview, and publish LiveLabs Sprint content.",
+      "filename": "./../../06-specialized-workflows-reference/sections/01-create-sprints-workflow/10-create-sprints-workflow.md"
+    },
+    {
+      "title": "Lab 17: Set up graphical remote desktop",
+      "description": "Explains how to configure and use a graphical remote desktop for a workshop environment.",
+      "filename": "./../../06-specialized-workflows-reference/sections/02-setup-graphical-remote-desktop/6-labs-setup-graphical-remote-desktop.md"
+    },
+    {
+      "title": "Lab 18: Create custom image for Marketplace",
+      "description": "Explains how to create and prepare a Marketplace image for workshop use.",
+      "filename": "./../../06-specialized-workflows-reference/sections/03-create-custom-image-for-marketplace/7-labs-create-custom-image-for-marketplace.md"
+    },
+    {
+      "title": "Lab 19: Publish your image to Oracle Marketplace",
+      "description": "Shows how to publish a prepared image to Oracle Marketplace.",
+      "filename": "./../../06-specialized-workflows-reference/sections/04-publish-custom-image-to-marketplace/8-labs-publish-custom-image-to-marketplace.md"
+    },
+    {
+      "title": "Lab 20: Update the image on your sandbox environment",
+      "description": "Shows how to register a published Marketplace listing and update the image used by a LiveLabs sandbox environment.",
+      "filename": "./../../06-specialized-workflows-reference/sections/05-add-custom-image-to-workshop/12-add-custom-image-to-workshop.md"
+    },
+    {
+      "title": "Lab 21: Secure Desktop environments in LiveLabs",
+      "description": "Explains when OCI Secure Desktops make sense for LiveLabs workshops and what they change in delivery.",
+      "filename": "./../../06-specialized-workflows-reference/sections/06-secure-desktop/secure-desktop.md"
+    },
+    {
+      "title": "Lab 22: Request and access Secure Desktop environments",
+      "description": "Explains how to request and access OCI Secure Desktop environments for a LiveLabs workshop.",
+      "filename": "./../../06-specialized-workflows-reference/sections/06-secure-desktop/secure-desktop-how-to-request.md"
+    }
+  ]
+}
