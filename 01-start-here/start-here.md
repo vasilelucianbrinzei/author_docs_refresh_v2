@@ -35,20 +35,20 @@ Estimated Time: 10 minutes
 
 | Section | Use it for | Read it now? |
 | --- | --- | --- |
-| [Start Here](../workshops/start-here/index.html) | Orientation, context, and guide structure | Yes |
-| [Core Workflow](../workshops/core-workshop-flow/index.html) | The required hands-on author path | Next |
-| [Validation and Publish](../workshops/validation-qa-publish/index.html) | Review readiness, QA, and production handoff | Yes, after your draft is working |
-| [Reuse and Enhancements](../workshops/workshop-components-reuse/index.html) | Optional components such as FreeSQL and quizzes | As needed |
-| [Tools and Productivity](../workshops/tools/index.html) | Screenshots, image optimization, and cleanup | As needed during development |
-| [Specialized Workflows](../workshops/specialized-workflows-reference/index.html) | Sprints, remote desktop, and Marketplace image flows | Only if your workshop needs them |
-| [Help and FAQ](../workshops/help-faq-support/index.html) | FAQ, support routes, and quick unblockers | As needed |
+| Start Here | Orientation, context, and guide structure | Yes |
+| Core Workflow | The required hands-on author path | Next |
+| Validation and Publish | Review readiness, QA, and production handoff | Yes, after your draft is working |
+| Reuse and Enhancements | Optional components such as FreeSQL and quizzes | As needed |
+| Tools and Productivity | Screenshots, image optimization, and cleanup | As needed during development |
+| Specialized Workflows | Sprints, remote desktop, and Marketplace image flows | Only if your workshop needs them |
+| Help and FAQ | FAQ, support routes, and quick unblockers | As needed |
 
 ## Task 4: Read The Key Introductory Labs Before The Hands-On Workflow
 
-| Lab | Open it when | Then continue with |
-| --- | --- | --- |
-| [Lab 1: WMS lifecycle, QA, and publishing flow](../workshops/start-here/index.html?lab=wms-workflows) | You need context on statuses, approvals, QA, or publishing handoffs | [Core Workflow](../workshops/core-workshop-flow/index.html) or [Validation and Publish](../workshops/validation-qa-publish/index.html) |
-| [Lab 2: GitHub foundations](../workshops/start-here/index.html?lab=github-introduction) | You need context on repositories, forks, clones, or previews | [Core Workflow](../workshops/core-workshop-flow/index.html) |
+| Lab | Open it when | Then continue with | Link |
+| --- | --- | --- | --- |
+| Lab 1: WMS lifecycle, QA, and publishing flow | You need context on statuses, approvals, QA, or publishing handoffs | Core Workflow or Validation and Publish | [Open](../workshops/start-here/index.html?lab=wms-workflows) |
+| Lab 2: GitHub foundations | You need context on repositories, forks, clones, or previews | Core Workflow | [Open](../workshops/start-here/index.html?lab=github-introduction) |
 
 ## Task 5: Follow The Main Author Path
 

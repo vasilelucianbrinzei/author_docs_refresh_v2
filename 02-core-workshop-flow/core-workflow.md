@@ -14,20 +14,20 @@ Estimated Time: 10 minutes
 
 ## Task 1: Follow The Main Author Path
 
-| Step | Open this page or lab | Use it for | Outcome |
-| --- | --- | --- | --- |
-| 1 | [Lab 3: Submit new workshop in WMS](../workshops/core-workshop-flow/index.html?lab=1-labs-wms) | Create or update the WMS entry and ownership details | A correct workshop record and status path |
-| 2 | [Lab 4: Set up GitHub and install tools](../workshops/core-workshop-flow/index.html?lab=2-labs-github) | Prepare GitHub, GitHub Desktop, VS Code, and core extensions | A ready authoring workstation |
-| 3 | [Lab 5: Stay in sync with GitHub](../workshops/core-workshop-flow/index.html?lab=3-labs-sync-github) | Fork, clone, sync, preview, and understand repository structure | A safe working repo and preview path |
-| 4 | [Lab 6: Develop Markdown and content](../workshops/core-workshop-flow/index.html?lab=4-labs-markdown-develop-content) | Build the workshop structure, manifests, content, images, and reuse patterns | A reviewable workshop draft |
+| Step | Open this page or lab | Use it for | Outcome | Link |
+| --- | --- | --- | --- | --- |
+| 1 | Lab 3: Submit new workshop in WMS | Create or update the WMS entry and ownership details | A correct workshop record and status path | [Open](../workshops/core-workshop-flow/index.html?lab=1-labs-wms) |
+| 2 | Lab 4: Set up GitHub and install tools | Prepare GitHub, GitHub Desktop, VS Code, and core extensions | A ready authoring workstation | [Open](../workshops/core-workshop-flow/index.html?lab=2-labs-github) |
+| 3 | Lab 5: Stay in sync with GitHub | Fork, clone, sync, preview, and understand repository structure | A safe working repo and preview path | [Open](../workshops/core-workshop-flow/index.html?lab=3-labs-sync-github) |
+| 4 | Lab 6: Develop Markdown and content | Build the workshop structure, manifests, content, images, and reuse patterns | A reviewable workshop draft | [Open](../workshops/core-workshop-flow/index.html?lab=4-labs-markdown-develop-content) |
 
 ## Task 2: Pull In Supporting Sections At The Right Time
 
 | If you need... | Go to... | Why |
 | --- | --- | --- |
-| Review, self-QA, publishing, or timeline expectations | [Validation and Publish](../workshops/validation-qa-publish/index.html) | It covers QA, publishing, and the timeline details page |
-| Optional interactive or reusable workshop elements | [Reuse and Enhancements](../workshops/workshop-components-reuse/index.html) | It covers FreeSQL and quizzes |
-| Better screenshots or smaller image files | [Tools and Productivity](../workshops/tools/index.html) | It covers capture standards, optimization, and cleanup |
+| Review, self-QA, publishing, or timeline expectations | Validation and Publish | It covers QA, publishing, and the timeline details page |
+| Optional interactive or reusable workshop elements | Reuse and Enhancements | It covers FreeSQL and quizzes |
+| Better screenshots or smaller image files | Tools and Productivity | It covers capture standards, optimization, and cleanup |
 
 ## Acknowledgements
 
