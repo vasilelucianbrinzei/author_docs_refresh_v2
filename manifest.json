@@ -7,7 +7,7 @@
                   ],
     "tutorials":  [
                       {
-                          "title":  "Section 1: Start Here",
+                          "title":  "Section 1: LiveLabs Start Guide",
                           "description":  "Use this opening section to understand the guide structure, the core author context, and when to use each later section.",
                           "filename":  "./01-start-here/start-here.md"
                       },
