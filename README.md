@@ -1,3 +1,7 @@
+# Github Pages
+
+https://vasilelucianbrinzei.github.io/author_docs_refresh_v2/
+
 # Guide Folder Structure
 
 This folder is organized to mirror the guide flow instead of a flat lab-number layout.
