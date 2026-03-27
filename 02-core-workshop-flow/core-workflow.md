@@ -6,11 +6,9 @@ This section is the hands-on author path. Once you understand the guide, the WMS
 
 Estimated Time: 10 minutes
 
-### Objectives
+## Quick Visual Guide
 
-* Know the required author path for most workshops
-* Know what each core lab covers
-* Know when to pull in supporting sections without losing the main flow
+![Quick visual guide to the core workflow section and its labs.](02-core-workflow-quick-reference.png " ")
 
 ## Task 1: Follow The Main Author Path
 
@@ -20,6 +18,12 @@ Estimated Time: 10 minutes
 | 2 | Lab 4: Set up GitHub and install tools | Prepare GitHub, GitHub Desktop, VS Code, and core extensions | A ready authoring workstation | [Open](../workshops/core-workshop-flow/index.html?lab=2-labs-github) |
 | 3 | Lab 5: Stay in sync with GitHub | Fork, clone, sync, preview, and understand repository structure | A safe working repo and preview path | [Open](../workshops/core-workshop-flow/index.html?lab=3-labs-sync-github) |
 | 4 | Lab 6: Develop Markdown and content | Build the workshop structure, manifests, content, images, and reuse patterns | A reviewable workshop draft | [Open](../workshops/core-workshop-flow/index.html?lab=4-labs-markdown-develop-content) |
+
+## Objectives
+
+* Know the required author path for most workshops
+* Know what each core lab covers
+* Know when to pull in supporting sections without losing the main flow
 
 ## Task 2: Pull In Supporting Sections At The Right Time
 

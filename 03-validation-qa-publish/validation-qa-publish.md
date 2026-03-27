@@ -6,12 +6,9 @@ Use this section when your workshop draft is ready for review. These labs cover 
 
 Estimated Time: 10 minutes
 
-### Objectives
+## Quick Visual Guide
 
-* Know the sequence from review-ready content to production publish
-* Know where self-QA, automated pull request checks, and publishing fit
-* Know where to find the timeline expectations for review and publishing handoffs
-* Know when to loop back to earlier sections to fix issues
+![Quick visual guide to the validation and publish section and its labs.](03-validation-publish-quick-reference.png " ")
 
 ## Task 1: Follow The Readiness Gates In Order
 
@@ -21,6 +18,13 @@ Estimated Time: 10 minutes
 | 2 | Lab 8: Review, QA, and publishing timelines | Check expected turnaround times for review, stakeholder QA, publishing, and follow-up | Better planning and cleaner escalation timing | [Open](../workshops/validation-qa-publish/index.html?lab=sla) |
 | 3 | Lab 9: Pull Request automated checks | Understand and fix CI failures that block your pull request | A clean or explainable PR status | [Open](../workshops/validation-qa-publish/index.html?lab=prcheck) |
 | 4 | Lab 10: Publish your workshop | Open the final PR and complete the WMS publishing request | Content ready for production deployment | [Open](../workshops/validation-qa-publish/index.html?lab=6-labs-publish) |
+
+## Objectives
+
+* Know the sequence from review-ready content to production publish
+* Know where self-QA, automated pull request checks, and publishing fit
+* Know where to find the timeline expectations for review and publishing handoffs
+* Know when to loop back to earlier sections to fix issues
 
 ## Task 2: Return To Earlier Sections When QA Finds Gaps
 
