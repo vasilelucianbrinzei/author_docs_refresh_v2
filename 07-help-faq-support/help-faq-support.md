@@ -10,18 +10,18 @@ Estimated Time: 5 minutes
 
 ![Quick visual guide to the help and FAQ section and its support pages.](07-help-faq-support-quick-reference.png " ")
 
+## Objectives
+
+* Know where to go for practical support
+* Know which page answers which type of question
+* Know when to use FAQ versus direct support
+
 ## Task 1: Open The Right Support Page
 
 | Page | Use it for | Typical moment | Link |
 | --- | --- | --- | --- |
 | Need Help? | The practical support path for workshop authors | When you are blocked and need the right contact or channel | [Open](../workshops/help-faq-support/index.html?lab=need-help) |
 | LiveLabs FAQ | Common process and policy questions | When you need a fast answer before asking for help | [Open](../workshops/help-faq-support/index.html?lab=livelabs-faq) |
-
-## Objectives
-
-* Know where to go for practical support
-* Know which page answers which type of question
-* Know when to use FAQ versus direct support
 
 ## Task 2: Use Support Without Losing Momentum
 

@@ -10,18 +10,18 @@ Estimated Time: 5 minutes
 
 ![Quick visual guide to the reuse and enhancements section and its labs.](04-reuse-enhancements-quick-reference.png " ")
 
+## Objectives
+
+* Identify optional enhancements that fit your workshop
+* Know when a reusable component is worth the added complexity
+* Keep optional components separate from the required author workflow
+
 ## Task 1: Choose The Right Enhancement
 
 | Lab | Use it when | What it adds | Link |
 | --- | --- | --- | --- |
 | Lab 11: Embed SQL Developer with FreeSQL | Learners need a lightweight SQL editor inside the flow | An embedded SQL interaction inside a lab task | [Open](../workshops/workshop-components-reuse/index.html?lab=freesqlembed) |
 | Lab 12: Add LiveLabs quizzes | You want quick knowledge checks or recap questions | Interactive quiz blocks inside the workshop | [Open](../workshops/workshop-components-reuse/index.html?lab=quiz) |
-
-## Objectives
-
-* Identify optional enhancements that fit your workshop
-* Know when a reusable component is worth the added complexity
-* Keep optional components separate from the required author workflow
 
 ## Task 2: Keep Enhancements In Proportion
 

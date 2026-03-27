@@ -10,6 +10,12 @@ Estimated Time: 5 minutes
 
 ![Quick visual guide to the tools and productivity section and its labs.](05-tools-productivity-quick-reference.png " ")
 
+## Objectives
+
+* Know which tool to use for each common authoring problem
+* Use screenshot and cleanup tools at the right point in the workflow
+* Keep the tool choices connected to review, QA, and publish needs
+
 ## Task 1: Match The Tool To The Problem
 
 | Lab | Use it for | Best time to use it | Result | Link |
@@ -17,12 +23,6 @@ Estimated Time: 5 minutes
 | Lab 13: Capture effective screens | Better screenshots and clearer step visuals | While documenting the product flow | Cleaner and more consistent screenshots | [Open](../workshops/tools/index.html?lab=13-labs-capture-screens-best-practices) |
 | Lab 14: Optimize screenshots with OptiShot | Smaller, lighter image files | After you capture screenshots and before review | Faster-loading pages and smaller assets | [Open](../workshops/tools/index.html?lab=optishot) |
 | Lab 15: Clean up content with Fixomat | Markdown and asset cleanup | Before QA, pull request review, or publish | Cleaner content with fewer avoidable issues | [Open](../workshops/tools/index.html?lab=fixomat) |
-
-## Objectives
-
-* Know which tool to use for each common authoring problem
-* Use screenshot and cleanup tools at the right point in the workflow
-* Keep the tool choices connected to review, QA, and publish needs
 
 ## Task 2: Keep Tools Connected To The Workflow
 

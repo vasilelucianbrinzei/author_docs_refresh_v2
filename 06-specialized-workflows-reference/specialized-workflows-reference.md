@@ -10,6 +10,12 @@ Estimated Time: 10 minutes
 
 ![Quick visual guide to the specialized workflows section and its labs.](06-specialized-workflows-quick-reference.png " ")
 
+## Objectives
+
+* Identify which advanced workflows are actually relevant to your workshop
+* Keep specialized setup separate from the standard author path
+* Find the right reference quickly when your delivery model requires it
+
 ## Task 1: Open Only The Labs That Match Your Delivery Model
 
 | Lab | Use it when | Primary outcome | Link |
@@ -21,12 +27,6 @@ Estimated Time: 10 minutes
 | Lab 20: Update the image on your sandbox environment | A published Marketplace image needs to be attached to a LiveLabs environment | A sandbox environment that uses the new image | [Open](../workshops/specialized-workflows-reference/index.html?lab=12-add-custom-image-to-workshop) |
 | Lab 21: Secure Desktop environments in LiveLabs | You need OCI Secure Desktop delivery context | A decision point for secure desktop use | [Open](../workshops/specialized-workflows-reference/index.html?lab=secure-desktop) |
 | Lab 22: Request and access Secure Desktop environments | You need the operational steps for secure desktop access | A request and access process for the environment | [Open](../workshops/specialized-workflows-reference/index.html?lab=secure-desktop-how-to-request) |
-
-## Objectives
-
-* Identify which advanced workflows are actually relevant to your workshop
-* Keep specialized setup separate from the standard author path
-* Find the right reference quickly when your delivery model requires it
 
 ## Task 2: Keep Specialized Work Separate From The Main Flow
 
