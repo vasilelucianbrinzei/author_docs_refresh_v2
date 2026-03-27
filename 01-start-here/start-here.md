@@ -1,4 +1,4 @@
-# Start Here
+# ![LiveLabs Start Guide](../workshops/start-here/index.html?lab=start-here)
 
 ## Introduction
 
