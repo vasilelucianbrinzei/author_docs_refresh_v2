@@ -10,12 +10,6 @@ Estimated Time: 10 minutes
 
 ![Quick visual guide to the author workflow and support paths.](author-guide-quick-flow.png " ")
 
-## Task 1: Read The Key Introductory Labs Before The Hands-On Workflow
-
-| Lab | Open it when | Then continue with | Link |
-| --- | --- | --- | --- |
-| Lab 1: WMS lifecycle, QA, and publishing flow | You need context on statuses, approvals, QA, or publishing handoffs | Core Workflow or Validation and Publish | [Open](../workshops/start-here/index.html?lab=wms-workflows) |
-| Lab 2: GitHub foundations | You need context on repositories, forks, clones, or previews | Core Workflow | [Open](../workshops/start-here/index.html?lab=github-introduction) |
 
 ## Objectives
 
@@ -23,6 +17,15 @@ Estimated Time: 10 minutes
 * Understand the main author path through the guide
 * Know which introductory labs to read before the hands-on workflow
 * Know which later sections are optional support or specialized workflows
+
+
+## Task 1: Read The Key Introductory Labs Before The Hands-On Workflow
+
+| Lab | Open it when | Then continue with | Link |
+| --- | --- | --- | --- |
+| Lab 1: WMS lifecycle, QA, and publishing flow | You need context on statuses, approvals, QA, or publishing handoffs | Core Workflow or Validation and Publish | [Open](../workshops/start-here/index.html?lab=wms-workflows) |
+| Lab 2: GitHub foundations | You need context on repositories, forks, clones, or previews | Core Workflow | [Open](../workshops/start-here/index.html?lab=github-introduction) |
+
 
 ## Task 2: Know The Core LiveLabs Content Types
 
