@@ -2,6 +2,12 @@
 
 https://vasilelucianbrinzei.github.io/author_docs_refresh_v2/
 
+The published root page is now the path-first landing experience:
+
+* `index.html` is the main entry point with the two-path UI.
+* `?lab=` links on the root still route into `workshops/livelabs/index.html`.
+* `workshops/livelabs/index.html` sends no-lab visits back to the root landing page.
+
 # Guide Folder Structure
 
 This folder is organized to mirror the guide flow instead of a flat lab-number layout.

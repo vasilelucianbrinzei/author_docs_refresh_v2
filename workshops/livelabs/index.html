@@ -7,6 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Oracle LiveLabs Author Guide with an interactive Guided Path and Reference Toolkit for workshop authors.">
     <title>Oracle LiveLabs Author Guide</title>
+    <script>
+        (function () {
+            var url = new URL(window.location.href);
+            var lab = url.searchParams.get("lab");
+            var target;
+
+            if (lab === "core-workshop-flow") {
+                url.searchParams.set("lab", "core-workflow");
+                window.location.replace(url.toString());
+                return;
+            }
+
+            if (!lab) {
+                target = new URL("../../index.html", url);
+                target.hash = url.hash;
+                window.location.replace(target.toString());
+            }
+        }());
+    </script>
     <script src="../../main-guide-nav-filter.js"></script>
 
     <script src="https://oracle-livelabs.github.io/common/redwood-hol/js/jquery-1.11.0.min.js"></script>
