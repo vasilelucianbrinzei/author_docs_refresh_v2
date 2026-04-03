@@ -310,6 +310,123 @@
       min-width: 13.25rem;
     }
 
+    #app .home-side-stack {
+      display: grid;
+      gap: 1rem;
+    }
+
+    #app .home-side-card {
+      position: relative;
+      display: grid;
+      gap: 0.95rem;
+      padding: 1.25rem 1.3rem;
+      overflow: hidden;
+    }
+
+    #app .home-side-card::after {
+      content: "";
+      position: absolute;
+      right: -4.5rem;
+      bottom: -5rem;
+      width: 13rem;
+      height: 13rem;
+      border-radius: 50%;
+      opacity: 0.18;
+      pointer-events: none;
+    }
+
+    #app .home-side-card.is-guided::after {
+      background: radial-gradient(circle, rgba(199, 70, 52, 0.6), transparent 68%);
+    }
+
+    #app .home-side-card.is-toolkit::after {
+      background: radial-gradient(circle, rgba(67, 124, 148, 0.54), transparent 68%);
+    }
+
+    #app .home-side-card h2 {
+      margin: 0;
+      font-size: clamp(1.45rem, 2.2vw, 2rem);
+      line-height: 1.06;
+    }
+
+    #app .home-side-card p {
+      margin: 0;
+      color: var(--ink-soft);
+      line-height: 1.68;
+    }
+
+    #app .home-mini-flow {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    #app .home-mini-step {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 0.8rem;
+      align-items: start;
+      padding: 0.85rem 0.95rem;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.86);
+      border: 1px solid rgba(212, 207, 202, 0.9);
+    }
+
+    #app .home-mini-number {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #c74634, #437c94);
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 900;
+      box-shadow: 0 10px 20px rgba(32, 30, 28, 0.12);
+    }
+
+    #app .home-mini-step strong,
+    #app .home-toolkit-card strong {
+      display: block;
+      font-size: 0.96rem;
+      line-height: 1.35;
+      margin-bottom: 0.18rem;
+    }
+
+    #app .home-mini-step small,
+    #app .home-toolkit-card small {
+      display: block;
+      color: var(--ink-soft);
+      line-height: 1.5;
+      font-size: 0.84rem;
+    }
+
+    #app .home-toolkit-summary {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+    }
+
+    #app .home-toolkit-preview {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+
+    #app .home-toolkit-card {
+      padding: 0.85rem 0.95rem;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.86);
+      border: 1px solid rgba(212, 207, 202, 0.9);
+      box-shadow: 0 12px 24px rgba(32, 30, 28, 0.04);
+    }
+
+    #app .home-side-note {
+      font-size: 0.92rem;
+      color: var(--ink-soft);
+      line-height: 1.6;
+    }
+
     #app .hub-stats,
     #app .mode-chip-row,
     #app .quick-links,
@@ -1954,6 +2071,10 @@
         width: 100%;
       }
 
+      #app .home-toolkit-preview {
+        grid-template-columns: 1fr;
+      }
+
       #app .search-group {
         grid-template-columns: 1fr;
       }
@@ -2065,38 +2186,66 @@
               </div>
 
               <div class="col-xl-6">
-                <div class="scene-well" aria-hidden="true">
-                  <div class="well-ring ring-surface"></div>
-                  <div class="well-ring ring-middle"></div>
-                  <div class="well-ring ring-deep"></div>
-                  <div class="well-path"></div>
+                <div class="home-side-stack">
+                  <article class="compact-panel home-side-card is-guided">
+                    <div class="panel-kicker">Guided path preview</div>
+                    <h2>Work the standard author route first.</h2>
+                    <p>Start in WMS, move into GitHub and markdown, then finish with QA and publishing only after the preview is stable.</p>
+                    <div class="home-mini-flow" aria-hidden="true">
+                      <div class="home-mini-step">
+                        <span class="home-mini-number">1</span>
+                        <div>
+                          <strong>Submit Workshop Request</strong>
+                          <small>Set owner, learner outcome, and delivery shape in WMS.</small>
+                        </div>
+                      </div>
+                      <div class="home-mini-step">
+                        <span class="home-mini-number">2</span>
+                        <div>
+                          <strong>Create Workshop + Add to GitHub</strong>
+                          <small>Build the structure, wire the manifest, and get preview working early.</small>
+                        </div>
+                      </div>
+                      <div class="home-mini-step">
+                        <span class="home-mini-number">3</span>
+                        <div>
+                          <strong>Review &amp; Publish</strong>
+                          <small>Run QA, open the PR, and confirm the final publishing details.</small>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
 
-                  <div class="well-node node-surface">
-                    <span class="node-tag">Surface</span>
-                    <strong>Choose your starting point</strong>
-                  </div>
-
-                  <div class="well-node node-request">
-                    <span class="node-tag">Layer 1</span>
-                    <strong>Submit in WMS</strong>
-                  </div>
-
-                  <div class="well-node node-build">
-                    <span class="node-tag">Layer 2</span>
-                    <strong>GitHub, manifest, preview</strong>
-                  </div>
-
-                  <div class="well-node node-review">
-                    <span class="node-tag">Layer 3</span>
-                    <strong>Self QA, PR, publish</strong>
-                  </div>
-
-                  <div class="tool-constellation">
-                    <div class="mini-bubble">Formatting</div>
-                    <div class="mini-bubble">Media</div>
-                    <div class="mini-bubble">QA</div>
-                    <div class="mini-bubble">Quiz</div>
-                  </div>
+                  <article class="compact-panel home-side-card is-toolkit">
+                    <div class="panel-kicker">Toolkit preview</div>
+                    <h2>Use the toolkit when the blocker is specific.</h2>
+                    <p>Search and filter the card deck when you already know the task, instead of walking the full sequence again.</p>
+                    <div class="home-toolkit-summary" aria-hidden="true">
+                      <span class="mode-chip">Formatting</span>
+                      <span class="mode-chip">GitHub</span>
+                      <span class="mode-chip">Media</span>
+                      <span class="mode-chip">QA</span>
+                    </div>
+                    <div class="home-toolkit-preview" aria-hidden="true">
+                      <div class="home-toolkit-card">
+                        <strong>WMS Request</strong>
+                        <small>Request shape, ownership, and approval context.</small>
+                      </div>
+                      <div class="home-toolkit-card">
+                        <strong>Formatting</strong>
+                        <small>Markdown patterns that stay easy to scan and review.</small>
+                      </div>
+                      <div class="home-toolkit-card">
+                        <strong>Media</strong>
+                        <small>Screenshots, video, and image hygiene before review.</small>
+                      </div>
+                      <div class="home-toolkit-card">
+                        <strong>QA &amp; Publish</strong>
+                        <small>Self QA, PR handoff, and final production URL checks.</small>
+                      </div>
+                    </div>
+                    <p class="home-side-note">The classic end-to-end guide still stays one click away in the top bar when you want the old contents-driven view.</p>
+                  </article>
                 </div>
               </div>
             </div>
