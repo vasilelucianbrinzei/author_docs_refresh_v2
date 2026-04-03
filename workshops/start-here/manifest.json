@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "New Workshop Step by Step",
+  "workshoptitle": "Oracle LiveLabs Author Guide",
   "help": "livelabs-help-db_us@oracle.com",
   "variables": [
     "./../../02-core-workshop-flow/sections/04-develop-markdown-and-content/variables.json",
@@ -8,7 +8,7 @@
   "tutorials": [
     {
       "title": "Section 1: Start Here",
-      "description": "Use this opening section to understand the guide structure, the core author context, and when to use each later section.",
+      "description": "Use this opening section to launch the interactive author guide, start with the Guided Path or open the Reference Toolkit, and then move into the right part of the documentation set.",
       "filename": "./../../01-start-here/start-here.md"
     },
     {
