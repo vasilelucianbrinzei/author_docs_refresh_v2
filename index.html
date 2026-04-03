@@ -28,18 +28,19 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     #app {
-      --surface: #fcfbfa;
-      --panel: rgba(255, 255, 255, 0.86);
-      --panel-strong: rgba(255, 255, 255, 0.96);
+      --surface: #fbf9f8;
+      --panel: rgba(255, 255, 255, 0.9);
+      --panel-strong: rgba(255, 255, 255, 0.97);
       --ink: #201e1c;
       --ink-soft: #665f5b;
       --rose: #c74634;
       --rose-soft: #fcd0ca;
       --sky: #437c94;
       --mint: #4c825c;
-      --gold: #9c6a00;
-      --violet: #b3311f;
-      --violet-deep: #6d2418;
+      --gold: #aa643b;
+      --violet: #ac3e2e;
+      --violet-deep: #863125;
+      --line: rgba(212, 207, 202, 0.92);
       --shadow-soft: 0 18px 48px rgba(32, 30, 28, 0.08);
       --shadow-deep: 0 28px 72px rgba(32, 30, 28, 0.12);
       min-height: 100vh;
@@ -48,7 +49,7 @@
       background:
         radial-gradient(circle at top right, rgba(199, 70, 52, 0.09), transparent 30%),
         radial-gradient(circle at bottom left, rgba(67, 124, 148, 0.08), transparent 28%),
-        linear-gradient(180deg, #fcfbfa 0%, #f6f3f0 100%);
+        linear-gradient(180deg, #fbf9f8 0%, #f3f0ed 100%);
       background-size: auto, auto, auto;
       background-color: var(--surface);
       overflow-x: hidden;
@@ -129,10 +130,10 @@
       height: 2.6rem;
       border-radius: 50%;
       background:
-        radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.6) 35%, rgba(108, 97, 185, 0.7) 36%, rgba(68, 57, 112, 0.98) 67%);
+        radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.62) 38%, rgba(199, 70, 52, 0.66) 39%, rgba(134, 49, 37, 0.96) 70%);
       box-shadow:
         inset 0 0 0 1px rgba(255, 255, 255, 0.6),
-        0 14px 28px rgba(66, 53, 113, 0.2);
+        0 14px 28px rgba(134, 49, 37, 0.2);
       position: relative;
       flex: 0 0 auto;
     }
@@ -166,18 +167,18 @@
     }
 
     #app .nav-control {
-      border: 1px solid rgba(80, 70, 116, 0.12);
+      border: 1px solid rgba(212, 207, 202, 0.92);
       background: rgba(255, 255, 255, 0.74);
       color: var(--ink);
       font-weight: 700;
       border-radius: 999px;
       padding: 0.7rem 1rem;
-      box-shadow: 0 10px 24px rgba(56, 46, 95, 0.08);
+      box-shadow: 0 10px 24px rgba(32, 30, 28, 0.08);
     }
 
     #app .nav-control:hover {
       transform: translateY(-1px);
-      box-shadow: 0 14px 30px rgba(56, 46, 95, 0.12);
+      box-shadow: 0 14px 30px rgba(32, 30, 28, 0.12);
     }
 
     #app .nav-control.is-active {
@@ -196,19 +197,19 @@
     }
 
     #app .nav-guide-link {
-      border: 1px solid rgba(80, 70, 116, 0.12);
+      border: 1px solid rgba(212, 207, 202, 0.92);
       background: rgba(255, 255, 255, 0.74);
       color: var(--ink);
       font-weight: 800;
       border-radius: 999px;
       padding: 0.7rem 1rem;
       text-decoration: none;
-      box-shadow: 0 10px 24px rgba(56, 46, 95, 0.08);
+      box-shadow: 0 10px 24px rgba(32, 30, 28, 0.08);
     }
 
     #app .nav-guide-link:hover {
       transform: translateY(-1px);
-      box-shadow: 0 14px 30px rgba(56, 46, 95, 0.12);
+      box-shadow: 0 14px 30px rgba(32, 30, 28, 0.12);
     }
 
     #app .hub-screen,
@@ -226,7 +227,7 @@
       position: relative;
       border-radius: 42px;
       padding: clamp(2rem, 4vw, 3rem);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(248, 245, 255, 0.86));
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(245, 244, 242, 0.94));
       border: 1px solid rgba(255, 255, 255, 0.74);
       box-shadow: var(--shadow-deep);
       overflow: hidden;
@@ -617,7 +618,7 @@
       border: 1px solid rgba(255, 255, 255, 0.74);
       border-radius: 32px;
       box-shadow: var(--shadow-soft);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(248, 245, 255, 0.9));
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(245, 244, 242, 0.95));
     }
 
     #app .path-card::after {
@@ -874,18 +875,18 @@
       display: flex;
       align-items: center;
       gap: 0.9rem;
-      background: rgba(248, 245, 255, 0.84);
+      background: rgba(245, 244, 242, 0.92);
       color: var(--ink);
       box-shadow:
-        inset 0 0 0 1px rgba(91, 76, 143, 0.08),
-        0 12px 24px rgba(56, 46, 95, 0.06);
+        inset 0 0 0 1px rgba(212, 207, 202, 0.9),
+        0 12px 24px rgba(32, 30, 28, 0.06);
     }
 
     #app .progress-button:hover {
       transform: translateY(-1px);
       box-shadow:
-        inset 0 0 0 1px rgba(91, 76, 143, 0.08),
-        0 16px 30px rgba(56, 46, 95, 0.1);
+        inset 0 0 0 1px rgba(212, 207, 202, 0.9),
+        0 16px 30px rgba(32, 30, 28, 0.1);
     }
 
     #app .progress-button.is-active {
@@ -1013,7 +1014,7 @@
       position: relative;
       padding: clamp(1.45rem, 3vw, 1.85rem);
       border-radius: 34px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(248, 245, 255, 0.86));
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(245, 244, 242, 0.94));
       border: 1px solid rgba(255, 255, 255, 0.78);
       box-shadow: var(--shadow-soft);
       overflow: hidden;
@@ -1624,18 +1625,18 @@
 
     /* Oracle theme override */
     #app {
-      --surface: #fcfbfa;
-      --panel: rgba(255, 255, 255, 0.86);
-      --panel-strong: rgba(255, 255, 255, 0.96);
+      --surface: #fbf9f8;
+      --panel: rgba(255, 255, 255, 0.9);
+      --panel-strong: rgba(255, 255, 255, 0.97);
       --ink: #201e1c;
       --ink-soft: #665f5b;
       --rose: #c74634;
       --rose-soft: #fcd0ca;
       --sky: #437c94;
       --mint: #4c825c;
-      --gold: #9c6a00;
-      --violet: #b3311f;
-      --violet-deep: #6d2418;
+      --gold: #aa643b;
+      --violet: #ac3e2e;
+      --violet-deep: #863125;
       --line: rgba(212, 207, 202, 0.92);
       --shadow-soft: 0 18px 48px rgba(32, 30, 28, 0.08);
       --shadow-deep: 0 28px 72px rgba(32, 30, 28, 0.12);
@@ -1643,7 +1644,7 @@
       background:
         radial-gradient(circle at top right, rgba(199, 70, 52, 0.09), transparent 30%),
         radial-gradient(circle at bottom left, rgba(67, 124, 148, 0.08), transparent 28%),
-        linear-gradient(180deg, #fcfbfa 0%, #f6f3f0 100%);
+        linear-gradient(180deg, #fbf9f8 0%, #f3f0ed 100%);
       background-size: auto, auto, auto;
     }
 
@@ -2003,6 +2004,583 @@
       background: linear-gradient(90deg, rgba(156, 106, 0, 0.88), rgba(156, 106, 0, 0.16));
     }
 
+    /* Full guide + Redwood cleanup */
+    #app {
+      --accent-red: #ac3e2e;
+      --accent-red-wash: rgba(255, 248, 247, 0.98);
+      --accent-red-soft: rgba(252, 208, 202, 0.8);
+      --accent-red-bar: linear-gradient(90deg, rgba(172, 62, 46, 0.94), rgba(172, 62, 46, 0.18));
+      --accent-red-halo: rgba(172, 62, 46, 0.16);
+      --accent-ocean: #437c94;
+      --accent-ocean-wash: rgba(245, 250, 252, 0.98);
+      --accent-ocean-soft: rgba(208, 229, 237, 0.8);
+      --accent-ocean-bar: linear-gradient(90deg, rgba(67, 124, 148, 0.94), rgba(67, 124, 148, 0.18));
+      --accent-ocean-halo: rgba(67, 124, 148, 0.16);
+      --accent-pine: #4c825c;
+      --accent-pine-wash: rgba(243, 252, 247, 0.98);
+      --accent-pine-soft: rgba(203, 233, 214, 0.8);
+      --accent-pine-bar: linear-gradient(90deg, rgba(76, 130, 92, 0.94), rgba(76, 130, 92, 0.18));
+      --accent-pine-halo: rgba(76, 130, 92, 0.16);
+      --accent-sienna: #aa643b;
+      --accent-sienna-wash: rgba(254, 249, 242, 0.98);
+      --accent-sienna-soft: rgba(245, 222, 189, 0.82);
+      --accent-sienna-bar: linear-gradient(90deg, rgba(170, 100, 59, 0.94), rgba(170, 100, 59, 0.18));
+      --accent-sienna-halo: rgba(170, 100, 59, 0.16);
+    }
+
+    #app .compact-panel,
+    #app .content-card,
+    #app .side-card,
+    #app .snippet-card,
+    #app .modal-panel,
+    #app .guide-sidebar-card,
+    #app .guide-lab-card,
+    #app .guide-lab-panel,
+    #app .modal-media-card,
+    #app .evidence-card,
+    #app .home-toolkit-card {
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.72),
+        0 16px 32px rgba(32, 30, 28, 0.08);
+    }
+
+    #app .guide-panel,
+    #app .modal-content {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(245, 244, 242, 0.96));
+      box-shadow: 0 24px 56px rgba(32, 30, 28, 0.12);
+    }
+
+    #app .guide-panel {
+      border: 1px solid rgba(212, 207, 202, 0.88);
+      color: var(--ink);
+    }
+
+    #app .copy-snippet {
+      background: linear-gradient(135deg, var(--accent-red), #b3311f 58%, var(--accent-ocean));
+      border-color: transparent;
+      color: #fff;
+      box-shadow: 0 14px 28px rgba(32, 30, 28, 0.12);
+    }
+
+    #app .copy-snippet:hover,
+    #app .copy-snippet:focus-visible {
+      border-color: transparent;
+      color: #fff;
+      background: linear-gradient(135deg, #9b382a, var(--accent-ocean));
+    }
+
+    #app .search-group {
+      box-shadow: 0 16px 32px rgba(32, 30, 28, 0.08);
+    }
+
+    #app .search-group .form-control::placeholder {
+      color: var(--ink-soft);
+    }
+
+    #app pre {
+      background: #201e1c;
+      color: #fbf9f8;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+
+    #app .home-toolkit-card,
+    #app .bubble-button,
+    #app .guide-nav-link,
+    #app .guide-section-card {
+      --accent-strong: var(--accent-red);
+      --accent-wash: var(--accent-red-wash);
+      --accent-soft: var(--accent-red-soft);
+      --accent-bar: var(--accent-red-bar);
+      --accent-halo: var(--accent-red-halo);
+    }
+
+    #app .home-toolkit-card[data-accent="red"],
+    #app .bubble-button[data-accent="red"],
+    #app .guide-nav-link[data-accent="red"],
+    #app .guide-section-card[data-accent="red"] {
+      --accent-strong: var(--accent-red);
+      --accent-wash: var(--accent-red-wash);
+      --accent-soft: var(--accent-red-soft);
+      --accent-bar: var(--accent-red-bar);
+      --accent-halo: var(--accent-red-halo);
+    }
+
+    #app .home-toolkit-card[data-accent="ocean"],
+    #app .bubble-button[data-accent="ocean"],
+    #app .guide-nav-link[data-accent="ocean"],
+    #app .guide-section-card[data-accent="ocean"] {
+      --accent-strong: var(--accent-ocean);
+      --accent-wash: var(--accent-ocean-wash);
+      --accent-soft: var(--accent-ocean-soft);
+      --accent-bar: var(--accent-ocean-bar);
+      --accent-halo: var(--accent-ocean-halo);
+    }
+
+    #app .home-toolkit-card[data-accent="pine"],
+    #app .bubble-button[data-accent="pine"],
+    #app .guide-nav-link[data-accent="pine"],
+    #app .guide-section-card[data-accent="pine"] {
+      --accent-strong: var(--accent-pine);
+      --accent-wash: var(--accent-pine-wash);
+      --accent-soft: var(--accent-pine-soft);
+      --accent-bar: var(--accent-pine-bar);
+      --accent-halo: var(--accent-pine-halo);
+    }
+
+    #app .home-toolkit-card[data-accent="sienna"],
+    #app .bubble-button[data-accent="sienna"],
+    #app .guide-nav-link[data-accent="sienna"],
+    #app .guide-section-card[data-accent="sienna"] {
+      --accent-strong: var(--accent-sienna);
+      --accent-wash: var(--accent-sienna-wash);
+      --accent-soft: var(--accent-sienna-soft);
+      --accent-bar: var(--accent-sienna-bar);
+      --accent-halo: var(--accent-sienna-halo);
+    }
+
+    #app .home-toolkit-card {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), var(--accent-wash));
+      border-color: rgba(212, 207, 202, 0.9);
+    }
+
+    #app .home-toolkit-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 0.32rem;
+      background: var(--accent-bar);
+    }
+
+    #app .home-toolkit-card::after {
+      content: "";
+      position: absolute;
+      right: -2rem;
+      bottom: -2rem;
+      width: 6.5rem;
+      height: 6.5rem;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--accent-halo), transparent 70%);
+      pointer-events: none;
+    }
+
+    #app .bubble-button {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), var(--accent-wash));
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.84),
+        0 18px 38px rgba(32, 30, 28, 0.12);
+    }
+
+    #app .bubble-button::before {
+      background: var(--accent-bar);
+    }
+
+    #app .bubble-button::after {
+      background: radial-gradient(circle, var(--accent-halo), transparent 68%);
+    }
+
+    #app .bubble-button:hover {
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.84),
+        0 24px 46px rgba(32, 30, 28, 0.16);
+    }
+
+    #app .guide-layout {
+      display: grid;
+      grid-template-columns: minmax(260px, 300px) minmax(0, 1fr);
+      gap: 1.5rem;
+      align-items: start;
+      margin-top: 1.5rem;
+    }
+
+    #app .guide-sidebar {
+      position: sticky;
+      top: 106px;
+      align-self: start;
+    }
+
+    #app .guide-sidebar-card {
+      border: 0;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.86);
+      backdrop-filter: blur(18px);
+    }
+
+    #app .guide-sidebar-card .card-body {
+      padding: 1rem;
+    }
+
+    #app .guide-nav-stack {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    #app .guide-nav-link {
+      position: relative;
+      width: 100%;
+      border: 1px solid rgba(212, 207, 202, 0.92);
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), var(--accent-wash));
+      color: var(--ink);
+      padding: 1rem 1rem 1rem 1.2rem;
+      text-align: left;
+      box-shadow: 0 12px 24px rgba(32, 30, 28, 0.06);
+      overflow: hidden;
+    }
+
+    #app .guide-nav-link::before {
+      content: "";
+      position: absolute;
+      inset: 0.85rem auto 0.85rem 0;
+      width: 0.34rem;
+      border-radius: 0 999px 999px 0;
+      background: var(--accent-bar);
+    }
+
+    #app .guide-nav-link small,
+    #app .guide-nav-link strong {
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
+    #app .guide-nav-link small {
+      color: var(--ink-soft);
+      font-size: 0.74rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 800;
+      margin-bottom: 0.35rem;
+    }
+
+    #app .guide-nav-link strong {
+      font-size: 1rem;
+      line-height: 1.4;
+      font-weight: 900;
+    }
+
+    #app .guide-nav-link:hover,
+    #app .guide-nav-link.is-active {
+      transform: translateY(-1px);
+      border-color: rgba(212, 207, 202, 0.96);
+      box-shadow: 0 18px 30px rgba(32, 30, 28, 0.1);
+    }
+
+    #app .guide-nav-link.is-active strong {
+      color: var(--accent-strong);
+    }
+
+    #app .guide-stage {
+      min-width: 0;
+    }
+
+    #app .breadcrumb-trail {
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 0.72rem 0.95rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.86);
+      border: 1px solid rgba(212, 207, 202, 0.92);
+      box-shadow: 0 10px 24px rgba(32, 30, 28, 0.08);
+    }
+
+    #app .breadcrumb-label {
+      color: var(--ink-soft);
+      font-size: 0.74rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    #app .breadcrumb-separator {
+      color: var(--ink-soft);
+      opacity: 0.7;
+      font-weight: 700;
+    }
+
+    #app .guide-section-card {
+      position: relative;
+      overflow: hidden;
+      border: 0;
+      border-radius: 36px;
+      padding: clamp(1.3rem, 2vw, 1.8rem);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), var(--accent-wash));
+      box-shadow: 0 24px 56px rgba(32, 30, 28, 0.12);
+    }
+
+    #app .guide-section-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 0.36rem;
+      background: var(--accent-bar);
+    }
+
+    #app .guide-section-card::after {
+      content: "";
+      position: absolute;
+      inset: -4rem -4rem auto auto;
+      width: 14rem;
+      height: 14rem;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--accent-halo), transparent 70%);
+      pointer-events: none;
+    }
+
+    #app .guide-section-card .panel-kicker {
+      color: var(--accent-strong);
+    }
+
+    #app .guide-section-hero {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(240px, 0.88fr);
+      gap: 1.4rem;
+      align-items: start;
+    }
+
+    #app .guide-section-copy {
+      display: grid;
+      gap: 0.95rem;
+    }
+
+    #app .guide-section-title {
+      font-size: clamp(2rem, 3vw, 3rem);
+      line-height: 1.04;
+      margin: 0;
+    }
+
+    #app .guide-section-summary {
+      color: var(--ink);
+      font-size: 1.04rem;
+      line-height: 1.74;
+      margin: 0;
+      max-width: 50rem;
+    }
+
+    #app .guide-section-purpose {
+      color: var(--ink-soft);
+      line-height: 1.72;
+      margin: 0;
+      max-width: 48rem;
+    }
+
+    #app .guide-highlight-row,
+    #app .guide-section-actions,
+    #app .guide-lab-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    #app .guide-highlight-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.58rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(212, 207, 202, 0.92);
+      box-shadow: 0 10px 22px rgba(32, 30, 28, 0.06);
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    #app .guide-section-figure,
+    #app .guide-figure,
+    #app .modal-media-figure,
+    #app .evidence-figure {
+      margin: 0;
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    #app .guide-section-figure {
+      position: relative;
+      z-index: 1;
+      padding: 0.85rem;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.84);
+      border: 1px solid rgba(212, 207, 202, 0.88);
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.72),
+        0 18px 36px rgba(32, 30, 28, 0.08);
+    }
+
+    #app .guide-section-figure img,
+    #app .guide-figure img,
+    #app .modal-media-figure img,
+    #app .evidence-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 18px 32px rgba(32, 30, 28, 0.12);
+    }
+
+    #app .guide-section-figure figcaption,
+    #app .guide-figure figcaption,
+    #app .modal-media-figure figcaption,
+    #app .evidence-figure figcaption {
+      color: var(--ink-soft);
+      font-size: 0.84rem;
+      line-height: 1.6;
+    }
+
+    #app .guide-lab-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 1.3rem;
+      margin-top: 1.5rem;
+    }
+
+    #app .guide-lab-card {
+      border: 1px solid rgba(212, 207, 202, 0.92);
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.88);
+      padding: 1.25rem;
+    }
+
+    #app .guide-lab-top {
+      margin-bottom: 1rem;
+    }
+
+    #app .guide-lab-label {
+      color: var(--ink-soft);
+      font-size: 0.74rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    #app .guide-lab-title {
+      font-size: 1.45rem;
+      line-height: 1.18;
+      margin: 0 0 0.65rem;
+    }
+
+    #app .guide-lab-summary {
+      margin: 0;
+      color: var(--ink-soft);
+      line-height: 1.7;
+    }
+
+    #app .guide-figure {
+      margin-bottom: 1rem;
+      padding: 0.8rem;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(245, 244, 242, 0.96));
+      border: 1px solid rgba(212, 207, 202, 0.88);
+    }
+
+    #app .guide-lab-panels {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    #app .guide-lab-panel {
+      border: 1px solid rgba(212, 207, 202, 0.88);
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(245, 244, 242, 0.96));
+      padding: 1rem 1rem 1.05rem;
+    }
+
+    #app .guide-lab-panel h4 {
+      font-size: 1rem;
+      margin: 0 0 0.75rem;
+    }
+
+    #app .guide-list {
+      margin: 0;
+      padding-left: 1.15rem;
+      display: grid;
+      gap: 0.72rem;
+      color: var(--ink-soft);
+      line-height: 1.65;
+    }
+
+    #app .modal-media-card {
+      border: 1px solid rgba(212, 207, 202, 0.9);
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(245, 244, 242, 0.96));
+    }
+
+    #app .modal-media-card .card-body {
+      padding: 1rem;
+    }
+
+    #app .evidence-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    #app .evidence-card {
+      border-radius: 26px;
+      padding: 1rem;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(245, 244, 242, 0.96));
+      border: 1px solid rgba(212, 207, 202, 0.88);
+    }
+
+    #app .evidence-card h4 {
+      margin: 0 0 0.75rem;
+      font-size: 1rem;
+    }
+
+    #app .evidence-card p {
+      margin: 0.8rem 0 0;
+      color: var(--ink-soft);
+      line-height: 1.62;
+    }
+
+    @media (max-width: 1199.98px) {
+      #app .guide-layout {
+        grid-template-columns: 1fr;
+      }
+
+      #app .guide-sidebar {
+        position: static;
+      }
+
+      #app .guide-section-hero {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 991.98px) {
+      #app .guide-lab-panels,
+      #app .evidence-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 767.98px) {
+      #app .guide-section-card,
+      #app .guide-lab-card {
+        border-radius: 28px;
+        padding: 1.1rem;
+      }
+
+      #app .guide-nav-link,
+      #app .guide-section-actions .btn,
+      #app .guide-lab-actions .btn {
+        width: 100%;
+      }
+
+      #app .guide-lab-panels,
+      #app .evidence-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @keyframes bubble-float {
       0%,
       100% {
@@ -2172,9 +2750,10 @@
                   <button class="btn nav-control" type="button" data-mode-target="hub" aria-label="Open the author guide home">Home</button>
                   <button class="btn nav-control" type="button" data-mode-target="beginner" aria-label="Open the guided path">Guided Path</button>
                   <button class="btn nav-control" type="button" data-mode-target="explorer" aria-label="Open the reference toolkit">Toolkit</button>
+                  <button class="btn nav-control" type="button" data-mode-target="guide" aria-label="Open the full guide">Full Guide</button>
                 </div>
                 <div class="breadcrumb-shell" id="breadcrumb" aria-live="polite">
-                  <a class="btn nav-guide-link" href="./workshops/livelabs/index.html?lab=core-workflow">Open Full End-to-End Guide</a>
+                  <button class="btn nav-guide-link" type="button" data-guide-target="start-here">Open Full Guide</button>
                 </div>
               </div>
             </div>
@@ -2207,6 +2786,7 @@
                 <div class="hero-actions">
                   <button class="btn btn-primary btn-lg rounded-pill px-4" type="button" data-mode-target="beginner">Choose Guided Path</button>
                   <button class="btn btn-outline-primary btn-lg rounded-pill px-4" type="button" data-mode-target="explorer">Open Toolkit</button>
+                  <button class="btn btn-outline-secondary btn-lg rounded-pill px-4" type="button" data-guide-target="start-here">Open Full Guide</button>
                 </div>
                 <div class="hub-stats mt-4">
                   <span class="stat-chip">3 guided layers</span>
@@ -2257,24 +2837,24 @@
                       <span class="mode-chip">QA</span>
                     </div>
                     <div class="home-toolkit-preview" aria-hidden="true">
-                      <div class="home-toolkit-card">
+                      <div class="home-toolkit-card" data-accent="red">
                         <strong>WMS Request</strong>
-                        <small>Request shape, ownership, and approval context.</small>
+                        <small>Request details, ownership fields, and status flow.</small>
                       </div>
-                      <div class="home-toolkit-card">
-                        <strong>Formatting</strong>
-                        <small>Markdown patterns that stay easy to scan and review.</small>
+                      <div class="home-toolkit-card" data-accent="ocean">
+                        <strong>Sync &amp; Preview</strong>
+                        <small>Fork, clone, merge, and preview URL patterns.</small>
                       </div>
-                      <div class="home-toolkit-card">
-                        <strong>Media</strong>
-                        <small>Screenshots, video, and image hygiene before review.</small>
+                      <div class="home-toolkit-card" data-accent="pine">
+                        <strong>Markdown Rules</strong>
+                        <small>Required sections, variables, copy tags, and lint checks.</small>
                       </div>
-                      <div class="home-toolkit-card">
+                      <div class="home-toolkit-card" data-accent="sienna">
                         <strong>QA &amp; Publish</strong>
-                        <small>Self QA, PR handoff, and final production URL checks.</small>
+                        <small>Checklist save order, PR checks, and WMS publishing.</small>
                       </div>
                     </div>
-                    <p class="home-side-note">The classic end-to-end guide still stays one click away in the top bar when you want the old contents-driven view.</p>
+                    <p class="home-side-note">Use the custom Full Guide when you want the whole author map without falling back to the markdown navigation chrome.</p>
                   </article>
                 </div>
               </div>
@@ -2309,6 +2889,7 @@
                       <li>Copyable snippets and targeted guidance per feature.</li>
                     </ul>
                     <button class="btn btn-outline-primary btn-lg rounded-pill px-4" type="button" data-mode-target="explorer">Open Reference Toolkit</button>
+                    <button class="btn btn-outline-secondary btn-lg rounded-pill px-4" type="button" data-guide-target="start-here">Open Full Guide</button>
                   </div>
                 </article>
               </div>
@@ -2420,13 +3001,13 @@
                       <div class="mini-map-title">Shortcut bubbles</div>
                       <div class="quick-links">
                         <button class="shortcut-chip" type="button" data-open-bubble-direct="wms-request">WMS Request</button>
-                        <button class="shortcut-chip" type="button" data-open-bubble-direct="qa-publish">QA Gate</button>
+                        <button class="shortcut-chip" type="button" data-open-bubble-direct="qa-checklist">QA Gate</button>
                       </div>
                     </div>
                   </div>
 
                   <div class="guide-panel guided-only mb-4">
-                    The goal at the first layer is not to write the whole workshop. It is to create a clean, reviewable request with the right owner, outcome, and notes on anything unusual such as embedded HTML or media.
+                    The goal at the first layer is not to write the whole workshop. It is to create the real WMS record that reviewers, stakeholders, and the later QA flow will all use.
                   </div>
 
                   <div class="row g-4">
@@ -2435,12 +3016,33 @@
                         <div class="card-body">
                           <h3>What to do</h3>
                           <ol class="action-list">
-                            <li>Open WMS and create the workshop request with a title that says the exact learner outcome.</li>
-                            <li>Write a compact abstract that explains who the workshop is for, what gets built, and what the reader leaves with.</li>
-                            <li>Add the correct owner, reviewer, business contact, and any timing notes so approval does not stall on missing names.</li>
-                            <li>Call out nonstandard elements early, such as embedded HTML, autoplay video, FreeSQL, or special media needs.</li>
-                            <li>Submit the request and keep WMS as the system of record before heavy GitHub work begins.</li>
+                            <li>Connect to Corporate VPN, open Oracle Workshop Management System, and click <strong>Submit a New Workshop Request</strong>.</li>
+                            <li>Fill <strong>Workshop Basic Information</strong> completely, especially <strong>Stakeholder</strong>, <strong>Workshop Council</strong>, <strong>Workshop Owner Group</strong>, <strong>Workshop Abstract</strong>, <strong>Workshop Outline</strong>, and <strong>Workshop Prerequisites</strong>.</li>
+                            <li>Open the <strong>Tags</strong> tab and set the required <strong>Level</strong>, <strong>Role</strong>, <strong>Focus Area</strong>, and <strong>Product</strong> tags before you click <strong>Create</strong>.</li>
+                            <li>Use the <strong>Go to Market - Social</strong> tab to add blog and promotion details before publish time if the workshop needs them.</li>
+                            <li>Wait for the request to move through <strong>Submitted</strong> and <strong>Approved</strong> before you treat GitHub work as the main source of truth.</li>
                           </ol>
+                        </div>
+                      </div>
+
+                      <div class="card evidence-card mt-4">
+                        <div class="card-body">
+                          <div class="evidence-header">
+                            <div>
+                              <div class="snippet-meta">UI you should see</div>
+                              <h3 class="mb-0">Request form and checklist evidence</h3>
+                            </div>
+                          </div>
+                          <div class="evidence-grid">
+                            <figure class="evidence-figure">
+                              <img src="./02-core-workshop-flow/sections/01-submit-new-workshop-in-wms/images/submit_workshop.png" alt="Submit workshop request form in WMS">
+                              <figcaption>The main request form is where ownership and scope are reviewed.</figcaption>
+                            </figure>
+                            <figure class="evidence-figure">
+                              <img src="./03-validation-qa-publish/sections/01-qa-checks/images/self-qa-checklist-1.png" alt="Self QA checklist in WMS">
+                              <figcaption>This same WMS record is what the Self QA checklist depends on later.</figcaption>
+                            </figure>
+                          </div>
                         </div>
                       </div>
 
@@ -2448,21 +3050,23 @@
                         <div class="card-body">
                           <div class="snippet-header">
                             <div>
-                              <div class="snippet-meta">Copy-ready starter brief</div>
-                              <h3 class="mb-0">WMS request skeleton</h3>
+                              <div class="snippet-meta">Copy-ready request checklist</div>
+                              <h3 class="mb-0">Fields to complete before submit</h3>
                             </div>
                             <button class="copy-snippet" type="button" data-copy-target="snippet-step-1">Copy</button>
                           </div>
                           <pre><code id="snippet-step-1">Workshop Title:
-Autonomous Database Quickstart for New Authors
-
-Abstract:
-A short workshop that shows a first-time author how to request, build, review, and publish a LiveLabs workshop.
-
-Notes:
-- Guided and reference author paths
-- GitHub Pages prototype with scoped HTML, CSS, and JS
-- Any embedded media called out before review</code></pre>
+Workshop Abstract:
+Workshop Outline:
+Workshop Prerequisites:
+Stakeholder:
+Workshop Council:
+Workshop Owner Group:
+Required tags:
+- Level
+- Role
+- Focus Area
+- Product</code></pre>
                         </div>
                       </div>
                     </div>
@@ -2472,11 +3076,11 @@ Notes:
                         <div class="card-body">
                           <h3>Quick checklist</h3>
                           <ul class="check-list">
-                            <li>Title is specific and readable to reviewers.</li>
-                            <li>Abstract names the audience, outcome, and scope.</li>
-                            <li>Real owner and contact fields are set.</li>
-                            <li>Special HTML or media needs are visible in the request.</li>
-                            <li>Status is submitted or approved before build work starts.</li>
+                            <li>The title names the learner outcome, not just the product.</li>
+                            <li>The abstract, outline, and prerequisites are filled thoroughly.</li>
+                            <li>Stakeholder, council, and owner group are correct before review starts.</li>
+                            <li>Required tags are set.</li>
+                            <li>The request is visible in Submitted or Approved before heavy build work starts.</li>
                           </ul>
                         </div>
                       </div>
@@ -2485,9 +3089,9 @@ Notes:
                         <div class="card-body">
                           <h3>Common mistakes</h3>
                           <ul class="mistake-list">
-                            <li>Submitting a vague request with no clear learner outcome.</li>
-                            <li>Starting the repo build before the workflow record is aligned.</li>
-                            <li>Waiting until final review to mention special media or embedded HTML.</li>
+                            <li>Writing a vague abstract and forcing the council to ask for more information.</li>
+                            <li>Starting repo work before the WMS record is aligned with the real workshop idea.</li>
+                            <li>Forgetting tags, social details, or special delivery notes until the end of the flow.</li>
                           </ul>
                         </div>
                       </div>
@@ -2495,7 +3099,7 @@ Notes:
                       <div class="card side-card mt-4">
                         <div class="card-body">
                           <h3>What good looks like</h3>
-                          <p class="mb-0">A reviewer can understand in under a minute what the workshop teaches, who owns it, and whether anything in the build will need special handling later.</p>
+                          <p class="mb-0">A council reviewer can tell in under a minute what the workshop teaches, who owns it, and whether anything about the later build or publish path needs special handling.</p>
                         </div>
                       </div>
                     </div>
@@ -2534,14 +3138,14 @@ Notes:
                       <div class="mini-map-title">Shortcut bubbles</div>
                       <div class="quick-links">
                         <button class="shortcut-chip" type="button" data-open-bubble-direct="github-setup">GitHub Setup</button>
-                        <button class="shortcut-chip" type="button" data-open-bubble-direct="links-files">Links &amp; Files</button>
-                        <button class="shortcut-chip" type="button" data-open-bubble-direct="formatting">Formatting</button>
+                        <button class="shortcut-chip" type="button" data-open-bubble-direct="sync-preview">Sync &amp; Preview</button>
+                        <button class="shortcut-chip" type="button" data-open-bubble-direct="markdown-structure">Markdown Rules</button>
                       </div>
                     </div>
                   </div>
 
                   <div class="guide-panel guided-only mb-4">
-                    Most new-author friction lives here. The trick is not to perfect everything at once. Build the skeleton fast, confirm preview works, then deepen the content only after the structure is stable.
+                    Most new-author friction lives here. Build the workstation, repo, structure, and preview first. Deep writing comes after the skeleton proves it can render.
                   </div>
 
                   <div class="row g-4">
@@ -2550,12 +3154,33 @@ Notes:
                         <div class="card-body">
                           <h3>What to do</h3>
                           <ol class="action-list">
-                            <li>Create or fork the correct repository and open it in GitHub Desktop or VS Code.</li>
-                            <li>Copy the sample workshop structure into a lowercase folder path and rename it cleanly.</li>
-                            <li>Update <code>manifest.json</code> with the real workshop title, help address, and tutorial order.</li>
-                            <li>Wire the <code>01-start-here</code> page and first lab files before deep writing so preview fails early, not late.</li>
-                            <li>Commit, push, and validate the GitHub Pages preview as soon as the skeleton exists.</li>
+                            <li>Create or confirm the GitHub account that uses your Oracle email, install GitHub Desktop, and sign in from <strong>File &gt; Options &gt; Sign in</strong>.</li>
+                            <li>Install Visual Studio Code plus <strong>Live Server</strong>, then set Markdown indentation to tabs size 4 before you create nested steps or code blocks.</li>
+                            <li>Fork the correct oracle-livelabs repository, clone your fork, and run <code>git config --global core.longpaths true</code> plus <code>git config --global core.ignorecase false</code> when you need them.</li>
+                            <li>Copy the sample workshop structure, keep all files lowercase, and wire <code>manifest.json</code> to real section or lab files instead of placeholders.</li>
+                            <li>Enable GitHub Pages on your fork and validate the preview URL before you spend hours writing content.</li>
                           </ol>
+                        </div>
+                      </div>
+
+                      <div class="card evidence-card mt-4">
+                        <div class="card-body">
+                          <div class="evidence-header">
+                            <div>
+                              <div class="snippet-meta">UI you should see</div>
+                              <h3 class="mb-0">GitHub Desktop and sample structure</h3>
+                            </div>
+                          </div>
+                          <div class="evidence-grid">
+                            <figure class="evidence-figure">
+                              <img src="./02-core-workshop-flow/sections/02-setup-github-and-install-tools/images/git-hub-desktop-login-screen.png" alt="GitHub Desktop login screen">
+                              <figcaption>Sign in to GitHub Desktop before you try to fork, clone, or push.</figcaption>
+                            </figure>
+                            <figure class="evidence-figure">
+                              <img src="./02-core-workshop-flow/sections/03-stay-in-sync-with-github/images/sample-workshop-structure.png" alt="Sample workshop folder structure">
+                              <figcaption>Copy the sample structure instead of improvising your folder layout.</figcaption>
+                            </figure>
+                          </div>
                         </div>
                       </div>
 
@@ -2563,12 +3188,15 @@ Notes:
                         <div class="card-body">
                           <div class="snippet-header">
                             <div>
-                              <div class="snippet-meta">Starter manifest</div>
-                              <h3 class="mb-0">Minimum structure for a first build</h3>
+                              <div class="snippet-meta">Starter structure</div>
+                              <h3 class="mb-0">Config and manifest baseline</h3>
                             </div>
                             <button class="copy-snippet" type="button" data-copy-target="snippet-step-2">Copy</button>
                           </div>
-                          <pre><code id="snippet-step-2">{
+                          <pre><code id="snippet-step-2">git config --global core.longpaths true
+git config --global core.ignorecase false
+
+{
   "workshoptitle": "My Workshop Title",
   "help": "my-team@oracle.com",
   "tutorials": [
@@ -2591,11 +3219,11 @@ Notes:
                         <div class="card-body">
                           <h3>Quick checklist</h3>
                           <ul class="check-list">
-                            <li>Repository path and branch are correct.</li>
+                            <li>GitHub Desktop, VS Code, and Live Server are working.</li>
+                            <li>The fork, local clone, and preview URL all point to the same workshop path.</li>
                             <li>Folder and file names stay lowercase and case-safe.</li>
                             <li>Manifest order matches real files.</li>
                             <li>Preview loads before long authoring sessions begin.</li>
-                            <li>Images and assets already have predictable folders.</li>
                           </ul>
                         </div>
                       </div>
@@ -2604,8 +3232,8 @@ Notes:
                         <div class="card-body">
                           <h3>Common mistakes</h3>
                           <ul class="mistake-list">
-                            <li>Using the wrong repository path or missing a case-sensitive rename.</li>
-                            <li>Authoring for too long before checking the first real preview.</li>
+                            <li>Using the wrong GitHub account or the wrong repository path.</li>
+                            <li>Skipping the daily merge and previewing only after deep edits.</li>
                             <li>Leaving sample manifest fields or broken file paths behind.</li>
                           </ul>
                         </div>
@@ -2614,7 +3242,7 @@ Notes:
                       <div class="card side-card mt-4">
                         <div class="card-body">
                           <h3>What good looks like</h3>
-                          <p class="mb-0">You can open the workshop preview, the manifest points to real labs, and the structure is clean enough that content work can continue without foundational rework.</p>
+                          <p class="mb-0">You can open the preview from your fork, the manifest points to real labs, and the structure is stable enough that deeper content work will not require foundational rework.</p>
                         </div>
                       </div>
                     </div>
@@ -2652,15 +3280,15 @@ Notes:
                     <div class="step-mini-map">
                       <div class="mini-map-title">Shortcut bubbles</div>
                       <div class="quick-links">
-                        <button class="shortcut-chip" type="button" data-open-bubble-direct="qa-publish">QA &amp; Publish</button>
-                        <button class="shortcut-chip" type="button" data-open-bubble-direct="automation">Automation</button>
-                        <button class="shortcut-chip" type="button" data-open-bubble-direct="media">Media</button>
+                        <button class="shortcut-chip" type="button" data-open-bubble-direct="qa-checklist">QA Checklist</button>
+                        <button class="shortcut-chip" type="button" data-open-bubble-direct="pr-checks">PR Checks</button>
+                        <button class="shortcut-chip" type="button" data-open-bubble-direct="publish-request">Publish Request</button>
                       </div>
                     </div>
                   </div>
 
                   <div class="guide-panel guided-only mb-4">
-                    The deepest layer is not more content. It is more precision. Reviewers should see a working preview, a clean workflow state, a safe PR, and the production URL pattern they expect.
+                    The deepest layer is not more content. It is precision. Reviewers should see a stable preview, a saved checklist, a clean PR, and the exact production URL pattern they expect.
                   </div>
 
                   <div class="row g-4">
@@ -2669,12 +3297,33 @@ Notes:
                         <div class="card-body">
                           <h3>What to do</h3>
                           <ol class="action-list">
-                            <li>Run the preview end to end and append <code>?qa=true</code> to open LintChecker while fixes are still cheap.</li>
-                            <li>Complete the Self QA checklist in WMS, save it, and only then mark <strong>Self QA Complete</strong>.</li>
-                            <li>Open a clean pull request with the WMS ID, reviewer context, and a stable preview URL.</li>
-                            <li>Update the Publishing tab with the final production URL and any required release notes.</li>
-                            <li>After merge, verify the production workshop and leave WMS ready for later quarterly QA.</li>
+                            <li>Run the preview end to end, append <code>?qa=true</code>, and fix LintChecker findings before you ask anyone else to review the workshop.</li>
+                            <li>On the WMS details page, update title, description, outline, prerequisites, tags, and development URL before you open the <strong>Self QA Checklist</strong>.</li>
+                            <li>Complete every checklist checkbox, add the PR link plus your personal <code>github.io</code> workshop link, upload the requested evidence, and click <strong>Save</strong>.</li>
+                            <li>Only after the checklist save succeeds should you move to <strong>Self QA Complete</strong>, create the PR with the WMS ID in the title, and request publishing from the <strong>Publishing</strong> tab.</li>
+                            <li>After merge and publish approval, verify the oracle-livelabs production workshop and leave WMS aligned for later quarterly QA.</li>
                           </ol>
+                        </div>
+                      </div>
+
+                      <div class="card evidence-card mt-4">
+                        <div class="card-body">
+                          <div class="evidence-header">
+                            <div>
+                              <div class="snippet-meta">UI you should see</div>
+                              <h3 class="mb-0">Checklist, PR, and publishing evidence</h3>
+                            </div>
+                          </div>
+                          <div class="evidence-grid">
+                            <figure class="evidence-figure">
+                              <img src="./03-validation-qa-publish/sections/01-qa-checks/images/self-qa-checklist-1.png" alt="Self QA checklist in WMS">
+                              <figcaption>Save this checklist before any status change.</figcaption>
+                            </figure>
+                            <figure class="evidence-figure">
+                              <img src="./03-validation-qa-publish/sections/03-publish-workshop/images/publishing-tab.png" alt="Publishing tab in WMS">
+                              <figcaption>The Publishing tab is where the final production metadata is approved.</figcaption>
+                            </figure>
+                          </div>
                         </div>
                       </div>
 
@@ -2708,6 +3357,7 @@ https://oracle-livelabs.github.io/&lt;repo-name&gt;/&lt;path&gt;/workshops/&lt;v
                             <li>Self QA checklist is saved before any status change.</li>
                             <li>PR title includes the WMS ID where reviewers expect it.</li>
                             <li>Publishing tab matches the final production URL.</li>
+                            <li>Branch is current and conflict free before approval is requested.</li>
                             <li>Production workshop is verified after merge.</li>
                           </ul>
                         </div>
@@ -2738,7 +3388,7 @@ https://oracle-livelabs.github.io/&lt;repo-name&gt;/&lt;path&gt;/workshops/&lt;v
                     <div class="d-flex flex-wrap gap-2">
                       <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-action="prev">Back</button>
                       <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Reference Toolkit</button>
-                      <button type="button" class="btn btn-primary rounded-pill px-4" data-mode-target="explorer">Go To Reference Toolkit</button>
+                      <button type="button" class="btn btn-primary rounded-pill px-4" data-guide-target="validation-publish">Open Full Guide</button>
                     </div>
                   </div>
                 </div>
@@ -2771,10 +3421,10 @@ https://oracle-livelabs.github.io/&lt;repo-name&gt;/&lt;path&gt;/workshops/&lt;v
                   <div class="compact-panel h-100">
                     <div class="panel-kicker">Popular shortcuts</div>
                     <div class="quick-links mt-3">
-                      <button type="button" class="shortcut-chip" data-open-bubble-direct="qa-publish">QA &amp; Publish</button>
-                      <button type="button" class="shortcut-chip" data-open-bubble-direct="formatting">Formatting</button>
-                      <button type="button" class="shortcut-chip" data-open-bubble-direct="media">Media</button>
-                      <button type="button" class="shortcut-chip" data-open-bubble-direct="automation">Automation</button>
+                      <button type="button" class="shortcut-chip" data-open-bubble-direct="qa-checklist">QA Checklist</button>
+                      <button type="button" class="shortcut-chip" data-open-bubble-direct="markdown-structure">Markdown Rules</button>
+                      <button type="button" class="shortcut-chip" data-open-bubble-direct="screenshots">Screenshot Standards</button>
+                      <button type="button" class="shortcut-chip" data-open-bubble-direct="pr-checks">PR Checks</button>
                     </div>
                     <p class="panel-copy mt-3">If the real problem is sequence rather than lookup, go back to the guided path and move through the three layers from top to bottom.</p>
                   </div>
@@ -2811,7 +3461,7 @@ https://oracle-livelabs.github.io/&lt;repo-name&gt;/&lt;path&gt;/workshops/&lt;v
 
               <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-2 mt-3">
                 <div class="result-line">
-                  <strong id="resultCount">Showing 12 toolkit cards</strong>
+                  <strong id="resultCount">Showing 14 toolkit cards</strong>
                   <span class="ms-lg-2">Open any card for a focused detail panel.</span>
                 </div>
                 <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-mode-target="beginner">Need sequence? Open Guided Path</button>
@@ -2822,6 +3472,53 @@ https://oracle-livelabs.github.io/&lt;repo-name&gt;/&lt;path&gt;/workshops/&lt;v
           <div class="garden-shell">
             <div class="bubble-grid row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4" id="bubbleGrid"></div>
             <div class="empty-state d-none" id="emptyState">No toolkit cards match that search yet. Clear the search or change the tag filter.</div>
+          </div>
+        </div>
+      </section>
+      <!-- Full Guide -->
+      <section class="mode-screen d-none" id="guideMode" aria-labelledby="guideHeading">
+        <div class="container">
+          <div class="card mode-hero guide-mode-hero">
+            <div class="card-body">
+              <div class="row g-4 align-items-start">
+                <div class="col-xl-8">
+                  <div class="mode-overline">Full Guide</div>
+                  <h2 class="mode-title" id="guideHeading">Read the full author map in one custom Redwood-style view.</h2>
+                  <p class="mode-copy">
+                    This mode starts at Start Here, keeps only the active sections from the original workshop guide, and turns them into section cards with real steps, copy-ready snippets, and screenshots instead of a contents-only navigation shell.
+                  </p>
+                  <div class="mode-chip-row">
+                    <span class="mode-chip">Starts at Start Here</span>
+                    <span class="mode-chip">Source-backed steps</span>
+                    <span class="mode-chip">Canonical lab links</span>
+                  </div>
+                </div>
+
+                <div class="col-xl-4">
+                  <div class="compact-panel h-100">
+                    <div class="panel-kicker">How to use it</div>
+                    <p class="panel-copy mb-3">Pick a section on the left, use the card details on the right, and open the canonical lab only when you need the original markdown page beside this custom view.</p>
+                    <div class="d-flex flex-wrap gap-2">
+                      <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="beginner">Need sequence? Guided Path</button>
+                      <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-mode-target="explorer">Need one answer? Toolkit</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="guide-layout">
+            <aside class="guide-sidebar">
+              <div class="card guide-sidebar-card">
+                <div class="card-body">
+                  <div class="panel-kicker">Sections</div>
+                  <div class="guide-nav-stack" id="guideSectionNav"></div>
+                </div>
+              </div>
+            </aside>
+
+            <div class="guide-stage" id="guideSectionMount"></div>
           </div>
         </div>
       </section>
@@ -2841,15 +3538,24 @@ https://oracle-livelabs.github.io/&lt;repo-name&gt;/&lt;path&gt;/workshops/&lt;v
               <p class="lead mb-3" id="bubbleModalDescription"></p>
               <div class="detail-tags mb-4" id="bubbleModalTags"></div>
 
+              <div class="card modal-media-card mb-4 d-none" id="bubbleModalMediaCard">
+                <div class="card-body">
+                  <figure class="modal-media-figure mb-0">
+                    <img id="bubbleModalImage" src="" alt="">
+                    <figcaption id="bubbleModalImageCaption"></figcaption>
+                  </figure>
+                </div>
+              </div>
+
               <div class="modal-grid">
                 <div class="modal-panel">
-                  <h3>Use it when</h3>
-                  <ul id="bubbleModalWhen"></ul>
+                  <h3>Do this</h3>
+                  <ul id="bubbleModalSteps"></ul>
                 </div>
 
                 <div class="modal-panel">
-                  <h3>Fast answer</h3>
-                  <ul id="bubbleModalQuickWins"></ul>
+                  <h3>What to check</h3>
+                  <ul id="bubbleModalCheckpoints"></ul>
                 </div>
 
                 <div class="modal-panel">
@@ -2873,6 +3579,8 @@ https://oracle-livelabs.github.io/&lt;repo-name&gt;/&lt;path&gt;/workshops/&lt;v
             </div>
 
             <div class="modal-footer">
+              <a class="btn btn-outline-secondary rounded-pill px-4 d-none" id="bubbleModalSourceLink" href="#" target="_blank" rel="noreferrer">Open Canonical Source</a>
+              <button type="button" class="btn btn-outline-primary rounded-pill px-4 d-none" id="bubbleModalGuideButton" data-guide-target="start-here">Open Full Guide</button>
               <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Close</button>
             </div>
           </div>
@@ -2883,978 +3591,8 @@ https://oracle-livelabs.github.io/&lt;repo-name&gt;/&lt;path&gt;/workshops/&lt;v
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    (function () {
-      const stepMeta = [
-        { id: "step-1", title: "Submit Workshop Request" },
-        { id: "step-2", title: "Create Workshop + Add to GitHub" },
-        { id: "step-3", title: "Review & Publish" }
-      ];
-
-      const explorerItems = [
-        {
-          id: "wms-request",
-          title: "WMS Request",
-          short: "Title, abstract, owner, and special build notes.",
-          accent: "rose",
-          tags: ["workflow", "beginner"],
-          description: "Use this bubble when you need the minimum safe information in WMS before build work starts.",
-          when: [
-            "You are creating a brand-new workshop request.",
-            "A reviewer asked for more clarity on audience, outcome, or ownership.",
-            "The workshop includes something unusual such as embedded HTML or special media."
-          ],
-          quickWins: [
-            "Make the title outcome-driven, not generic.",
-            "Say who the workshop is for and what the learner leaves with.",
-            "Mention nonstandard build elements before review begins."
-          ],
-          watchFor: [
-            "Vague abstracts that do not explain value.",
-            "Missing owner or business contact fields.",
-            "Starting the repo build before the request is aligned."
-          ],
-          snippetMeta: "WMS outline",
-          snippetTitle: "Starter request format",
-          snippet: [
-            "Workshop Title:",
-            "Abstract:",
-            "Audience:",
-            "Outcome:",
-            "Notes:",
-            "- Embedded HTML",
-            "- Media or video needs",
-            "- Environment assumptions"
-          ].join("\n")
-        },
-        {
-          id: "github-setup",
-          title: "GitHub Setup",
-          short: "Repo path, sample structure, manifest, and preview.",
-          accent: "sky",
-          tags: ["workflow", "advanced"],
-          description: "This bubble compresses the setup work required to get a LiveLabs workshop skeleton running in GitHub Pages fast.",
-          when: [
-            "You need to start a new workshop repository path.",
-            "Preview is failing before content work has started.",
-            "You want the minimum safe setup sequence."
-          ],
-          quickWins: [
-            "Copy the sample workshop instead of cloning a random old workshop.",
-            "Keep every file and folder lowercase from the start.",
-            "Check preview before writing deeply."
-          ],
-          watchFor: [
-            "Wrong repo branch or nested folder path.",
-            "Manifest pointing at placeholder files.",
-            "Case mismatches that only fail in GitHub Pages."
-          ],
-          snippetMeta: "Setup checklist",
-          snippetTitle: "Minimal authoring sequence",
-          snippet: [
-            "1. Fork or open the target repo.",
-            "2. Copy the sample workshop structure.",
-            "3. Rename folders in lowercase.",
-            "4. Update manifest.json.",
-            "5. Preview workshops/<variant>/index.html."
-          ].join("\n")
-        },
-        {
-          id: "formatting",
-          title: "Formatting",
-          short: "Task-based Markdown that stays easy to scan.",
-          accent: "mint",
-          tags: ["markdown"],
-          description: "Use consistent LiveLabs structure so readers never need to relearn the page. The simplest path is always one H1, Introduction, Objectives, Estimated Time, Task sections, and Acknowledgements.",
-          when: [
-            "You are building or refactoring a standard lab page.",
-            "Reviewers keep flagging section structure or indentation.",
-            "Notes are drifting away from guided tasks."
-          ],
-          quickWins: [
-            "Keep one H1 only.",
-            "Use Task headings for procedural work.",
-            "Indent code blocks, notes, and images under the right step."
-          ],
-          watchFor: [
-            "Using raw HTML when Markdown is enough.",
-            "Missing required sections such as Objectives or Acknowledgements.",
-            "Long paragraphs where a task list is clearer."
-          ],
-          snippetMeta: "Markdown structure",
-          snippetTitle: "Standard lab pattern",
-          snippet: [
-            "# Lab Title",
-            "",
-            "## Introduction",
-            "",
-            "Estimated Time: 15 minutes",
-            "",
-            "### Objectives",
-            "* Do the first thing",
-            "* Do the second thing",
-            "",
-            "## Task 1: Start Here",
-            "1. Open the target page.",
-            "2. Complete the setup."
-          ].join("\n")
-        },
-        {
-          id: "tables",
-          title: "Tables",
-          short: "Compact comparisons, defaults, and criteria.",
-          accent: "gold",
-          tags: ["markdown"],
-          description: "Tables work best when you are comparing options, listing readiness criteria, or showing expected values side by side.",
-          when: [
-            "A paragraph is easier to scan as columns.",
-            "You need a definition matrix or checklist summary.",
-            "Review criteria should be visible at a glance."
-          ],
-          quickWins: [
-            "Keep headings short and outcome-driven.",
-            "Use tables for comparisons, not for instructions.",
-            "Split oversized tables into two smaller ones."
-          ],
-          watchFor: [
-            "Wide tables that break readability on smaller screens.",
-            "Too much prose inside cells.",
-            "Using tables where numbered tasks would be clearer."
-          ],
-          snippetMeta: "Markdown table",
-          snippetTitle: "Simple comparison table",
-          snippet: [
-            "| Area | Ready When | Common Miss |",
-            "| --- | --- | --- |",
-            "| Preview | Full workshop renders correctly | Preview URL shared too early |",
-            "| QA | Checklist saved and certified | Status changed before save |",
-            "| Publish | Production URL is final | Dev and prod URLs mixed |"
-          ].join("\n")
-        },
-        {
-          id: "links-files",
-          title: "Links & Files",
-          short: "Case-safe paths, images, downloads, and references.",
-          accent: "sky",
-          tags: ["markdown", "advanced"],
-          description: "GitHub Pages is case-sensitive, even when a local machine is not. This bubble is for any issue that smells like path, filename, or asset wiring.",
-          when: [
-            "Links work locally but fail in GitHub Pages.",
-            "You are wiring images, downloads, or cross-lab references.",
-            "A manifest entry points to a renamed file."
-          ],
-          quickWins: [
-            "Keep paths lowercase and exact.",
-            "Use standard Markdown links whenever possible.",
-            "Fix case-only renames with a temporary filename or git mv."
-          ],
-          watchFor: [
-            "Broken image folders after a rename.",
-            "Old manifest entries left in place.",
-            "Relative paths copied from another workshop without adjustment."
-          ],
-          snippetMeta: "Link examples",
-          snippetTitle: "File and link patterns",
-          snippet: [
-            "![Provisioned database details](images/provisioned-database.png \" \")",
-            "[Review the common repository](https://github.com/oracle-livelabs/common)",
-            "",
-            "{",
-            "  \"title\": \"Introduction\",",
-            "  \"filename\": \"./../../01-start-here/start-here.md\"",
-            "}"
-          ].join("\n")
-        },
-        {
-          id: "media",
-          title: "Media",
-          short: "Screenshots, video, and image cleanup.",
-          accent: "rose",
-          tags: ["media", "advanced"],
-          description: "Media should support the step, not distract from it. Use this bubble for screenshot standards, rich media placement, and image hygiene before QA.",
-          when: [
-            "You need to add screenshots or a landing-page video.",
-            "An image is too large, inconsistent, or still contains sensitive data.",
-            "You are mixing Markdown steps with richer HTML media."
-          ],
-          quickWins: [
-            "Crop to the action, not the whole screen.",
-            "Always provide meaningful alt text.",
-            "Use OptiShot before QA if dimensions drift past 1280px."
-          ],
-          watchFor: [
-            "Sensitive data left in screenshots.",
-            "Overusing video where a screenshot is clearer.",
-            "Huge image files that slow page load."
-          ],
-          snippetMeta: "Media snippet",
-          snippetTitle: "Image and video pattern",
-          snippet: [
-            "![Console home page](images/console-home-page.png \" \")",
-            "",
-            "<video autoplay muted loop playsinline class=\"w-100 rounded-4\">",
-            "  <source src=\"videos/demo.mp4\" type=\"video/mp4\">",
-            "</video>"
-          ].join("\n")
-        },
-        {
-          id: "interactivity",
-          title: "Interactivity",
-          short: "Quiz blocks, embeds, and richer inline components.",
-          accent: "mint",
-          tags: ["interactivity", "media"],
-          description: "Use this bubble when a learner should interact with something directly inside the workshop page rather than jumping out to another site.",
-          when: [
-            "You want a quiz, FreeSQL, embed, or scoped HTML component.",
-            "A step benefits from inline interaction instead of a link-out.",
-            "You are prototyping richer components inside Markdown."
-          ],
-          quickWins: [
-            "Keep interactive elements close to the instructions they support.",
-            "Use scoped HTML, CSS, and JS only inside the component.",
-            "Preview the interaction before relying on it in the flow."
-          ],
-          watchFor: [
-            "Embedding too much UI when a simple link is enough.",
-            "Using global CSS that leaks into the rest of the page.",
-            "Skipping accessibility for keyboard navigation."
-          ],
-          snippetMeta: "Interactive pattern",
-          snippetTitle: "Quiz block starter",
-          snippet: [
-            "```quiz",
-            "Q: What is the maximum image width allowed in LiveLabs workshops?",
-            "* 1280 pixels",
-            "- 1920 pixels",
-            "- 800 pixels",
-            "- 2560 pixels",
-            "> Images must not exceed 1,280 px in width or height.",
-            "```"
-          ].join("\n")
-        },
-        {
-          id: "building-blocks",
-          title: "Building Blocks",
-          short: "Sample reuse, common labs, and workshop structure.",
-          accent: "gold",
-          tags: ["workflow", "advanced"],
-          description: "This bubble is for starting from the sample workshop, reusing approved common content, and keeping workshop structure intentional instead of inherited by accident.",
-          when: [
-            "You need a new workshop skeleton quickly.",
-            "A stable common lab already exists in the shared repo.",
-            "You want reuse without hiding the real structure."
-          ],
-          quickWins: [
-            "Start from the sample workshop, not an arbitrary old one.",
-            "Reuse common content only when it is genuinely stable.",
-            "Remove unused manifest fields instead of leaving placeholder clutter."
-          ],
-          watchFor: [
-            "Copying old technical debt into a new workshop.",
-            "Reusing content that should really be customized.",
-            "Letting the manifest grow with unused options."
-          ],
-          snippetMeta: "Manifest entry",
-          snippetTitle: "Reuse a common lab",
-          snippet: [
-            "{",
-            "  \"title\": \"Need Help?\",",
-            "  \"filename\": \"https://oracle-livelabs.github.io/common/labs/need-help/need-help.md\"",
-            "}"
-          ].join("\n")
-        },
-        {
-          id: "qa-publish",
-          title: "QA & Publish",
-          short: "Preview, LintChecker, Self QA, PR, and production handoff.",
-          accent: "sky",
-          tags: ["qa", "workflow"],
-          description: "Open this bubble when the workshop is ready for review and you need the shortest path through preview, Self QA, PR, and publishing details.",
-          when: [
-            "The workshop is ready for review or close to production.",
-            "You want the publish gates without reopening the full guide.",
-            "A reviewer asks for the exact preview or PR pattern."
-          ],
-          quickWins: [
-            "Add ?qa=true to the preview URL before calling it ready.",
-            "Save the Self QA checklist before the status change.",
-            "Include the WMS ID in the PR title."
-          ],
-          watchFor: [
-            "Opening a PR while the branch is behind.",
-            "Mixing preview and production URLs.",
-            "Moving WMS state before checklist save."
-          ],
-          snippetMeta: "QA pattern",
-          snippetTitle: "Preview and PR handoff",
-          snippet: [
-            "Preview URL:",
-            "https://<github-username>.github.io/<repo-name>/<path>/workshops/<variant>/index.html?qa=true",
-            "",
-            "PR title:",
-            "Publish My Workshop (WMS 12345)"
-          ].join("\n")
-        },
-        {
-          id: "automation",
-          title: "Automation",
-          short: "Fixomat, OptiShot, cleanup passes, and late-stage helpers.",
-          accent: "rose",
-          tags: ["advanced", "qa", "media"],
-          description: "Automation helps late in the workflow when the workshop already exists and needs cleanup, consistency, or image optimization before review.",
-          when: [
-            "You need to clean up screenshots or Markdown before QA.",
-            "A large workshop needs consistency passes.",
-            "Specialized helpers can remove repetitive cleanup work."
-          ],
-          quickWins: [
-            "Use Fixomat after the core content exists, not before.",
-            "Use OptiShot when image dimensions are the actual problem.",
-            "Review automated changes instead of blindly accepting them."
-          ],
-          watchFor: [
-            "Using automation instead of understanding the base workflow.",
-            "Applying bulk cleanup too early.",
-            "Forgetting to recheck preview after automated edits."
-          ],
-          snippetMeta: "Advanced helper pattern",
-          snippetTitle: "Conditional content example",
-          snippet: [
-            "{",
-            "  \"title\": \"Provision Resources\",",
-            "  \"filename\": \"./../../provision/provision.md\",",
-            "  \"type\": \"livelabs\"",
-            "}",
-            "",
-            "<if type=\"livelabs\">",
-            "Use the LiveLabs environment instructions here.",
-            "</if>"
-          ].join("\n")
-        },
-        {
-          id: "variables",
-          title: "Variables",
-          short: "Conditional content and multi-variant behavior.",
-          accent: "mint",
-          tags: ["advanced", "workflow"],
-          description: "Use this bubble when the workshop needs variant-aware content, conditional sections, or a cleaner way to avoid duplicating the same instructions across outputs.",
-          when: [
-            "One workshop serves multiple variants or delivery types.",
-            "You need conditional sections without splitting into many labs.",
-            "A shared pattern repeats with only a few changed values."
-          ],
-          quickWins: [
-            "Introduce variables only where reuse is real.",
-            "Keep conditional sections obvious to future authors.",
-            "Test every variant preview, not just the first one."
-          ],
-          watchFor: [
-            "Complex conditions that hide the actual workshop flow.",
-            "Variant logic left undocumented.",
-            "Only previewing one branch of conditional content."
-          ],
-          snippetMeta: "Conditional pattern",
-          snippetTitle: "Basic variable idea",
-          snippet: [
-            "<if type=\"livelabs\">",
-            "Use the LiveLabs environment instructions here.",
-            "</if>",
-            "",
-            "<if type=\"freetier\">",
-            "Use the Free Tier setup steps here.",
-            "</if>"
-          ].join("\n")
-        },
-        {
-          id: "support",
-          title: "Help & Support",
-          short: "Where to go when the blocker is process, not syntax.",
-          accent: "gold",
-          tags: ["workflow", "qa"],
-          description: "Not every blocker is a Markdown problem. Use this bubble when the question is really about process, ownership, review timing, or where to escalate.",
-          when: [
-            "You are blocked by process rather than authoring syntax.",
-            "You need to know who reviews or approves something.",
-            "The next step is support, not more editing."
-          ],
-          quickWins: [
-            "Keep the WMS record current so support has context.",
-            "Bring the preview URL and WMS ID when asking for help.",
-            "Know whether the blocker is request, build, or publish."
-          ],
-          watchFor: [
-            "Escalating without current workflow details.",
-            "Asking for help with no preview or repo context.",
-            "Treating every issue as a documentation issue."
-          ],
-          snippetMeta: "Support starter",
-          snippetTitle: "Context to bring when asking for help",
-          snippet: [
-            "WMS ID:",
-            "Preview URL:",
-            "Repo / branch:",
-            "Current workflow status:",
-            "What is blocked right now:"
-          ].join("\n")
-        }
-      ];
-
-      const state = {
-        mode: "hub",
-        currentStep: 0,
-        fastTrack: "guided",
-        activeTag: "all",
-        query: ""
-      };
-
-      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      let maxUnlockedStep = 0;
-      let suppressObserver = false;
-
-      const modeNav = document.getElementById("modeNav");
-      const hub = document.getElementById("hub");
-      const beginnerMode = document.getElementById("beginnerMode");
-      const explorerMode = document.getElementById("explorerMode");
-      const breadcrumb = document.getElementById("breadcrumb");
-      const rabbitFlow = document.getElementById("rabbitFlow");
-      const stepSections = Array.from(document.querySelectorAll(".rabbit-step"));
-      const progressButtons = Array.from(document.querySelectorAll(".progress-button"));
-      const progressCaption = document.getElementById("progressCaption");
-      const fastTrackToggle = document.getElementById("fastTrackToggle");
-      const fastTrackStatus = document.getElementById("fastTrackStatus");
-      const liveRegion = document.getElementById("liveRegion");
-      const bubbleGrid = document.getElementById("bubbleGrid");
-      const emptyState = document.getElementById("emptyState");
-      const resultCount = document.getElementById("resultCount");
-      const bubbleSearch = document.getElementById("bubbleSearch");
-      const clearSearch = document.getElementById("clearSearch");
-      const tagPills = Array.from(document.querySelectorAll(".tag-pill"));
-      const bubbleModalElement = document.getElementById("bubbleModal");
-      const bubbleModal = bootstrap.Modal.getOrCreateInstance(bubbleModalElement);
-
-      bubbleModalElement.addEventListener("hidden.bs.modal", function () {
-        document.body.classList.remove("modal-open");
-        document.body.style.removeProperty("padding-right");
-        document.querySelectorAll(".modal-backdrop").forEach(function (backdrop) {
-          backdrop.remove();
-        });
-      });
-
-      function escapeHtml(value) {
-        return String(value)
-          .replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;")
-          .replace(/"/g, "&quot;");
-      }
-
-      function smoothBehavior() {
-        return prefersReducedMotion ? "auto" : "smooth";
-      }
-
-      function setLiveMessage(message) {
-        liveRegion.textContent = "";
-        window.setTimeout(function () {
-          liveRegion.textContent = message;
-        }, 20);
-      }
-
-      function setHash(hash) {
-        if (window.location.hash !== hash) {
-          history.replaceState(null, "", hash);
-        }
-      }
-
-      function updateHashFromState() {
-        if (state.mode === "beginner") {
-          setHash(state.currentStep === 0 ? "#guided" : "#step-" + (state.currentStep + 1));
-          return;
-        }
-        if (state.mode === "explorer") {
-          setHash("#toolkit");
-          return;
-        }
-        setHash("#home");
-      }
-
-      function scrollToTarget(target) {
-        if (!target) {
-          return;
-        }
-        target.scrollIntoView({
-          behavior: smoothBehavior(),
-          block: "start"
-        });
-      }
-
-      function updateNav() {
-        modeNav.classList.remove("d-none");
-
-        document.querySelectorAll(".nav-control").forEach(function (button) {
-          const targetMode = button.getAttribute("data-mode-target");
-          const isActive = targetMode === state.mode;
-          button.classList.toggle("is-active", isActive);
-          button.setAttribute("aria-pressed", isActive ? "true" : "false");
-        });
-      }
-
-      function updateBreadcrumb() {
-        breadcrumb.innerHTML = '<a class="btn nav-guide-link" href="./workshops/livelabs/index.html?lab=core-workflow">Open Full End-to-End Guide</a>';
-      }
-
-      function updateProgressCaption() {
-        if (state.mode !== "beginner") {
-          progressCaption.textContent = "Layer 1 of 3 is active.";
-          return;
-        }
-        const trackLabel = state.fastTrack === "minimal" ? "Fast Track" : "Guided";
-        progressCaption.textContent = "Layer " + (state.currentStep + 1) + " of 3: " + stepMeta[state.currentStep].title + " (" + trackLabel + ").";
-      }
-
-      function updateBeginnerUI() {
-        rabbitFlow.classList.toggle("track-minimal", state.fastTrack === "minimal");
-        fastTrackToggle.checked = state.fastTrack === "minimal";
-        fastTrackStatus.textContent = state.fastTrack === "minimal"
-          ? "Fast Track hides the longer notes and common mistakes."
-          : "Guided mode keeps notes, common mistakes, and extra context visible.";
-
-        progressButtons.forEach(function (button, index) {
-          const isActive = index === state.currentStep;
-          const isComplete = index < state.currentStep;
-          const isLocked = index > maxUnlockedStep;
-          const mark = button.querySelector(".progress-mark");
-
-          button.classList.toggle("is-active", isActive);
-          button.classList.toggle("is-complete", isComplete);
-          button.classList.toggle("is-locked", isLocked);
-          button.setAttribute("aria-current", isActive ? "step" : "false");
-          mark.innerHTML = isComplete ? "&#10003;" : String(index + 1);
-        });
-
-        stepSections.forEach(function (section, index) {
-          const isActive = index === state.currentStep;
-          const isComplete = index < state.currentStep;
-          const isLocked = index > maxUnlockedStep;
-          section.classList.toggle("is-active", isActive);
-          section.classList.toggle("is-complete", isComplete);
-          section.classList.toggle("is-locked", isLocked);
-        });
-
-        updateProgressCaption();
-        updateBreadcrumb();
-      }
-
-      function switchMode(mode, options) {
-        const config = Object.assign({
-          scroll: true,
-          hash: true,
-          announce: true,
-          openBubble: null
-        }, options || {});
-
-        state.mode = mode;
-        hub.classList.toggle("d-none", mode !== "hub");
-        beginnerMode.classList.toggle("d-none", mode !== "beginner");
-        explorerMode.classList.toggle("d-none", mode !== "explorer");
-
-        if (mode !== "explorer") {
-          bubbleModal.hide();
-        }
-
-        updateNav();
-        updateBreadcrumb();
-
-        if (mode === "beginner") {
-          maxUnlockedStep = Math.max(maxUnlockedStep, state.currentStep);
-          updateBeginnerUI();
-          if (config.scroll !== false) {
-            goToStep(state.currentStep, { scroll: true, hash: false, announce: false });
-          }
-        } else if (mode === "explorer") {
-          renderExplorer();
-          if (config.scroll !== false) {
-            scrollToTarget(explorerMode);
-          }
-        } else if (config.scroll !== false) {
-          window.scrollTo({
-            top: 0,
-            behavior: smoothBehavior()
-          });
-        }
-
-        if (config.hash !== false) {
-          updateHashFromState();
-        }
-
-        if (config.openBubble) {
-          window.setTimeout(function () {
-            openBubble(config.openBubble);
-          }, prefersReducedMotion ? 0 : 220);
-        }
-
-        if (config.announce !== false) {
-          if (mode === "hub") {
-            setLiveMessage("Returned to the guide home.");
-          } else if (mode === "beginner") {
-            setLiveMessage("Guided path opened.");
-          } else if (mode === "explorer") {
-            setLiveMessage("Reference toolkit opened.");
-          }
-        }
-      }
-
-      function goToStep(index, options) {
-        const config = Object.assign({
-          scroll: true,
-          hash: true,
-          announce: true
-        }, options || {});
-
-        const boundedIndex = Math.max(0, Math.min(index, stepSections.length - 1));
-        state.currentStep = boundedIndex;
-        maxUnlockedStep = Math.max(maxUnlockedStep, boundedIndex);
-
-        if (state.mode !== "beginner") {
-          switchMode("beginner", {
-            scroll: false,
-            hash: false,
-            announce: false
-          });
-        }
-
-        updateBeginnerUI();
-
-        if (config.scroll !== false) {
-          suppressObserver = true;
-          scrollToTarget(stepSections[boundedIndex]);
-          window.setTimeout(function () {
-            suppressObserver = false;
-          }, prefersReducedMotion ? 50 : 420);
-        }
-
-        if (config.hash !== false) {
-          updateHashFromState();
-        }
-
-        if (config.announce !== false) {
-          setLiveMessage("Step " + (boundedIndex + 1) + ". " + stepMeta[boundedIndex].title + ".");
-        }
-      }
-
-      function nextStep() {
-        if (state.currentStep < stepSections.length - 1) {
-          goToStep(state.currentStep + 1);
-        }
-      }
-
-      function prevStep() {
-        if (state.currentStep > 0) {
-          goToStep(state.currentStep - 1);
-        }
-      }
-
-      function titleCaseTag(tag) {
-        if (tag === "qa") {
-          return "QA";
-        }
-        return tag
-          .split("-")
-          .map(function (part) {
-            return part.charAt(0).toUpperCase() + part.slice(1);
-          })
-          .join(" ");
-      }
-
-      function renderExplorer() {
-        const query = state.query.trim().toLowerCase();
-        const visibleItems = explorerItems.filter(function (item) {
-          const haystack = [
-            item.title,
-            item.short,
-            item.description
-          ].concat(item.tags).join(" ").toLowerCase();
-          const matchesQuery = !query || haystack.indexOf(query) !== -1;
-          const matchesTag = state.activeTag === "all" || item.tags.indexOf(state.activeTag) !== -1;
-          return matchesQuery && matchesTag;
-        });
-
-        bubbleGrid.innerHTML = visibleItems.map(function (item) {
-          return [
-            '<div class="col bubble-item" data-bubble-id="', item.id, '">',
-            '  <button type="button" class="bubble-button" data-open-bubble="', item.id, '" data-accent="', item.accent, '" aria-label="Open ', escapeHtml(item.title), ' details">',
-            '    <span class="bubble-badge">', escapeHtml(titleCaseTag(item.tags[0])), '</span>',
-            '    <span class="bubble-title">', escapeHtml(item.title), '</span>',
-            '    <span class="bubble-text">', escapeHtml(item.short), '</span>',
-            '  </button>',
-            '</div>'
-          ].join("");
-        }).join("");
-
-        resultCount.textContent = "Showing " + visibleItems.length + " toolkit card" + (visibleItems.length === 1 ? "" : "s");
-        emptyState.classList.toggle("d-none", visibleItems.length !== 0);
-      }
-
-      function openBubble(id) {
-        const item = explorerItems.find(function (candidate) {
-          return candidate.id === id;
-        });
-
-        if (!item) {
-          return;
-        }
-
-        document.getElementById("bubbleModalKicker").textContent = item.tags.map(titleCaseTag).join(" / ");
-        document.getElementById("bubbleModalLabel").textContent = item.title;
-        document.getElementById("bubbleModalDescription").textContent = item.description;
-        document.getElementById("bubbleModalTags").innerHTML = item.tags.map(function (tag) {
-          return '<span class="detail-tag">' + escapeHtml(titleCaseTag(tag)) + "</span>";
-        }).join("");
-        document.getElementById("bubbleModalWhen").innerHTML = item.when.map(function (entry) {
-          return "<li>" + escapeHtml(entry) + "</li>";
-        }).join("");
-        document.getElementById("bubbleModalQuickWins").innerHTML = item.quickWins.map(function (entry) {
-          return "<li>" + escapeHtml(entry) + "</li>";
-        }).join("");
-        document.getElementById("bubbleModalWatchFor").innerHTML = item.watchFor.map(function (entry) {
-          return "<li>" + escapeHtml(entry) + "</li>";
-        }).join("");
-        document.getElementById("bubbleModalSnippetMeta").textContent = item.snippetMeta;
-        document.getElementById("bubbleModalSnippetTitle").textContent = item.snippetTitle;
-        document.getElementById("bubbleModalSnippet").textContent = item.snippet;
-        bubbleModal.show();
-        setLiveMessage(item.title + " opened.");
-      }
-
-      function copyWithFallback(text) {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          return navigator.clipboard.writeText(text);
-        }
-
-        return new Promise(function (resolve, reject) {
-          const helper = document.createElement("textarea");
-          helper.value = text;
-          helper.setAttribute("readonly", "");
-          helper.style.position = "absolute";
-          helper.style.left = "-9999px";
-          document.body.appendChild(helper);
-          helper.select();
-          try {
-            document.execCommand("copy");
-            resolve();
-          } catch (error) {
-            reject(error);
-          } finally {
-            document.body.removeChild(helper);
-          }
-        });
-      }
-
-      function copyTarget(targetId, button) {
-        const target = document.getElementById(targetId);
-        if (!target) {
-          return;
-        }
-
-        copyWithFallback(target.textContent).then(function () {
-          const original = button.textContent;
-          button.textContent = "Copied";
-          button.classList.add("is-copied");
-          setLiveMessage("Snippet copied to clipboard.");
-          window.setTimeout(function () {
-            button.textContent = original;
-            button.classList.remove("is-copied");
-          }, 1400);
-        }).catch(function () {
-          setLiveMessage("Copy failed. Select the text manually.");
-        });
-      }
-
-      function setActiveTag(tag) {
-        state.activeTag = tag;
-        tagPills.forEach(function (pill) {
-          pill.classList.toggle("is-active", pill.getAttribute("data-tag") === tag);
-        });
-        renderExplorer();
-      }
-
-      function handleShortcutBubble(id) {
-        state.query = "";
-        bubbleSearch.value = "";
-        setActiveTag("all");
-        switchMode("explorer", {
-          openBubble: id
-        });
-      }
-
-      function applyHash(hash) {
-        const cleaned = (hash || "").replace("#", "").trim();
-
-        if (!cleaned || cleaned === "home" || cleaned === "hub") {
-          switchMode("hub", {
-            scroll: false,
-            hash: false,
-            announce: false
-          });
-          return;
-        }
-
-        if (cleaned === "guided") {
-          switchMode("beginner", {
-            scroll: false,
-            hash: false,
-            announce: false
-          });
-          updateBeginnerUI();
-          return;
-        }
-
-        if (cleaned === "toolkit" || cleaned === "explorer") {
-          switchMode("explorer", {
-            scroll: false,
-            hash: false,
-            announce: false
-          });
-          return;
-        }
-
-        if (cleaned.indexOf("step-") === 0) {
-          const index = Number(cleaned.replace("step-", "")) - 1;
-          if (!Number.isNaN(index)) {
-            maxUnlockedStep = Math.max(0, Math.min(index, stepSections.length - 1));
-            state.currentStep = Math.max(0, Math.min(index, stepSections.length - 1));
-            switchMode("beginner", {
-              scroll: false,
-              hash: false,
-              announce: false
-            });
-            updateBeginnerUI();
-            return;
-          }
-        }
-
-        switchMode("hub", {
-          scroll: false,
-          hash: false,
-          announce: false
-        });
-      }
-
-      const observer = new IntersectionObserver(function (entries) {
-        if (state.mode !== "beginner" || suppressObserver) {
-          return;
-        }
-
-        const visibleEntry = entries
-          .filter(function (entry) {
-            return entry.isIntersecting;
-          })
-          .sort(function (left, right) {
-            return right.intersectionRatio - left.intersectionRatio;
-          })[0];
-
-        if (!visibleEntry || visibleEntry.intersectionRatio < 0.58) {
-          return;
-        }
-
-        const index = Number(visibleEntry.target.getAttribute("data-step-index") || "0");
-        if (index !== state.currentStep) {
-          state.currentStep = index;
-          maxUnlockedStep = Math.max(maxUnlockedStep, index);
-          updateBeginnerUI();
-          updateHashFromState();
-        }
-      }, {
-        threshold: [0.58]
-      });
-
-      stepSections.forEach(function (section) {
-        observer.observe(section);
-      });
-
-      document.addEventListener("click", function (event) {
-        const modeButton = event.target.closest("[data-mode-target]");
-        if (modeButton) {
-          const targetMode = modeButton.getAttribute("data-mode-target");
-          if (targetMode === "hub") {
-            switchMode("hub");
-          } else if (targetMode === "beginner") {
-            switchMode("beginner");
-          } else if (targetMode === "explorer") {
-            switchMode("explorer");
-          }
-          return;
-        }
-
-        const progressButton = event.target.closest("[data-step-target]");
-        if (progressButton) {
-          goToStep(Number(progressButton.getAttribute("data-step-target")));
-          return;
-        }
-
-        const actionButton = event.target.closest("[data-action]");
-        if (actionButton) {
-          const action = actionButton.getAttribute("data-action");
-          if (action === "next") {
-            nextStep();
-          } else if (action === "prev") {
-            prevStep();
-          } else if (action === "surface") {
-            switchMode("hub");
-          }
-          return;
-        }
-
-        const shortcutBubble = event.target.closest("[data-open-bubble-direct]");
-        if (shortcutBubble) {
-          handleShortcutBubble(shortcutBubble.getAttribute("data-open-bubble-direct"));
-          return;
-        }
-
-        const bubbleButton = event.target.closest("[data-open-bubble]");
-        if (bubbleButton) {
-          openBubble(bubbleButton.getAttribute("data-open-bubble"));
-          return;
-        }
-
-        const copyButton = event.target.closest("[data-copy-target]");
-        if (copyButton) {
-          copyTarget(copyButton.getAttribute("data-copy-target"), copyButton);
-          return;
-        }
-
-        const tagButton = event.target.closest("[data-tag]");
-        if (tagButton) {
-          setActiveTag(tagButton.getAttribute("data-tag"));
-        }
-      });
-
-      fastTrackToggle.addEventListener("change", function (event) {
-        state.fastTrack = event.target.checked ? "minimal" : "guided";
-        updateBeginnerUI();
-        setLiveMessage(state.fastTrack === "minimal" ? "Fast Track enabled." : "Guided mode enabled.");
-      });
-
-      bubbleSearch.addEventListener("input", function (event) {
-        state.query = event.target.value;
-        renderExplorer();
-      });
-
-      clearSearch.addEventListener("click", function () {
-        state.query = "";
-        bubbleSearch.value = "";
-        renderExplorer();
-        bubbleSearch.focus();
-      });
-
-      window.addEventListener("hashchange", function () {
-        applyHash(window.location.hash);
-      });
-
-      updateNav();
-      updateBeginnerUI();
-      renderExplorer();
-      applyHash(window.location.hash);
-    }());
-  </script>
+  <script src="./guide-content.js"></script>
+  <script src="./author-guide-app.js"></script>
 </body>
 </html>
+
