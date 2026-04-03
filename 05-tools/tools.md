@@ -6,10 +6,6 @@ Use this section for the practical tools that improve screenshot quality, reduce
 
 Estimated Time: 5 minutes
 
-## Quick Visual Guide
-
-![Quick visual guide to the tools and productivity section and its labs.](05-tools-productivity-quick-reference.png " ")
-
 ## Objectives
 
 * Know which tool to use for each common authoring problem

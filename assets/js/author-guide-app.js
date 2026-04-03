@@ -48,7 +48,9 @@
     ["markdown", "manifest", "copy tags", "task header", "acknowledgements"],
     ["sql", "plsql", "free sql", "freesql", "sql developer"],
     ["help", "support", "faq", "message the team", "slack", "mailbox"],
-    ["sla", "timeline", "timelines", "review window", "publishing window"]
+    ["sla", "timeline", "timelines", "review window", "publishing window"],
+    ["secure desktop", "secure desktops", "restricted laptop", "restricted corporate laptop", "novnc", "chrome", "popups"],
+    ["ai", "ai developer hub", "agentic", "automation first", "skill bundle", "how to guide"]
   ];
 
   var state = {
@@ -83,6 +85,7 @@
   var rabbitFlow = document.getElementById("rabbitFlow");
   var stepSections = Array.from(document.querySelectorAll(".rabbit-step"));
   var progressButtons = Array.from(document.querySelectorAll(".progress-button"));
+  var progressShell = document.getElementById("progressShell");
   var progressCaption = document.getElementById("progressCaption");
   var fastTrackToggle = document.getElementById("fastTrackToggle");
   var fastTrackStatus = document.getElementById("fastTrackStatus");
@@ -232,14 +235,35 @@
     setHash("#home");
   }
 
+  function stickyOffset(target) {
+    var offset = 16;
+    var navHeight = modeNav && !modeNav.classList.contains("d-none") ? modeNav.getBoundingClientRect().height : 0;
+    var progressHeight = 0;
+
+    if (
+      state.mode === "beginner" &&
+      progressShell &&
+      !beginnerMode.classList.contains("d-none") &&
+      target &&
+      target !== beginnerMode
+    ) {
+      progressHeight = progressShell.getBoundingClientRect().height;
+    }
+
+    return Math.ceil(navHeight + progressHeight + offset);
+  }
+
   function scrollToTarget(target) {
+    var top;
+
     if (!target) {
       return;
     }
 
-    target.scrollIntoView({
-      behavior: smoothBehavior(),
-      block: "start"
+    top = window.pageYOffset + target.getBoundingClientRect().top - stickyOffset(target);
+    window.scrollTo({
+      top: Math.max(0, top),
+      behavior: smoothBehavior()
     });
   }
 
@@ -799,6 +823,21 @@
   function renderGuideLab(section, lab) {
     var snippetId = "guide-snippet-" + section.id + "-" + lab.id;
     var targetedClass = state.guideFocusLab === lab.id ? " is-targeted" : "";
+    var stepsBlock = renderGuidePanel("What You Do", lab.steps || [], { ordered: true });
+    var mediaBlock = lab.image ? [
+      '<figure class="guide-figure">',
+      '  <img src="', escapeHtml(lab.image.src), '" alt="', escapeHtml(lab.image.alt || lab.title), '">',
+      '  <figcaption>', escapeHtml(lab.image.caption || ""), "</figcaption>",
+      "</figure>"
+    ].join("") : "";
+    var flowBlock = mediaBlock ? '<div class="guide-lab-flow">' + stepsBlock + mediaBlock + "</div>" : stepsBlock;
+    var supportBlocks = [
+      buildFieldCardsHtml(lab.exampleTitle || "Worked example", lab.exampleIntro || "", lab.exampleFields, "Worked example"),
+      buildMilestoneCardsHtml(lab.milestonesTitle || "Status flow", lab.milestonesIntro || "", lab.milestones, "Status flow"),
+      renderGuidePanel(lab.checkpointsTitle || "Before You Move On", lab.checkpoints || []),
+      buildResourceLinksHtml(lab.resourcesTitle || "Useful links", lab.resourcesIntro || "", lab.resourceLinks, "Resources"),
+      renderGuidePanel("Watch For", lab.watchFor || [])
+    ].filter(Boolean).join("");
 
     return [
       '<article class="guide-lab-card', targetedClass, '" id="guide-lab-', section.id, "-", lab.id, '">',
@@ -807,18 +846,8 @@
       '    <h3 class="guide-lab-title">', escapeHtml(lab.title), "</h3>",
       '    <p class="guide-lab-summary">', escapeHtml(lab.summary), "</p>",
       "  </div>",
-      renderGuidePanel("What You Do", lab.steps || [], { ordered: true }),
-      lab.image ? [
-        '<figure class="guide-figure">',
-        '  <img src="', escapeHtml(lab.image.src), '" alt="', escapeHtml(lab.image.alt || lab.title), '">',
-        '  <figcaption>', escapeHtml(lab.image.caption || ""), "</figcaption>",
-        "</figure>"
-      ].join("") : "",
-      buildFieldCardsHtml(lab.exampleTitle || "Worked example", lab.exampleIntro || "", lab.exampleFields, "Worked example"),
-      buildMilestoneCardsHtml(lab.milestonesTitle || "Status flow", lab.milestonesIntro || "", lab.milestones, "Status flow"),
-      renderGuidePanel(lab.checkpointsTitle || "Before You Move On", lab.checkpoints || []),
-      buildResourceLinksHtml(lab.resourcesTitle || "Useful links", lab.resourcesIntro || "", lab.resourceLinks, "Resources"),
-      renderGuidePanel("Watch For", lab.watchFor || []),
+      flowBlock,
+      supportBlocks ? '<div class="guide-lab-panels">' + supportBlocks + "</div>" : "",
       renderGuideSnippetCard(snippetId, lab.snippet, lab.snippetTitle || "Snippet", lab.snippetMeta || "Copy-ready detail"),
       '  <div class="guide-lab-actions">',
       lab.sourceHref ? '<a class="btn btn-outline-secondary rounded-pill px-4" href="' + escapeHtml(lab.sourceHref) + '" target="_blank" rel="noreferrer">' + escapeHtml(lab.sourceLabel || "Open Canonical Lab") + "</a>" : "",
@@ -1211,7 +1240,9 @@
       announce: true,
       openBubble: null,
       guideSection: state.guideSection,
-      guideFocusLab: null
+      guideFocusLab: null,
+      resetStep: false,
+      forceTop: false
     }, options || {});
     var guideTarget;
 
@@ -1227,6 +1258,10 @@
 
     if (config.guideFocusLab !== null) {
       state.guideFocusLab = config.guideFocusLab || "";
+    }
+
+    if (mode === "beginner" && config.resetStep) {
+      state.currentStep = 0;
     }
 
     state.mode = mode;
@@ -1247,24 +1282,40 @@
       maxUnlockedStep = Math.max(maxUnlockedStep, state.currentStep);
       updateBeginnerUI();
       if (config.scroll !== false) {
-        goToStep(state.currentStep, { scroll: true, hash: false, announce: false });
+        if (config.forceTop) {
+          window.scrollTo({ top: 0, behavior: smoothBehavior() });
+        } else {
+          goToStep(state.currentStep, { scroll: true, hash: false, announce: false });
+        }
       }
     } else if (mode === "explorer") {
       renderExplorer();
       updateBreadcrumb();
       if (config.scroll !== false) {
-        scrollToTarget(explorerMode);
+        if (config.forceTop) {
+          window.scrollTo({ top: 0, behavior: smoothBehavior() });
+        } else {
+          scrollToTarget(explorerMode);
+        }
       }
     } else if (mode === "guide") {
       renderGuideSection();
       if (config.scroll !== false) {
-        guideTarget = state.guideFocusLab ? document.getElementById("guide-lab-" + state.guideSection + "-" + state.guideFocusLab) : null;
-        scrollToTarget(guideTarget || guideMode);
+        if (config.forceTop) {
+          window.scrollTo({ top: 0, behavior: smoothBehavior() });
+        } else {
+          guideTarget = state.guideFocusLab ? document.getElementById("guide-lab-" + state.guideSection + "-" + state.guideFocusLab) : null;
+          scrollToTarget(guideTarget || guideMode);
+        }
       }
     } else if (mode === "search") {
       renderSearchResults();
       if (config.scroll !== false) {
-        scrollToTarget(searchMode);
+        if (config.forceTop) {
+          window.scrollTo({ top: 0, behavior: smoothBehavior() });
+        } else {
+          scrollToTarget(searchMode);
+        }
       }
     } else {
       updateBreadcrumb();
@@ -1506,12 +1557,15 @@
     var copyButton = event.target.closest("[data-copy-target]");
     var tagButton = event.target.closest("[data-tag]");
     var searchOpenButton = event.target.closest("[data-search-open]");
+    var isPrimaryNav = modeButton && !!modeButton.closest(".nav-group-all");
 
     if (modeButton) {
       if (modeButton.getAttribute("data-mode-target") === "guide" && modeButton.getAttribute("data-guide-target")) {
-        switchMode("guide", { guideSection: modeButton.getAttribute("data-guide-target"), guideFocusLab: "" });
+        switchMode("guide", { guideSection: modeButton.getAttribute("data-guide-target"), guideFocusLab: "", forceTop: isPrimaryNav });
+      } else if (modeButton.getAttribute("data-mode-target") === "beginner") {
+        switchMode("beginner", { resetStep: true, forceTop: isPrimaryNav || !!modeButton.closest(".hero-actions") });
       } else {
-        switchMode(modeButton.getAttribute("data-mode-target"));
+        switchMode(modeButton.getAttribute("data-mode-target"), { forceTop: isPrimaryNav });
       }
       return;
     }

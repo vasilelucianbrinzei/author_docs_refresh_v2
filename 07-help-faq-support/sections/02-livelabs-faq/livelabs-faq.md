@@ -68,8 +68,10 @@ Estimated Time: 10 minutes
 
 3. If the real question is about response times, handoff timing, or when to follow up, use **Lab 8: Review, QA, and publishing timelines**.
 
-4. If the question is about event-style, sandbox, secure desktop, or other non-standard author paths, use the **Specialized Workflows** section.
+4. If the goal is AI-assisted drafting, restructuring, or workflow acceleration, use **LiveLabs AI Developer Hub**.
+
+5. If the question is about event-style, sandbox, secure desktop, or other non-standard author paths, use the **Specialized Workflows** section.
 
 ## Acknowledgements
 
-* **Last Updated By/Date:** Workshop Author Docs Refresh, March 2026
+* **Last Updated By/Date:** Workshop Author Docs Refresh, April 2026

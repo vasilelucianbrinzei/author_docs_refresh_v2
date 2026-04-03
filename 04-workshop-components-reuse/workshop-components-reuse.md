@@ -6,10 +6,6 @@ Use this section for optional additions that extend a workshop after the core au
 
 Estimated Time: 5 minutes
 
-## Quick Visual Guide
-
-![Quick visual guide to the reuse and enhancements section and its labs.](04-reuse-enhancements-quick-reference.png " ")
-
 ## Objectives
 
 * Identify optional enhancements that fit your workshop

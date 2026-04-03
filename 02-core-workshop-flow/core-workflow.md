@@ -6,10 +6,6 @@ This section is the hands-on author path. Once you understand the guide, the WMS
 
 Estimated Time: 10 minutes
 
-## Quick Visual Guide
-
-![Quick visual guide to the core workflow section and its labs.](02-core-workflow-quick-reference.png " ")
-
 ## Objectives
 
 * Know the required author path for most workshops

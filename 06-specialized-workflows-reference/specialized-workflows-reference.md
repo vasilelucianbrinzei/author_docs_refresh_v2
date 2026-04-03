@@ -6,10 +6,6 @@ Use this section for advanced or niche workflows that only apply to some worksho
 
 Estimated Time: 10 minutes
 
-## Quick Visual Guide
-
-![Quick visual guide to the specialized workflows section and its labs.](06-specialized-workflows-quick-reference.png " ")
-
 ## Objectives
 
 * Identify which advanced workflows are actually relevant to your workshop

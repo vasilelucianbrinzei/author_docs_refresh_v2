@@ -17,7 +17,8 @@ Estimated Time: 5 minutes
 1. Check the section landing page for the topic you are working on so you do not ask a support question that the documentation already answers.
 2. Review **LiveLabs FAQ** for common author and publishing questions.
 3. Review **Lab 8: Review, QA, and publishing timelines** if your question is about expected response times or handoff timing.
-4. If the issue is tied to a non-standard environment or specialized flow, check the **Specialized Workflows** section before escalating.
+4. Review **LiveLabs AI Developer Hub** first if the goal is drafting or restructuring faster rather than solving a platform blocker.
+5. If the issue is tied to a non-standard environment or specialized flow, check the **Specialized Workflows** section before escalating.
 
 ## Task 2: Use The Right Support Channel
 
@@ -36,4 +37,4 @@ Estimated Time: 5 minutes
 
 ## Acknowledgements
 
-* **Last Updated By/Date:** Workshop Author Docs Refresh, March 2026
+* **Last Updated By/Date:** Workshop Author Docs Refresh, April 2026

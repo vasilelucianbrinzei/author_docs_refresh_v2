@@ -8,7 +8,13 @@ window.authorGuideContent = (function () {
     oracleRepos: "https://github.com/orgs/oracle-livelabs/repositories",
     sampleWorkshop: "https://github.com/oracle-livelabs/common/tree/main/sample-livelabs-templates/sample-workshop",
     validatorBash: "https://raw.githubusercontent.com/oracle-livelabs/common/main/md-validator/.github/scripts/validate-livelabs-markdown.sh",
-    validatorPowerShell: "https://raw.githubusercontent.com/oracle-livelabs/common/main/md-validator/.github/scripts/validate-livelabs-markdown.ps1"
+    validatorPowerShell: "https://raw.githubusercontent.com/oracle-livelabs/common/main/md-validator/.github/scripts/validate-livelabs-markdown.ps1",
+    secureDesktopAccess: "https://oracle-livelabs.github.io/common/labs/testing-access/workshops/desktop/index.html?lab=livelabs-sandbox",
+    secureDesktopDocs: "https://oracle-livelabs.github.io/common/support/securedesktops/index.html#BeforeyougetStarted",
+    liveLabsAuthorsSlack: "https://oracle.enterprise.slack.com/archives/CTUPZQ5HA",
+    aiHubGuide: "https://lfoinding.github.io/livelabs-ai-playground/skills/how-to/workshops/sandbox/index.html",
+    aiHubRepo: "https://github.com/lfoinding/livelabs-ai-playground",
+    aiHubSkills: "https://github.com/lfoinding/livelabs-ai-playground/tree/main/LiveLabs-AI-Developer"
   };
 
   function labLink(labId) {
@@ -914,6 +920,141 @@ window.authorGuideContent = (function () {
           "Workshop publishing        -> 1 business day"
         ].join("\n"),
         sourceHref: labLink("sla"),
+        sourceLabel: "Open Canonical Lab",
+        guideTarget: "validation-publish"
+      },
+      {
+        id: "secure-desktop-when",
+        title: "Secure Desktop: When to Use It",
+        short: "Test normal access first, use secure desktop only for real restrictions, and validate with sample users before the event.",
+        accent: "sienna",
+        tags: ["workflow", "advanced"],
+        description: "Use this card when the workshop audience may be on restricted corporate laptops and you need to decide whether OCI Secure Desktops are actually required.",
+        steps: [
+          "Assume standard access first, then test with one or two representative participants from the target organization before you request secure desktops.",
+          "Ask those participants to open the normal workshop environment from their corporate laptop, then try Secure Desktop only if standard access is blocked.",
+          "Run the test at least two days before the event so you still have time to request or adjust the secure desktop flow.",
+          "Use secure desktops only when they solve a real access problem such as blocked sites, blocked protocols, or failed noVNC access."
+        ],
+        checkpoints: [
+          "You have evidence that the normal path is blocked before you switch to secure desktops.",
+          "A participant can launch the secure desktop and open the LiveLabs workshop from inside it.",
+          "Large events are tested early enough that access issues are found before launch day."
+        ],
+        watchFor: [
+          "Turning on secure desktops by default instead of proving the normal path fails first.",
+          "Waiting until the event starts to discover corporate browser or firewall restrictions.",
+          "Treating one successful test as enough for a 100+ attendee event."
+        ],
+        resourcesTitle: "Secure desktop references",
+        resourcesIntro: "Keep these two pages open during access testing so you do not guess the launch flow.",
+        resourceLinks: [
+          resourceLink("Test access guide", officialLinks.secureDesktopAccess, "Use this to validate the full end-to-end participant path."),
+          resourceLink("OCI Secure Desktop docs", officialLinks.secureDesktopDocs, "Use this when you need the broader platform prerequisites and setup context.")
+        ],
+        snippetMeta: "Decision gate",
+        snippetTitle: "Use secure desktop only after this test sequence",
+        snippet: [
+          "1. Test the normal workshop path first",
+          "2. Test with 1-2 representative users",
+          "3. Run the test at least 2 days before the event",
+          "4. Use secure desktop only if the normal path is blocked",
+          "5. For 100+ users, start planning earlier and test more than once"
+        ].join("\n"),
+        sourceHref: labLink("secure-desktop"),
+        sourceLabel: "Open Canonical Lab",
+        guideTarget: "specialized-workflows"
+      },
+      {
+        id: "secure-desktop-request",
+        title: "Secure Desktop: Request and Access",
+        short: "Post the request with full event details, plan earlier for large events, and make participants use the supported browser flow.",
+        accent: "sienna",
+        tags: ["workflow", "advanced"],
+        description: "Use this card when secure desktops are justified and you need the exact request details plus the participant-side launch prerequisites.",
+        steps: [
+          "Post the request in the LiveLabs Authors Slack channel and include event name, event date, workshop, participant count, and why standard access is blocked.",
+          "If you need 100 or more secure desktops, start coordination 3 to 4 weeks ahead so infrastructure planning is possible.",
+          "Tell participants to use Google Chrome, enable pop-ups, and log out of any OCI tenants in that browser before launch.",
+          "Send participants the secure desktop access guide and validate the connection end to end before the event starts."
+        ],
+        checkpoints: [
+          "The request includes enough context for the LiveLabs team to provision the right environment.",
+          "Participants know the browser, pop-up, and OCI sign-out prerequisites before the session begins.",
+          "The secure desktop path is tested before event day."
+        ],
+        watchFor: [
+          "Sending a vague request with no event date, workshop, or participant count.",
+          "Assuming Chrome, pop-ups, and OCI sign-out details are optional.",
+          "Treating large secure desktop requests like a last-minute setup item."
+        ],
+        resourcesTitle: "Request and launch references",
+        resourcesIntro: "Use the Slack channel for the request, then hand off the documented access steps to participants.",
+        resourceLinks: [
+          resourceLink("LiveLabs Authors Slack", officialLinks.liveLabsAuthorsSlack, "Post the request here with the full event context."),
+          resourceLink("Test access guide", officialLinks.secureDesktopAccess, "Share this with participants for the launch flow."),
+          resourceLink("OCI Secure Desktop docs", officialLinks.secureDesktopDocs, "Use this when participants or reviewers need more setup detail.")
+        ],
+        snippetMeta: "Bring this to the request",
+        snippetTitle: "Secure desktop request details",
+        snippet: [
+          "Event name",
+          "Event date",
+          "Workshop name",
+          "Estimated participant count",
+          "Why standard access is blocked",
+          "",
+          "Participant launch prerequisites",
+          "- Google Chrome",
+          "- Pop-ups enabled",
+          "- Logged out of OCI tenants"
+        ].join("\n"),
+        sourceHref: labLink("secure-desktop-how-to-request"),
+        sourceLabel: "Open Canonical Lab",
+        guideTarget: "specialized-workflows"
+      },
+      {
+        id: "ai-developer-hub",
+        title: "AI Developer Hub",
+        short: "Use the AI Developer Hub guide, repo, and skill bundles to speed up authoring work without replacing the canonical workflow.",
+        accent: "pine",
+        tags: ["workflow", "advanced"],
+        description: "Use this card when you want AI-assisted help for drafting, restructuring, or automating LiveLabs authoring tasks, but still need the output anchored to the canonical guide and validator rules.",
+        steps: [
+          "Open the LiveLabs AI Developer Hub how-to guide first so you understand the intended workflow and starting points.",
+          "Review the repository and the LiveLabs AI Developer skill bundle folder to see what authoring helpers already exist before you invent a new prompt flow.",
+          "Use the hub for narrow, real tasks such as drafting task steps, tightening prose, extracting prerequisites, or producing a first pass that you will verify manually.",
+          "Review every AI-assisted output against the canonical guide, preview the workshop again, and run the validator before you trust the result."
+        ],
+        checkpoints: [
+          "The AI workflow starts from the published guide and skill bundle instead of freeform prompting alone.",
+          "Generated steps, commands, and screenshots still match the real workshop flow.",
+          "Human review happens before any AI-assisted content is committed."
+        ],
+        watchFor: [
+          "Using AI to replace the canonical guide instead of accelerating work around it.",
+          "Keeping vague generated summaries that never become real steps, commands, or evidence.",
+          "Committing AI-generated content without preview or validator checks."
+        ],
+        resourcesTitle: "Hub entry points",
+        resourcesIntro: "Start with the guide, then use the repo and skill bundle as the reusable working set.",
+        resourceLinks: [
+          resourceLink("AI Developer Hub guide", officialLinks.aiHubGuide, "Open the how-to workflow first."),
+          resourceLink("AI Developer Hub repository", officialLinks.aiHubRepo, "Use the repo when you want the source materials locally."),
+          resourceLink("LiveLabs AI Developer skills", officialLinks.aiHubSkills, "Review the authoring skill bundle before you create a new flow.")
+        ],
+        snippetMeta: "Quick start",
+        snippetTitle: "Start with these hub assets",
+        snippet: [
+          "git clone https://github.com/lfoinding/livelabs-ai-playground.git",
+          "",
+          "Guide",
+          "https://lfoinding.github.io/livelabs-ai-playground/skills/how-to/workshops/sandbox/index.html",
+          "",
+          "Skill bundle",
+          "https://github.com/lfoinding/livelabs-ai-playground/tree/main/LiveLabs-AI-Developer"
+        ].join("\n"),
+        sourceHref: labLink("15-labs-livelabs-ai-developer-hub"),
         sourceLabel: "Open Canonical Lab",
         guideTarget: "help-faq"
       }
@@ -1823,22 +1964,32 @@ window.authorGuideContent = (function () {
             summary: "Use OCI Secure Desktops when participants are on restricted corporate laptops and cannot access the standard environment directly.",
             steps: [
               "Decide whether the audience is likely to be blocked by corporate laptop policies before the event starts.",
-              "Test standard access first with one or two representative participants, then try Secure Desktop if normal access fails.",
+              "Test standard access first with one or two representative participants, then try Secure Desktop only if normal access fails.",
+              "Run the access test at least two days before the event so you still have time to request or adjust the secure desktop route.",
               "Use the secure desktop only when it is solving a real access restriction, not as the default path for every event."
             ],
             checkpoints: [
               "You have evidence that standard access is blocked before you request the secure desktop route.",
-              "The participant can reach the workshop inside the secure desktop browser session."
+              "The participant can reach the workshop inside the secure desktop browser session.",
+              "Large events have enough lead time for repeated testing."
             ],
             watchFor: [
               "Enabling secure desktop without testing the normal path first.",
-              "Waiting until the event starts to discover corporate access restrictions."
+              "Waiting until the event starts to discover corporate access restrictions.",
+              "Treating one successful test as enough for a 100+ attendee event."
+            ],
+            resourcesTitle: "Access testing references",
+            resourcesIntro: "Use the participant access guide during the validation run, and keep the platform docs nearby for prerequisites.",
+            resourceLinks: [
+              resourceLink("Test access guide", officialLinks.secureDesktopAccess, "Use this to validate the participant launch flow."),
+              resourceLink("OCI Secure Desktop docs", officialLinks.secureDesktopDocs, "Use this for the broader browser and platform prerequisites.")
             ],
             snippetTitle: "When secure desktop is the right answer",
             snippet: [
               "Corporate-managed laptops",
               "Restricted access to required websites or protocols",
-              "Need a browser-accessible HTTPS remote desktop"
+              "Need a browser-accessible HTTPS remote desktop",
+              "Normal access was tested first and failed"
             ].join("\n"),
             sourceHref: labLink("secure-desktop"),
             sourceLabel: "Open Canonical Lab"
@@ -1849,25 +2000,40 @@ window.authorGuideContent = (function () {
             title: "Request and access Secure Desktop environments",
             summary: "Request the secure desktop through the documented Slack flow and make sure participants use the supported browser and access steps.",
             steps: [
-              "Post the secure desktop request in the LiveLabs Authors Slack channel and include the details the request page asks for.",
-              "Tell participants to use Google Chrome and to log out of any OCI tenants in the browser before launch.",
+              "Post the secure desktop request in the LiveLabs Authors Slack channel and include event name, event date, workshop, participant count, and why standard access is blocked.",
+              "If you need 100 or more secure desktops, start coordination 3 to 4 weeks ahead with the LiveLabs infrastructure team.",
+              "Tell participants to use Google Chrome, enable pop-ups, and log out of any OCI tenants in the browser before launch.",
               "Point participants to the secure desktop access guide and validate the end-to-end connection before the event."
             ],
             checkpoints: [
               "The request includes enough detail for the LiveLabs team to provision the environment.",
-              "Participants have the supported browser and access prerequisites."
+              "Participants have the supported browser and access prerequisites.",
+              "The secure desktop path is tested before the event starts."
             ],
             watchFor: [
               "Assuming participants can just open the secure desktop without the browser prerequisites.",
-              "Sending a vague request with no workshop or event context."
+              "Sending a vague request with no workshop or event context.",
+              "Treating large secure desktop requests like a last-minute task."
+            ],
+            resourcesTitle: "Request and launch references",
+            resourcesIntro: "Use Slack for the request itself, then hand off the access guide and platform docs to participants.",
+            resourceLinks: [
+              resourceLink("LiveLabs Authors Slack", officialLinks.liveLabsAuthorsSlack, "Post the request here with full event context."),
+              resourceLink("Test access guide", officialLinks.secureDesktopAccess, "Share this with participants for the actual launch steps."),
+              resourceLink("OCI Secure Desktop docs", officialLinks.secureDesktopDocs, "Use this when participants need broader setup guidance.")
             ],
             snippetTitle: "Bring these details to the request",
             snippet: [
+              "Event name",
+              "Event date",
               "Workshop name",
-              "Event or audience context",
               "Expected participant count",
               "Why standard access is blocked",
-              "Requested date"
+              "",
+              "Participant launch prerequisites",
+              "- Google Chrome",
+              "- Pop-ups enabled",
+              "- Logged out of OCI tenants"
             ].join("\n"),
             sourceHref: labLink("secure-desktop-how-to-request"),
             sourceLabel: "Open Canonical Lab"
@@ -1879,12 +2045,13 @@ window.authorGuideContent = (function () {
         label: "Section 7",
         title: "Help and FAQ",
         accent: "pine",
-        summary: "Use this section when the blocker is process, ownership, or timing and you need the right support route or a fast answer to a repeat workflow question.",
-        purpose: "This section is intentionally short: first find the right channel, then bring enough context that support can actually unblock you.",
+        summary: "Use this section when the blocker is process, ownership, repeat questions, or AI-assisted authoring and you need the right support or reference route quickly.",
+        purpose: "This section stays focused: first find the right channel or repeat-answer page, then use AI assistance only when it still stays grounded in the canonical workflow.",
         highlights: [
           "FAQ first for repeat questions.",
           "Use the right owner or channel for the blocker.",
-          "Bring WMS ID, preview URL, and repo or PR context."
+          "Bring WMS ID, preview URL, and repo or PR context.",
+          "Use the AI Developer Hub to accelerate work, not replace the source guide."
         ],
         sectionHref: labLink("help-faq-support"),
         sectionLabel: "Open Canonical Section",
@@ -1946,6 +2113,47 @@ window.authorGuideContent = (function () {
               "What if Quarterly QA is missed?"
             ].join("\n"),
             sourceHref: labLink("livelabs-faq"),
+            sourceLabel: "Open Canonical Lab"
+          },
+          {
+            id: "guide-ai-hub",
+            label: "AI Developer Hub",
+            title: "Use AI assistance without losing workflow accuracy",
+            summary: "Open the LiveLabs AI Developer Hub when you want AI-assisted help for drafting or restructuring, but keep the canonical guide, screenshots, preview, and validator as the final authority.",
+            steps: [
+              "Open the AI Developer Hub how-to guide first so you start from the supported workflow instead of a blank prompt.",
+              "Review the repository and the LiveLabs AI Developer skill bundle folder to see what authoring helpers already exist.",
+              "Use the hub for focused tasks such as drafting task steps, tightening prose, extracting prerequisites, or restructuring a section that already has source material.",
+              "Review every AI-assisted output against the canonical guide, preview the workshop again, and run the validator before you commit the result."
+            ],
+            checkpoints: [
+              "The AI workflow starts from the guide and skill bundle, not only from a generic prompt.",
+              "Commands, screenshots, and steps still match the real workshop flow.",
+              "Human review happens before any AI-generated content is treated as final."
+            ],
+            watchFor: [
+              "Using AI to replace the canonical guide instead of accelerating work around it.",
+              "Accepting vague generated summaries that never turn into real steps or commands.",
+              "Skipping preview or validator checks after AI-assisted edits."
+            ],
+            resourcesTitle: "Hub entry points",
+            resourcesIntro: "Start from the guide, then use the repo and skill bundle when you want reusable AI authoring workflows.",
+            resourceLinks: [
+              resourceLink("AI Developer Hub guide", officialLinks.aiHubGuide, "Open the how-to workflow first."),
+              resourceLink("AI Developer Hub repository", officialLinks.aiHubRepo, "Use the repo when you want the source locally."),
+              resourceLink("LiveLabs AI Developer skills", officialLinks.aiHubSkills, "Review the authoring skill bundle before you create a new flow.")
+            ],
+            snippetTitle: "Quick start",
+            snippet: [
+              "git clone https://github.com/lfoinding/livelabs-ai-playground.git",
+              "",
+              "Guide",
+              officialLinks.aiHubGuide,
+              "",
+              "Skill bundle",
+              officialLinks.aiHubSkills
+            ].join("\n"),
+            sourceHref: labLink("15-labs-livelabs-ai-developer-hub"),
             sourceLabel: "Open Canonical Lab"
           }
         ]

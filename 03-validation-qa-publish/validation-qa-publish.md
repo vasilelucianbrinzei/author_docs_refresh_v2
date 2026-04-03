@@ -6,10 +6,6 @@ Use this section when your workshop draft is ready for review. These labs cover 
 
 Estimated Time: 10 minutes
 
-## Quick Visual Guide
-
-![Quick visual guide to the validation and publish section and its labs.](03-validation-publish-quick-reference.png " ")
-
 ## Objectives
 
 * Know the sequence from review-ready content to production publish

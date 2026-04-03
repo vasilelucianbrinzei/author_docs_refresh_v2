@@ -8,7 +8,7 @@
   "tutorials": [
     {
       "title": "Section 7: Help and FAQ",
-      "description": "Use this section for support paths and common authoring questions when you are blocked or need a quick answer.",
+      "description": "Use this section for support paths, repeat workflow answers, and AI-assisted authoring references when you need a faster route to help.",
       "filename": "./../../07-help-faq-support/help-faq-support.md"
     },
     {
@@ -20,6 +20,11 @@
       "title": "LiveLabs FAQ",
       "description": "Collects common questions about LiveLabs production, development, workshop structure, and event workflows.",
       "filename": "./../../07-help-faq-support/sections/02-livelabs-faq/livelabs-faq.md"
+    },
+    {
+      "title": "Get started with the LiveLabs AI Developer Hub",
+      "description": "Shows authors how to use the AI Developer Hub guide, repo, and skill bundles to accelerate work without replacing the canonical workflow.",
+      "filename": "./../../07-help-faq-support/sections/04-ai-developer-hub/15-labs-livelabs-ai-developer-hub.md"
     }
   ]
 }
