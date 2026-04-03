@@ -1194,7 +1194,8 @@
 
     #app .action-list,
     #app .mistake-list,
-    #app .modal-panel ul {
+    #app .modal-panel ul,
+    #app .modal-panel ol {
       margin: 0;
       padding-left: 1.15rem;
       display: grid;
@@ -1609,6 +1610,106 @@
 
     #app .modal-footer {
       padding: 0 1.5rem 1.5rem;
+    }
+
+    body.image-lightbox-open {
+      overflow: hidden;
+    }
+
+    #app .image-lightbox[hidden] {
+      display: none !important;
+    }
+
+    #app .image-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 1850;
+      display: grid;
+      place-items: center;
+      padding: 1.25rem;
+    }
+
+    #app .image-lightbox-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(22, 21, 19, 0.82);
+      backdrop-filter: blur(10px);
+    }
+
+    #app .image-lightbox-dialog {
+      position: relative;
+      z-index: 1;
+      width: min(1180px, 100%);
+      max-height: calc(100vh - 2.5rem);
+      display: grid;
+      gap: 0.9rem;
+      padding: 1rem;
+      border-radius: 32px;
+      border: 1px solid rgba(212, 207, 202, 0.72);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(245, 244, 242, 0.95));
+      box-shadow: 0 28px 72px rgba(0, 0, 0, 0.32);
+    }
+
+    #app .image-lightbox-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    #app .image-lightbox-kicker {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 0.74rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    #app .image-lightbox-close {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 6.5rem;
+      padding: 0.65rem 1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(212, 207, 202, 0.9);
+      background: rgba(255, 255, 255, 0.94);
+      color: var(--ink);
+      font-weight: 800;
+    }
+
+    #app .image-lightbox-close:hover,
+    #app .image-lightbox-close:focus-visible {
+      border-color: rgba(172, 62, 46, 0.34);
+      color: var(--accent-red);
+      background: rgba(255, 248, 247, 0.98);
+    }
+
+    #app .image-lightbox-body {
+      display: grid;
+      justify-items: center;
+      overflow: auto;
+      padding: 0.4rem;
+      border-radius: 24px;
+      background: rgba(245, 244, 242, 0.72);
+    }
+
+    #app .image-lightbox-body img {
+      display: block;
+      max-width: 100%;
+      max-height: calc(100vh - 11rem);
+      width: auto;
+      height: auto;
+      border-radius: 22px;
+      box-shadow: 0 18px 40px rgba(32, 30, 28, 0.18);
+    }
+
+    #app .image-lightbox-caption {
+      margin: 0;
+      color: var(--ink-soft);
+      line-height: 1.65;
+      padding: 0 0.15rem 0.15rem;
     }
 
     #app .visually-hidden-live {
@@ -2301,6 +2402,31 @@
       font-weight: 700;
     }
 
+    #app .guide-inline-breadcrumb {
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      padding: 0.52rem 0.85rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(212, 207, 202, 0.88);
+      color: var(--ink-soft);
+      font-size: 0.74rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 800;
+      width: fit-content;
+    }
+
+    #app .guide-inline-breadcrumb strong {
+      color: var(--ink);
+      font-weight: 900;
+      letter-spacing: 0.02em;
+      text-transform: none;
+      font-size: 0.84rem;
+    }
+
     #app .guide-section-card {
       position: relative;
       overflow: hidden;
@@ -2338,7 +2464,7 @@
       position: relative;
       z-index: 1;
       display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(240px, 0.88fr);
+      grid-template-columns: 1fr;
       gap: 1.4rem;
       align-items: start;
     }
@@ -2377,6 +2503,21 @@
       gap: 0.75rem;
     }
 
+    #app .guide-section-actions {
+      margin-top: 0.2rem;
+    }
+
+    #app .guide-lab-actions {
+      margin-top: 1.35rem;
+      padding-top: 1.1rem;
+      border-top: 1px solid rgba(212, 207, 202, 0.78);
+    }
+
+    #app .guide-section-actions .btn,
+    #app .guide-lab-actions .btn {
+      margin-bottom: 0.15rem;
+    }
+
     #app .guide-highlight-chip {
       display: inline-flex;
       align-items: center;
@@ -2396,6 +2537,13 @@
       margin: 0;
       display: grid;
       gap: 0.7rem;
+    }
+
+    #app .guide-figure,
+    #app .modal-media-figure,
+    #app .evidence-figure {
+      position: relative;
+      overflow: hidden;
     }
 
     #app .guide-section-figure {
@@ -2428,6 +2576,83 @@
       color: var(--ink-soft);
       font-size: 0.84rem;
       line-height: 1.6;
+    }
+
+    #app figure[data-expandable="true"] {
+      cursor: zoom-in;
+      outline: none;
+      transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease;
+    }
+
+    #app figure[data-expandable="true"] img {
+      transition:
+        transform 200ms ease,
+        box-shadow 200ms ease;
+    }
+
+    #app figure[data-expandable="true"]:hover,
+    #app figure[data-expandable="true"]:focus-visible {
+      transform: translateY(-2px);
+      border-color: rgba(172, 62, 46, 0.28);
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.82),
+        0 20px 38px rgba(32, 30, 28, 0.12);
+    }
+
+    #app figure[data-expandable="true"]:hover img,
+    #app figure[data-expandable="true"]:focus-visible img {
+      transform: scale(1.012);
+    }
+
+    #app .figure-expand-pill {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.48rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(212, 207, 202, 0.92);
+      box-shadow: 0 10px 24px rgba(32, 30, 28, 0.08);
+      color: var(--ink);
+      font-size: 0.74rem;
+      letter-spacing: 0.01em;
+      font-weight: 800;
+      pointer-events: none;
+      transition:
+        transform 180ms ease,
+        background 180ms ease,
+        border-color 180ms ease,
+        color 180ms ease;
+    }
+
+    #app .figure-expand-pill::before {
+      content: "+";
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.15rem;
+      height: 1.15rem;
+      border-radius: 50%;
+      background: rgba(172, 62, 46, 0.14);
+      color: var(--accent-strong);
+      font-size: 0.92rem;
+      line-height: 1;
+      font-weight: 900;
+    }
+
+    #app figure[data-expandable="true"]:hover .figure-expand-pill,
+    #app figure[data-expandable="true"]:focus-visible .figure-expand-pill {
+      transform: translateY(-1px);
+      background: rgba(255, 235, 232, 0.98);
+      border-color: rgba(172, 62, 46, 0.3);
+      color: var(--accent-strong);
     }
 
     #app .guide-lab-grid {
@@ -2506,6 +2731,14 @@
       line-height: 1.65;
     }
 
+    #app .guide-list.is-ordered {
+      padding-left: 1.3rem;
+    }
+
+    #app .guide-list li {
+      color: inherit;
+    }
+
     #app .modal-media-card {
       border: 1px solid rgba(212, 207, 202, 0.9);
       border-radius: 28px;
@@ -2575,6 +2808,26 @@
         width: 100%;
       }
 
+      #app .figure-expand-pill {
+        top: 0.75rem;
+        right: 0.75rem;
+        padding: 0.44rem 0.7rem;
+        font-size: 0.7rem;
+      }
+
+      #app .image-lightbox {
+        padding: 0.85rem;
+      }
+
+      #app .image-lightbox-dialog {
+        padding: 0.85rem;
+        border-radius: 26px;
+      }
+
+      #app .image-lightbox-body img {
+        max-height: calc(100vh - 10rem);
+      }
+
       #app .guide-lab-panels,
       #app .evidence-grid {
         grid-template-columns: 1fr;
@@ -2593,10 +2846,6 @@
     }
 
     @media (max-width: 1199.98px) {
-      #app .breadcrumb-shell {
-        justify-content: flex-start;
-      }
-
       #app .rabbit-step[data-depth="2"] .step-shell,
       #app .rabbit-step[data-depth="3"] .step-shell {
         margin-left: 0;
@@ -2750,10 +2999,7 @@
                   <button class="btn nav-control" type="button" data-mode-target="hub" aria-label="Open the author guide home">Home</button>
                   <button class="btn nav-control" type="button" data-mode-target="beginner" aria-label="Open the guided path">Guided Path</button>
                   <button class="btn nav-control" type="button" data-mode-target="explorer" aria-label="Open the reference toolkit">Toolkit</button>
-                  <button class="btn nav-control" type="button" data-mode-target="guide" aria-label="Open the full guide">Full Guide</button>
-                </div>
-                <div class="breadcrumb-shell" id="breadcrumb" aria-live="polite">
-                  <button class="btn nav-guide-link" type="button" data-guide-target="start-here">Open Full Guide</button>
+                  <button class="btn nav-control" type="button" data-mode-target="guide" data-guide-target="start-here" aria-label="Open the full guide">Full Guide</button>
                 </div>
               </div>
             </div>
@@ -2779,7 +3025,7 @@
                   </span>
                 </div>
                 <div class="hero-overline">Guided path plus reference toolkit</div>
-                <h1 class="hero-title" id="hubHeading">Choose the shortest safe path for your task.</h1>
+                <h1 class="hero-title" id="hubHeading">Choose the shortest path for your task.</h1>
                 <p class="hero-subtitle">
                   New authors can move through three guided layers from request to publish. Returning authors can jump straight to the feature, tool, or QA answer they need.
                 </p>
@@ -2841,15 +3087,15 @@
                         <strong>WMS Request</strong>
                         <small>Request details, ownership fields, and status flow.</small>
                       </div>
-                      <div class="home-toolkit-card" data-accent="ocean">
+                      <div class="home-toolkit-card" data-accent="red">
                         <strong>Sync &amp; Preview</strong>
                         <small>Fork, clone, merge, and preview URL patterns.</small>
                       </div>
-                      <div class="home-toolkit-card" data-accent="pine">
+                      <div class="home-toolkit-card" data-accent="red">
                         <strong>Markdown Rules</strong>
                         <small>Required sections, variables, copy tags, and lint checks.</small>
                       </div>
-                      <div class="home-toolkit-card" data-accent="sienna">
+                      <div class="home-toolkit-card" data-accent="red">
                         <strong>QA &amp; Publish</strong>
                         <small>Checklist save order, PR checks, and WMS publishing.</small>
                       </div>
@@ -2905,7 +3151,7 @@
               <div class="row g-4 align-items-start">
                 <div class="col-xl-8">
                   <div class="mode-overline">Guided Path</div>
-                  <h2 class="mode-title" id="beginnerHeading">Follow the shortest safe route from request to publish.</h2>
+                  <h2 class="mode-title" id="beginnerHeading">Follow the shortest route from request to publish.</h2>
                   <p class="mode-copy">
                     This path compresses the author journey into three layers: request the workshop, create the workshop in GitHub, then review and publish it. The progress dock and top controls stay visible so you always know where you are.
                   </p>
@@ -3221,7 +3467,7 @@ git config --global core.ignorecase false
                           <ul class="check-list">
                             <li>GitHub Desktop, VS Code, and Live Server are working.</li>
                             <li>The fork, local clone, and preview URL all point to the same workshop path.</li>
-                            <li>Folder and file names stay lowercase and case-safe.</li>
+                            <li>Folder and file names stay lowercase and case-correct.</li>
                             <li>Manifest order matches real files.</li>
                             <li>Preview loads before long authoring sessions begin.</li>
                           </ul>
@@ -3408,7 +3654,7 @@ https://oracle-livelabs.github.io/&lt;repo-name&gt;/&lt;path&gt;/workshops/&lt;v
                   <div class="mode-overline">Reference Toolkit</div>
                   <h2 class="mode-title" id="explorerHeading">Go straight to the feature, tool, or QA answer you need.</h2>
                   <p class="mode-copy">
-                    Use this toolkit deck when you already know where you are stuck. Search, filter, open a card, copy the snippet, and return to authoring without walking the full guided path.
+                    Use this toolkit deck when you already know where you are stuck. Search, filter, open a card, copy the real command or workflow pattern, and return to authoring without walking the full guided path.
                   </p>
                   <div class="mode-chip-row">
                     <span class="mode-chip">Search + filter</span>
@@ -3485,7 +3731,7 @@ https://oracle-livelabs.github.io/&lt;repo-name&gt;/&lt;path&gt;/workshops/&lt;v
                   <div class="mode-overline">Full Guide</div>
                   <h2 class="mode-title" id="guideHeading">Read the full author map in one custom Redwood-style view.</h2>
                   <p class="mode-copy">
-                    This mode starts at Start Here, keeps only the active sections from the original workshop guide, and turns them into section cards with real steps, copy-ready snippets, and screenshots instead of a contents-only navigation shell.
+                    This mode starts at Start Here, keeps only the active sections from the original workshop guide, and turns them into section cards with concrete steps, copy-ready commands, and UI screenshots instead of a contents-only navigation shell.
                   </p>
                   <div class="mode-chip-row">
                     <span class="mode-chip">Starts at Start Here</span>
@@ -3497,7 +3743,7 @@ https://oracle-livelabs.github.io/&lt;repo-name&gt;/&lt;path&gt;/workshops/&lt;v
                 <div class="col-xl-4">
                   <div class="compact-panel h-100">
                     <div class="panel-kicker">How to use it</div>
-                    <p class="panel-copy mb-3">Pick a section on the left, use the card details on the right, and open the canonical lab only when you need the original markdown page beside this custom view.</p>
+                    <p class="panel-copy mb-3">Pick a section on the left, use the card details on the right, and expect this custom view to carry the main instructions. The canonical lab is a source reference, not the page you should need for basic execution.</p>
                     <div class="d-flex flex-wrap gap-2">
                       <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="beginner">Need sequence? Guided Path</button>
                       <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-mode-target="explorer">Need one answer? Toolkit</button>
@@ -3550,7 +3796,7 @@ https://oracle-livelabs.github.io/&lt;repo-name&gt;/&lt;path&gt;/workshops/&lt;v
               <div class="modal-grid">
                 <div class="modal-panel">
                   <h3>Do this</h3>
-                  <ul id="bubbleModalSteps"></ul>
+                  <ol id="bubbleModalSteps"></ol>
                 </div>
 
                 <div class="modal-panel">
@@ -3584,6 +3830,19 @@ https://oracle-livelabs.github.io/&lt;repo-name&gt;/&lt;path&gt;/workshops/&lt;v
               <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Close</button>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="image-lightbox" id="imageLightbox" hidden aria-hidden="true">
+        <div class="image-lightbox-backdrop" data-lightbox-close="true"></div>
+        <div class="image-lightbox-dialog" role="dialog" aria-modal="true" aria-labelledby="imageLightboxTitle">
+          <div class="image-lightbox-header">
+            <p class="image-lightbox-kicker" id="imageLightboxTitle">Expanded Image</p>
+            <button type="button" class="image-lightbox-close" id="imageLightboxClose" aria-label="Close expanded image">Close</button>
+          </div>
+          <div class="image-lightbox-body">
+            <img id="imageLightboxImage" src="" alt="">
+          </div>
+          <p class="image-lightbox-caption" id="imageLightboxCaption"></p>
         </div>
       </div>
       <div class="visually-hidden-live" aria-live="polite" id="liveRegion"></div>

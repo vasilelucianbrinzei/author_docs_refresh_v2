@@ -26,7 +26,6 @@
   var beginnerMode = document.getElementById("beginnerMode");
   var explorerMode = document.getElementById("explorerMode");
   var guideMode = document.getElementById("guideMode");
-  var breadcrumb = document.getElementById("breadcrumb");
   var rabbitFlow = document.getElementById("rabbitFlow");
   var stepSections = Array.from(document.querySelectorAll(".rabbit-step"));
   var progressButtons = Array.from(document.querySelectorAll(".progress-button"));
@@ -44,8 +43,14 @@
   var guideSectionMount = document.getElementById("guideSectionMount");
   var bubbleModalElement = document.getElementById("bubbleModal");
   var bubbleModal = bootstrap.Modal.getOrCreateInstance(bubbleModalElement);
+  var imageLightbox = document.getElementById("imageLightbox");
+  var imageLightboxImage = document.getElementById("imageLightboxImage");
+  var imageLightboxCaption = document.getElementById("imageLightboxCaption");
+  var imageLightboxClose = document.getElementById("imageLightboxClose");
+  var lastExpandedFigure = null;
 
   bubbleModalElement.addEventListener("hidden.bs.modal", function () {
+    closeImageLightbox({ announce: false, restoreFocus: false });
     document.body.classList.remove("modal-open");
     document.body.style.removeProperty("padding-right");
     document.querySelectorAll(".modal-backdrop").forEach(function (backdrop) {
@@ -138,25 +143,7 @@
   }
 
   function updateBreadcrumb() {
-    var section;
-
-    if (state.mode === "guide") {
-      section = guideSectionMap[state.guideSection];
-      breadcrumb.innerHTML = [
-        '<div class="breadcrumb-trail">',
-        '  <span class="breadcrumb-label">Full Guide</span>',
-        '  <span class="breadcrumb-separator">/</span>',
-        '  <strong>', escapeHtml(section ? section.title : "Start Here"), "</strong>",
-        "</div>"
-      ].join("");
-      return;
-    }
-
-    breadcrumb.innerHTML = [
-      '<button class="btn nav-guide-link" type="button" data-guide-target="',
-      escapeHtml(currentGuideTarget()),
-      '">Open Full Guide</button>'
-    ].join("");
+    return;
   }
 
   function updateProgressCaption() {
@@ -211,7 +198,7 @@
     bubbleGrid.innerHTML = visibleItems.map(function (item) {
       return [
         '<div class="col bubble-item" data-bubble-id="', item.id, '">',
-        '  <button type="button" class="bubble-button" data-open-bubble="', item.id, '" data-accent="', item.accent, '" aria-label="Open ', escapeHtml(item.title), ' details">',
+        '  <button type="button" class="bubble-button" data-open-bubble="', item.id, '" data-accent="red" aria-label="Open ', escapeHtml(item.title), ' details">',
         '    <span class="bubble-badge">', escapeHtml(titleCaseTag(item.tags[0])), "</span>",
         '    <span class="bubble-title">', escapeHtml(item.title), "</span>",
         '    <span class="bubble-text">', escapeHtml(item.short), "</span>",
@@ -236,6 +223,94 @@
     document.getElementById(id).innerHTML = items.map(function (entry) {
       return "<li>" + escapeHtml(entry) + "</li>";
     }).join("");
+  }
+
+  function decorateExpandableMedia(root) {
+    if (!root) {
+      return;
+    }
+
+    root.querySelectorAll(".guide-figure, .modal-media-figure, .evidence-figure").forEach(function (figure) {
+      var image = figure.querySelector("img");
+      var caption = figure.querySelector("figcaption");
+      var captionText;
+      var pill;
+
+      if (!image) {
+        return;
+      }
+
+      captionText = caption ? caption.textContent.trim() : "";
+      figure.setAttribute("data-expandable", "true");
+      figure.setAttribute("tabindex", "0");
+      figure.setAttribute("role", "button");
+      figure.setAttribute("aria-label", captionText ? "Expand image: " + captionText : "Expand image");
+
+      pill = figure.querySelector(".figure-expand-pill");
+      if (!pill) {
+        pill = document.createElement("span");
+        pill.className = "figure-expand-pill";
+        pill.setAttribute("aria-hidden", "true");
+        pill.textContent = "Click to expand";
+        figure.insertBefore(pill, figure.firstChild);
+      }
+    });
+  }
+
+  function openImageLightbox(figure) {
+    var image;
+    var caption;
+    var captionText;
+
+    if (!figure || !imageLightbox) {
+      return;
+    }
+
+    image = figure.querySelector("img");
+    caption = figure.querySelector("figcaption");
+
+    if (!image) {
+      return;
+    }
+
+    captionText = caption ? caption.textContent.trim() : (image.getAttribute("alt") || "");
+    lastExpandedFigure = figure;
+    imageLightboxImage.setAttribute("src", image.currentSrc || image.getAttribute("src") || "");
+    imageLightboxImage.setAttribute("alt", image.getAttribute("alt") || "");
+    imageLightboxCaption.textContent = captionText;
+    imageLightbox.removeAttribute("hidden");
+    imageLightbox.setAttribute("aria-hidden", "false");
+    document.body.classList.add("image-lightbox-open");
+    imageLightboxClose.focus();
+    setLiveMessage("Expanded image opened.");
+  }
+
+  function closeImageLightbox(options) {
+    var config = Object.assign({
+      announce: true,
+      restoreFocus: true
+    }, options || {});
+
+    if (!imageLightbox || imageLightbox.hasAttribute("hidden")) {
+      return;
+    }
+
+    imageLightbox.setAttribute("hidden", "");
+    imageLightbox.setAttribute("aria-hidden", "true");
+    imageLightboxImage.setAttribute("src", "");
+    imageLightboxImage.setAttribute("alt", "");
+    imageLightboxCaption.textContent = "";
+    document.body.classList.remove("image-lightbox-open");
+
+    if (config.restoreFocus && lastExpandedFigure && typeof lastExpandedFigure.focus === "function") {
+      lastExpandedFigure.focus();
+    }
+
+    lastExpandedFigure = null;
+
+    if (config.announce) {
+      setLiveMessage("Expanded image closed.");
+    }
   }
 
   function openBubble(id) {
@@ -269,6 +344,7 @@
       document.getElementById("bubbleModalImage").setAttribute("alt", item.image.alt || item.title);
       document.getElementById("bubbleModalImageCaption").textContent = item.image.caption || "";
       mediaCard.classList.remove("d-none");
+      decorateExpandableMedia(mediaCard);
     } else {
       mediaCard.classList.add("d-none");
     }
@@ -311,15 +387,33 @@
     }).join("");
   }
 
-  function renderGuidePanel(title, items) {
+  function buildGuideBreadcrumb(section) {
+    return [
+      '<div class="guide-inline-breadcrumb" aria-label="Current guide section">',
+      '  <span>Full Guide</span>',
+      '  <span>/</span>',
+      '  <span>', escapeHtml(section.label), '</span>',
+      '  <span>/</span>',
+      '  <strong>', escapeHtml(section.title), "</strong>",
+      "</div>"
+    ].join("");
+  }
+
+  function renderGuidePanel(title, items, options) {
+    var config = Object.assign({
+      ordered: false
+    }, options || {});
+    var listTag = config.ordered ? "ol" : "ul";
+    var listClass = config.ordered ? "guide-list is-ordered" : "guide-list";
+
     return [
       '<div class="guide-lab-panel">',
       '  <h4>', escapeHtml(title), "</h4>",
-      '  <ul class="guide-list">',
+      "  <", listTag, ' class="', listClass, '">',
       items.map(function (item) {
         return "<li>" + escapeHtml(item) + "</li>";
       }).join(""),
-      "  </ul>",
+      "  </", listTag, ">",
       "</div>"
     ].join("");
   }
@@ -341,7 +435,7 @@
         "</figure>"
       ].join("") : "",
       '  <div class="guide-lab-panels">',
-      renderGuidePanel("Do This", lab.steps || []),
+      renderGuidePanel("Do This", lab.steps || [], { ordered: true }),
       renderGuidePanel("What To Check", lab.checkpoints || []),
       renderGuidePanel("Watch For", lab.watchFor || []),
       "  </div>",
@@ -377,6 +471,7 @@
       '<article class="guide-section-card" data-accent="', section.accent, '">',
       '  <div class="guide-section-hero">',
       '    <div class="guide-section-copy">',
+      buildGuideBreadcrumb(section),
       '      <div class="panel-kicker">', escapeHtml(section.label), "</div>",
       '      <h2 class="guide-section-title">', escapeHtml(section.title), "</h2>",
       '      <p class="guide-section-summary">', escapeHtml(section.summary), "</p>",
@@ -391,12 +486,6 @@
       section.sectionHref ? '<a class="btn btn-outline-secondary rounded-pill px-4" href="' + escapeHtml(section.sectionHref) + '" target="_blank" rel="noreferrer">' + escapeHtml(section.sectionLabel || "Open Canonical Section") + "</a>" : "",
       "      </div>",
       "    </div>",
-      section.image ? [
-        '<figure class="guide-section-figure">',
-        '  <img src="', escapeHtml(section.image.src), '" alt="', escapeHtml(section.image.alt || section.title), '">',
-        '  <figcaption>', escapeHtml(section.image.caption || ""), "</figcaption>",
-        "</figure>"
-      ].join("") : "",
       "  </div>",
       '  <div class="guide-lab-grid">',
       section.labs.map(function (lab) {
@@ -407,6 +496,7 @@
     ].join("");
 
     renderGuideNav();
+    decorateExpandableMedia(guideSectionMount);
     updateBreadcrumb();
   }
 
@@ -418,6 +508,8 @@
       openBubble: null,
       guideSection: state.guideSection
     }, options || {});
+
+    closeImageLightbox({ announce: false, restoreFocus: false });
 
     if (config.guideSection && guideSectionMap[config.guideSection]) {
       state.guideSection = config.guideSection;
@@ -675,7 +767,21 @@
     var tagButton = event.target.closest("[data-tag]");
 
     if (modeButton) {
-      switchMode(modeButton.getAttribute("data-mode-target"));
+      if (modeButton.getAttribute("data-mode-target") === "guide" && modeButton.getAttribute("data-guide-target")) {
+        switchMode("guide", { guideSection: modeButton.getAttribute("data-guide-target") });
+      } else {
+        switchMode(modeButton.getAttribute("data-mode-target"));
+      }
+      return;
+    }
+
+    if (event.target === imageLightboxClose || event.target.closest("[data-lightbox-close]")) {
+      closeImageLightbox();
+      return;
+    }
+
+    if (event.target.closest("figure[data-expandable=\"true\"]")) {
+      openImageLightbox(event.target.closest("figure[data-expandable=\"true\"]"));
       return;
     }
 
@@ -725,6 +831,20 @@
     }
   });
 
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && imageLightbox && !imageLightbox.hasAttribute("hidden")) {
+      event.preventDefault();
+      event.stopPropagation();
+      closeImageLightbox();
+      return;
+    }
+
+    if ((event.key === "Enter" || event.key === " ") && event.target && event.target.closest && event.target.closest("figure[data-expandable=\"true\"]")) {
+      event.preventDefault();
+      openImageLightbox(event.target.closest("figure[data-expandable=\"true\"]"));
+    }
+  }, true);
+
   fastTrackToggle.addEventListener("change", function (event) {
     state.fastTrack = event.target.checked ? "minimal" : "guided";
     updateBeginnerUI();
@@ -747,6 +867,7 @@
     applyHash(window.location.hash);
   });
 
+  decorateExpandableMedia(document);
   renderGuideNav();
   updateNav();
   updateBeginnerUI();
