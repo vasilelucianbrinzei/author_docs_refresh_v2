@@ -288,33 +288,107 @@ window.authorGuideContent = (function () {
         guideTarget: "core-workflow"
       },
       {
-        id: "links-images-copy",
-        title: "Links, Images & Copy",
-        short: "Case-correct paths, absolute images, alt text, copy tags, and SQL-friendly code blocks.",
+        id: "links-paths",
+        title: "Links and Paths",
+        short: "Case-correct paths, markdown links, and shared URLs that keep preview and GitHub Pages aligned.",
         accent: "sienna",
-        tags: ["markdown", "media"],
-        description: "Use this card when a workshop renders locally but breaks in preview, or when code blocks and screenshots are not following the LiveLabs runtime rules.",
+        tags: ["markdown"],
+        description: "Use this card when links work locally but break in preview or production because the path, filename case, or link style is wrong.",
         steps: [
-          "Keep image files in an images folder, keep names lowercase, and make the Markdown path match the exact case used on disk.",
-          "Use Markdown links instead of inline HTML and use the approved absolute image path pattern when you are referencing shared images from oracle-livelabs/common.",
-          "Wrap copyable commands in <copy> tags so the LiveLabs copy button appears in preview.",
-          "Use sql or plsql code blocks inside <copy> tags when you want trailing newlines to execute the last statement cleanly."
+          "Keep every workshop file and folder lowercase and make the markdown path match the exact case used on disk.",
+          "Use standard Markdown links instead of raw HTML links unless the canonical guide explicitly requires an embed or special markup.",
+          "Use approved absolute URLs when you reference shared labs or shared assets from oracle-livelabs/common instead of copying them locally.",
+          "Preview on local Live Server and on personal github.io so you catch path errors before review."
+        ],
+        checkpoints: [
+          "Links resolve the same way locally and on GitHub Pages.",
+          "Shared references point to the canonical common location instead of duplicated copies.",
+          "No raw HTML links were used where normal Markdown would work."
+        ],
+        watchFor: [
+          "Case-only renames on Windows or macOS that fail later on GitHub Pages.",
+          "Hard-coding a local relative path for content that really lives in common.",
+          "Treating a successful local preview as proof that the production path is correct."
+        ],
+        snippetMeta: "Path-safe examples",
+        snippetTitle: "Use Markdown links and case-correct paths",
+        snippet: [
+          "[Open the next lab](./../../my-lab/my-lab.md)",
+          "[Open GitHub Desktop](https://desktop.github.com/)",
+          "",
+          "Rule:",
+          "The path and filename case must match what is on disk exactly."
+        ].join("\n"),
+        image: {
+          src: "./02-core-workshop-flow/sections/04-develop-markdown-and-content/images/case-sensitive.png",
+          alt: "Case-sensitive image and path reminder",
+          caption: "GitHub Pages is case-sensitive even when a local machine is not."
+        },
+        sourceHref: labLink("4-labs-markdown-develop-content"),
+        sourceLabel: "Open Canonical Lab",
+        guideTarget: "core-workflow"
+      },
+      {
+        id: "image-references",
+        title: "Image References",
+        short: "Images folder rules, shared image URLs, and alt text that survive preview and review.",
+        accent: "ocean",
+        tags: ["media", "markdown"],
+        description: "Use this card when the issue is how images are referenced inside markdown rather than how screenshots are captured.",
+        steps: [
+          "Keep workshop images inside the current lab's images folder unless the asset is intentionally shared from oracle-livelabs/common.",
+          "Use descriptive alt text on every image so the step still makes sense if the image fails to load or is read by assistive technology.",
+          "Use the approved absolute image path pattern when referencing shared images from common.",
+          "Open the GitHub Pages preview and confirm the same image loads there before you ask anyone to review it."
         ],
         checkpoints: [
           "Every image has descriptive alt text.",
-          "The preview shows the same assets on GitHub Pages that you see locally.",
-          "Copy buttons appear where learners need commands, SQL, or scripts."
+          "The preview shows the same image on personal github.io that you saw locally.",
+          "Shared images point to a canonical common URL instead of an improvised local copy."
         ],
         watchFor: [
-          "Case-only renames on Windows or macOS that fail on GitHub Pages.",
-          "Raw <a href> tags in Markdown where standard links should be used.",
-          "Code blocks without copy tags or images outside the images folder."
+          "Placing screenshots outside the images folder and losing track of them later.",
+          "Using vague alt text such as image1 or screenshot.",
+          "Breaking image paths with mixed case or partial folder names."
         ],
-        snippetMeta: "Copy-ready patterns",
-        snippetTitle: "Image, link, and copy examples",
+        snippetMeta: "Image example",
+        snippetTitle: "Shared image plus alt text pattern",
         snippet: [
           "![Console home page](https://oracle-livelabs.github.io/common/images/console/home-page.png \" \")",
           "",
+          "Rule:",
+          "Use alt text that tells the learner what the image proves or what UI they should recognize."
+        ].join("\n"),
+        sourceHref: labLink("4-labs-markdown-develop-content"),
+        sourceLabel: "Open Canonical Lab",
+        guideTarget: "core-workflow"
+      },
+      {
+        id: "copy-sql",
+        title: "Copy Tags and SQL Blocks",
+        short: "Copy-ready commands, SQL or PL/SQL blocks, and the patterns that make the LiveLabs copy button work.",
+        accent: "pine",
+        tags: ["markdown"],
+        description: "Use this card when the learner needs to copy commands or SQL directly from the guide and the code block has to behave correctly in preview.",
+        steps: [
+          "Wrap copyable commands in <copy> tags so the LiveLabs copy button appears in preview.",
+          "Use sql or plsql fenced code blocks inside <copy> tags when the learner needs trailing newlines or multiple statements to execute cleanly.",
+          "Keep the copy block directly beside the step that uses it instead of pushing the command into a detached appendix.",
+          "Preview the page and test the copy button before you rely on it in review."
+        ],
+        checkpoints: [
+          "Copy buttons appear where learners need commands, scripts, or SQL.",
+          "The SQL block keeps the intended line breaks and execution order.",
+          "The command block sits next to the step it supports."
+        ],
+        watchFor: [
+          "Plain fenced code blocks with no copy tag when the learner is expected to paste the content.",
+          "Putting too many unrelated commands into one copy block.",
+          "Leaving the copy behavior untested until stakeholder review."
+        ],
+        snippetMeta: "Copy-ready SQL",
+        snippetTitle: "Wrap SQL inside copy tags",
+        snippet: [
           "```sql",
           "<copy>",
           "SELECT * FROM employees;",
@@ -322,11 +396,6 @@ window.authorGuideContent = (function () {
           "</copy>",
           "```"
         ].join("\n"),
-        image: {
-          src: "./02-core-workshop-flow/sections/04-develop-markdown-and-content/images/case-sensitive.png",
-          alt: "Case-sensitive image example",
-          caption: "GitHub Pages is case-sensitive even when a local machine is not."
-        },
         sourceHref: labLink("4-labs-markdown-develop-content"),
         sourceLabel: "Open Canonical Lab",
         guideTarget: "core-workflow"
@@ -376,29 +445,29 @@ window.authorGuideContent = (function () {
         guideTarget: "reuse-enhancements"
       },
       {
-        id: "quiz-embed",
-        title: "Quizzes & FreeSQL",
-        short: "Interactive quizzes, scored badges, and inline SQL experiences that stay close to the task.",
+        id: "quiz-blocks",
+        title: "LiveLabs Quizzes",
+        short: "Single-topic quizzes, scored quiz variants, and badge configuration that stay close to the step they reinforce.",
         accent: "sienna",
-        tags: ["interactivity", "advanced"],
-        description: "Use this card when a learner should answer something or run SQL inside the workshop page instead of leaving the flow for another tool.",
+        tags: ["interactivity"],
+        description: "Use this card when the learner should stop and verify understanding of the task that just happened, not when you only want decorative interactivity.",
         steps: [
-          "For quizzes, add a fenced quiz block in the task where the learner should stop and check understanding.",
-          "Use `*` for correct answers, `-` for incorrect answers, and `>` for the explanation that appears after the learner answers.",
-          "Add `quiz score` and a top-level `quiz-config` block when the workshop needs pass or fail scoring or a downloadable badge.",
-          "For FreeSQL, generate the embed snippet from FreeSQL, paste it directly into the task, and validate the rendered editor in preview before review."
+          "Add a quiz block in the task where the learner should stop and verify understanding of the step that just finished.",
+          "Use `Q:` for the question, `*` for correct answers, `-` for wrong answers, and `>` for the explanation shown after submit.",
+          "Use `quiz score` and a top-level `quiz-config` block only when the workshop truly benefits from scoring or a badge.",
+          "Preview the page and confirm that the answer states, scoring behavior, and any badge path all render correctly."
         ],
         checkpoints: [
-          "The quiz or embed sits directly next to the instructions it supports.",
-          "Scoring or badges are enabled only when the workshop truly benefits from them.",
-          "Preview confirms the interaction still renders and behaves correctly."
+          "The quiz is tied to the instructions immediately around it.",
+          "Scoring or badges are enabled only when they add real learner value.",
+          "Preview confirms that the quiz marks answers correctly."
         ],
         watchFor: [
-          "Adding interactivity because it looks impressive rather than because it helps the learner finish the task.",
-          "Leaving badge assets or quiz-config paths outside the images folder.",
-          "Skipping preview and discovering broken rendering only during review."
+          "Adding quizzes that slow the flow instead of helping the learner confirm understanding.",
+          "Forgetting the explanation line on questions that need teaching value.",
+          "Leaving badge assets or quiz-config paths outside the images folder."
         ],
-        snippetMeta: "Interactive starter",
+        snippetMeta: "Quiz starter",
         snippetTitle: "Quiz block with scoring and badge config",
         snippet: [
           "```quiz score",
@@ -417,10 +486,45 @@ window.authorGuideContent = (function () {
         image: {
           src: "./04-workshop-components-reuse/sections/02-add-quizzes/images/quizconfig.png",
           alt: "Quiz configuration example",
-          caption: "Use one quiz-config block near the top when badges or passing scores matter."
+          caption: "Use quiz-config only when scoring or badges are really part of the learning flow."
         },
-        sourceHref: labLink("workshop-components-reuse"),
-        sourceLabel: "Open Canonical Section",
+        sourceHref: labLink("quiz"),
+        sourceLabel: "Open Canonical Lab",
+        guideTarget: "reuse-enhancements"
+      },
+      {
+        id: "freesql-embed",
+        title: "FreeSQL Embed",
+        short: "Generate the FreeSQL embed, place it in the right task, and validate the rendered editor before review.",
+        accent: "pine",
+        tags: ["interactivity", "advanced"],
+        description: "Use this card when running SQL inline inside the lab materially improves the task flow for the learner.",
+        steps: [
+          "Prepare the SQL or PL/SQL the learner should run and generate the embed snippet from FreeSQL.",
+          "Paste the generated embed directly into the task where the learner needs SQL execution, and keep the surrounding instructions immediately beside it.",
+          "Render the lab and verify that the editor loads correctly, fits the available width, and still matches the surrounding steps.",
+          "Remove the embed if a normal copy block would explain the task more clearly."
+        ],
+        checkpoints: [
+          "The embed is scoped to one task or concept instead of taking over the whole page.",
+          "Preview confirms the runtime loads the editor where the learner expects it.",
+          "The task instructions still make sense without sending the learner somewhere else."
+        ],
+        watchFor: [
+          "Adding an embed when a normal code block or copy tag would be clearer.",
+          "Separating the embed from the instructions it supports.",
+          "Modifying iframe behavior without validating the current renderer first."
+        ],
+        snippetMeta: "Placement rule",
+        snippetTitle: "Keep the embed close to the task",
+        snippet: [
+          "1. Generate the embed snippet in FreeSQL",
+          "2. Paste it into the task that needs SQL execution",
+          "3. Keep the instructions directly above or below it",
+          "4. Preview the rendered lab before review"
+        ].join("\n"),
+        sourceHref: labLink("freesqlembed"),
+        sourceLabel: "Open Canonical Lab",
         guideTarget: "reuse-enhancements"
       },
       {
@@ -709,27 +813,27 @@ window.authorGuideContent = (function () {
         guideTarget: "validation-publish"
       },
       {
-        id: "help-sla",
-        title: "Help & SLA",
-        short: "Use the right support channel, bring context, and wait the normal SLA before escalating.",
+        id: "need-help",
+        title: "Need Help?",
+        short: "Choose the right support channel and bring enough context that someone can actually unblock you.",
         accent: "pine",
-        tags: ["workflow", "qa"],
-        description: "Use this card when the blocker is process, ownership, or timing rather than Markdown syntax or workshop structure.",
+        tags: ["workflow"],
+        description: "Use this card when the blocker is ownership, tooling, or workflow support and you need to route the question to the right place.",
         steps: [
-          "Check the FAQ or the relevant workflow lab first so you are not escalating a question the guide already answers.",
+          "Check the workflow lab or FAQ first so you do not escalate something the guide already answers clearly.",
           "Use WMS Message the Team for workshop-specific approval, stakeholder, or publishing questions tied to one workshop record.",
-          "Use the shared help mailbox or the #workshop-authors-help Slack channel for platform, tooling, or shared process blockers.",
-          "If the normal SLA window has passed, follow up with the WMS ID, repo or PR, preview URL, and the exact blocker instead of sending a generic ping."
+          "Use the shared mailbox or #workshop-authors-help Slack channel for tooling, documentation, or shared platform blockers.",
+          "Bring the WMS ID, preview URL, repository or PR, exact blocker, and what you already tried."
         ],
         checkpoints: [
-          "You can name the owner or channel that actually fits the blocker.",
-          "Your support request includes the WMS ID, preview URL, repo or PR, and the exact failing step.",
-          "You have allowed the expected SLA window to pass before escalating."
+          "The support request goes to the channel that actually owns the blocker.",
+          "The request includes enough context to reproduce or route the issue.",
+          "You are not sending the same vague request to multiple channels."
         ],
         watchFor: [
+          "Asking for help with no WMS ID, preview URL, or error context.",
           "Direct messaging people to bypass the queue for normal review work.",
-          "Asking for help with no preview URL, WMS ID, or error context.",
-          "Treating every timing question like an emergency without stating the real deadline."
+          "Treating the support channel as the first stop instead of the guide or FAQ."
         ],
         snippetMeta: "Support context",
         snippetTitle: "Bring this context when you ask for help",
@@ -739,11 +843,78 @@ window.authorGuideContent = (function () {
           "Repository / branch or PR:",
           "Current workflow status:",
           "Exact blocker:",
-          "What you already tried:",
-          "Any deadline or event date:"
+          "What you already tried:"
         ].join("\n"),
-        sourceHref: labLink("help-faq-support"),
-        sourceLabel: "Open Canonical Section",
+        sourceHref: labLink("need-help"),
+        sourceLabel: "Open Canonical Lab",
+        guideTarget: "help-faq"
+      },
+      {
+        id: "livelabs-faq",
+        title: "LiveLabs FAQ",
+        short: "Use the FAQ for repeat author questions such as VPN, preview versus production links, and Quarterly QA.",
+        accent: "pine",
+        tags: ["workflow"],
+        description: "Use this card when the question is common and you need a fast answer before diving back into the deeper workflow lab.",
+        steps: [
+          "Use FAQ first for repeat questions such as VPN access, who can submit a workshop, and where the Self QA checklist appears.",
+          "Use it again for maintenance questions such as which link to share during development, which link to share after publish, and how to handle minor or major updates.",
+          "Return to the workflow lab when you need execution detail instead of a short answer."
+        ],
+        checkpoints: [
+          "You know whether a short FAQ answer is enough or whether the full workflow lab is needed.",
+          "The FAQ answer resolves the immediate question without replacing the real step-by-step instructions.",
+          "You are using FAQ to reduce noise, not to skip the process."
+        ],
+        watchFor: [
+          "Using FAQ answers as a shortcut around the actual author flow.",
+          "Escalating a question that the FAQ already answers.",
+          "Treating FAQ as the main execution guide."
+        ],
+        snippetMeta: "Typical FAQ topics",
+        snippetTitle: "Use FAQ for these repeat questions",
+        snippet: [
+          "Need VPN for WMS?",
+          "Which link should I share in development?",
+          "Which link should I share after publish?",
+          "What happens if Quarterly QA is missed?"
+        ].join("\n"),
+        sourceHref: labLink("livelabs-faq"),
+        sourceLabel: "Open Canonical Lab",
+        guideTarget: "help-faq"
+      },
+      {
+        id: "review-sla",
+        title: "Review SLA",
+        short: "Use the expected review and publishing windows before you escalate, and include the real deadline when timing matters.",
+        accent: "pine",
+        tags: ["workflow", "qa"],
+        description: "Use this card when the blocker is timing rather than content quality and you need the normal review windows for PRs, council review, QA, or publishing.",
+        steps: [
+          "Plan around 1 business day for PR review, 2 to 3 business days for workshop submission review, 2 business days for stakeholder QA verification, and 1 business day for publishing after approval.",
+          "Wait for the normal response window before escalating routine review work.",
+          "If the workshop is tied to an event or hard deadline, state that explicitly instead of assuming the urgency is obvious."
+        ],
+        checkpoints: [
+          "You know whether the current wait time is still inside the expected SLA window.",
+          "Escalations include the WMS ID, preview URL, PR, and the real deadline.",
+          "Timing expectations are grounded in the published workflow instead of guesswork."
+        ],
+        watchFor: [
+          "Escalating without context or before the expected SLA has passed.",
+          "Using Slack direct messages to bypass the normal queue for routine work.",
+          "Treating every timing question like an emergency with no stated deadline."
+        ],
+        snippetMeta: "Core checkpoints",
+        snippetTitle: "Use these SLA windows before escalating",
+        snippet: [
+          "GitHub PR review            -> 1 business day",
+          "Workshop submission review -> 2-3 business days",
+          "Stakeholder QA             -> 2 business days",
+          "Workshop publishing        -> 1 business day"
+        ].join("\n"),
+        sourceHref: labLink("sla"),
+        sourceLabel: "Open Canonical Lab",
         guideTarget: "help-faq"
       }
     ],

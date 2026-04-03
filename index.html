@@ -2980,41 +2980,37 @@
 
     #app .nav-main-grid {
       width: 100%;
-      display: grid;
-      grid-template-columns: auto minmax(18rem, 1fr) auto;
-      gap: 0.9rem;
+      display: flex;
       align-items: center;
+      justify-content: flex-end;
+      gap: 1.35rem;
       min-width: 0;
     }
 
-    #app .nav-group-left,
-    #app .nav-group-right {
+    #app .nav-group-all {
+      display: flex;
       flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-left: 0.2rem;
     }
 
     #app .nav-search-form {
-      min-width: 0;
-      width: 100%;
+      flex: 0 1 19.5rem;
+      min-width: 14rem;
+      max-width: 19.5rem;
     }
 
     #app .nav-search-group {
-      grid-template-columns: auto minmax(10rem, 1fr) auto auto;
-      padding: 0.35rem;
+      grid-template-columns: minmax(0, 1fr) auto auto;
+      padding: 0.25rem;
       background: rgba(241, 239, 237, 0.96);
       border: 1px solid rgba(212, 207, 202, 0.92);
       box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.6);
     }
 
-    #app .nav-search-group .input-group-text,
     #app .nav-search-group .form-control,
     #app .nav-search-group .btn {
-      min-height: 2.85rem;
-    }
-
-    #app .nav-search-group .input-group-text {
-      background: transparent;
-      border-color: transparent;
-      padding-right: 0.45rem;
+      min-height: 2.35rem;
     }
 
     #app .nav-search-group .form-control {
@@ -3030,6 +3026,7 @@
     #app .nav-search-group .btn,
     #app .search-group .btn {
       font-weight: 800;
+      padding-inline: 0.85rem;
     }
 
     #app .nav-control.is-active,
@@ -3050,50 +3047,34 @@
       box-shadow: 0 8px 18px rgba(172, 62, 46, 0.18);
     }
 
-    #app .breadcrumb-bar {
-      padding: 0.55rem 0 0;
-    }
-
-    #app .breadcrumb-shell {
-      min-height: 0;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-    }
-
-    #app .breadcrumb-trail {
-      max-width: 100%;
-      overflow-wrap: anywhere;
-      gap: 0.42rem;
-      padding: 0.62rem 0.95rem;
-      background: rgba(255, 255, 255, 0.88);
-      box-shadow: 0 10px 24px rgba(32, 30, 28, 0.06);
-    }
-
     #app .progress-dock {
-      position: fixed;
-      right: 1.25rem;
-      bottom: 1.25rem;
-      top: auto;
-      z-index: 135;
-      width: min(24rem, calc(100vw - 2.5rem));
-      margin: 0;
+      position: sticky;
+      top: 5.6rem;
+      z-index: 132;
+      margin: 0 0 1rem;
+      padding-top: 0.35rem;
     }
 
     #app .progress-card {
-      border-radius: 30px;
+      border-radius: 24px;
       border: 1px solid rgba(255, 255, 255, 0.78);
-      box-shadow: 0 24px 54px rgba(32, 30, 28, 0.12);
+      box-shadow: 0 18px 36px rgba(32, 30, 28, 0.09);
+      display: grid;
+      grid-template-columns: minmax(11rem, 16rem) minmax(0, 1fr);
+      gap: 0.8rem;
+      align-items: center;
+      padding: 0.7rem 0.9rem;
     }
 
     #app .progress-rail {
-      grid-template-columns: 1fr;
-      gap: 0.6rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.5rem;
     }
 
     #app .progress-button {
-      border-radius: 22px;
-      padding: 0.78rem 0.9rem;
+      border-radius: 18px;
+      padding: 0.55rem 0.7rem;
+      gap: 0.55rem;
       background: rgba(245, 244, 242, 0.96);
     }
 
@@ -3102,13 +3083,39 @@
       color: var(--ink);
     }
 
+    #app .progress-summary {
+      display: grid;
+      gap: 0.18rem;
+      padding-right: 0.2rem;
+    }
+
+    #app .progress-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #863125;
+    }
+
     #app .progress-mark {
-      box-shadow: 0 10px 22px rgba(32, 30, 28, 0.1);
+      width: 1.8rem;
+      height: 1.8rem;
+      font-size: 0.8rem;
+      box-shadow: 0 8px 18px rgba(32, 30, 28, 0.08);
+    }
+
+    #app .progress-label strong {
+      font-size: 0.84rem;
+      line-height: 1.25;
+    }
+
+    #app .progress-label small {
+      display: none;
     }
 
     #app .journey-column {
       padding-left: 0;
-      padding-bottom: 8rem;
+      padding-bottom: 2rem;
     }
 
     #app .journey-column::before,
@@ -3431,21 +3438,26 @@
 
     @media (max-width: 1199.98px) {
       #app .nav-main-grid {
-        grid-template-columns: 1fr;
+        flex-direction: column;
+        align-items: stretch;
       }
 
-      #app .nav-group-left,
-      #app .nav-group-right {
+      #app .nav-search-form {
+        max-width: none;
         width: 100%;
       }
 
-      #app .nav-group-left .nav-control,
-      #app .nav-group-right .nav-control {
+      #app .nav-group-all {
+        width: 100%;
+        margin-left: 0;
+      }
+
+      #app .nav-group-all .nav-control {
         flex: 1 1 auto;
       }
 
-      #app .progress-dock {
-        width: min(22rem, calc(100vw - 2rem));
+      #app .progress-card {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -3455,18 +3467,16 @@
       }
 
       #app .nav-search-group {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr) auto auto;
       }
 
-      #app .progress-dock {
-        right: 0.75rem;
-        left: 0.75rem;
-        width: auto;
-        bottom: 0.75rem;
+      #app .nav-group-all {
+        display: flex;
       }
 
       #app .progress-card {
-        padding: 0.85rem;
+        gap: 0.65rem;
+        padding: 0.7rem 0.75rem;
       }
 
       #app .progress-rail {
@@ -3474,17 +3484,12 @@
       }
 
       #app .progress-button {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 0.45rem;
+        align-items: center;
+        gap: 0.4rem;
       }
 
       #app .progress-label strong {
         font-size: 0.82rem;
-      }
-
-      #app .journey-column {
-        padding-bottom: 10.5rem;
       }
 
       #app .detail-field-grid,
@@ -3536,20 +3541,14 @@
               </button>
 
               <div class="nav-main-grid ms-xl-auto">
-                <div class="btn-group nav-group nav-group-left" role="group" aria-label="Primary navigation">
-                  <button class="btn nav-control" type="button" data-mode-target="hub" aria-label="Open the author guide home">Home</button>
-                  <button class="btn nav-control" type="button" data-mode-target="beginner" aria-label="Open the guided path">Guided Path</button>
-                </div>
-
                 <form class="nav-search-form" id="navSearchForm" role="search" aria-label="Search across the author guide">
                   <label class="visually-hidden" for="navSearchInput">Search the author guide</label>
                   <div class="search-group nav-search-group">
-                    <span class="input-group-text">Search Guide</span>
                     <input
                       id="navSearchInput"
                       class="form-control"
                       type="search"
-                      placeholder="Search WMS, Self QA, GitHub Pages, validator"
+                      placeholder="WMS, QA, GitHub, validator"
                       aria-label="Search across guided path, toolkit, and full guide"
                     >
                     <button type="submit" class="btn btn-primary">Go</button>
@@ -3557,7 +3556,9 @@
                   </div>
                 </form>
 
-                <div class="btn-group nav-group nav-group-right" role="group" aria-label="Reference navigation">
+                <div class="nav-group nav-group-all" role="group" aria-label="Primary navigation">
+                  <button class="btn nav-control" type="button" data-mode-target="hub" aria-label="Open the author guide home">Home</button>
+                  <button class="btn nav-control" type="button" data-mode-target="beginner" aria-label="Open the guided path">Guided Path</button>
                   <button class="btn nav-control" type="button" data-mode-target="explorer" aria-label="Open the reference toolkit">Toolkit</button>
                   <button class="btn nav-control" type="button" data-mode-target="guide" data-guide-target="start-here" aria-label="Open the full guide">Full Guide</button>
                 </div>
@@ -3566,14 +3567,6 @@
           </nav>
         </div>
       </header>
-
-      <div class="breadcrumb-bar" id="breadcrumbBar">
-        <div class="container">
-          <div class="breadcrumb-shell">
-            <div class="breadcrumb-trail" id="breadcrumbTrail" aria-label="Current location"></div>
-          </div>
-        </div>
-      </div>
 
       <!-- Entry Hub -->
       <section class="hub-screen" id="hub" aria-labelledby="hubHeading">
@@ -3683,7 +3676,7 @@
                     <p>Follow a short sequence from WMS request to GitHub setup to review and publish without making a new author read the entire documentation map first.</p>
                     <ul class="path-points">
                       <li>Three layers only: request, build, review.</li>
-                      <li>Sticky progress dock and Back / Next controls.</li>
+                      <li>Sticky progress strip and Back / Next controls.</li>
                       <li>Fast Track toggle when you want minimal explanation.</li>
                     </ul>
                     <button class="btn btn-primary btn-lg rounded-pill px-4" type="button" data-mode-target="beginner">Start Guided Path</button>
@@ -3713,6 +3706,40 @@
       </section>
       <!-- Guided Path -->
       <section class="mode-screen d-none" id="beginnerMode" aria-labelledby="beginnerHeading">
+        <div class="progress-dock" id="progressShell">
+          <div class="container">
+            <div class="progress-card">
+              <div class="progress-summary">
+                <div class="progress-eyebrow">Guided path</div>
+                <div class="small text-muted" id="progressCaption">Step 1 of 3 is active.</div>
+              </div>
+
+              <div class="progress-rail">
+                <button class="progress-button" type="button" data-step-target="0" aria-label="Jump to step 1">
+                  <span class="progress-mark">1</span>
+                  <span class="progress-label">
+                    <strong>Request</strong>
+                  </span>
+                </button>
+
+                <button class="progress-button" type="button" data-step-target="1" aria-label="Jump to step 2">
+                  <span class="progress-mark">2</span>
+                  <span class="progress-label">
+                    <strong>Build + GitHub</strong>
+                  </span>
+                </button>
+
+                <button class="progress-button" type="button" data-step-target="2" aria-label="Jump to step 3">
+                  <span class="progress-mark">3</span>
+                  <span class="progress-label">
+                    <strong>Review + Publish</strong>
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="container">
           <div class="card mode-hero">
             <div class="card-body">
@@ -3721,7 +3748,7 @@
                   <div class="mode-overline">Guided Path</div>
                   <h2 class="mode-title" id="beginnerHeading">Follow the shortest route from request to publish.</h2>
                   <p class="mode-copy">
-                    This path compresses the author journey into three layers: request the workshop, create the workshop in GitHub, then review and publish it. The progress dock and top controls stay visible so you always know where you are.
+                    This path compresses the author journey into three layers: request the workshop, create the workshop in GitHub, then review and publish it. The progress strip stays visible under the main navigation so you always know where you are.
                   </p>
                   <div class="mode-chip-row">
                     <span class="mode-chip">3 steps</span>
@@ -3749,41 +3776,6 @@
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="progress-dock" id="progressShell">
-          <div class="progress-card">
-            <div class="d-flex flex-column gap-2 mb-3">
-              <div class="panel-kicker mb-0">Progress</div>
-              <div class="small text-muted" id="progressCaption">Layer 1 of 3 is active.</div>
-            </div>
-
-            <div class="progress-rail">
-              <button class="progress-button" type="button" data-step-target="0" aria-label="Jump to step 1">
-                <span class="progress-mark">1</span>
-                <span class="progress-label">
-                  <small>Step 1</small>
-                  <strong>Submit Workshop Request</strong>
-                </span>
-              </button>
-
-              <button class="progress-button" type="button" data-step-target="1" aria-label="Jump to step 2">
-                <span class="progress-mark">2</span>
-                <span class="progress-label">
-                  <small>Step 2</small>
-                  <strong>Create Workshop + Add to GitHub</strong>
-                </span>
-              </button>
-
-              <button class="progress-button" type="button" data-step-target="2" aria-label="Jump to step 3">
-                <span class="progress-mark">3</span>
-                <span class="progress-label">
-                  <small>Step 3</small>
-                  <strong>Review &amp; Publish</strong>
-                </span>
-              </button>
             </div>
           </div>
         </div>
@@ -4365,7 +4357,7 @@ https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-fol
                   <label for="bubbleSearch" class="form-label filter-label">Search toolkit</label>
                   <div class="input-group input-group-lg search-group">
                     <span class="input-group-text">Search</span>
-                    <input id="bubbleSearch" class="form-control" type="search" placeholder="Formatting, QA, media, GitHub" aria-label="Search reference toolkit cards">
+                    <input id="bubbleSearch" class="form-control" type="search" placeholder="WMS, FAQ, FreeSQL, validator" aria-label="Search reference toolkit cards">
                     <button type="button" class="btn btn-outline-secondary" id="clearSearch">Clear</button>
                   </div>
                 </div>
@@ -4386,7 +4378,7 @@ https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-fol
 
               <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-2 mt-3">
                 <div class="result-line">
-                  <strong id="resultCount">Showing 14 toolkit cards</strong>
+                  <strong id="resultCount">Showing toolkit cards</strong>
                   <span class="ms-lg-2">Open any card for a focused detail panel.</span>
                 </div>
                 <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-mode-target="beginner">Need sequence? Open Guided Path</button>
@@ -4479,7 +4471,7 @@ https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-fol
           </div>
 
           <div class="search-results-shell">
-            <div class="search-empty-state" id="searchEmptyState">Use the centered search in the menu to search by keywords such as <strong>WMS</strong>, <strong>Self QA</strong>, <strong>GitHub Pages</strong>, <strong>validator</strong>, or a short question such as <strong>how do I publish</strong>.</div>
+            <div class="search-empty-state" id="searchEmptyState">Use the menu search to search by keywords such as <strong>WMS</strong>, <strong>Self QA</strong>, <strong>GitHub Pages</strong>, <strong>validator</strong>, or a short question such as <strong>how do I publish</strong>.</div>
             <div class="search-results-grid" id="searchResults"></div>
           </div>
         </div>

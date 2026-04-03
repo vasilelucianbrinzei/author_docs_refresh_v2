@@ -45,7 +45,10 @@
     ["publish", "publishing", "production", "completed", "publish requested", "publish approved"],
     ["validator", "markdown validation", "pr checks", "lintchecker", "checks", "validation"],
     ["images", "image", "screenshot", "screenshots", "optishot", "media"],
-    ["markdown", "manifest", "copy tags", "task header", "acknowledgements"]
+    ["markdown", "manifest", "copy tags", "task header", "acknowledgements"],
+    ["sql", "plsql", "free sql", "freesql", "sql developer"],
+    ["help", "support", "faq", "message the team", "slack", "mailbox"],
+    ["sla", "timeline", "timelines", "review window", "publishing window"]
   ];
 
   var state = {
@@ -377,11 +380,11 @@
 
   function updateProgressCaption() {
     if (state.mode !== "beginner") {
-      progressCaption.textContent = "Layer 1 of 3 is active.";
+      progressCaption.textContent = "Step 1 of 3 is active.";
       return;
     }
 
-    progressCaption.textContent = "Layer " + (state.currentStep + 1) + " of 3: " +
+    progressCaption.textContent = "Step " + (state.currentStep + 1) + " of 3: " +
       stepMeta[state.currentStep].title + " (" + (state.fastTrack === "minimal" ? "Fast Track" : "Guided") + ").";
   }
 
