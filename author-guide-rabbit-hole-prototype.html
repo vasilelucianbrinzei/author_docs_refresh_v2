@@ -1,49 +1,3579 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Oracle LiveLabs Author Guide path-first experience.">
-    <title>Oracle LiveLabs Author Guide</title>
-    <script>
-        (function () {
-            var url = new URL(window.location.href);
-            var lab = url.searchParams.get("lab");
-            var target;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Oracle LiveLabs Author Guide with guided-path and reference-toolkit standalone experiences.">
+  <title>Oracle LiveLabs Author Guide</title>
+  <script>
+    (function () {
+      var url = new URL(window.location.href);
+      var lab = url.searchParams.get("lab");
+      var target;
 
-            if (!lab) {
-                return;
-            }
+      if (!lab) {
+        return;
+      }
 
-            if (lab === "core-workshop-flow") {
-                url.searchParams.set("lab", "core-workflow");
-            }
+      if (lab === "core-workshop-flow") {
+        url.searchParams.set("lab", "core-workflow");
+      }
 
-            target = new URL("./workshops/livelabs/index.html", url);
-            target.search = url.search;
-            target.hash = url.hash;
-            window.location.replace(target.toString());
-        }());
-    </script>
-    <link rel="stylesheet" href="./author-guide-app.css">
-    <link rel="shortcut icon" href="https://oracle-livelabs.github.io/common/redwood-hol/img/favicon.ico">
-    <script defer src="./author-guide-app.js"></script>
+      target = new URL("./workshops/livelabs/index.html", url);
+      target.search = url.search;
+      target.hash = url.hash;
+      window.location.replace(target.toString());
+    }());
+  </script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    #app {
+      --surface: #fcfbfa;
+      --panel: rgba(255, 255, 255, 0.86);
+      --panel-strong: rgba(255, 255, 255, 0.96);
+      --ink: #201e1c;
+      --ink-soft: #665f5b;
+      --rose: #c74634;
+      --rose-soft: #fcd0ca;
+      --sky: #437c94;
+      --mint: #4c825c;
+      --gold: #9c6a00;
+      --violet: #b3311f;
+      --violet-deep: #6d2418;
+      --shadow-soft: 0 18px 48px rgba(32, 30, 28, 0.08);
+      --shadow-deep: 0 28px 72px rgba(32, 30, 28, 0.12);
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: "Oracle Sans", "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(199, 70, 52, 0.09), transparent 30%),
+        radial-gradient(circle at bottom left, rgba(67, 124, 148, 0.08), transparent 28%),
+        linear-gradient(180deg, #fcfbfa 0%, #f6f3f0 100%);
+      background-size: auto, auto, auto;
+      background-color: var(--surface);
+      overflow-x: hidden;
+      position: relative;
+      isolation: isolate;
+    }
+
+    #app,
+    #app * {
+      box-sizing: border-box;
+    }
+
+    #app h1,
+    #app h2,
+    #app h3,
+    #app h4 {
+      font-family: "Oracle Sans", "Segoe UI", Arial, sans-serif;
+      letter-spacing: -0.02em;
+    }
+
+    #app button,
+    #app input,
+    #app .nav-control,
+    #app .bubble-button {
+      transition:
+        transform 180ms ease,
+        box-shadow 180ms ease,
+        background-color 180ms ease,
+        border-color 180ms ease,
+        color 180ms ease,
+        opacity 180ms ease;
+    }
+
+    #app button:focus-visible,
+    #app input:focus-visible,
+    #app .nav-control:focus-visible,
+    #app .progress-button:focus-visible,
+    #app .bubble-button:focus-visible,
+    #app .shortcut-chip:focus-visible {
+      outline: 3px solid rgba(199, 70, 52, 0.26);
+      outline-offset: 2px;
+      box-shadow: 0 0 0 4px rgba(67, 124, 148, 0.14);
+    }
+
+    #app .app-shell {
+      min-height: 100vh;
+      position: relative;
+      padding-bottom: 3rem;
+    }
+
+    #app .mode-nav {
+      position: sticky;
+      top: 0;
+      z-index: 140;
+      padding: 1rem 0 0;
+    }
+
+    #app .nav-shell {
+      border-radius: 999px;
+      padding: 0.85rem 1rem;
+      background: rgba(255, 255, 255, 0.84);
+      border: 1px solid rgba(255, 255, 255, 0.76);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(18px);
+    }
+
+    #app .brand-token {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.85rem;
+      text-align: left;
+      text-decoration: none;
+      color: var(--ink);
+      padding: 0.25rem 0.5rem 0.25rem 0.15rem;
+    }
+
+    #app .brand-mark {
+      width: 2.6rem;
+      height: 2.6rem;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.6) 35%, rgba(108, 97, 185, 0.7) 36%, rgba(68, 57, 112, 0.98) 67%);
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.6),
+        0 14px 28px rgba(66, 53, 113, 0.2);
+      position: relative;
+      flex: 0 0 auto;
+    }
+
+    #app .brand-mark::after {
+      content: "";
+      position: absolute;
+      inset: 0.45rem;
+      border-radius: 50%;
+      border: 1px dashed rgba(255, 255, 255, 0.56);
+      opacity: 0.8;
+    }
+
+    #app .brand-label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    #app .brand-token small {
+      display: block;
+      color: var(--ink-soft);
+      font-size: 0.85rem;
+    }
+
+    #app .nav-group {
+      gap: 0.45rem;
+      flex-wrap: wrap;
+    }
+
+    #app .nav-control {
+      border: 1px solid rgba(80, 70, 116, 0.12);
+      background: rgba(255, 255, 255, 0.74);
+      color: var(--ink);
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 0.7rem 1rem;
+      box-shadow: 0 10px 24px rgba(56, 46, 95, 0.08);
+    }
+
+    #app .nav-control:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px rgba(56, 46, 95, 0.12);
+    }
+
+    #app .nav-control.is-active {
+      border-color: transparent;
+      color: #fff;
+      background: linear-gradient(135deg, #c74634, #b3311f 58%, #437c94);
+      box-shadow: 0 18px 34px rgba(199, 70, 52, 0.18);
+    }
+
+    #app .breadcrumb-shell {
+      min-height: 2.25rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-end;
+      color: var(--ink-soft);
+      font-size: 0.92rem;
+      white-space: normal;
+    }
+
+    #app .breadcrumb-shell strong {
+      color: var(--ink);
+      font-weight: 800;
+    }
+
+    #app .hub-screen,
+    #app .mode-screen {
+      padding: 2rem 0 3rem;
+    }
+
+    #app .hub-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+
+    #app .hub-hero {
+      position: relative;
+      border-radius: 42px;
+      padding: clamp(2rem, 4vw, 3rem);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(248, 245, 255, 0.86));
+      border: 1px solid rgba(255, 255, 255, 0.74);
+      box-shadow: var(--shadow-deep);
+      overflow: hidden;
+    }
+
+    #app .hub-hero::before {
+      content: "";
+      position: absolute;
+      inset: -8rem auto auto -6rem;
+      width: 18rem;
+      height: 18rem;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(199, 70, 52, 0.14), transparent 68%);
+      pointer-events: none;
+    }
+
+    #app .hub-hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -6rem -8rem auto;
+      width: 22rem;
+      height: 22rem;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(67, 124, 148, 0.12), transparent 68%);
+      pointer-events: none;
+    }
+
+    #app .hero-overline,
+    #app .mode-overline,
+    #app .panel-kicker,
+    #app .modal-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.45rem 0.85rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.74);
+      color: var(--ink-soft);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      box-shadow: 0 10px 24px rgba(56, 46, 95, 0.08);
+    }
+
+    #app .hero-overline::before,
+    #app .mode-overline::before,
+    #app .panel-kicker::before,
+    #app .modal-kicker::before {
+      content: "";
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--rose), var(--sky));
+      flex: 0 0 auto;
+    }
+
+    #app .hero-title {
+      font-size: clamp(3rem, 7vw, 5.8rem);
+      line-height: 0.92;
+      margin: 1rem 0;
+      max-width: 11ch;
+    }
+
+    #app .hero-subtitle {
+      font-size: clamp(1.02rem, 1.8vw, 1.28rem);
+      line-height: 1.75;
+      color: var(--ink-soft);
+      max-width: 44rem;
+      margin: 0;
+    }
+
+    #app .hub-stats,
+    #app .mode-chip-row,
+    #app .quick-links,
+    #app .detail-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+    }
+
+    #app .stat-chip,
+    #app .mode-chip,
+    #app .meta-pill,
+    #app .detail-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.55rem 0.85rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--ink);
+      font-weight: 700;
+      font-size: 0.9rem;
+      box-shadow: 0 10px 22px rgba(56, 46, 95, 0.08);
+    }
+
+    #app .stat-chip::before,
+    #app .mode-chip::before,
+    #app .meta-pill::before,
+    #app .detail-tag::before {
+      content: "";
+      width: 0.45rem;
+      height: 0.45rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--sky), var(--rose));
+      flex: 0 0 auto;
+    }
+
+    #app .scene-well {
+      position: relative;
+      min-height: 34rem;
+      border-radius: 38px;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      background:
+        linear-gradient(180deg, rgba(243, 248, 255, 0.76), rgba(255, 255, 255, 0.58)),
+        radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0) 34%);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    #app .scene-well::before {
+      content: "";
+      position: absolute;
+      inset: auto 10% -26% 10%;
+      height: 20rem;
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 34%, rgba(76, 67, 132, 0.16), rgba(76, 67, 132, 0) 68%);
+      filter: blur(12px);
+      z-index: 0;
+    }
+
+    #app .well-ring {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.78);
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.36),
+        0 24px 50px rgba(61, 48, 101, 0.14);
+      z-index: 1;
+    }
+
+    #app .ring-surface {
+      top: 1.5rem;
+      width: min(84%, 28rem);
+      height: 12rem;
+      background:
+        radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.6) 48%, rgba(213, 227, 255, 0.64));
+    }
+
+    #app .ring-middle {
+      top: 6.4rem;
+      width: min(60%, 20rem);
+      height: 8.5rem;
+      background:
+        radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.92), rgba(247, 243, 255, 0.7) 42%, rgba(167, 195, 255, 0.56) 72%);
+    }
+
+    #app .ring-deep {
+      top: 10.7rem;
+      width: min(36%, 11.5rem);
+      height: 4.8rem;
+      background:
+        radial-gradient(circle at 50% 35%, rgba(98, 85, 168, 0.72), rgba(51, 41, 93, 0.98) 72%);
+    }
+
+    #app .well-path {
+      position: absolute;
+      left: 50%;
+      top: 12rem;
+      width: 4px;
+      height: 15rem;
+      transform: translateX(-50%);
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(199, 70, 52, 0.68), rgba(67, 124, 148, 0.56), rgba(156, 106, 0, 0.5));
+      z-index: 1;
+    }
+
+    #app .well-node {
+      position: absolute;
+      max-width: 13.5rem;
+      padding: 0.85rem 1rem;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.84);
+      border: 1px solid rgba(255, 255, 255, 0.76);
+      box-shadow: 0 14px 30px rgba(61, 48, 101, 0.12);
+      z-index: 2;
+    }
+
+    #app .node-tag {
+      display: block;
+      color: var(--ink-soft);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+      font-weight: 800;
+    }
+
+    #app .well-node strong {
+      display: block;
+      font-size: 0.98rem;
+      line-height: 1.45;
+    }
+
+    #app .node-surface {
+      left: 1.6rem;
+      top: 1.9rem;
+    }
+
+    #app .node-request {
+      right: 1.6rem;
+      top: 8.2rem;
+    }
+
+    #app .node-build {
+      left: 2.1rem;
+      top: 15.9rem;
+    }
+
+    #app .node-review {
+      right: 2.1rem;
+      bottom: 4.5rem;
+    }
+
+    #app .tool-constellation {
+      position: absolute;
+      left: 50%;
+      bottom: 1.6rem;
+      width: min(100%, 20rem);
+      transform: translateX(-50%);
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.8rem;
+      z-index: 2;
+    }
+
+    #app .mini-bubble {
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.72) 42%, rgba(255, 236, 244, 0.86));
+      border: 1px solid rgba(255, 255, 255, 0.88);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem;
+      text-align: center;
+      color: var(--ink);
+      font-weight: 800;
+      font-size: 0.86rem;
+      box-shadow: 0 14px 32px rgba(61, 48, 101, 0.14);
+    }
+
+    #app .path-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.74);
+      border-radius: 32px;
+      box-shadow: var(--shadow-soft);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(248, 245, 255, 0.9));
+    }
+
+    #app .path-card::after {
+      content: "";
+      position: absolute;
+      width: 14rem;
+      height: 14rem;
+      border-radius: 50%;
+      right: -3rem;
+      bottom: -4rem;
+      opacity: 0.26;
+      pointer-events: none;
+    }
+
+    #app .path-card.beginner::after {
+      background: radial-gradient(circle, rgba(199, 70, 52, 0.72), transparent 68%);
+    }
+
+    #app .path-card.explorer::after {
+      background: radial-gradient(circle, rgba(67, 124, 148, 0.68), transparent 68%);
+    }
+
+    #app .path-card .card-body {
+      padding: 2rem;
+    }
+
+    #app .path-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-deep);
+    }
+
+    #app .path-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.76);
+      color: var(--ink-soft);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      box-shadow: 0 10px 22px rgba(56, 46, 95, 0.08);
+    }
+
+    #app .path-badge::before {
+      content: "";
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--rose), var(--sky));
+    }
+
+    #app .path-card h2 {
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      margin-bottom: 0.85rem;
+    }
+
+    #app .path-card p {
+      color: var(--ink-soft);
+      line-height: 1.7;
+    }
+
+    #app .path-points {
+      list-style: none;
+      padding: 0;
+      margin: 1.15rem 0 1.4rem;
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    #app .path-points li {
+      position: relative;
+      padding-left: 1.65rem;
+      line-height: 1.55;
+    }
+
+    #app .path-points li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55rem;
+      width: 0.65rem;
+      height: 0.65rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--sky), var(--rose));
+      box-shadow: 0 0 0 0.25rem rgba(67, 124, 148, 0.14);
+    }
+    #app .mode-screen {
+      min-height: 100vh;
+    }
+
+    #app .mode-hero,
+    #app .toolbar-card,
+    #app .progress-card,
+    #app .garden-shell {
+      border: 1px solid rgba(255, 255, 255, 0.74);
+      border-radius: 34px;
+      box-shadow: var(--shadow-soft);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(247, 244, 255, 0.82));
+      overflow: hidden;
+    }
+
+    #app .mode-hero {
+      position: relative;
+      margin-bottom: 1.4rem;
+    }
+
+    #app .mode-hero::before {
+      content: "";
+      position: absolute;
+      inset: auto -5rem -8rem auto;
+      width: 22rem;
+      height: 22rem;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(199, 70, 52, 0.14), transparent 68%);
+      pointer-events: none;
+    }
+
+    #app .mode-hero::after {
+      content: "";
+      position: absolute;
+      inset: -7rem auto auto -6rem;
+      width: 18rem;
+      height: 18rem;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(67, 124, 148, 0.12), transparent 68%);
+      pointer-events: none;
+    }
+
+    #app .mode-hero .card-body,
+    #app .toolbar-card .card-body {
+      padding: clamp(1.6rem, 3vw, 2.4rem);
+    }
+
+    #app .mode-title {
+      font-size: clamp(2.2rem, 4vw, 3.6rem);
+      line-height: 1.02;
+      margin: 1rem 0 0.9rem;
+      max-width: 14ch;
+    }
+
+    #app .mode-copy {
+      color: var(--ink-soft);
+      font-size: 1.05rem;
+      line-height: 1.75;
+      margin-bottom: 1rem;
+      max-width: 44rem;
+    }
+
+    #app .hero-side-stack {
+      display: grid;
+      gap: 1rem;
+    }
+
+    #app .compact-panel,
+    #app .content-card,
+    #app .side-card,
+    #app .snippet-card,
+    #app .modal-panel {
+      border: 0;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow:
+        inset 0 0 0 1px rgba(91, 76, 143, 0.06),
+        0 14px 30px rgba(56, 46, 95, 0.08);
+    }
+
+    #app .compact-panel {
+      padding: 1.1rem 1.15rem;
+    }
+
+    #app .panel-copy {
+      color: var(--ink-soft);
+      line-height: 1.65;
+      margin: 0.9rem 0 0;
+    }
+
+    #app .feature-switch {
+      margin-top: 0.95rem;
+    }
+
+    #app .feature-switch .form-check-input {
+      width: 3rem;
+      height: 1.6rem;
+      cursor: pointer;
+      box-shadow: none;
+      border-color: rgba(91, 76, 143, 0.18);
+    }
+
+    #app .feature-switch .form-check-input:checked {
+      background-color: var(--violet);
+      border-color: var(--violet);
+    }
+
+    #app .feature-switch .form-check-label {
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    #app .progress-dock {
+      position: sticky;
+      top: 96px;
+      z-index: 120;
+      margin-bottom: 1.4rem;
+    }
+
+    #app .progress-card {
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(16px);
+    }
+
+    #app .progress-rail {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.85rem;
+    }
+
+    #app .progress-button {
+      width: 100%;
+      border: 0;
+      border-radius: 24px;
+      padding: 0.9rem 1rem;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      background: rgba(248, 245, 255, 0.84);
+      color: var(--ink);
+      box-shadow:
+        inset 0 0 0 1px rgba(91, 76, 143, 0.08),
+        0 12px 24px rgba(56, 46, 95, 0.06);
+    }
+
+    #app .progress-button:hover {
+      transform: translateY(-1px);
+      box-shadow:
+        inset 0 0 0 1px rgba(91, 76, 143, 0.08),
+        0 16px 30px rgba(56, 46, 95, 0.1);
+    }
+
+    #app .progress-button.is-active {
+      color: #fff;
+      background: linear-gradient(135deg, #c74634, #b3311f 58%, #437c94);
+      box-shadow: 0 18px 36px rgba(199, 70, 52, 0.18);
+    }
+
+    #app .progress-button.is-complete {
+      background: linear-gradient(135deg, rgba(146, 227, 210, 0.72), rgba(255, 255, 255, 0.92));
+    }
+
+    #app .progress-button.is-locked {
+      opacity: 0.78;
+    }
+
+    #app .progress-mark {
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--ink);
+      box-shadow: 0 10px 22px rgba(61, 48, 101, 0.12);
+      flex: 0 0 auto;
+    }
+
+    #app .progress-button.is-active .progress-mark {
+      color: var(--violet-deep);
+    }
+
+    #app .progress-label {
+      display: grid;
+      gap: 0.12rem;
+      min-width: 0;
+    }
+
+    #app .progress-label small {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.82;
+      font-weight: 800;
+    }
+
+    #app .progress-label strong {
+      font-size: 0.96rem;
+      line-height: 1.35;
+    }
+
+    #app .journey-column {
+      position: relative;
+      padding-left: 4.25rem;
+    }
+
+    #app .journey-column::before {
+      content: "";
+      position: absolute;
+      left: 1.48rem;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(199, 70, 52, 0.8), rgba(67, 124, 148, 0.64), rgba(156, 106, 0, 0.54));
+      box-shadow: 0 0 0 0.35rem rgba(255, 255, 255, 0.5);
+    }
+
+    #app .rabbit-step {
+      position: relative;
+      padding-bottom: 2.8rem;
+    }
+
+    #app .rabbit-step:last-child {
+      padding-bottom: 0;
+    }
+
+    #app .rabbit-step::after {
+      content: "";
+      position: absolute;
+      left: -4rem;
+      top: 1.4rem;
+      width: 22rem;
+      height: 22rem;
+      border-radius: 50%;
+      filter: blur(32px);
+      opacity: 0.28;
+      z-index: -1;
+    }
+
+    #app .rabbit-step[data-depth="1"]::after {
+      background: radial-gradient(circle, rgba(199, 70, 52, 0.64), transparent 68%);
+    }
+
+    #app .rabbit-step[data-depth="2"]::after {
+      background: radial-gradient(circle, rgba(67, 124, 148, 0.56), transparent 68%);
+    }
+
+    #app .rabbit-step[data-depth="3"]::after {
+      background: radial-gradient(circle, rgba(156, 106, 0, 0.52), transparent 68%);
+    }
+
+    #app .step-orb {
+      position: absolute;
+      left: 0;
+      top: 1.7rem;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      color: #fff;
+      background: linear-gradient(135deg, #c74634, #437c94);
+      box-shadow: 0 14px 30px rgba(32, 30, 28, 0.18);
+      z-index: 2;
+    }
+
+    #app .step-shell {
+      position: relative;
+      padding: clamp(1.45rem, 3vw, 1.85rem);
+      border-radius: 34px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(248, 245, 255, 0.86));
+      border: 1px solid rgba(255, 255, 255, 0.78);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+    }
+
+    #app .step-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0.8rem;
+      border-radius: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.54);
+      pointer-events: none;
+    }
+
+    #app .step-shell::after {
+      content: "";
+      position: absolute;
+      inset: auto -6rem -8rem auto;
+      width: 20rem;
+      height: 20rem;
+      border-radius: 50%;
+      opacity: 0.18;
+      pointer-events: none;
+    }
+
+    #app .rabbit-step[data-depth="1"] .step-shell::after {
+      background: radial-gradient(circle, rgba(199, 70, 52, 0.72), transparent 68%);
+    }
+
+    #app .rabbit-step[data-depth="2"] .step-shell::after {
+      background: radial-gradient(circle, rgba(67, 124, 148, 0.58), transparent 68%);
+    }
+
+    #app .rabbit-step[data-depth="3"] .step-shell::after {
+      background: radial-gradient(circle, rgba(156, 106, 0, 0.58), transparent 68%);
+    }
+
+    #app .rabbit-step[data-depth="1"] .step-shell {
+      max-width: 1060px;
+    }
+
+    #app .rabbit-step[data-depth="2"] .step-shell {
+      max-width: 1000px;
+      margin-left: 1.3rem;
+    }
+
+    #app .rabbit-step[data-depth="3"] .step-shell {
+      max-width: 950px;
+      margin-left: 2.5rem;
+    }
+
+    #app .rabbit-step.is-active .step-shell {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-deep);
+    }
+
+    #app .rabbit-step.is-complete .step-orb {
+      background: linear-gradient(135deg, rgba(50, 161, 118, 0.96), rgba(126, 209, 171, 0.96));
+    }
+
+    #app .rabbit-step.is-locked .step-shell {
+      opacity: 0.78;
+      transform: scale(0.992);
+    }
+
+    #app .rabbit-step.is-locked .lockable {
+      filter: blur(2.6px);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    #app .step-lock {
+      position: absolute;
+      left: 1rem;
+      right: 1rem;
+      bottom: 1rem;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 0.9rem 1rem;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--ink);
+      font-weight: 800;
+      text-align: center;
+      box-shadow: 0 14px 26px rgba(56, 46, 95, 0.1);
+      z-index: 3;
+    }
+
+    #app .rabbit-step.is-locked .step-lock {
+      display: flex;
+    }
+
+    #app .step-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+      color: var(--ink-soft);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 800;
+      margin-bottom: 0.95rem;
+    }
+
+    #app .step-kicker::before {
+      content: "";
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--rose), var(--sky));
+    }
+
+    #app .step-title {
+      font-size: clamp(2rem, 3vw, 2.75rem);
+      margin-bottom: 0.65rem;
+    }
+
+    #app .step-summary {
+      color: var(--ink-soft);
+      font-size: 1.05rem;
+      line-height: 1.72;
+      margin-bottom: 1rem;
+      max-width: 40rem;
+    }
+
+    #app .step-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+    }
+
+    #app .step-mini-map {
+      min-width: 12rem;
+      padding: 0.95rem 1rem;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: inset 0 0 0 1px rgba(91, 76, 143, 0.06);
+    }
+
+    #app .mini-map-title {
+      color: var(--ink-soft);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 800;
+      margin-bottom: 0.7rem;
+    }
+
+    #app .guide-panel {
+      border-radius: 26px;
+      padding: 1rem 1.1rem;
+      background: linear-gradient(135deg, rgba(255, 242, 247, 0.94), rgba(241, 247, 255, 0.94));
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      box-shadow: 0 12px 28px rgba(56, 46, 95, 0.06);
+      color: var(--ink);
+      line-height: 1.7;
+    }
+
+    #app .content-card .card-body,
+    #app .side-card .card-body,
+    #app .snippet-card .card-body {
+      padding: 1.2rem 1.2rem 1.25rem;
+    }
+
+    #app .content-card h3,
+    #app .side-card h3,
+    #app .snippet-card h3,
+    #app .modal-panel h3 {
+      font-size: 1.12rem;
+      margin-bottom: 0.85rem;
+    }
+
+    #app .action-list,
+    #app .mistake-list,
+    #app .modal-panel ul {
+      margin: 0;
+      padding-left: 1.15rem;
+      display: grid;
+      gap: 0.72rem;
+      line-height: 1.62;
+    }
+
+    #app .check-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 0.72rem;
+    }
+
+    #app .check-list li {
+      position: relative;
+      padding-left: 1.95rem;
+      line-height: 1.58;
+    }
+
+    #app .check-list li::before {
+      content: "\2713";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1.4rem;
+      height: 1.4rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(50, 161, 118, 0.96), rgba(126, 209, 171, 0.96));
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 900;
+      box-shadow: 0 10px 20px rgba(50, 161, 118, 0.18);
+    }
+
+    #app .snippet-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.85rem;
+    }
+
+    #app .snippet-meta {
+      color: var(--ink-soft);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    #app .copy-snippet {
+      border: 0;
+      border-radius: 999px;
+      padding: 0.55rem 0.95rem;
+      background: linear-gradient(135deg, rgba(94, 81, 186, 0.96), rgba(102, 184, 239, 0.94));
+      color: #fff;
+      font-weight: 800;
+      box-shadow: 0 12px 24px rgba(76, 62, 141, 0.2);
+    }
+
+    #app .copy-snippet.is-copied {
+      background: linear-gradient(135deg, rgba(50, 161, 118, 0.96), rgba(126, 209, 171, 0.94));
+    }
+
+    #app pre {
+      margin: 0;
+      padding: 1rem 1.05rem;
+      border-radius: 22px;
+      background: #241d38;
+      color: #f7f0ff;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    #app code {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 0.92rem;
+    }
+
+    #app .step-footer {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 1.4rem;
+    }
+
+    #app .step-note,
+    #app .result-line,
+    #app .empty-state {
+      color: var(--ink-soft);
+      line-height: 1.6;
+    }
+
+    #app .shortcut-chip {
+      border: 0;
+      border-radius: 999px;
+      padding: 0.55rem 0.85rem;
+      background: rgba(255, 255, 255, 0.88);
+      color: var(--ink);
+      font-weight: 800;
+      box-shadow: 0 10px 22px rgba(56, 46, 95, 0.08);
+    }
+
+    #app .shortcut-chip:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(56, 46, 95, 0.12);
+    }
+
+    #app .track-minimal .guided-only {
+      display: none !important;
+    }
+    #app .toolbar-card {
+      margin-bottom: 1.3rem;
+    }
+
+    #app .filter-label {
+      color: var(--ink-soft);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 800;
+      margin-bottom: 0.6rem;
+    }
+
+    #app .search-group {
+      border-radius: 999px;
+      box-shadow: 0 14px 28px rgba(56, 46, 95, 0.08);
+      overflow: hidden;
+    }
+
+    #app .search-group .input-group-text,
+    #app .search-group .form-control,
+    #app .search-group .btn {
+      border: 0;
+    }
+
+    #app .search-group .input-group-text {
+      background: rgba(255, 255, 255, 0.94);
+      color: var(--ink-soft);
+      font-weight: 800;
+    }
+
+    #app .search-group .form-control {
+      background: rgba(255, 255, 255, 0.94);
+      color: var(--ink);
+      box-shadow: none;
+    }
+
+    #app .search-group .form-control::placeholder {
+      color: #9187ad;
+    }
+
+    #app .tag-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+    }
+
+    #app .tag-pill {
+      border: 0;
+      border-radius: 999px;
+      padding: 0.58rem 0.95rem;
+      background: rgba(255, 255, 255, 0.78);
+      color: var(--ink);
+      font-weight: 800;
+      box-shadow: 0 10px 22px rgba(56, 46, 95, 0.06);
+    }
+
+    #app .tag-pill.is-active {
+      background: linear-gradient(135deg, rgba(252, 208, 202, 0.96), rgba(208, 229, 237, 0.96));
+      box-shadow: 0 14px 26px rgba(32, 30, 28, 0.08);
+    }
+
+    #app .garden-shell {
+      position: relative;
+      padding: clamp(1.4rem, 3vw, 2rem);
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    #app .garden-shell::before {
+      content: "";
+      position: absolute;
+      inset: -4rem auto auto -6rem;
+      width: 18rem;
+      height: 18rem;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(199, 70, 52, 0.14), transparent 68%);
+      z-index: 0;
+    }
+
+    #app .garden-shell::after {
+      content: "";
+      position: absolute;
+      inset: auto -6rem -8rem auto;
+      width: 22rem;
+      height: 22rem;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(67, 124, 148, 0.14), transparent 68%);
+      z-index: 0;
+    }
+
+    #app .bubble-grid {
+      position: relative;
+      z-index: 1;
+      align-items: stretch;
+    }
+
+    #app .bubble-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: bubble-float 8s ease-in-out infinite;
+    }
+
+    #app .bubble-item:nth-child(2n) {
+      animation-delay: -1.8s;
+    }
+
+    #app .bubble-item:nth-child(3n) {
+      animation-delay: -3.6s;
+    }
+
+    #app .bubble-button {
+      position: relative;
+      width: min(100%, 14rem);
+      aspect-ratio: 1;
+      border: 0;
+      border-radius: 50%;
+      padding: 1.2rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      color: var(--ink);
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.84),
+        0 18px 38px rgba(56, 46, 95, 0.14);
+      background:
+        radial-gradient(circle at 30% 28%, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.84) 40%, rgba(244, 245, 255, 0.94) 62%);
+    }
+
+    #app .bubble-button::before {
+      content: "";
+      position: absolute;
+      inset: 0.55rem;
+      border-radius: 50%;
+      border: 1px dashed rgba(91, 76, 143, 0.18);
+      opacity: 0.86;
+    }
+
+    #app .bubble-button:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.84),
+        0 24px 46px rgba(56, 46, 95, 0.18);
+    }
+
+    #app .bubble-button[data-accent="rose"] {
+      background:
+        radial-gradient(circle at 30% 28%, rgba(255, 255, 255, 0.98), rgba(255, 241, 246, 0.9) 42%, rgba(255, 204, 225, 0.88) 72%);
+    }
+
+    #app .bubble-button[data-accent="sky"] {
+      background:
+        radial-gradient(circle at 30% 28%, rgba(255, 255, 255, 0.98), rgba(240, 249, 255, 0.9) 42%, rgba(196, 230, 255, 0.9) 72%);
+    }
+
+    #app .bubble-button[data-accent="mint"] {
+      background:
+        radial-gradient(circle at 30% 28%, rgba(255, 255, 255, 0.98), rgba(241, 253, 249, 0.9) 42%, rgba(191, 241, 229, 0.9) 72%);
+    }
+
+    #app .bubble-button[data-accent="gold"] {
+      background:
+        radial-gradient(circle at 30% 28%, rgba(255, 255, 255, 0.98), rgba(255, 249, 236, 0.92) 42%, rgba(247, 224, 167, 0.92) 72%);
+    }
+
+    #app .bubble-badge {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+      color: var(--ink-soft);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 800;
+      box-shadow: 0 8px 18px rgba(56, 46, 95, 0.08);
+    }
+
+    #app .bubble-title,
+    #app .bubble-text {
+      position: relative;
+      z-index: 1;
+    }
+
+    #app .bubble-title {
+      font-size: 1.16rem;
+      font-weight: 900;
+      line-height: 1.2;
+      max-width: 9ch;
+    }
+
+    #app .bubble-text {
+      font-size: 0.91rem;
+      color: var(--ink-soft);
+      line-height: 1.45;
+      max-width: 13ch;
+    }
+
+    #app .empty-state {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 2rem 1rem 0.5rem;
+      font-weight: 700;
+    }
+
+    #app .modal-dialog {
+      max-width: min(1120px, calc(100% - 2rem));
+    }
+
+    #app .modal-content {
+      border: 0;
+      border-radius: 34px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(246, 243, 255, 0.94));
+      box-shadow: var(--shadow-deep);
+    }
+
+    #app .modal-header,
+    #app .modal-footer {
+      border: 0;
+      padding: 1.35rem 1.5rem 0;
+    }
+
+    #app .modal-body {
+      padding: 1rem 1.5rem 1.5rem;
+    }
+
+    #app .modal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    #app .modal-panel {
+      padding: 1rem 1rem 1.05rem;
+    }
+
+    #app .modal-footer {
+      padding: 0 1.5rem 1.5rem;
+    }
+
+    #app .visually-hidden-live {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* Oracle theme override */
+    #app {
+      --surface: #fcfbfa;
+      --panel: rgba(255, 255, 255, 0.86);
+      --panel-strong: rgba(255, 255, 255, 0.96);
+      --ink: #201e1c;
+      --ink-soft: #665f5b;
+      --rose: #c74634;
+      --rose-soft: #fcd0ca;
+      --sky: #437c94;
+      --mint: #4c825c;
+      --gold: #9c6a00;
+      --violet: #b3311f;
+      --violet-deep: #6d2418;
+      --line: rgba(212, 207, 202, 0.92);
+      --shadow-soft: 0 18px 48px rgba(32, 30, 28, 0.08);
+      --shadow-deep: 0 28px 72px rgba(32, 30, 28, 0.12);
+      font-family: "Oracle Sans", "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(199, 70, 52, 0.09), transparent 30%),
+        radial-gradient(circle at bottom left, rgba(67, 124, 148, 0.08), transparent 28%),
+        linear-gradient(180deg, #fcfbfa 0%, #f6f3f0 100%);
+      background-size: auto, auto, auto;
+    }
+
+    #app h1,
+    #app h2,
+    #app h3,
+    #app h4,
+    #app .brand-label,
+    #app .hero-lockup-label {
+      font-family: "Oracle Sans", "Segoe UI", Arial, sans-serif;
+      letter-spacing: -0.02em;
+    }
+
+    #app button:focus-visible,
+    #app input:focus-visible,
+    #app .nav-control:focus-visible,
+    #app .progress-button:focus-visible,
+    #app .bubble-button:focus-visible,
+    #app .shortcut-chip:focus-visible {
+      outline: 3px solid rgba(199, 70, 52, 0.26);
+      outline-offset: 2px;
+      box-shadow: 0 0 0 4px rgba(67, 124, 148, 0.14);
+    }
+
+    #app .nav-shell,
+    #app .hub-hero,
+    #app .mode-hero,
+    #app .progress-card,
+    #app .step-shell,
+    #app .path-card,
+    #app .compact-panel,
+    #app .content-card,
+    #app .side-card,
+    #app .snippet-card,
+    #app .toolbar-card,
+    #app .guide-panel,
+    #app .modal-content,
+    #app .step-mini-map,
+    #app .scene-well {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 245, 242, 0.95));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+    }
+
+    #app .hub-hero,
+    #app .mode-hero,
+    #app .step-shell,
+    #app .modal-content,
+    #app .scene-well {
+      box-shadow: var(--shadow-deep);
+    }
+
+    #app .hub-hero::before,
+    #app .mode-hero::before,
+    #app .garden-shell::before,
+    #app .rabbit-step[data-depth="1"]::after,
+    #app .rabbit-step[data-depth="1"] .step-shell::after,
+    #app .path-card.beginner::after {
+      background: radial-gradient(circle, rgba(199, 70, 52, 0.14), transparent 68%);
+    }
+
+    #app .hub-hero::after,
+    #app .mode-hero::after,
+    #app .garden-shell::after,
+    #app .rabbit-step[data-depth="2"]::after,
+    #app .rabbit-step[data-depth="2"] .step-shell::after,
+    #app .path-card.explorer::after {
+      background: radial-gradient(circle, rgba(67, 124, 148, 0.12), transparent 68%);
+    }
+
+    #app .rabbit-step[data-depth="3"]::after,
+    #app .rabbit-step[data-depth="3"] .step-shell::after {
+      background: radial-gradient(circle, rgba(156, 106, 0, 0.12), transparent 68%);
+    }
+
+    #app .brand-token {
+      gap: 0.95rem;
+    }
+
+    #app .brand-mark {
+      width: auto;
+      height: auto;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #app .brand-mark::after {
+      display: none;
+    }
+
+    #app .brand-mark svg,
+    #app .hero-wordmark svg {
+      display: block;
+      width: 112px;
+      height: auto;
+    }
+
+    #app .brand-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: var(--rose);
+    }
+
+    #app .brand-token small {
+      color: var(--ink-soft);
+      font-size: 0.83rem;
+    }
+
+    #app .hero-lockup {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      margin-bottom: 1rem;
+    }
+
+    #app .hero-lockup-label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--rose);
+    }
+
+    #app .hero-lockup-note {
+      display: block;
+      color: var(--ink-soft);
+      font-size: 0.92rem;
+    }
+
+    #app .hero-overline,
+    #app .mode-overline,
+    #app .panel-kicker,
+    #app .modal-kicker,
+    #app .step-kicker,
+    #app .path-badge,
+    #app .stat-chip,
+    #app .mode-chip,
+    #app .meta-pill,
+    #app .bubble-badge,
+    #app .step-mini-map,
+    #app .guide-panel {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(212, 207, 202, 0.9);
+      box-shadow: none;
+      color: var(--ink-soft);
+    }
+
+    #app .nav-control,
+    #app .tag-pill,
+    #app .shortcut-chip,
+    #app .search-group .input-group-text,
+    #app .search-group .form-control,
+    #app .btn-outline-secondary,
+    #app .copy-snippet {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--line);
+      box-shadow: none;
+      color: var(--ink);
+    }
+
+    #app .nav-control:hover,
+    #app .tag-pill:hover,
+    #app .shortcut-chip:hover,
+    #app .btn-outline-secondary:hover,
+    #app .copy-snippet:hover {
+      border-color: rgba(199, 70, 52, 0.34);
+      color: var(--rose);
+    }
+
+    #app .nav-control.is-active,
+    #app .progress-button.is-active {
+      color: #fff;
+      background: linear-gradient(135deg, #c74634, #b3311f 58%, #437c94 100%);
+      box-shadow: 0 18px 34px rgba(199, 70, 52, 0.18);
+    }
+
+    #app .btn-primary {
+      background: linear-gradient(135deg, #c74634, #b3311f);
+      border-color: #c74634;
+      box-shadow: 0 14px 30px rgba(199, 70, 52, 0.14);
+    }
+
+    #app .btn-primary:hover,
+    #app .btn-primary:focus-visible {
+      background: linear-gradient(135deg, #b3311f, #962a1b);
+      border-color: #b3311f;
+      color: #fff;
+    }
+
+    #app .btn-outline-primary {
+      color: var(--rose);
+      background: rgba(255, 255, 255, 0.92);
+      border-color: rgba(199, 70, 52, 0.34);
+    }
+
+    #app .btn-outline-primary:hover,
+    #app .btn-outline-primary:focus-visible {
+      background: rgba(252, 208, 202, 0.52);
+      border-color: var(--rose);
+      color: var(--rose);
+    }
+
+    #app .feature-switch .form-check-input {
+      border-color: rgba(199, 70, 52, 0.24);
+      background-color: rgba(255, 255, 255, 0.98);
+    }
+
+    #app .feature-switch .form-check-input:checked {
+      background-color: var(--rose);
+      border-color: var(--rose);
+    }
+
+    #app .scene-well::before {
+      background: radial-gradient(circle at 50% 34%, rgba(199, 70, 52, 0.12), rgba(199, 70, 52, 0) 68%);
+      filter: blur(18px);
+    }
+
+    #app .well-ring {
+      border: 1px solid rgba(212, 207, 202, 0.9);
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.5),
+        0 24px 50px rgba(32, 30, 28, 0.08);
+    }
+
+    #app .ring-surface {
+      background: radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.78) 48%, rgba(252, 208, 202, 0.42));
+    }
+
+    #app .ring-middle {
+      background: radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.96), rgba(248, 245, 242, 0.82) 42%, rgba(208, 229, 237, 0.5) 72%);
+    }
+
+    #app .ring-deep {
+      background: radial-gradient(circle at 50% 35%, rgba(199, 70, 52, 0.7), rgba(109, 36, 24, 0.96) 72%);
+    }
+
+    #app .well-path,
+    #app .journey-column::before {
+      background: linear-gradient(180deg, rgba(199, 70, 52, 0.68), rgba(67, 124, 148, 0.56), rgba(156, 106, 0, 0.5));
+    }
+
+    #app .well-node,
+    #app .mini-bubble {
+      border: 1px solid rgba(212, 207, 202, 0.9);
+      box-shadow: 0 14px 32px rgba(32, 30, 28, 0.08);
+    }
+
+    #app .mini-bubble {
+      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.78) 42%, rgba(252, 208, 202, 0.38));
+    }
+
+    #app .progress-button {
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow:
+        inset 0 0 0 1px rgba(212, 207, 202, 0.9),
+        0 12px 24px rgba(32, 30, 28, 0.06);
+    }
+
+    #app .progress-button.is-complete,
+    #app .rabbit-step.is-complete .step-orb,
+    #app .check-list li::before {
+      background: linear-gradient(135deg, #4c825c, #6aa177);
+      box-shadow: 0 12px 24px rgba(76, 130, 92, 0.16);
+    }
+
+    #app .progress-mark {
+      box-shadow: 0 10px 22px rgba(32, 30, 28, 0.08);
+    }
+
+    #app .progress-button.is-active .progress-mark {
+      color: var(--rose);
+    }
+
+    #app .step-orb {
+      background: linear-gradient(135deg, #c74634, #437c94);
+      box-shadow: 0 14px 30px rgba(32, 30, 28, 0.18);
+    }
+
+    #app .guide-panel {
+      background: linear-gradient(135deg, rgba(252, 208, 202, 0.28), rgba(255, 255, 255, 0.96));
+      box-shadow: 0 12px 28px rgba(32, 30, 28, 0.05);
+      color: var(--ink);
+    }
+
+    #app .search-group .form-control::placeholder {
+      color: #8d8179;
+    }
+
+    #app .tag-pill.is-active {
+      background: rgba(252, 208, 202, 0.76);
+      color: var(--rose);
+      box-shadow: inset 0 0 0 1px rgba(199, 70, 52, 0.18);
+    }
+
+    #app .shortcut-chip,
+    #app .copy-snippet {
+      border-radius: 999px;
+    }
+
+    #app .bubble-button {
+      border: 1px solid var(--line);
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.84),
+        0 18px 38px rgba(32, 30, 28, 0.1);
+    }
+
+    #app .bubble-button::before {
+      border-color: rgba(102, 95, 91, 0.16);
+    }
+
+    #app .bubble-button:hover {
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.84),
+        0 24px 46px rgba(32, 30, 28, 0.14);
+    }
+
+    #app .bubble-button[data-accent="rose"] {
+      background: radial-gradient(circle at 30% 28%, rgba(255, 255, 255, 0.98), rgba(255, 244, 242, 0.92) 42%, rgba(252, 208, 202, 0.88) 72%);
+    }
+
+    #app .bubble-button[data-accent="sky"] {
+      background: radial-gradient(circle at 30% 28%, rgba(255, 255, 255, 0.98), rgba(244, 249, 252, 0.92) 42%, rgba(208, 229, 237, 0.9) 72%);
+    }
+
+    #app .bubble-button[data-accent="mint"] {
+      background: radial-gradient(circle at 30% 28%, rgba(255, 255, 255, 0.98), rgba(245, 251, 246, 0.92) 42%, rgba(216, 231, 220, 0.92) 72%);
+    }
+
+    #app .bubble-button[data-accent="gold"] {
+      background: radial-gradient(circle at 30% 28%, rgba(255, 255, 255, 0.98), rgba(252, 248, 240, 0.92) 42%, rgba(245, 227, 191, 0.92) 72%);
+    }
+
+    @keyframes bubble-float {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    @media (max-width: 1199.98px) {
+      #app .breadcrumb-shell {
+        justify-content: flex-start;
+      }
+
+      #app .rabbit-step[data-depth="2"] .step-shell,
+      #app .rabbit-step[data-depth="3"] .step-shell {
+        margin-left: 0;
+      }
+
+      #app .modal-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 991.98px) {
+      #app .mode-nav {
+        padding-top: 0.75rem;
+      }
+
+      #app .nav-shell {
+        border-radius: 30px;
+      }
+
+      #app .progress-dock {
+        top: 116px;
+      }
+
+      #app .progress-rail {
+        grid-template-columns: 1fr;
+      }
+
+      #app .journey-column {
+        padding-left: 3.6rem;
+      }
+
+      #app .journey-column::before {
+        left: 1.2rem;
+      }
+
+      #app .scene-well {
+        min-height: 31rem;
+      }
+
+      #app .node-request {
+        right: 1rem;
+      }
+
+      #app .node-review {
+        right: 1rem;
+      }
+    }
+
+    @media (max-width: 767.98px) {
+      #app .hub-screen,
+      #app .mode-screen {
+        padding-top: 1.25rem;
+      }
+
+      #app .hub-hero,
+      #app .mode-hero .card-body,
+      #app .toolbar-card .card-body,
+      #app .step-shell {
+        padding: 1.25rem;
+      }
+
+      #app .hero-title,
+      #app .mode-title {
+        max-width: none;
+      }
+
+      #app .scene-well {
+        min-height: 28rem;
+      }
+
+      #app .tool-constellation {
+        width: 100%;
+        padding: 0 1rem;
+      }
+
+      #app .mini-bubble {
+        font-size: 0.8rem;
+      }
+
+      #app .journey-column {
+        padding-left: 0;
+      }
+
+      #app .journey-column::before,
+      #app .step-orb {
+        display: none;
+      }
+
+      #app .step-footer {
+        align-items: stretch;
+      }
+
+      #app .step-footer .btn,
+      #app .compact-panel .btn {
+        width: 100%;
+      }
+
+      #app .modal-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #app *,
+      #app *::before,
+      #app *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
 </head>
+<body>
+  <div id="app">
+    <div class="app-shell">
+      <!-- Sticky Navigation -->
+      <header class="mode-nav d-none" id="modeNav">
+        <div class="container">
+          <nav class="navbar nav-shell">
+            <div class="container-fluid px-0 gap-3">
+              <button class="brand-token border-0 bg-transparent" type="button" data-mode-target="beginner" aria-label="Return to the guided home">
+                <span class="brand-mark" aria-hidden="true">
+                  <svg viewBox="0 0 109.36 22.96" xmlns="http://www.w3.org/2000/svg" role="img" focusable="false" aria-hidden="true">
+                    <path d="M47.9122 13.4234 54.459 13.4234 51 7.84135 44.6505 17.9233 41.75 17.9233 49.4805 5.82375C49.8106 5.33355 50.377 5.03665 50.9962 5.03665 51.6017 5.03665 52.1582 5.32375 52.4883 5.80225L60.2422 17.9233 57.3497 17.9233 55.9865 15.6694 49.3574 15.6694 47.9122 13.4234M77.9512 15.6694 77.9512 5.15975 75.4922 5.15975 75.4922 16.7027C75.4922 17.0172 75.6251 17.3258 75.8556 17.5483 76.09 17.7906 76.4121 17.9233 76.75 17.9233L87.9317 17.9233 89.3887 15.6694 77.9512 15.6694M37.3512 13.7906C39.7407 13.7906 41.6622 11.8569 41.6622 9.47415 41.6622 7.09135 39.7407 5.15975 37.3512 5.15975L26.6129 5.15975 26.6129 17.9233 29.0669 17.9233 29.0669 7.41555 37.188 7.41555C38.3278 7.41555 39.2515 8.33555 39.2515 9.47415 39.2515 10.6109 38.3278 11.5464 37.188 11.5464L30.2672 11.5406 37.5973 17.9233 41.1582 17.9233 36.235 13.7906 37.3512 13.7906M11.5142 17.9233 18.9331 17.9233C22.4625 17.9233 25.3043 15.0718 25.3043 11.5464 25.3043 8.01715 22.4625 5.15975 18.9331 5.15975L11.5142 5.15975C7.98886 5.15975 5.12945 8.01715 5.12945 11.5464 5.12945 15.0718 7.98886 17.9233 11.5142 17.9233M18.7633 15.6772 11.6774 15.6772C9.39705 15.6772 7.54935 13.8237 7.54935 11.5464 7.54935 9.25935 9.39705 7.41555 11.6774 7.41555L18.7633 7.41555C21.0513 7.41555 22.8971 9.25935 22.8971 11.5464 22.8971 13.8237 21.0513 15.6772 18.7633 15.6772M65.3672 17.9233 72.9415 17.9233 74.375 15.6772 65.5352 15.6772C63.2442 15.6772 61.3985 13.8237 61.3985 11.5464 61.3985 9.25935 63.2442 7.41555 65.5352 7.41555L72.7305 7.41555 74.1817 5.15975 65.3672 5.15975C61.8399 5.15975 58.9746 8.01715 58.9746 11.5464 58.9747 15.0718 61.84 17.9233 65.3672 17.9233M95.381 15.6772C93.4903 15.6772 91.8965 14.4078 91.4044 12.6714L101.893 12.6714 103.338 10.4214 91.4044 10.4214C91.8947 8.68125 93.4903 7.41555 95.381 7.41555L102.582 7.41555 104.022 5.15975 95.2169 5.15975C91.6953 5.15975 88.8379 8.01715 88.8379 11.5464 88.8379 15.0718 91.6953 17.9233 95.2169 17.9233L102.791 17.9233 104.231 15.6772 95.381 15.6772" fill="#C74634"/>
+                  </svg>
+                </span>
+                <span>
+                  <span class="brand-label">Oracle LiveLabs</span>
+                  <small>Author guide</small>
+                </span>
+              </button>
 
-<body class="author-guide-page">
-    <noscript>
-        <main class="no-script-shell">
-            <h1>Oracle LiveLabs Author Guide</h1>
-            <p>Choose the path that matches how you work.</p>
-            <ul>
-                <li><a href="./workshops/core-workshop-flow/index.html?lab=core-workflow">Guided Path</a></li>
-                <li><a href="./workshops/livelabs/index.html?lab=core-workflow">Reference Toolkit</a></li>
-            </ul>
-        </main>
-    </noscript>
-    <div id="authorGuideApp"></div>
+              <div class="d-flex flex-column flex-xl-row align-items-xl-center gap-3 ms-xl-auto">
+                <div class="btn-group nav-group" role="group" aria-label="Mode navigation">
+                  <button class="btn nav-control" type="button" data-mode-target="beginner" aria-label="Return to the guided home">Home</button>
+                  <button class="btn nav-control" type="button" data-mode-target="beginner" aria-label="Open the guided path">Guided Path</button>
+                  <button class="btn nav-control" type="button" data-mode-target="explorer" aria-label="Open the reference toolkit">Reference Toolkit</button>
+                </div>
+                <div class="breadcrumb-shell" id="breadcrumb" aria-live="polite">
+                  <strong>Home</strong>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </header>
+
+      <!-- Entry Hub -->
+      <section class="hub-screen" id="hub" aria-labelledby="hubHeading">
+        <div class="container">
+          <div class="hub-hero">
+            <div class="row g-4 align-items-center">
+              <div class="col-xl-6">
+                <div class="hero-lockup">
+                  <span class="hero-wordmark" aria-hidden="true">
+                    <svg viewBox="0 0 109.36 22.96" xmlns="http://www.w3.org/2000/svg" role="img" focusable="false" aria-hidden="true">
+                      <path d="M47.9122 13.4234 54.459 13.4234 51 7.84135 44.6505 17.9233 41.75 17.9233 49.4805 5.82375C49.8106 5.33355 50.377 5.03665 50.9962 5.03665 51.6017 5.03665 52.1582 5.32375 52.4883 5.80225L60.2422 17.9233 57.3497 17.9233 55.9865 15.6694 49.3574 15.6694 47.9122 13.4234M77.9512 15.6694 77.9512 5.15975 75.4922 5.15975 75.4922 16.7027C75.4922 17.0172 75.6251 17.3258 75.8556 17.5483 76.09 17.7906 76.4121 17.9233 76.75 17.9233L87.9317 17.9233 89.3887 15.6694 77.9512 15.6694M37.3512 13.7906C39.7407 13.7906 41.6622 11.8569 41.6622 9.47415 41.6622 7.09135 39.7407 5.15975 37.3512 5.15975L26.6129 5.15975 26.6129 17.9233 29.0669 17.9233 29.0669 7.41555 37.188 7.41555C38.3278 7.41555 39.2515 8.33555 39.2515 9.47415 39.2515 10.6109 38.3278 11.5464 37.188 11.5464L30.2672 11.5406 37.5973 17.9233 41.1582 17.9233 36.235 13.7906 37.3512 13.7906M11.5142 17.9233 18.9331 17.9233C22.4625 17.9233 25.3043 15.0718 25.3043 11.5464 25.3043 8.01715 22.4625 5.15975 18.9331 5.15975L11.5142 5.15975C7.98886 5.15975 5.12945 8.01715 5.12945 11.5464 5.12945 15.0718 7.98886 17.9233 11.5142 17.9233M18.7633 15.6772 11.6774 15.6772C9.39705 15.6772 7.54935 13.8237 7.54935 11.5464 7.54935 9.25935 9.39705 7.41555 11.6774 7.41555L18.7633 7.41555C21.0513 7.41555 22.8971 9.25935 22.8971 11.5464 22.8971 13.8237 21.0513 15.6772 18.7633 15.6772M65.3672 17.9233 72.9415 17.9233 74.375 15.6772 65.5352 15.6772C63.2442 15.6772 61.3985 13.8237 61.3985 11.5464 61.3985 9.25935 63.2442 7.41555 65.5352 7.41555L72.7305 7.41555 74.1817 5.15975 65.3672 5.15975C61.8399 5.15975 58.9746 8.01715 58.9746 11.5464 58.9747 15.0718 61.84 17.9233 65.3672 17.9233M95.381 15.6772C93.4903 15.6772 91.8965 14.4078 91.4044 12.6714L101.893 12.6714 103.338 10.4214 91.4044 10.4214C91.8947 8.68125 93.4903 7.41555 95.381 7.41555L102.582 7.41555 104.022 5.15975 95.2169 5.15975C91.6953 5.15975 88.8379 8.01715 88.8379 11.5464 88.8379 15.0718 91.6953 17.9233 95.2169 17.9233L102.791 17.9233 104.231 15.6772 95.381 15.6772" fill="#C74634"/>
+                    </svg>
+                  </span>
+                  <span>
+                    <span class="hero-lockup-label">Oracle LiveLabs</span>
+                    <span class="hero-lockup-note">Author guide</span>
+                  </span>
+                </div>
+                <div class="hero-overline">Guided path plus reference toolkit</div>
+                <h1 class="hero-title" id="hubHeading">Choose the shortest safe path for your task.</h1>
+                <p class="hero-subtitle">
+                  New authors can move through three guided layers from request to publish. Returning authors can jump straight to the feature, tool, or QA answer they need.
+                </p>
+                <div class="hub-stats mt-4">
+                  <span class="stat-chip">3 guided layers</span>
+                  <span class="stat-chip">Searchable toolkit</span>
+                  <span class="stat-chip">Publish-ready checks</span>
+                </div>
+              </div>
+
+              <div class="col-xl-6">
+                <div class="scene-well" aria-hidden="true">
+                  <div class="well-ring ring-surface"></div>
+                  <div class="well-ring ring-middle"></div>
+                  <div class="well-ring ring-deep"></div>
+                  <div class="well-path"></div>
+
+                  <div class="well-node node-surface">
+                    <span class="node-tag">Surface</span>
+                    <strong>Choose your starting point</strong>
+                  </div>
+
+                  <div class="well-node node-request">
+                    <span class="node-tag">Layer 1</span>
+                    <strong>Submit in WMS</strong>
+                  </div>
+
+                  <div class="well-node node-build">
+                    <span class="node-tag">Layer 2</span>
+                    <strong>GitHub, manifest, preview</strong>
+                  </div>
+
+                  <div class="well-node node-review">
+                    <span class="node-tag">Layer 3</span>
+                    <strong>Self QA, PR, publish</strong>
+                  </div>
+
+                  <div class="tool-constellation">
+                    <div class="mini-bubble">Formatting</div>
+                    <div class="mini-bubble">Media</div>
+                    <div class="mini-bubble">QA</div>
+                    <div class="mini-bubble">Quiz</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-4 mt-1">
+              <div class="col-lg-6">
+                <article class="card path-card beginner h-100">
+                  <div class="card-body">
+                    <div class="path-badge">Guided Path</div>
+                    <h2>Start with the guided path</h2>
+                    <p>Follow a short sequence from WMS request to GitHub setup to review and publish without making a new author read the entire documentation map first.</p>
+                    <ul class="path-points">
+                      <li>Three layers only: request, build, review.</li>
+                      <li>Sticky progress, breadcrumb, and Back / Next controls.</li>
+                      <li>Fast Track toggle when you want minimal explanation.</li>
+                    </ul>
+                    <button class="btn btn-primary btn-lg rounded-pill px-4" type="button" data-mode-target="beginner">Start Guided Path</button>
+                  </div>
+                </article>
+              </div>
+
+              <div class="col-lg-6">
+                <article class="card path-card explorer h-100">
+                  <div class="card-body">
+                    <div class="path-badge">Reference Toolkit</div>
+                    <h2>Find the exact tool or pattern</h2>
+                    <p>Open a searchable toolkit for formatting, media, quizzes, embeds, QA, and advanced patterns when the goal is finding one answer fast.</p>
+                    <ul class="path-points">
+                      <li>Immediate access for experienced authors in one click.</li>
+                      <li>Search, tag filters, hover states, and a focused detail modal.</li>
+                      <li>Copyable snippets and targeted guidance per feature.</li>
+                    </ul>
+                    <button class="btn btn-outline-primary btn-lg rounded-pill px-4" type="button" data-mode-target="explorer">Open Reference Toolkit</button>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Guided Path -->
+      <section class="mode-screen d-none" id="beginnerMode" aria-labelledby="beginnerHeading">
+        <div class="container">
+          <div class="card mode-hero">
+            <div class="card-body">
+              <div class="row g-4 align-items-start">
+                <div class="col-xl-8">
+                  <div class="mode-overline">Guided Path</div>
+                  <h2 class="mode-title" id="beginnerHeading">Follow the shortest safe route from request to publish.</h2>
+                  <p class="mode-copy">
+                    This path compresses the author journey into three layers: request the workshop, create the workshop in GitHub, then review and publish it. The progress dock and breadcrumb stay visible so you always know where you are.
+                  </p>
+                  <div class="mode-chip-row">
+                    <span class="mode-chip">3 steps</span>
+                    <span class="mode-chip">Progressive reveal</span>
+                    <span class="mode-chip">Checklists + snippets</span>
+                  </div>
+                </div>
+
+                <div class="col-xl-4">
+                  <div class="hero-side-stack">
+                    <div class="compact-panel">
+                      <div class="panel-kicker">Route controls</div>
+                      <div class="form-check form-switch feature-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="fastTrackToggle" aria-label="Toggle fast track mode">
+                        <label class="form-check-label" for="fastTrackToggle">Fast Track</label>
+                      </div>
+                      <p class="panel-copy" id="fastTrackStatus">Guided mode keeps notes, common mistakes, and extra context visible.</p>
+                    </div>
+
+                    <div class="compact-panel">
+                      <div class="panel-kicker">Need a fast lookup?</div>
+                      <p class="panel-copy mb-3">Leave the sequence and jump directly to the reference toolkit whenever the problem is really about one feature, one tool, or one QA question.</p>
+                      <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Reference Toolkit</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="progress-dock" id="progressShell">
+          <div class="container">
+            <div class="progress-card">
+              <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-2 mb-3">
+                <div>
+                  <div class="panel-kicker mb-1">Progress Tracker</div>
+                  <div class="small text-muted">Jump to any layer. Completed steps switch to a check mark.</div>
+                </div>
+                <div class="small text-muted" id="progressCaption">Layer 1 of 3 is active.</div>
+              </div>
+
+              <div class="progress-rail">
+                <button class="progress-button" type="button" data-step-target="0" aria-label="Jump to step 1">
+                  <span class="progress-mark">1</span>
+                  <span class="progress-label">
+                    <small>Step 1</small>
+                    <strong>Submit Workshop Request</strong>
+                  </span>
+                </button>
+
+                <button class="progress-button" type="button" data-step-target="1" aria-label="Jump to step 2">
+                  <span class="progress-mark">2</span>
+                  <span class="progress-label">
+                    <small>Step 2</small>
+                    <strong>Create Workshop + Add to GitHub</strong>
+                  </span>
+                </button>
+
+                <button class="progress-button" type="button" data-step-target="2" aria-label="Jump to step 3">
+                  <span class="progress-mark">3</span>
+                  <span class="progress-label">
+                    <small>Step 3</small>
+                    <strong>Review &amp; Publish</strong>
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="journey-column" id="rabbitFlow">
+            <section class="rabbit-step" id="step-1" data-step-index="0" data-step-name="Submit Workshop Request" data-depth="1">
+              <div class="step-orb" aria-hidden="true">1</div>
+              <article class="step-shell">
+                <div class="lockable">
+                  <div class="d-flex flex-column flex-xl-row justify-content-between align-items-xl-start gap-3 mb-4">
+                    <div>
+                      <div class="step-kicker">Layer 1 / WMS gate</div>
+                      <h2 class="step-title">Submit Workshop Request</h2>
+                      <p class="step-summary">Create the request in WMS with enough clarity that reviewers know the learner outcome, owner, and delivery shape before you start building.</p>
+                      <div class="step-meta-row">
+                        <span class="meta-pill">Output: approved request</span>
+                        <span class="meta-pill">Time: 5 to 10 min</span>
+                        <span class="meta-pill">Unlocks: repo work</span>
+                      </div>
+                    </div>
+
+                    <div class="step-mini-map">
+                      <div class="mini-map-title">Shortcut bubbles</div>
+                      <div class="quick-links">
+                        <button class="shortcut-chip" type="button" data-open-bubble-direct="wms-request">WMS Request</button>
+                        <button class="shortcut-chip" type="button" data-open-bubble-direct="qa-publish">QA Gate</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="guide-panel guided-only mb-4">
+                    The goal at the first layer is not to write the whole workshop. It is to create a clean, reviewable request with the right owner, outcome, and notes on anything unusual such as embedded HTML or media.
+                  </div>
+
+                  <div class="row g-4">
+                    <div class="col-xl-7">
+                      <div class="card content-card">
+                        <div class="card-body">
+                          <h3>What to do</h3>
+                          <ol class="action-list">
+                            <li>Open WMS and create the workshop request with a title that says the exact learner outcome.</li>
+                            <li>Write a compact abstract that explains who the workshop is for, what gets built, and what the reader leaves with.</li>
+                            <li>Add the correct owner, reviewer, business contact, and any timing notes so approval does not stall on missing names.</li>
+                            <li>Call out nonstandard elements early, such as embedded HTML, autoplay video, FreeSQL, or special media needs.</li>
+                            <li>Submit the request and keep WMS as the system of record before heavy GitHub work begins.</li>
+                          </ol>
+                        </div>
+                      </div>
+
+                      <div class="card snippet-card mt-4">
+                        <div class="card-body">
+                          <div class="snippet-header">
+                            <div>
+                              <div class="snippet-meta">Copy-ready starter brief</div>
+                              <h3 class="mb-0">WMS request skeleton</h3>
+                            </div>
+                            <button class="copy-snippet" type="button" data-copy-target="snippet-step-1">Copy</button>
+                          </div>
+                          <pre><code id="snippet-step-1">Workshop Title:
+Autonomous Database Quickstart for New Authors
+
+Abstract:
+A short workshop that shows a first-time author how to request, build, review, and publish a LiveLabs workshop.
+
+Notes:
+- Guided and reference author paths
+- GitHub Pages prototype with scoped HTML, CSS, and JS
+- Any embedded media called out before review</code></pre>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-xl-5">
+                      <div class="card side-card">
+                        <div class="card-body">
+                          <h3>Quick checklist</h3>
+                          <ul class="check-list">
+                            <li>Title is specific and readable to reviewers.</li>
+                            <li>Abstract names the audience, outcome, and scope.</li>
+                            <li>Real owner and contact fields are set.</li>
+                            <li>Special HTML or media needs are visible in the request.</li>
+                            <li>Status is submitted or approved before build work starts.</li>
+                          </ul>
+                        </div>
+                      </div>
+
+                      <div class="card side-card guided-only mt-4">
+                        <div class="card-body">
+                          <h3>Common mistakes</h3>
+                          <ul class="mistake-list">
+                            <li>Submitting a vague request with no clear learner outcome.</li>
+                            <li>Starting the repo build before the workflow record is aligned.</li>
+                            <li>Waiting until final review to mention special media or embedded HTML.</li>
+                          </ul>
+                        </div>
+                      </div>
+
+                      <div class="card side-card mt-4">
+                        <div class="card-body">
+                          <h3>What good looks like</h3>
+                          <p class="mb-0">A reviewer can understand in under a minute what the workshop teaches, who owns it, and whether anything in the build will need special handling later.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="step-footer">
+                    <div class="step-note">This layer exists so the rest of the work starts from an aligned request instead of assumptions.</div>
+                    <div class="d-flex flex-wrap gap-2">
+                      <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-action="surface">Back to Home</button>
+                      <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Reference Toolkit</button>
+                      <button type="button" class="btn btn-primary rounded-pill px-4" data-action="next">Next Step</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="step-lock">Keep moving to unlock this layer.</div>
+              </article>
+            </section>
+
+            <section class="rabbit-step" id="step-2" data-step-index="1" data-step-name="Create Workshop + Add to GitHub" data-depth="2">
+              <div class="step-orb" aria-hidden="true">2</div>
+              <article class="step-shell">
+                <div class="lockable">
+                  <div class="d-flex flex-column flex-xl-row justify-content-between align-items-xl-start gap-3 mb-4">
+                    <div>
+                      <div class="step-kicker">Layer 2 / GitHub build</div>
+                      <h2 class="step-title">Create Workshop + Add to GitHub</h2>
+                      <p class="step-summary">Set up the authoring environment, copy the sample structure, wire the manifest, and get a preview running early while the workshop is still cheap to fix.</p>
+                      <div class="step-meta-row">
+                        <span class="meta-pill">Output: live preview</span>
+                        <span class="meta-pill">Time: 15 to 20 min</span>
+                        <span class="meta-pill">Unlocks: content authoring</span>
+                      </div>
+                    </div>
+
+                    <div class="step-mini-map">
+                      <div class="mini-map-title">Shortcut bubbles</div>
+                      <div class="quick-links">
+                        <button class="shortcut-chip" type="button" data-open-bubble-direct="github-setup">GitHub Setup</button>
+                        <button class="shortcut-chip" type="button" data-open-bubble-direct="links-files">Links &amp; Files</button>
+                        <button class="shortcut-chip" type="button" data-open-bubble-direct="formatting">Formatting</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="guide-panel guided-only mb-4">
+                    Most new-author friction lives here. The trick is not to perfect everything at once. Build the skeleton fast, confirm preview works, then deepen the content only after the structure is stable.
+                  </div>
+
+                  <div class="row g-4">
+                    <div class="col-xl-7">
+                      <div class="card content-card">
+                        <div class="card-body">
+                          <h3>What to do</h3>
+                          <ol class="action-list">
+                            <li>Create or fork the correct repository and open it in GitHub Desktop or VS Code.</li>
+                            <li>Copy the sample workshop structure into a lowercase folder path and rename it cleanly.</li>
+                            <li>Update <code>manifest.json</code> with the real workshop title, help address, and tutorial order.</li>
+                            <li>Wire the <code>01-start-here</code> page and first lab files before deep writing so preview fails early, not late.</li>
+                            <li>Commit, push, and validate the GitHub Pages preview as soon as the skeleton exists.</li>
+                          </ol>
+                        </div>
+                      </div>
+
+                      <div class="card snippet-card mt-4">
+                        <div class="card-body">
+                          <div class="snippet-header">
+                            <div>
+                              <div class="snippet-meta">Starter manifest</div>
+                              <h3 class="mb-0">Minimum structure for a first build</h3>
+                            </div>
+                            <button class="copy-snippet" type="button" data-copy-target="snippet-step-2">Copy</button>
+                          </div>
+                          <pre><code id="snippet-step-2">{
+  "workshoptitle": "My Workshop Title",
+  "help": "my-team@oracle.com",
+  "tutorials": [
+    {
+      "title": "Start Here",
+      "filename": "./../../01-start-here/start-here.md"
+    },
+    {
+      "title": "Core Workflow",
+      "filename": "./../../02-core-workflow/core-workflow.md"
+    }
+  ]
+}</code></pre>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-xl-5">
+                      <div class="card side-card">
+                        <div class="card-body">
+                          <h3>Quick checklist</h3>
+                          <ul class="check-list">
+                            <li>Repository path and branch are correct.</li>
+                            <li>Folder and file names stay lowercase and case-safe.</li>
+                            <li>Manifest order matches real files.</li>
+                            <li>Preview loads before long authoring sessions begin.</li>
+                            <li>Images and assets already have predictable folders.</li>
+                          </ul>
+                        </div>
+                      </div>
+
+                      <div class="card side-card guided-only mt-4">
+                        <div class="card-body">
+                          <h3>Common mistakes</h3>
+                          <ul class="mistake-list">
+                            <li>Using the wrong repository path or missing a case-sensitive rename.</li>
+                            <li>Authoring for too long before checking the first real preview.</li>
+                            <li>Leaving sample manifest fields or broken file paths behind.</li>
+                          </ul>
+                        </div>
+                      </div>
+
+                      <div class="card side-card mt-4">
+                        <div class="card-body">
+                          <h3>What good looks like</h3>
+                          <p class="mb-0">You can open the workshop preview, the manifest points to real labs, and the structure is clean enough that content work can continue without foundational rework.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="step-footer">
+                    <div class="step-note">This layer combines environment setup, structure, manifest wiring, and early preview into one build checkpoint.</div>
+                    <div class="d-flex flex-wrap gap-2">
+                      <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-action="prev">Back</button>
+                      <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Reference Toolkit</button>
+                      <button type="button" class="btn btn-primary rounded-pill px-4" data-action="next">Next Step</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="step-lock">Keep moving to unlock this layer.</div>
+              </article>
+            </section>
+
+            <section class="rabbit-step" id="step-3" data-step-index="2" data-step-name="Review & Publish" data-depth="3">
+              <div class="step-orb" aria-hidden="true">3</div>
+              <article class="step-shell">
+                <div class="lockable">
+                  <div class="d-flex flex-column flex-xl-row justify-content-between align-items-xl-start gap-3 mb-4">
+                    <div>
+                      <div class="step-kicker">Layer 3 / QA chamber</div>
+                      <h2 class="step-title">Review &amp; Publish</h2>
+                      <p class="step-summary">Run preview and QA checks, complete Self QA in WMS, open a clean PR, and supply the final publishing details so the workshop can move to production.</p>
+                      <div class="step-meta-row">
+                        <span class="meta-pill">Output: reviewed release</span>
+                        <span class="meta-pill">Time: 10 to 15 min</span>
+                        <span class="meta-pill">Unlocks: production</span>
+                      </div>
+                    </div>
+
+                    <div class="step-mini-map">
+                      <div class="mini-map-title">Shortcut bubbles</div>
+                      <div class="quick-links">
+                        <button class="shortcut-chip" type="button" data-open-bubble-direct="qa-publish">QA &amp; Publish</button>
+                        <button class="shortcut-chip" type="button" data-open-bubble-direct="automation">Automation</button>
+                        <button class="shortcut-chip" type="button" data-open-bubble-direct="media">Media</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="guide-panel guided-only mb-4">
+                    The deepest layer is not more content. It is more precision. Reviewers should see a working preview, a clean workflow state, a safe PR, and the production URL pattern they expect.
+                  </div>
+
+                  <div class="row g-4">
+                    <div class="col-xl-7">
+                      <div class="card content-card">
+                        <div class="card-body">
+                          <h3>What to do</h3>
+                          <ol class="action-list">
+                            <li>Run the preview end to end and append <code>?qa=true</code> to open LintChecker while fixes are still cheap.</li>
+                            <li>Complete the Self QA checklist in WMS, save it, and only then mark <strong>Self QA Complete</strong>.</li>
+                            <li>Open a clean pull request with the WMS ID, reviewer context, and a stable preview URL.</li>
+                            <li>Update the Publishing tab with the final production URL and any required release notes.</li>
+                            <li>After merge, verify the production workshop and leave WMS ready for later quarterly QA.</li>
+                          </ol>
+                        </div>
+                      </div>
+
+                      <div class="card snippet-card mt-4">
+                        <div class="card-body">
+                          <div class="snippet-header">
+                            <div>
+                              <div class="snippet-meta">Review handoff</div>
+                              <h3 class="mb-0">PR and preview pattern</h3>
+                            </div>
+                            <button class="copy-snippet" type="button" data-copy-target="snippet-step-3">Copy</button>
+                          </div>
+                          <pre><code id="snippet-step-3">PR title:
+Publish My Workshop Name (WMS 12345)
+
+Preview URL:
+https://&lt;github-username&gt;.github.io/&lt;repo-name&gt;/&lt;path&gt;/workshops/&lt;variant&gt;/index.html?qa=true
+
+Production URL:
+https://oracle-livelabs.github.io/&lt;repo-name&gt;/&lt;path&gt;/workshops/&lt;variant&gt;/</code></pre>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-xl-5">
+                      <div class="card side-card">
+                        <div class="card-body">
+                          <h3>Quick checklist</h3>
+                          <ul class="check-list">
+                            <li>Preview works end to end and LintChecker issues are resolved.</li>
+                            <li>Self QA checklist is saved before any status change.</li>
+                            <li>PR title includes the WMS ID where reviewers expect it.</li>
+                            <li>Publishing tab matches the final production URL.</li>
+                            <li>Production workshop is verified after merge.</li>
+                          </ul>
+                        </div>
+                      </div>
+
+                      <div class="card side-card guided-only mt-4">
+                        <div class="card-body">
+                          <h3>Common mistakes</h3>
+                          <ul class="mistake-list">
+                            <li>Sharing a preview before checking tutorial order, links, images, and copy flows end to end.</li>
+                            <li>Changing WMS status before the checklist is saved and certified.</li>
+                            <li>Mixing development and production URLs or opening a PR from a stale branch.</li>
+                          </ul>
+                        </div>
+                      </div>
+
+                      <div class="card side-card mt-4">
+                        <div class="card-body">
+                          <h3>What good looks like</h3>
+                          <p class="mb-0">Reviewers can approve from one clean PR, the WMS record is consistent with the release, and the production workshop matches the preview you already checked.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="step-footer">
+                    <div class="step-note">At the end of this layer, the workshop is ready either to publish or to branch into the reference toolkit for a targeted feature lookup.</div>
+                    <div class="d-flex flex-wrap gap-2">
+                      <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-action="prev">Back</button>
+                      <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Reference Toolkit</button>
+                      <button type="button" class="btn btn-primary rounded-pill px-4" data-mode-target="explorer">Go To Reference Toolkit</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="step-lock">Keep moving to unlock this layer.</div>
+              </article>
+            </section>
+          </div>
+        </div>
+      </section>
+      <!-- Reference Toolkit -->
+      <section class="mode-screen d-none" id="explorerMode" aria-labelledby="explorerHeading">
+        <div class="container">
+          <div class="card mode-hero">
+            <div class="card-body">
+              <div class="row g-4 align-items-start">
+                <div class="col-xl-7">
+                  <div class="mode-overline">Reference Toolkit</div>
+                  <h2 class="mode-title" id="explorerHeading">Go straight to the feature, tool, or QA answer you need.</h2>
+                  <p class="mode-copy">
+                    Use this bubble map when you already know the moment you are stuck. Search, filter, open the bubble, copy the snippet, and return to authoring without walking the full guided path.
+                  </p>
+                  <div class="mode-chip-row">
+                    <span class="mode-chip">Search + filter</span>
+                    <span class="mode-chip">Bubble details</span>
+                    <span class="mode-chip">Copyable snippets</span>
+                  </div>
+                </div>
+
+                <div class="col-xl-5">
+                  <div class="compact-panel h-100">
+                    <div class="panel-kicker">Popular shortcuts</div>
+                    <div class="quick-links mt-3">
+                      <button type="button" class="shortcut-chip" data-open-bubble-direct="qa-publish">QA &amp; Publish</button>
+                      <button type="button" class="shortcut-chip" data-open-bubble-direct="formatting">Formatting</button>
+                      <button type="button" class="shortcut-chip" data-open-bubble-direct="media">Media</button>
+                      <button type="button" class="shortcut-chip" data-open-bubble-direct="automation">Automation</button>
+                    </div>
+                    <p class="panel-copy mt-3">If the real problem is sequence rather than lookup, go back to the guided path and move through the three layers from top to bottom.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card toolbar-card">
+            <div class="card-body">
+              <div class="row g-3 align-items-end">
+                <div class="col-xl-5">
+                  <label for="bubbleSearch" class="form-label filter-label">Search bubbles</label>
+                  <div class="input-group input-group-lg search-group">
+                    <span class="input-group-text">Find</span>
+                    <input id="bubbleSearch" class="form-control" type="search" placeholder="Formatting, quiz, QA, GitHub, media" aria-label="Search reference toolkit bubbles">
+                    <button type="button" class="btn btn-outline-secondary" id="clearSearch">Clear</button>
+                  </div>
+                </div>
+
+                <div class="col-xl-7">
+                  <div class="filter-label">Filter by tag</div>
+                  <div class="tag-pills" id="tagPills" aria-label="Reference toolkit tag filters">
+                    <button type="button" class="tag-pill is-active" data-tag="all">All</button>
+                    <button type="button" class="tag-pill" data-tag="workflow">Workflow</button>
+                    <button type="button" class="tag-pill" data-tag="markdown">Markdown</button>
+                    <button type="button" class="tag-pill" data-tag="media">Media</button>
+                    <button type="button" class="tag-pill" data-tag="interactivity">Interactivity</button>
+                    <button type="button" class="tag-pill" data-tag="qa">QA / Publish</button>
+                    <button type="button" class="tag-pill" data-tag="advanced">Advanced</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-2 mt-3">
+                <div class="result-line">
+                  <strong id="resultCount">Showing 12 bubbles</strong>
+                  <span class="ms-lg-2">Open any bubble for a focused detail panel.</span>
+                </div>
+                <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-mode-target="beginner">Need sequence? Open Guided Path</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="garden-shell">
+            <div class="bubble-grid row row-cols-2 row-cols-md-3 row-cols-xl-4 g-4" id="bubbleGrid"></div>
+            <div class="empty-state d-none" id="emptyState">No bubbles match that search yet. Clear the search or change the tag filter.</div>
+          </div>
+        </div>
+      </section>
+      <!-- Toolkit Detail Modal -->
+      <div class="modal fade" id="bubbleModal" tabindex="-1" aria-labelledby="bubbleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <div>
+                <div class="modal-kicker" id="bubbleModalKicker">Toolkit Detail</div>
+                <h2 class="modal-title h3 mb-0" id="bubbleModalLabel">Bubble detail</h2>
+              </div>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close detail view"></button>
+            </div>
+
+            <div class="modal-body">
+              <p class="lead mb-3" id="bubbleModalDescription"></p>
+              <div class="detail-tags mb-4" id="bubbleModalTags"></div>
+
+              <div class="modal-grid">
+                <div class="modal-panel">
+                  <h3>Use it when</h3>
+                  <ul id="bubbleModalWhen"></ul>
+                </div>
+
+                <div class="modal-panel">
+                  <h3>Fast answer</h3>
+                  <ul id="bubbleModalQuickWins"></ul>
+                </div>
+
+                <div class="modal-panel">
+                  <h3>Watch for</h3>
+                  <ul id="bubbleModalWatchFor"></ul>
+                </div>
+              </div>
+
+              <div class="card snippet-card mt-4">
+                <div class="card-body">
+                  <div class="snippet-header">
+                    <div>
+                      <div class="snippet-meta" id="bubbleModalSnippetMeta">Reference snippet</div>
+                      <h3 class="mb-0" id="bubbleModalSnippetTitle">Snippet</h3>
+                    </div>
+                    <button class="copy-snippet" type="button" data-copy-target="bubbleModalSnippet">Copy</button>
+                  </div>
+                  <pre><code id="bubbleModalSnippet"></code></pre>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="visually-hidden-live" aria-live="polite" id="liveRegion"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    (function () {
+      const stepMeta = [
+        { id: "step-1", title: "Submit Workshop Request" },
+        { id: "step-2", title: "Create Workshop + Add to GitHub" },
+        { id: "step-3", title: "Review & Publish" }
+      ];
+
+      const explorerItems = [
+        {
+          id: "wms-request",
+          title: "WMS Request",
+          short: "Title, abstract, owner, and special build notes.",
+          accent: "rose",
+          tags: ["workflow", "beginner"],
+          description: "Use this bubble when you need the minimum safe information in WMS before build work starts.",
+          when: [
+            "You are creating a brand-new workshop request.",
+            "A reviewer asked for more clarity on audience, outcome, or ownership.",
+            "The workshop includes something unusual such as embedded HTML or special media."
+          ],
+          quickWins: [
+            "Make the title outcome-driven, not generic.",
+            "Say who the workshop is for and what the learner leaves with.",
+            "Mention nonstandard build elements before review begins."
+          ],
+          watchFor: [
+            "Vague abstracts that do not explain value.",
+            "Missing owner or business contact fields.",
+            "Starting the repo build before the request is aligned."
+          ],
+          snippetMeta: "WMS outline",
+          snippetTitle: "Starter request format",
+          snippet: [
+            "Workshop Title:",
+            "Abstract:",
+            "Audience:",
+            "Outcome:",
+            "Notes:",
+            "- Embedded HTML",
+            "- Media or video needs",
+            "- Environment assumptions"
+          ].join("\n")
+        },
+        {
+          id: "github-setup",
+          title: "GitHub Setup",
+          short: "Repo path, sample structure, manifest, and preview.",
+          accent: "sky",
+          tags: ["workflow", "advanced"],
+          description: "This bubble compresses the setup work required to get a LiveLabs workshop skeleton running in GitHub Pages fast.",
+          when: [
+            "You need to start a new workshop repository path.",
+            "Preview is failing before content work has started.",
+            "You want the minimum safe setup sequence."
+          ],
+          quickWins: [
+            "Copy the sample workshop instead of cloning a random old workshop.",
+            "Keep every file and folder lowercase from the start.",
+            "Check preview before writing deeply."
+          ],
+          watchFor: [
+            "Wrong repo branch or nested folder path.",
+            "Manifest pointing at placeholder files.",
+            "Case mismatches that only fail in GitHub Pages."
+          ],
+          snippetMeta: "Setup checklist",
+          snippetTitle: "Minimal authoring sequence",
+          snippet: [
+            "1. Fork or open the target repo.",
+            "2. Copy the sample workshop structure.",
+            "3. Rename folders in lowercase.",
+            "4. Update manifest.json.",
+            "5. Preview workshops/<variant>/index.html."
+          ].join("\n")
+        },
+        {
+          id: "formatting",
+          title: "Formatting",
+          short: "Task-based Markdown that stays easy to scan.",
+          accent: "mint",
+          tags: ["markdown"],
+          description: "Use consistent LiveLabs structure so readers never need to relearn the page. The simplest path is always one H1, Introduction, Objectives, Estimated Time, Task sections, and Acknowledgements.",
+          when: [
+            "You are building or refactoring a standard lab page.",
+            "Reviewers keep flagging section structure or indentation.",
+            "Notes are drifting away from guided tasks."
+          ],
+          quickWins: [
+            "Keep one H1 only.",
+            "Use Task headings for procedural work.",
+            "Indent code blocks, notes, and images under the right step."
+          ],
+          watchFor: [
+            "Using raw HTML when Markdown is enough.",
+            "Missing required sections such as Objectives or Acknowledgements.",
+            "Long paragraphs where a task list is clearer."
+          ],
+          snippetMeta: "Markdown structure",
+          snippetTitle: "Standard lab pattern",
+          snippet: [
+            "# Lab Title",
+            "",
+            "## Introduction",
+            "",
+            "Estimated Time: 15 minutes",
+            "",
+            "### Objectives",
+            "* Do the first thing",
+            "* Do the second thing",
+            "",
+            "## Task 1: Start Here",
+            "1. Open the target page.",
+            "2. Complete the setup."
+          ].join("\n")
+        },
+        {
+          id: "tables",
+          title: "Tables",
+          short: "Compact comparisons, defaults, and criteria.",
+          accent: "gold",
+          tags: ["markdown"],
+          description: "Tables work best when you are comparing options, listing readiness criteria, or showing expected values side by side.",
+          when: [
+            "A paragraph is easier to scan as columns.",
+            "You need a definition matrix or checklist summary.",
+            "Review criteria should be visible at a glance."
+          ],
+          quickWins: [
+            "Keep headings short and outcome-driven.",
+            "Use tables for comparisons, not for instructions.",
+            "Split oversized tables into two smaller ones."
+          ],
+          watchFor: [
+            "Wide tables that break readability on smaller screens.",
+            "Too much prose inside cells.",
+            "Using tables where numbered tasks would be clearer."
+          ],
+          snippetMeta: "Markdown table",
+          snippetTitle: "Simple comparison table",
+          snippet: [
+            "| Area | Ready When | Common Miss |",
+            "| --- | --- | --- |",
+            "| Preview | Full workshop renders correctly | Preview URL shared too early |",
+            "| QA | Checklist saved and certified | Status changed before save |",
+            "| Publish | Production URL is final | Dev and prod URLs mixed |"
+          ].join("\n")
+        },
+        {
+          id: "links-files",
+          title: "Links & Files",
+          short: "Case-safe paths, images, downloads, and references.",
+          accent: "sky",
+          tags: ["markdown", "advanced"],
+          description: "GitHub Pages is case-sensitive, even when a local machine is not. This bubble is for any issue that smells like path, filename, or asset wiring.",
+          when: [
+            "Links work locally but fail in GitHub Pages.",
+            "You are wiring images, downloads, or cross-lab references.",
+            "A manifest entry points to a renamed file."
+          ],
+          quickWins: [
+            "Keep paths lowercase and exact.",
+            "Use standard Markdown links whenever possible.",
+            "Fix case-only renames with a temporary filename or git mv."
+          ],
+          watchFor: [
+            "Broken image folders after a rename.",
+            "Old manifest entries left in place.",
+            "Relative paths copied from another workshop without adjustment."
+          ],
+          snippetMeta: "Link examples",
+          snippetTitle: "File and link patterns",
+          snippet: [
+            "![Provisioned database details](images/provisioned-database.png \" \")",
+            "[Review the common repository](https://github.com/oracle-livelabs/common)",
+            "",
+            "{",
+            "  \"title\": \"Introduction\",",
+            "  \"filename\": \"./../../01-start-here/start-here.md\"",
+            "}"
+          ].join("\n")
+        },
+        {
+          id: "media",
+          title: "Media",
+          short: "Screenshots, video, and image cleanup.",
+          accent: "rose",
+          tags: ["media", "advanced"],
+          description: "Media should support the step, not distract from it. Use this bubble for screenshot standards, rich media placement, and image hygiene before QA.",
+          when: [
+            "You need to add screenshots or a landing-page video.",
+            "An image is too large, inconsistent, or still contains sensitive data.",
+            "You are mixing Markdown steps with richer HTML media."
+          ],
+          quickWins: [
+            "Crop to the action, not the whole screen.",
+            "Always provide meaningful alt text.",
+            "Use OptiShot before QA if dimensions drift past 1280px."
+          ],
+          watchFor: [
+            "Sensitive data left in screenshots.",
+            "Overusing video where a screenshot is clearer.",
+            "Huge image files that slow page load."
+          ],
+          snippetMeta: "Media snippet",
+          snippetTitle: "Image and video pattern",
+          snippet: [
+            "![Console home page](images/console-home-page.png \" \")",
+            "",
+            "<video autoplay muted loop playsinline class=\"w-100 rounded-4\">",
+            "  <source src=\"videos/demo.mp4\" type=\"video/mp4\">",
+            "</video>"
+          ].join("\n")
+        },
+        {
+          id: "interactivity",
+          title: "Interactivity",
+          short: "Quiz blocks, embeds, and richer inline components.",
+          accent: "mint",
+          tags: ["interactivity", "media"],
+          description: "Use this bubble when a learner should interact with something directly inside the workshop page rather than jumping out to another site.",
+          when: [
+            "You want a quiz, FreeSQL, embed, or scoped HTML component.",
+            "A step benefits from inline interaction instead of a link-out.",
+            "You are prototyping richer components inside Markdown."
+          ],
+          quickWins: [
+            "Keep interactive elements close to the instructions they support.",
+            "Use scoped HTML, CSS, and JS only inside the component.",
+            "Preview the interaction before relying on it in the flow."
+          ],
+          watchFor: [
+            "Embedding too much UI when a simple link is enough.",
+            "Using global CSS that leaks into the rest of the page.",
+            "Skipping accessibility for keyboard navigation."
+          ],
+          snippetMeta: "Interactive pattern",
+          snippetTitle: "Quiz block starter",
+          snippet: [
+            "```quiz",
+            "Q: What is the maximum image width allowed in LiveLabs workshops?",
+            "* 1280 pixels",
+            "- 1920 pixels",
+            "- 800 pixels",
+            "- 2560 pixels",
+            "> Images must not exceed 1,280 px in width or height.",
+            "```"
+          ].join("\n")
+        },
+        {
+          id: "building-blocks",
+          title: "Building Blocks",
+          short: "Sample reuse, common labs, and workshop structure.",
+          accent: "gold",
+          tags: ["workflow", "advanced"],
+          description: "This bubble is for starting from the sample workshop, reusing approved common content, and keeping workshop structure intentional instead of inherited by accident.",
+          when: [
+            "You need a new workshop skeleton quickly.",
+            "A stable common lab already exists in the shared repo.",
+            "You want reuse without hiding the real structure."
+          ],
+          quickWins: [
+            "Start from the sample workshop, not an arbitrary old one.",
+            "Reuse common content only when it is genuinely stable.",
+            "Remove unused manifest fields instead of leaving placeholder clutter."
+          ],
+          watchFor: [
+            "Copying old technical debt into a new workshop.",
+            "Reusing content that should really be customized.",
+            "Letting the manifest grow with unused options."
+          ],
+          snippetMeta: "Manifest entry",
+          snippetTitle: "Reuse a common lab",
+          snippet: [
+            "{",
+            "  \"title\": \"Need Help?\",",
+            "  \"filename\": \"https://oracle-livelabs.github.io/common/labs/need-help/need-help.md\"",
+            "}"
+          ].join("\n")
+        },
+        {
+          id: "qa-publish",
+          title: "QA & Publish",
+          short: "Preview, LintChecker, Self QA, PR, and production handoff.",
+          accent: "sky",
+          tags: ["qa", "workflow"],
+          description: "Open this bubble when the workshop is ready for review and you need the shortest path through preview, Self QA, PR, and publishing details.",
+          when: [
+            "The workshop is ready for review or close to production.",
+            "You want the publish gates without reopening the full guide.",
+            "A reviewer asks for the exact preview or PR pattern."
+          ],
+          quickWins: [
+            "Add ?qa=true to the preview URL before calling it ready.",
+            "Save the Self QA checklist before the status change.",
+            "Include the WMS ID in the PR title."
+          ],
+          watchFor: [
+            "Opening a PR while the branch is behind.",
+            "Mixing preview and production URLs.",
+            "Moving WMS state before checklist save."
+          ],
+          snippetMeta: "QA pattern",
+          snippetTitle: "Preview and PR handoff",
+          snippet: [
+            "Preview URL:",
+            "https://<github-username>.github.io/<repo-name>/<path>/workshops/<variant>/index.html?qa=true",
+            "",
+            "PR title:",
+            "Publish My Workshop (WMS 12345)"
+          ].join("\n")
+        },
+        {
+          id: "automation",
+          title: "Automation",
+          short: "Fixomat, OptiShot, cleanup passes, and late-stage helpers.",
+          accent: "rose",
+          tags: ["advanced", "qa", "media"],
+          description: "Automation helps late in the workflow when the workshop already exists and needs cleanup, consistency, or image optimization before review.",
+          when: [
+            "You need to clean up screenshots or Markdown before QA.",
+            "A large workshop needs consistency passes.",
+            "Specialized helpers can remove repetitive cleanup work."
+          ],
+          quickWins: [
+            "Use Fixomat after the core content exists, not before.",
+            "Use OptiShot when image dimensions are the actual problem.",
+            "Review automated changes instead of blindly accepting them."
+          ],
+          watchFor: [
+            "Using automation instead of understanding the base workflow.",
+            "Applying bulk cleanup too early.",
+            "Forgetting to recheck preview after automated edits."
+          ],
+          snippetMeta: "Advanced helper pattern",
+          snippetTitle: "Conditional content example",
+          snippet: [
+            "{",
+            "  \"title\": \"Provision Resources\",",
+            "  \"filename\": \"./../../provision/provision.md\",",
+            "  \"type\": \"livelabs\"",
+            "}",
+            "",
+            "<if type=\"livelabs\">",
+            "Use the LiveLabs environment instructions here.",
+            "</if>"
+          ].join("\n")
+        },
+        {
+          id: "variables",
+          title: "Variables",
+          short: "Conditional content and multi-variant behavior.",
+          accent: "mint",
+          tags: ["advanced", "workflow"],
+          description: "Use this bubble when the workshop needs variant-aware content, conditional sections, or a cleaner way to avoid duplicating the same instructions across outputs.",
+          when: [
+            "One workshop serves multiple variants or delivery types.",
+            "You need conditional sections without splitting into many labs.",
+            "A shared pattern repeats with only a few changed values."
+          ],
+          quickWins: [
+            "Introduce variables only where reuse is real.",
+            "Keep conditional sections obvious to future authors.",
+            "Test every variant preview, not just the first one."
+          ],
+          watchFor: [
+            "Complex conditions that hide the actual workshop flow.",
+            "Variant logic left undocumented.",
+            "Only previewing one branch of conditional content."
+          ],
+          snippetMeta: "Conditional pattern",
+          snippetTitle: "Basic variable idea",
+          snippet: [
+            "<if type=\"livelabs\">",
+            "Use the LiveLabs environment instructions here.",
+            "</if>",
+            "",
+            "<if type=\"freetier\">",
+            "Use the Free Tier setup steps here.",
+            "</if>"
+          ].join("\n")
+        },
+        {
+          id: "support",
+          title: "Help & Support",
+          short: "Where to go when the blocker is process, not syntax.",
+          accent: "gold",
+          tags: ["workflow", "qa"],
+          description: "Not every blocker is a Markdown problem. Use this bubble when the question is really about process, ownership, review timing, or where to escalate.",
+          when: [
+            "You are blocked by process rather than authoring syntax.",
+            "You need to know who reviews or approves something.",
+            "The next step is support, not more editing."
+          ],
+          quickWins: [
+            "Keep the WMS record current so support has context.",
+            "Bring the preview URL and WMS ID when asking for help.",
+            "Know whether the blocker is request, build, or publish."
+          ],
+          watchFor: [
+            "Escalating without current workflow details.",
+            "Asking for help with no preview or repo context.",
+            "Treating every issue as a documentation issue."
+          ],
+          snippetMeta: "Support starter",
+          snippetTitle: "Context to bring when asking for help",
+          snippet: [
+            "WMS ID:",
+            "Preview URL:",
+            "Repo / branch:",
+            "Current workflow status:",
+            "What is blocked right now:"
+          ].join("\n")
+        }
+      ];
+
+      const state = {
+        mode: "hub",
+        currentStep: 0,
+        fastTrack: "guided",
+        activeTag: "all",
+        query: ""
+      };
+
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      let maxUnlockedStep = 0;
+      let suppressObserver = false;
+
+      const modeNav = document.getElementById("modeNav");
+      const hub = document.getElementById("hub");
+      const beginnerMode = document.getElementById("beginnerMode");
+      const explorerMode = document.getElementById("explorerMode");
+      const breadcrumb = document.getElementById("breadcrumb");
+      const rabbitFlow = document.getElementById("rabbitFlow");
+      const stepSections = Array.from(document.querySelectorAll(".rabbit-step"));
+      const progressButtons = Array.from(document.querySelectorAll(".progress-button"));
+      const progressCaption = document.getElementById("progressCaption");
+      const fastTrackToggle = document.getElementById("fastTrackToggle");
+      const fastTrackStatus = document.getElementById("fastTrackStatus");
+      const liveRegion = document.getElementById("liveRegion");
+      const bubbleGrid = document.getElementById("bubbleGrid");
+      const emptyState = document.getElementById("emptyState");
+      const resultCount = document.getElementById("resultCount");
+      const bubbleSearch = document.getElementById("bubbleSearch");
+      const clearSearch = document.getElementById("clearSearch");
+      const tagPills = Array.from(document.querySelectorAll(".tag-pill"));
+      const bubbleModalElement = document.getElementById("bubbleModal");
+      const bubbleModal = bootstrap.Modal.getOrCreateInstance(bubbleModalElement);
+      function escapeHtml(value) {
+        return String(value)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function smoothBehavior() {
+        return prefersReducedMotion ? "auto" : "smooth";
+      }
+
+      function setLiveMessage(message) {
+        liveRegion.textContent = "";
+        window.setTimeout(function () {
+          liveRegion.textContent = message;
+        }, 20);
+      }
+
+      function setHash(hash) {
+        if (window.location.hash !== hash) {
+          history.replaceState(null, "", hash);
+        }
+      }
+
+      function updateHashFromState() {
+        if (state.mode === "beginner") {
+          setHash(state.currentStep === 0 ? "#home" : "#step-" + (state.currentStep + 1));
+          return;
+        }
+        if (state.mode === "explorer") {
+          setHash("#toolkit");
+          return;
+        }
+        setHash("#hub");
+      }
+
+      function scrollToTarget(target) {
+        if (!target) {
+          return;
+        }
+        target.scrollIntoView({
+          behavior: smoothBehavior(),
+          block: "start"
+        });
+      }
+
+      function updateNav() {
+        const isHub = state.mode === "hub";
+        modeNav.classList.toggle("d-none", isHub);
+
+        document.querySelectorAll(".nav-control").forEach(function (button) {
+          const targetMode = button.getAttribute("data-mode-target");
+          const isActive = targetMode === state.mode;
+          button.classList.toggle("is-active", isActive);
+          button.setAttribute("aria-pressed", isActive ? "true" : "false");
+        });
+      }
+
+      function updateBreadcrumb() {
+        let html = "<strong>Home</strong>";
+        if (state.mode === "beginner") {
+          html = "<span>Home</span> / <span>Guided Path</span> / <strong>" + escapeHtml(stepMeta[state.currentStep].title) + "</strong>";
+        } else if (state.mode === "explorer") {
+          html = "<span>Home</span> / <strong>Reference Toolkit</strong>";
+        }
+        breadcrumb.innerHTML = html;
+      }
+
+      function updateProgressCaption() {
+        if (state.mode !== "beginner") {
+          progressCaption.textContent = "Layer 1 of 3 is active.";
+          return;
+        }
+        const trackLabel = state.fastTrack === "minimal" ? "Fast Track" : "Guided";
+        progressCaption.textContent = "Layer " + (state.currentStep + 1) + " of 3: " + stepMeta[state.currentStep].title + " (" + trackLabel + ").";
+      }
+
+      function updateBeginnerUI() {
+        rabbitFlow.classList.toggle("track-minimal", state.fastTrack === "minimal");
+        fastTrackToggle.checked = state.fastTrack === "minimal";
+        fastTrackStatus.textContent = state.fastTrack === "minimal"
+          ? "Fast Track hides the longer notes and common mistakes."
+          : "Guided mode keeps notes, common mistakes, and extra context visible.";
+
+        progressButtons.forEach(function (button, index) {
+          const isActive = index === state.currentStep;
+          const isComplete = index < state.currentStep;
+          const isLocked = index > maxUnlockedStep;
+          const mark = button.querySelector(".progress-mark");
+
+          button.classList.toggle("is-active", isActive);
+          button.classList.toggle("is-complete", isComplete);
+          button.classList.toggle("is-locked", isLocked);
+          button.setAttribute("aria-current", isActive ? "step" : "false");
+          mark.innerHTML = isComplete ? "&#10003;" : String(index + 1);
+        });
+
+        stepSections.forEach(function (section, index) {
+          const isActive = index === state.currentStep;
+          const isComplete = index < state.currentStep;
+          const isLocked = index > maxUnlockedStep;
+          section.classList.toggle("is-active", isActive);
+          section.classList.toggle("is-complete", isComplete);
+          section.classList.toggle("is-locked", isLocked);
+        });
+
+        updateProgressCaption();
+        updateBreadcrumb();
+      }
+
+      function switchMode(mode, options) {
+        const config = Object.assign({
+          scroll: true,
+          hash: true,
+          announce: true,
+          openBubble: null
+        }, options || {});
+
+        state.mode = mode;
+        hub.classList.toggle("d-none", mode !== "hub");
+        beginnerMode.classList.toggle("d-none", mode !== "beginner");
+        explorerMode.classList.toggle("d-none", mode !== "explorer");
+
+        if (mode !== "explorer") {
+          bubbleModal.hide();
+        }
+
+        updateNav();
+        updateBreadcrumb();
+
+        if (mode === "beginner") {
+          maxUnlockedStep = Math.max(maxUnlockedStep, state.currentStep);
+          updateBeginnerUI();
+          if (config.scroll !== false) {
+            goToStep(state.currentStep, { scroll: true, hash: false, announce: false });
+          }
+        } else if (mode === "explorer") {
+          renderExplorer();
+          if (config.scroll !== false) {
+            scrollToTarget(explorerMode);
+          }
+        } else if (config.scroll !== false) {
+          window.scrollTo({
+            top: 0,
+            behavior: smoothBehavior()
+          });
+        }
+
+        if (config.hash !== false) {
+          updateHashFromState();
+        }
+
+        if (config.openBubble) {
+          window.setTimeout(function () {
+            openBubble(config.openBubble);
+          }, prefersReducedMotion ? 0 : 220);
+        }
+
+        if (config.announce !== false) {
+          if (mode === "hub") {
+            setLiveMessage("Returned to the entry hub.");
+          } else if (mode === "beginner") {
+            setLiveMessage("Guided path opened.");
+          } else if (mode === "explorer") {
+            setLiveMessage("Reference toolkit opened.");
+          }
+        }
+      }
+
+      function goToStep(index, options) {
+        const config = Object.assign({
+          scroll: true,
+          hash: true,
+          announce: true
+        }, options || {});
+
+        const boundedIndex = Math.max(0, Math.min(index, stepSections.length - 1));
+        state.currentStep = boundedIndex;
+        maxUnlockedStep = Math.max(maxUnlockedStep, boundedIndex);
+
+        if (state.mode !== "beginner") {
+          switchMode("beginner", {
+            scroll: false,
+            hash: false,
+            announce: false
+          });
+        }
+
+        updateBeginnerUI();
+
+        if (config.scroll !== false) {
+          suppressObserver = true;
+          scrollToTarget(stepSections[boundedIndex]);
+          window.setTimeout(function () {
+            suppressObserver = false;
+          }, prefersReducedMotion ? 50 : 420);
+        }
+
+        if (config.hash !== false) {
+          updateHashFromState();
+        }
+
+        if (config.announce !== false) {
+          setLiveMessage("Step " + (boundedIndex + 1) + ". " + stepMeta[boundedIndex].title + ".");
+        }
+      }
+
+      function nextStep() {
+        if (state.currentStep < stepSections.length - 1) {
+          goToStep(state.currentStep + 1);
+        }
+      }
+
+      function prevStep() {
+        if (state.currentStep > 0) {
+          goToStep(state.currentStep - 1);
+        }
+      }
+
+      function titleCaseTag(tag) {
+        if (tag === "qa") {
+          return "QA";
+        }
+        return tag
+          .split("-")
+          .map(function (part) {
+            return part.charAt(0).toUpperCase() + part.slice(1);
+          })
+          .join(" ");
+      }
+
+      function renderExplorer() {
+        const query = state.query.trim().toLowerCase();
+        const visibleItems = explorerItems.filter(function (item) {
+          const haystack = [
+            item.title,
+            item.short,
+            item.description
+          ].concat(item.tags).join(" ").toLowerCase();
+          const matchesQuery = !query || haystack.indexOf(query) !== -1;
+          const matchesTag = state.activeTag === "all" || item.tags.indexOf(state.activeTag) !== -1;
+          return matchesQuery && matchesTag;
+        });
+
+        bubbleGrid.innerHTML = visibleItems.map(function (item) {
+          return [
+            '<div class="col bubble-item" data-bubble-id="', item.id, '">',
+            '  <button type="button" class="bubble-button" data-open-bubble="', item.id, '" data-accent="', item.accent, '" aria-label="Open ', escapeHtml(item.title), ' details">',
+            '    <span class="bubble-badge">', escapeHtml(titleCaseTag(item.tags[0])), '</span>',
+            '    <span class="bubble-title">', escapeHtml(item.title), '</span>',
+            '    <span class="bubble-text">', escapeHtml(item.short), '</span>',
+            '  </button>',
+            '</div>'
+          ].join("");
+        }).join("");
+
+        resultCount.textContent = "Showing " + visibleItems.length + " bubble" + (visibleItems.length === 1 ? "" : "s");
+        emptyState.classList.toggle("d-none", visibleItems.length !== 0);
+      }
+
+      function openBubble(id) {
+        const item = explorerItems.find(function (candidate) {
+          return candidate.id === id;
+        });
+
+        if (!item) {
+          return;
+        }
+
+        document.getElementById("bubbleModalKicker").textContent = item.tags.map(titleCaseTag).join(" / ");
+        document.getElementById("bubbleModalLabel").textContent = item.title;
+        document.getElementById("bubbleModalDescription").textContent = item.description;
+        document.getElementById("bubbleModalTags").innerHTML = item.tags.map(function (tag) {
+          return '<span class="detail-tag">' + escapeHtml(titleCaseTag(tag)) + "</span>";
+        }).join("");
+        document.getElementById("bubbleModalWhen").innerHTML = item.when.map(function (entry) {
+          return "<li>" + escapeHtml(entry) + "</li>";
+        }).join("");
+        document.getElementById("bubbleModalQuickWins").innerHTML = item.quickWins.map(function (entry) {
+          return "<li>" + escapeHtml(entry) + "</li>";
+        }).join("");
+        document.getElementById("bubbleModalWatchFor").innerHTML = item.watchFor.map(function (entry) {
+          return "<li>" + escapeHtml(entry) + "</li>";
+        }).join("");
+        document.getElementById("bubbleModalSnippetMeta").textContent = item.snippetMeta;
+        document.getElementById("bubbleModalSnippetTitle").textContent = item.snippetTitle;
+        document.getElementById("bubbleModalSnippet").textContent = item.snippet;
+        bubbleModal.show();
+        setLiveMessage(item.title + " opened.");
+      }
+
+      function copyWithFallback(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          return navigator.clipboard.writeText(text);
+        }
+
+        return new Promise(function (resolve, reject) {
+          const helper = document.createElement("textarea");
+          helper.value = text;
+          helper.setAttribute("readonly", "");
+          helper.style.position = "absolute";
+          helper.style.left = "-9999px";
+          document.body.appendChild(helper);
+          helper.select();
+          try {
+            document.execCommand("copy");
+            resolve();
+          } catch (error) {
+            reject(error);
+          } finally {
+            document.body.removeChild(helper);
+          }
+        });
+      }
+
+      function copyTarget(targetId, button) {
+        const target = document.getElementById(targetId);
+        if (!target) {
+          return;
+        }
+
+        copyWithFallback(target.textContent).then(function () {
+          const original = button.textContent;
+          button.textContent = "Copied";
+          button.classList.add("is-copied");
+          setLiveMessage("Snippet copied to clipboard.");
+          window.setTimeout(function () {
+            button.textContent = original;
+            button.classList.remove("is-copied");
+          }, 1400);
+        }).catch(function () {
+          setLiveMessage("Copy failed. Select the text manually.");
+        });
+      }
+
+      function setActiveTag(tag) {
+        state.activeTag = tag;
+        tagPills.forEach(function (pill) {
+          pill.classList.toggle("is-active", pill.getAttribute("data-tag") === tag);
+        });
+        renderExplorer();
+      }
+
+      function handleShortcutBubble(id) {
+        state.query = "";
+        bubbleSearch.value = "";
+        setActiveTag("all");
+        switchMode("explorer", {
+          openBubble: id
+        });
+      }
+
+      function applyHash(hash) {
+        const cleaned = (hash || "").replace("#", "").trim();
+
+        if (!cleaned || cleaned === "home" || cleaned === "guided") {
+          switchMode("beginner", {
+            scroll: false,
+            hash: false,
+            announce: false
+          });
+          updateBeginnerUI();
+          return;
+        }
+
+        if (cleaned === "toolkit" || cleaned === "explorer") {
+          switchMode("explorer", {
+            scroll: false,
+            hash: false,
+            announce: false
+          });
+          return;
+        }
+
+        if (cleaned === "hub") {
+          switchMode("hub", {
+            scroll: false,
+            hash: false,
+            announce: false
+          });
+          return;
+        }
+
+        if (cleaned.indexOf("step-") === 0) {
+          const index = Number(cleaned.replace("step-", "")) - 1;
+          if (!Number.isNaN(index)) {
+            maxUnlockedStep = Math.max(0, Math.min(index, stepSections.length - 1));
+            state.currentStep = Math.max(0, Math.min(index, stepSections.length - 1));
+            switchMode("beginner", {
+              scroll: false,
+              hash: false,
+              announce: false
+            });
+            updateBeginnerUI();
+            return;
+          }
+        }
+
+        switchMode("beginner", {
+          scroll: false,
+          hash: false,
+          announce: false
+        });
+        updateBeginnerUI();
+      }
+
+      const observer = new IntersectionObserver(function (entries) {
+        if (state.mode !== "beginner" || suppressObserver) {
+          return;
+        }
+
+        const visibleEntry = entries
+          .filter(function (entry) {
+            return entry.isIntersecting;
+          })
+          .sort(function (left, right) {
+            return right.intersectionRatio - left.intersectionRatio;
+          })[0];
+
+        if (!visibleEntry || visibleEntry.intersectionRatio < 0.58) {
+          return;
+        }
+
+        const index = Number(visibleEntry.target.getAttribute("data-step-index") || "0");
+        if (index !== state.currentStep) {
+          state.currentStep = index;
+          maxUnlockedStep = Math.max(maxUnlockedStep, index);
+          updateBeginnerUI();
+          updateHashFromState();
+        }
+      }, {
+        threshold: [0.58]
+      });
+
+      stepSections.forEach(function (section) {
+        observer.observe(section);
+      });
+
+      document.addEventListener("click", function (event) {
+        const modeButton = event.target.closest("[data-mode-target]");
+        if (modeButton) {
+          const targetMode = modeButton.getAttribute("data-mode-target");
+            if (targetMode === "hub") {
+              switchMode("beginner");
+            } else if (targetMode === "beginner") {
+              switchMode("beginner");
+            } else if (targetMode === "explorer") {
+            switchMode("explorer");
+          }
+          return;
+        }
+
+        const progressButton = event.target.closest("[data-step-target]");
+        if (progressButton) {
+          goToStep(Number(progressButton.getAttribute("data-step-target")));
+          return;
+        }
+
+        const actionButton = event.target.closest("[data-action]");
+        if (actionButton) {
+          const action = actionButton.getAttribute("data-action");
+          if (action === "next") {
+            nextStep();
+          } else if (action === "prev") {
+            prevStep();
+            } else if (action === "surface") {
+              goToStep(0);
+            }
+          return;
+        }
+
+        const shortcutBubble = event.target.closest("[data-open-bubble-direct]");
+        if (shortcutBubble) {
+          handleShortcutBubble(shortcutBubble.getAttribute("data-open-bubble-direct"));
+          return;
+        }
+
+        const bubbleButton = event.target.closest("[data-open-bubble]");
+        if (bubbleButton) {
+          openBubble(bubbleButton.getAttribute("data-open-bubble"));
+          return;
+        }
+
+        const copyButton = event.target.closest("[data-copy-target]");
+        if (copyButton) {
+          copyTarget(copyButton.getAttribute("data-copy-target"), copyButton);
+          return;
+        }
+
+        const tagButton = event.target.closest("[data-tag]");
+        if (tagButton) {
+          setActiveTag(tagButton.getAttribute("data-tag"));
+        }
+      });
+
+      fastTrackToggle.addEventListener("change", function (event) {
+        state.fastTrack = event.target.checked ? "minimal" : "guided";
+        updateBeginnerUI();
+        setLiveMessage(state.fastTrack === "minimal" ? "Fast Track enabled." : "Guided mode enabled.");
+      });
+
+      bubbleSearch.addEventListener("input", function (event) {
+        state.query = event.target.value;
+        renderExplorer();
+      });
+
+      clearSearch.addEventListener("click", function () {
+        state.query = "";
+        bubbleSearch.value = "";
+        renderExplorer();
+        bubbleSearch.focus();
+      });
+
+      window.addEventListener("hashchange", function () {
+        applyHash(window.location.hash);
+      });
+
+      updateNav();
+      updateBeginnerUI();
+      renderExplorer();
+      applyHash(window.location.hash);
+    }());
+  </script>
 </body>
-
 </html>

@@ -2,13 +2,13 @@
 
 ## Introduction
 
-This section is now an orientation page, not the main entry experience. The primary author guide starts on the home page, where you choose either the **Guided Path** or the **Reference Toolkit** first and only go deeper after that choice.
+This section is now an orientation page, not the main entry experience. The primary author guide starts on the home page, which opens on the guided path and keeps the **Reference Toolkit** available from the same standalone experience.
 
 Estimated Time: 5 minutes
 
 ### Objectives
 
-* Reopen the path-first home page when you want the main guide experience
+* Reopen the standalone author guide when you want the main guide experience
 * Jump directly to the right background page when you need only context
 * Use the classic guide structure only after you already know the branch you need
 
@@ -18,8 +18,8 @@ Estimated Time: 5 minutes
 
     [Open the path-first author guide](../../index.html)
 
-2. Choose **Guided Path** when you want the standard request-build-publish sequence.
-3. Choose **Reference Toolkit** when you already know the blocker, task, or section you need.
+2. Stay on **Guided Path** when you want the standard request-build-publish sequence.
+3. Switch to **Reference Toolkit** from the page menu when you already know the blocker, task, or section you need.
 
 ## Task 2: Use Background Context Only When Needed
 
