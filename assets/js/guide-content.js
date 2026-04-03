@@ -1,15 +1,66 @@
 window.authorGuideContent = (function () {
   var canonicalRoot = "./workshops/livelabs/index.html?lab=";
+  var officialLinks = {
+    github: "https://github.com/",
+    githubDesktop: "https://desktop.github.com/",
+    vscode: "https://code.visualstudio.com/download",
+    liveServer: "https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer",
+    oracleRepos: "https://github.com/orgs/oracle-livelabs/repositories",
+    sampleWorkshop: "https://github.com/oracle-livelabs/common/tree/main/sample-livelabs-templates/sample-workshop",
+    validatorBash: "https://raw.githubusercontent.com/oracle-livelabs/common/main/md-validator/.github/scripts/validate-livelabs-markdown.sh",
+    validatorPowerShell: "https://raw.githubusercontent.com/oracle-livelabs/common/main/md-validator/.github/scripts/validate-livelabs-markdown.ps1"
+  };
 
   function labLink(labId) {
     return canonicalRoot + labId;
   }
 
+  function exampleField(label, value, guidance) {
+    return {
+      label: label,
+      value: value,
+      guidance: guidance
+    };
+  }
+
+  function resourceLink(label, href, note) {
+    return {
+      label: label,
+      href: href,
+      note: note
+    };
+  }
+
+  function milestone(label, detail) {
+    return {
+      label: label,
+      detail: detail
+    };
+  }
+
   return {
     stepMeta: [
-      { id: "step-1", title: "Submit Workshop Request", guideTarget: "start-here" },
-      { id: "step-2", title: "Create Workshop + Add to GitHub", guideTarget: "core-workflow" },
-      { id: "step-3", title: "Review & Publish", guideTarget: "validation-publish" }
+      {
+        id: "step-1",
+        title: "Submit Workshop Request",
+        guideTarget: "start-here",
+        summary: "Start in WMS, fill the reviewer-facing request fields with real detail, and understand the approval to QA status flow before development begins.",
+        keywords: ["wms", "workshop request", "stakeholder", "council", "tags", "approved", "self qa", "quarterly qa"]
+      },
+      {
+        id: "step-2",
+        title: "Create Workshop + Add to GitHub",
+        guideTarget: "core-workflow",
+        summary: "Set up GitHub Desktop and VS Code, fork and clone the right repos, copy the sample workshop, and validate preview early.",
+        keywords: ["github", "fork", "clone", "upstream", "git config", "github pages", "preview", "manifest"]
+      },
+      {
+        id: "step-3",
+        title: "Review & Publish",
+        guideTarget: "validation-publish",
+        summary: "Complete Self QA in the right order, fix PR check failures by class, create the PR with the WMS ID, and request publishing with production URLs.",
+        keywords: ["self qa", "quarterly qa", "validator", "pr", "publish", "production", "wms id"]
+      }
     ],
 
     explorerItems: [
@@ -36,22 +87,26 @@ window.authorGuideContent = (function () {
           "Leaving abstract, outline, or prerequisites too vague and forcing council follow-up.",
           "Forgetting that later Self QA and publishing steps depend on the same WMS record."
         ],
-        snippetMeta: "Request checklist",
-        snippetTitle: "Fill these fields before you click Create",
-        snippet: [
-          "Workshop Title:",
-          "Workshop Abstract:",
-          "Workshop Outline:",
-          "Workshop Prerequisites:",
-          "Stakeholder:",
-          "Workshop Council:",
-          "Workshop Owner Group:",
-          "Required tags:",
-          "- Level",
-          "- Role",
-          "- Focus Area",
-          "- Product"
-        ].join("\n"),
+        exampleTitle: "Example completion",
+        exampleIntro: "These are the kinds of answers reviewers should see. The exact stakeholder or council name changes, but the level of detail should not.",
+        exampleFields: [
+          exampleField("Workshop Title", "Build and publish an Oracle LiveLabs workshop from WMS to GitHub Pages", "Lead with the learner outcome, not only the product name."),
+          exampleField("Workshop Abstract", "Authors learn how to request a workshop in WMS, prepare GitHub Desktop and VS Code, build from the LiveLabs sample structure, complete Self QA, and request publishing.", "A reviewer should understand the end-to-end goal after two or three sentences."),
+          exampleField("Workshop Outline", "1. Submit and track the WMS request. 2. Set up GitHub and preview tooling. 3. Build the workshop structure and labs. 4. Run Self QA, fix PR issues, and publish.", "Keep the outline in the same order the work will really happen."),
+          exampleField("Workshop Prerequisites", "Oracle VPN access, GitHub account tied to @oracle.com, GitHub Desktop, Visual Studio Code, Live Server, and permission to work in the target oracle-livelabs repository.", "If a prerequisite can block setup or review later, surface it here."),
+          exampleField("Stakeholder / Council / Owner Group", "Choose the named stakeholder who will verify the workshop, the council aligned to the production repository, and the team that will maintain the workshop after publish.", "Do not leave these on temporary contributors or generic defaults."),
+          exampleField("Required Tags", "Use the actual WMS tags for Level, Role, Focus Area, and Product. Example pattern: Level = Beginner, Role = Developer, Product = the Oracle service being taught.", "Tags are required routing and discovery metadata.")
+        ],
+        milestonesTitle: "Status flow",
+        milestonesIntro: "The same WMS record stays with the workshop all the way through approval, QA, publishing, and later maintenance.",
+        milestones: [
+          milestone("Submitted", "Council review starts here."),
+          milestone("More Info Needed or Approved", "Answer follow-up questions or wait for approval before heavy build work."),
+          milestone("In Development", "Move here when real GitHub authoring starts."),
+          milestone("Self QA to Self QA Complete", "Run the checklist, save it, and certify the handoff only after the workshop is stable."),
+          milestone("Completed", "Stakeholders have verified the workshop and it is ready for publish handling."),
+          milestone("Quarterly QA", "Published workshops cycle back into QA later, and missed QA can disable the entry.")
+        ],
         image: {
           src: "./02-core-workshop-flow/sections/01-submit-new-workshop-in-wms/images/submit_workshop.png",
           alt: "Submit new workshop request page in WMS",
@@ -84,6 +139,14 @@ window.authorGuideContent = (function () {
           "Creating or using a second GitHub account instead of the Oracle-linked one.",
           "Skipping GitHub Desktop sign-in and discovering the problem at fork, clone, or push time.",
           "Leaving editor setup until after you already created broken nested lists or code blocks."
+        ],
+        resourcesTitle: "Official downloads",
+        resourcesIntro: "Use the official tool pages so the setup matches what the guide expects.",
+        resourceLinks: [
+          resourceLink("GitHub account", officialLinks.github, "Create or confirm the account that uses your @oracle.com email."),
+          resourceLink("GitHub Desktop", officialLinks.githubDesktop, "Install the desktop client before you try to clone or push."),
+          resourceLink("Visual Studio Code", officialLinks.vscode, "Use VS Code for markdown, manifests, and file structure work."),
+          resourceLink("Live Server", officialLinks.liveServer, "Install the extension before you start authoring so local preview is available.")
         ],
         snippetMeta: "Minimum toolchain",
         snippetTitle: "Install and configure these before authoring",
@@ -138,6 +201,12 @@ window.authorGuideContent = (function () {
           "Skipping the daily upstream merge and opening a PR from stale content.",
           "Working directly in the production repository or forgetting to fork common as well.",
           "Waiting until late review to discover path, case, or Pages publication problems."
+        ],
+        resourcesTitle: "Start here",
+        resourcesIntro: "These are the two references most authors need before they fork, clone, and copy the sample structure.",
+        resourceLinks: [
+          resourceLink("Oracle LiveLabs repositories", officialLinks.oracleRepos, "Choose the product repository that will own the workshop in production."),
+          resourceLink("Sample workshop template", officialLinks.sampleWorkshop, "Copy the canonical sample structure instead of improvising a new one.")
         ],
         snippetMeta: "Repo sync",
         snippetTitle: "Daily sync commands and preview pattern",
@@ -500,18 +569,24 @@ window.authorGuideContent = (function () {
           "Leaving outdated descriptions or tags in WMS while the GitHub content has already changed.",
           "Skipping Quarterly QA because the workshop is already published."
         ],
-        snippetMeta: "Self QA handoff",
-        snippetTitle: "Bring these into Self QA before you certify",
-        snippet: [
-          "Preview URL (personal github.io):",
-          "Pull Request link:",
-          "Development GitHub/GitLab URL:",
-          "Production GitHub/GitLab URL:",
-          "Updated title/description/outline/prerequisites:",
-          "Tags saved:",
-          "Checklist evidence uploaded:",
-          "Status ready to change:"
-        ].join("\n"),
+        exampleTitle: "Bring this into Self QA",
+        exampleIntro: "The checklist is easiest to save when these fields are already collected and consistent across WMS, the preview, and the PR.",
+        exampleFields: [
+          exampleField("Preview URL", "Your personal github.io workshop link with ?qa=true", "This is the review surface before production exists."),
+          exampleField("Pull Request link", "The open PR that contains the latest workshop changes", "Add it once the PR exists so reviewers can move between WMS and GitHub easily."),
+          exampleField("Development URL", "The personal github.io preview path for the workshop", "Do not replace this with oracle-livelabs until after merge."),
+          exampleField("Production URL", "The oracle-livelabs production path after merge", "This is filled or corrected once the workshop is actually in production."),
+          exampleField("Metadata", "Updated title, descriptions, outline, prerequisites, and tags in WMS", "The WMS record should match the workshop the stakeholder will open."),
+          exampleField("Evidence", "Checklist boxes checked, images uploaded, and certification ready", "Save the checklist before you try to move to Self QA Complete or Quarterly QA Complete.")
+        ],
+        milestonesTitle: "QA status flow",
+        milestonesIntro: "Publishing starts only after the workshop moves through the QA and stakeholder handoff states cleanly.",
+        milestones: [
+          milestone("Self QA", "The workshop is stable enough to test end to end."),
+          milestone("Self QA Complete", "The checklist is saved and certified, and stakeholders are notified."),
+          milestone("Completed", "Stakeholders have verified the workshop and it is ready for publishing action."),
+          milestone("Quarterly QA", "Published workshops cycle back into QA later to stay current.")
+        ],
         image: {
           src: "./03-validation-qa-publish/sections/01-qa-checks/images/self-qa-checklist-1.png",
           alt: "Self QA checklist in WMS",
@@ -545,16 +620,22 @@ window.authorGuideContent = (function () {
           "Assuming a locally rendered page means the markdown validator will pass.",
           "Leaving the PowerShell validator half-configured because execution policy blocked the script."
         ],
+        resourcesTitle: "Validator scripts",
+        resourcesIntro: "Use the official validator scripts when you want to test locally before pushing again.",
+        resourceLinks: [
+          resourceLink("Bash validator script", officialLinks.validatorBash, "Use this on Linux or macOS."),
+          resourceLink("PowerShell validator script", officialLinks.validatorPowerShell, "Use this on Windows when Bash is not your normal path.")
+        ],
         snippetMeta: "Local validator",
         snippetTitle: "Run the validator locally before the next push",
         snippet: [
           "Bash",
-          "curl -O https://raw.githubusercontent.com/oracle-livelabs/common/main/md-validator/.github/scripts/validate-livelabs-markdown.sh",
+          "curl -O " + officialLinks.validatorBash,
           "chmod +x validate-livelabs-markdown.sh",
           "./validate-livelabs-markdown.sh /path/to/workshop",
           "",
           "PowerShell",
-          "Invoke-WebRequest -Uri \"https://raw.githubusercontent.com/oracle-livelabs/common/main/md-validator/.github/scripts/validate-livelabs-markdown.ps1\" -OutFile \"validate-livelabs-markdown.ps1\"",
+          "Invoke-WebRequest -Uri \"" + officialLinks.validatorPowerShell + "\" -OutFile \"validate-livelabs-markdown.ps1\"",
           "Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process",
           ".\\validate-livelabs-markdown.ps1 C:\\path\\to\\your\\workshop"
         ].join("\n"),
@@ -591,6 +672,14 @@ window.authorGuideContent = (function () {
           "Opening the PR while the fork is behind main or still contains conflicts.",
           "Using the personal github.io preview link in a production publishing field.",
           "Skipping the Publishing tab because the PR was already created."
+        ],
+        milestonesTitle: "Final release flow",
+        milestonesIntro: "Keep the production handoff aligned with the real workshop state instead of mixing preview, review, and production URLs.",
+        milestones: [
+          milestone("PR opened", "The title includes the WMS ID and the branch is current."),
+          milestone("Publish Requested", "The Publishing tab is filled with production metadata and URL patterns."),
+          milestone("Publish Approved", "LiveLabs publishers have approved the production handoff."),
+          milestone("Production verified", "The oracle-livelabs workshop matches the preview you already reviewed.")
         ],
         snippetMeta: "Review handoff",
         snippetTitle: "PR and publishing URL patterns",
@@ -724,6 +813,16 @@ window.authorGuideContent = (function () {
               "Treating status changes like paperwork instead of gates that drive the rest of the process.",
               "Skipping stakeholder follow-up after Self QA Complete."
             ],
+            milestonesTitle: "Status ladder",
+            milestonesIntro: "Use the status as the workflow gate, not as after-the-fact paperwork.",
+            milestones: [
+              milestone("Submitted", "Council review starts and the request is either approved or sent back for more information."),
+              milestone("In Development", "Real GitHub authoring has started."),
+              milestone("Self QA", "The preview is stable enough to test end to end."),
+              milestone("Self QA Complete", "The checklist is saved and stakeholders are notified."),
+              milestone("Completed", "Stakeholders have verified the workshop and it is ready for publish handling."),
+              milestone("Quarterly QA", "Published workshops return to QA later to stay current.")
+            ],
             snippetTitle: "The status ladder to remember",
             snippet: [
               "Submitted",
@@ -810,21 +909,19 @@ window.authorGuideContent = (function () {
               "Treating WMS like an afterthought and then backfilling the record after GitHub work is already deep.",
               "Leaving tags or prerequisites incomplete and forcing a council round trip."
             ],
-            snippetTitle: "Field checklist before submit",
-            snippet: [
-              "Workshop Title",
-              "Abstract",
-              "Outline",
-              "Prerequisites",
-              "Stakeholder",
-              "Workshop Council",
-              "Workshop Owner Group",
-              "Required tags"
-            ].join("\n"),
+            exampleTitle: "Example completion",
+            exampleIntro: "The exact names change by workshop, but the request should always read like this level of detail.",
+            exampleFields: [
+              exampleField("Workshop Title", "Build and publish an Oracle LiveLabs workshop from WMS to GitHub Pages", "Lead with the learner outcome."),
+              exampleField("Workshop Abstract", "Authors learn how to request a workshop in WMS, build from the sample structure, complete Self QA, and publish to production.", "A reviewer should understand the goal after two or three sentences."),
+              exampleField("Workshop Outline", "1. Submit request. 2. Set up GitHub and preview tooling. 3. Build the workshop structure. 4. Run QA and publish.", "Outline the real sequence of work."),
+              exampleField("Workshop Prerequisites", "Oracle VPN access, GitHub account tied to @oracle.com, GitHub Desktop, Visual Studio Code, Live Server, and repo access.", "List anything that can block setup or review."),
+              exampleField("Stakeholder / Council / Owner Group", "Choose the named stakeholder who will verify the workshop, the council aligned to the target repo, and the team that will maintain the workshop later.", "Do not leave these on temporary contributors.")
+            ],
             image: {
-              src: "./02-core-workshop-flow/sections/01-submit-new-workshop-in-wms/images/tags.png",
-              alt: "WMS tags selection screen",
-              caption: "Level, Role, Focus Area, and Product tags are not optional for the active workflow."
+              src: "./02-core-workshop-flow/sections/01-submit-new-workshop-in-wms/images/submit_workshop.png",
+              alt: "Submit workshop request page in WMS",
+              caption: "Start with the main request form, then move to tags and any social metadata that will matter later."
             },
             sourceHref: labLink("1-labs-wms"),
             sourceLabel: "Open Canonical Lab"
@@ -850,6 +947,14 @@ window.authorGuideContent = (function () {
               "Using the wrong GitHub account or trying to split LiveLabs work across multiple accounts.",
               "Skipping GitHub Desktop sign-in and only discovering the problem when clone or push fails.",
               "Leaving editor configuration until after nested steps and code blocks already exist."
+            ],
+            resourcesTitle: "Official downloads",
+            resourcesIntro: "Use the official tool pages so the setup matches the rest of the guide and the screenshots.",
+            resourceLinks: [
+              resourceLink("GitHub account", officialLinks.github, "Create or confirm the Oracle-linked account."),
+              resourceLink("GitHub Desktop", officialLinks.githubDesktop, "Install the desktop client before you try to clone or push."),
+              resourceLink("Visual Studio Code", officialLinks.vscode, "Use VS Code for markdown, manifests, and file moves."),
+              resourceLink("Live Server", officialLinks.liveServer, "Install the extension before you start authoring.")
             ],
             snippetTitle: "Minimum workstation setup",
             snippet: [
@@ -900,6 +1005,12 @@ window.authorGuideContent = (function () {
               "Doing a large day of edits without syncing upstream/main first.",
               "Working in the production repository or forgetting to fork common as well.",
               "Waiting until late review to discover path, case, or GitHub Pages publication problems."
+            ],
+            resourcesTitle: "Start here",
+            resourcesIntro: "Most authors need these two references before they fork, clone, and copy the template.",
+            resourceLinks: [
+              resourceLink("Oracle LiveLabs repositories", officialLinks.oracleRepos, "Choose the repo that will own the workshop in production."),
+              resourceLink("Sample workshop template", officialLinks.sampleWorkshop, "Copy the canonical sample structure instead of improvising a new one.")
             ],
             snippetTitle: "Config and preview pattern",
             snippet: [
@@ -1012,25 +1123,27 @@ window.authorGuideContent = (function () {
               "Leaving outdated descriptions or tags in WMS while the GitHub content has already changed.",
               "Treating Quarterly QA as optional because the workshop is already published."
             ],
-            snippetTitle: "Self QA order",
-            snippet: [
-              "Preview URL (personal github.io)",
-              "Pull Request link",
-              "Development GitHub/GitLab URL",
-              "Production GitHub/GitLab URL",
-              "Updated title/description/outline/prerequisites",
-              "Tags saved",
-              "Checklist evidence uploaded",
-              "",
-              "Then",
-              "1. Save checklist",
-              "2. Change status",
-              "3. Certify"
-            ].join("\n"),
+            exampleTitle: "Bring this into Self QA",
+            exampleIntro: "Save the checklist only after these references and metadata are consistent.",
+            exampleFields: [
+              exampleField("Preview URL", "Personal github.io workshop link with ?qa=true", "This is the review surface before production exists."),
+              exampleField("Pull Request link", "The PR that contains the latest workshop changes", "Add it once the PR exists so reviewers can move between WMS and GitHub."),
+              exampleField("Development URL", "Personal github.io preview path", "Keep this pointed at the fork during development."),
+              exampleField("Production URL", "oracle-livelabs production path after merge", "Do not use the personal preview URL in the production field."),
+              exampleField("Metadata and evidence", "Updated title, descriptions, outline, prerequisites, tags, and uploaded checklist evidence", "The WMS record should match the workshop the stakeholder will open.")
+            ],
+            milestonesTitle: "QA status flow",
+            milestonesIntro: "Publishing only makes sense after the workshop moves through the QA and stakeholder states cleanly.",
+            milestones: [
+              milestone("Self QA", "The workshop is stable enough to test end to end."),
+              milestone("Self QA Complete", "The checklist is saved and certified, and stakeholders are notified."),
+              milestone("Completed", "Stakeholders have verified the workshop and it is ready for publishing action."),
+              milestone("Quarterly QA", "Published workshops come back through QA later.")
+            ],
             image: {
-              src: "./03-validation-qa-publish/sections/01-qa-checks/images/complete-checklist-warning.png",
-              alt: "Warning shown when checklist is incomplete",
-              caption: "The warning dialog is the sign that the checklist was not fully saved before the status change."
+              src: "./03-validation-qa-publish/sections/01-qa-checks/images/self-qa-checklist-1.png",
+              alt: "Self QA checklist in WMS",
+              caption: "Save the checklist before you change status so stakeholder review has a clean handoff surface."
             },
             sourceHref: labLink("5-labs-qa-checks"),
             sourceLabel: "Open Canonical Lab"
@@ -1085,15 +1198,21 @@ window.authorGuideContent = (function () {
               "Thinking a locally rendered page means the validator will pass.",
               "Leaving the PowerShell validator half-configured because execution policy blocked the script."
             ],
+            resourcesTitle: "Validator scripts",
+            resourcesIntro: "Use the official validator scripts locally when you want faster repair loops than waiting for GitHub Actions.",
+            resourceLinks: [
+              resourceLink("Bash validator script", officialLinks.validatorBash, "Use this on Linux or macOS."),
+              resourceLink("PowerShell validator script", officialLinks.validatorPowerShell, "Use this on Windows when Bash is not your normal path.")
+            ],
             snippetTitle: "Local markdown validator",
             snippet: [
               "Bash",
-              "curl -O https://raw.githubusercontent.com/oracle-livelabs/common/main/md-validator/.github/scripts/validate-livelabs-markdown.sh",
+              "curl -O " + officialLinks.validatorBash,
               "chmod +x validate-livelabs-markdown.sh",
               "./validate-livelabs-markdown.sh /path/to/workshop",
               "",
               "PowerShell",
-              "Invoke-WebRequest -Uri \"https://raw.githubusercontent.com/oracle-livelabs/common/main/md-validator/.github/scripts/validate-livelabs-markdown.ps1\" -OutFile \"validate-livelabs-markdown.ps1\"",
+              "Invoke-WebRequest -Uri \"" + officialLinks.validatorPowerShell + "\" -OutFile \"validate-livelabs-markdown.ps1\"",
               "Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process",
               ".\\validate-livelabs-markdown.ps1 C:\\path\\to\\your\\workshop"
             ].join("\n"),
@@ -1128,6 +1247,14 @@ window.authorGuideContent = (function () {
               "Using the personal preview URL in the production field.",
               "Skipping the Publishing tab because the PR already exists."
             ],
+            milestonesTitle: "Final release flow",
+            milestonesIntro: "Keep preview, review, and production surfaces separate so the final handoff is easy to approve.",
+            milestones: [
+              milestone("PR opened", "The title includes the WMS ID and the branch is current."),
+              milestone("Publish Requested", "The Publishing tab is filled with production metadata and URL patterns."),
+              milestone("Publish Approved", "LiveLabs publishers have approved the production handoff."),
+              milestone("Production verified", "The oracle-livelabs workshop matches the preview you already reviewed.")
+            ],
             snippetTitle: "Publishing URL pattern",
             snippet: [
               "Preview",
@@ -1143,9 +1270,9 @@ window.authorGuideContent = (function () {
               "https://oracle-livelabs.github.io/sprints/<category-folder>/<sprint-folder>/"
             ].join("\n"),
             image: {
-              src: "./03-validation-qa-publish/sections/03-publish-workshop/images/general-req.png",
-              alt: "Pull request general requirements checklist",
-              caption: "The PR form and checklist are part of the publishing handoff, not optional extra notes."
+              src: "./03-validation-qa-publish/sections/03-publish-workshop/images/publishing-tab.png",
+              alt: "Publishing tab in WMS",
+              caption: "The Publishing tab is where production metadata is entered after the workshop is already in the right review state."
             },
             sourceHref: labLink("6-labs-publish"),
             sourceLabel: "Open Canonical Lab"
