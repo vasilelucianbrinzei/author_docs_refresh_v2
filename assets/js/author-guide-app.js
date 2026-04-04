@@ -286,6 +286,20 @@
     });
   }
 
+  function syncProgressDockPosition() {
+    var navHeight;
+
+    if (!progressShell || window.innerWidth <= 1199 || state.mode !== "beginner") {
+      if (progressShell) {
+        progressShell.style.top = "";
+      }
+      return;
+    }
+
+    navHeight = modeNav && !modeNav.classList.contains("d-none") ? modeNav.getBoundingClientRect().height : 0;
+    progressShell.style.top = Math.ceil(navHeight + 14) + "px";
+  }
+
   function resetGuideSidebar() {
     if (!guideSidebar) {
       return;
@@ -968,6 +982,8 @@
 
     renderGuideNav();
     decorateExpandableMedia(guideSectionMount);
+    syncProgressDockPosition();
+    syncProgressDockPosition();
     scheduleGuideSidebarSync();
     updateBreadcrumb();
   }
@@ -1763,7 +1779,10 @@
   });
 
   window.addEventListener("scroll", scheduleGuideSidebarSync, { passive: true });
-  window.addEventListener("resize", scheduleGuideSidebarSync);
+  window.addEventListener("resize", function () {
+    syncProgressDockPosition();
+    scheduleGuideSidebarSync();
+  });
 
   decorateExpandableMedia(document);
   renderGuideNav();
@@ -1773,5 +1792,6 @@
   renderExplorer();
   buildSearchIndex();
   applyHash(window.location.hash);
+  syncProgressDockPosition();
   scheduleGuideSidebarSync();
 }());
