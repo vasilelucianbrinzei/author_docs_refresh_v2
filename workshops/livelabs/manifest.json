@@ -7,7 +7,7 @@
                   ],
     "tutorials":  [
                       {
-                          "title":  "Section 1: Start Here",
+                          "title":  "Section 1: Start Guide",
                           "description":  "Use this orientation section to reopen the path-first home page, or jump directly to the background pages and guide branches when you already know what you need.",
                           "filename":  "./../../01-start-here/start-here.md"
                       },
@@ -18,7 +18,7 @@
                       },
                       {
                           "title":  "Lab 2: GitHub foundations",
-                          "description":  "Explains the Oracle LiveLabs GitHub model, including repositories, forks, clones, and the safe authoring flow before authors start execution labs.",
+                          "description":  "Explains the Oracle LiveLabs GitHub model, including repositories, forks, clones, and the standard authoring flow before authors start execution labs.",
                           "filename":  "./../../02-core-workshop-flow/sections/01a-understand-github-foundations/github-introduction.md"
                       },
                       {
@@ -38,7 +38,7 @@
                       },
                       {
                           "title":  "Lab 5: Stay in sync with GitHub",
-                          "description":  "Shows authors how to fork, clone, sync, structure their repository, and preview workshop content safely.",
+                          "description":  "Shows authors how to fork, clone, sync, structure their repository, and preview workshop content correctly.",
                           "filename":  "./../../02-core-workshop-flow/sections/03-stay-in-sync-with-github/3-labs-sync-github.md"
                       },
                       {

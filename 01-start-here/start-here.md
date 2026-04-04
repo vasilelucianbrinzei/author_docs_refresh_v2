@@ -1,4 +1,4 @@
-# LiveLabs Start Guide
+# Start Guide
 
 ## Introduction
 

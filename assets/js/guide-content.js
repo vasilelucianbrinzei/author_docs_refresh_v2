@@ -208,7 +208,7 @@ window.authorGuideContent = (function () {
           "Working directly in the production repository or forgetting to fork common as well.",
           "Waiting until late review to discover path, case, or Pages publication problems."
         ],
-        resourcesTitle: "Start here",
+        resourcesTitle: "Core references",
         resourcesIntro: "These are the two references most authors need before they fork, clone, and copy the sample structure.",
         resourceLinks: [
           resourceLink("Oracle LiveLabs repositories", officialLinks.oracleRepos, "Choose the product repository that will own the workshop in production."),
@@ -1064,9 +1064,9 @@ window.authorGuideContent = (function () {
       {
         id: "start-here",
         label: "Section 1",
-        title: "Start Here",
+        title: "Start Guide",
         accent: "red",
-        summary: "Start here first. This replaces the old behavior that jumped straight into Core Workflow and gives you the real orientation path before hands-on authoring.",
+        summary: "Start guide first. This replaces the old behavior that jumped straight into Core Workflow and gives you the real orientation path before hands-on authoring.",
         purpose: "Use this section when you need the route, the WMS status model, or the GitHub organization model before you start building.",
         highlights: [
           "Open the custom home page first, not the markdown nav.",
@@ -1101,7 +1101,7 @@ window.authorGuideContent = (function () {
               "Toolkit      -> one blocker, one answer",
               "Full Guide   -> section-by-section reference",
               "",
-              "Start Here exists so you do not guess which path comes next."
+              "Start Guide exists so you do not guess which path comes next."
             ].join("\n"),
             sourceHref: labLink("start-here"),
             sourceLabel: "Open Canonical Section"
@@ -1318,7 +1318,7 @@ window.authorGuideContent = (function () {
               "Working in the production repository or forgetting to fork common as well.",
               "Waiting until late review to discover path, case, or GitHub Pages publication problems."
             ],
-            resourcesTitle: "Start here",
+            resourcesTitle: "Core references",
             resourcesIntro: "Most authors need these two references before they fork, clone, and copy the template.",
             resourceLinks: [
               resourceLink("Oracle LiveLabs repositories", officialLinks.oracleRepos, "Choose the repo that will own the workshop in production."),

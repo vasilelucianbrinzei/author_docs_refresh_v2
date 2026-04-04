@@ -75,6 +75,7 @@
   var maxUnlockedStep = 0;
   var suppressObserver = false;
 
+  var appRoot = document.getElementById("app");
   var modeNav = document.getElementById("modeNav");
   var breadcrumbTrail = document.getElementById("breadcrumbTrail");
   var hub = document.getElementById("hub");
@@ -96,6 +97,9 @@
   var bubbleSearch = document.getElementById("bubbleSearch");
   var clearSearch = document.getElementById("clearSearch");
   var tagPills = Array.from(document.querySelectorAll(".tag-pill"));
+  var guideLayout = document.querySelector(".guide-layout");
+  var guideSidebar = document.querySelector(".guide-sidebar");
+  var guideSidebarCard = document.querySelector(".guide-sidebar-card");
   var guideSectionNav = document.getElementById("guideSectionNav");
   var guideSectionMount = document.getElementById("guideSectionMount");
   var searchResultsMount = document.getElementById("searchResults");
@@ -114,6 +118,7 @@
   var imageLightboxCaption = document.getElementById("imageLightboxCaption");
   var imageLightboxClose = document.getElementById("imageLightboxClose");
   var lastExpandedFigure = null;
+  var guideSidebarFrame = 0;
 
   bubbleModalElement.addEventListener("hidden.bs.modal", function () {
     closeImageLightbox({ announce: false, restoreFocus: false });
@@ -130,6 +135,19 @@
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;");
+  }
+
+  function rootCssPx(name, fallback) {
+    var styles;
+    var value;
+
+    if (!appRoot) {
+      return fallback;
+    }
+
+    styles = window.getComputedStyle(appRoot);
+    value = parseFloat(styles.getPropertyValue(name));
+    return Number.isFinite(value) ? value : fallback;
   }
 
   function normalizeText(value) {
@@ -243,6 +261,7 @@
     if (
       state.mode === "beginner" &&
       progressShell &&
+      window.innerWidth <= 1199 &&
       !beginnerMode.classList.contains("d-none") &&
       target &&
       target !== beginnerMode
@@ -264,6 +283,61 @@
     window.scrollTo({
       top: Math.max(0, top),
       behavior: smoothBehavior()
+    });
+  }
+
+  function resetGuideSidebar() {
+    if (!guideSidebar) {
+      return;
+    }
+
+    guideSidebar.style.position = "";
+    guideSidebar.style.top = "";
+    guideSidebar.style.left = "";
+    guideSidebar.style.width = "";
+  }
+
+  function syncGuideSidebar() {
+    var navHeight;
+    var topOffset;
+    var layoutRect;
+    var layoutTop;
+    var naturalLeft = rootCssPx("--guide-sidebar-offset", -20);
+    var fixedLeft;
+    var sidebarWidth = rootCssPx("--guide-sidebar-width", 214);
+
+    if (!guideLayout || !guideSidebar || !guideSidebarCard || window.innerWidth <= 1199 || state.mode !== "guide") {
+      resetGuideSidebar();
+      return;
+    }
+
+    navHeight = modeNav && !modeNav.classList.contains("d-none") ? modeNav.getBoundingClientRect().height : 0;
+    topOffset = Math.ceil(navHeight + 8);
+    layoutRect = guideLayout.getBoundingClientRect();
+    layoutTop = window.pageYOffset + layoutRect.top;
+    fixedLeft = Math.round(layoutRect.left + naturalLeft);
+    guideSidebar.style.width = sidebarWidth + "px";
+
+    if (window.pageYOffset + topOffset <= layoutTop) {
+      guideSidebar.style.position = "absolute";
+      guideSidebar.style.top = "0px";
+      guideSidebar.style.left = naturalLeft + "px";
+      return;
+    }
+
+    guideSidebar.style.position = "fixed";
+    guideSidebar.style.top = topOffset + "px";
+    guideSidebar.style.left = fixedLeft + "px";
+  }
+
+  function scheduleGuideSidebarSync() {
+    if (guideSidebarFrame) {
+      return;
+    }
+
+    guideSidebarFrame = window.requestAnimationFrame(function () {
+      guideSidebarFrame = 0;
+      syncGuideSidebar();
     });
   }
 
@@ -894,6 +968,7 @@
 
     renderGuideNav();
     decorateExpandableMedia(guideSectionMount);
+    scheduleGuideSidebarSync();
     updateBreadcrumb();
   }
 
@@ -1134,7 +1209,7 @@
       searchSummary.textContent = "Enter keywords or a short question in the menu search. Results link back into the exact guided step, toolkit card, or full-guide section that best matches the query.";
       searchCountChip.textContent = "0 results";
       searchResultsMount.innerHTML = "";
-      searchEmptyState.innerHTML = "Use the centered search in the menu to search by keywords such as <strong>WMS</strong>, <strong>Self QA</strong>, <strong>GitHub Pages</strong>, <strong>validator</strong>, or a short question such as <strong>how do I publish</strong>.";
+      searchEmptyState.innerHTML = "Use the search field in the menu to search by keywords such as <strong>WMS</strong>, <strong>Self QA</strong>, <strong>GitHub Pages</strong>, <strong>validator</strong>, or a short question such as <strong>how do I publish</strong>.";
       searchEmptyState.classList.remove("d-none");
       updateBreadcrumb();
       return;
@@ -1334,6 +1409,8 @@
       }, prefersReducedMotion ? 0 : 220);
     }
 
+    scheduleGuideSidebarSync();
+
     if (config.announce !== false) {
       if (mode === "hub") {
         setLiveMessage("Returned to the guide home.");
@@ -1342,7 +1419,7 @@
       } else if (mode === "explorer") {
         setLiveMessage("Reference toolkit opened.");
       } else if (mode === "guide") {
-        setLiveMessage("Full Guide opened at " + (currentGuideSection() ? currentGuideSection().title : "Start Here") + ".");
+        setLiveMessage("Full Guide opened at " + (currentGuideSection() ? currentGuideSection().title : "Start Guide") + ".");
       } else if (mode === "search") {
         setLiveMessage("Search results opened.");
       }
@@ -1685,6 +1762,9 @@
     applyHash(window.location.hash);
   });
 
+  window.addEventListener("scroll", scheduleGuideSidebarSync, { passive: true });
+  window.addEventListener("resize", scheduleGuideSidebarSync);
+
   decorateExpandableMedia(document);
   renderGuideNav();
   updateNav();
@@ -1693,4 +1773,5 @@
   renderExplorer();
   buildSearchIndex();
   applyHash(window.location.hash);
+  scheduleGuideSidebarSync();
 }());

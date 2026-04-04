@@ -2290,14 +2290,14 @@
     #app .guide-layout {
       display: block;
       position: relative;
-      margin-top: 1.5rem;
+      margin-top: 2rem;
     }
 
     #app .guide-sidebar {
-      position: fixed;
-      top: 6rem;
-      left: max(12px, calc((100vw - min(1320px, 100vw - 24px)) / 2));
-      width: 300px;
+      position: absolute;
+      top: 0;
+      left: var(--guide-sidebar-offset);
+      width: var(--guide-sidebar-width);
       align-self: start;
     }
 
@@ -2311,20 +2311,20 @@
     }
 
     #app .guide-sidebar-card .card-body {
-      padding: 1.1rem 1rem 1rem;
+      padding: 0.8rem 0.72rem 0.78rem;
       display: grid;
       gap: 0.1rem;
     }
 
     #app .guide-sidebar-card .panel-kicker {
       display: block;
-      margin-bottom: 0.85rem;
+      margin-bottom: 0.65rem;
     }
 
     #app .guide-nav-stack {
       display: grid;
-      gap: 0.9rem;
-      max-height: calc(100vh - 8rem);
+      gap: 0.5rem;
+      max-height: calc(100vh - 7.2rem);
       overflow-y: auto;
       padding-right: 0.2rem;
     }
@@ -2333,10 +2333,10 @@
       position: relative;
       width: 100%;
       border: 1px solid rgba(212, 207, 202, 0.92);
-      border-radius: 24px;
+      border-radius: 18px;
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), var(--accent-wash));
       color: var(--ink);
-      padding: 1rem 1rem 1rem 1.2rem;
+      padding: 0.72rem 0.72rem 0.72rem 0.92rem;
       text-align: left;
       box-shadow: 0 12px 24px rgba(32, 30, 28, 0.06);
       overflow: hidden;
@@ -2345,8 +2345,8 @@
     #app .guide-nav-link::before {
       content: "";
       position: absolute;
-      inset: 0.85rem auto 0.85rem 0;
-      width: 0.34rem;
+      inset: 0.7rem auto 0.7rem 0;
+      width: 0.28rem;
       border-radius: 0 999px 999px 0;
       background: var(--accent-bar);
     }
@@ -2360,16 +2360,16 @@
 
     #app .guide-nav-link small {
       color: var(--ink-soft);
-      font-size: 0.74rem;
+      font-size: 0.63rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       font-weight: 800;
-      margin-bottom: 0.35rem;
+      margin-bottom: 0.22rem;
     }
 
     #app .guide-nav-link strong {
-      font-size: 1rem;
-      line-height: 1.4;
+      font-size: 0.88rem;
+      line-height: 1.28;
       font-weight: 900;
     }
 
@@ -2385,7 +2385,7 @@
     }
 
     #app .guide-stage {
-      margin-left: calc(300px + 1.85rem);
+      margin-left: calc(var(--guide-sidebar-width) + 0.65rem);
       min-width: 0;
     }
 
@@ -2710,8 +2710,8 @@
 
     #app .guide-lab-flow {
       display: grid;
-      grid-template-columns: minmax(0, 1.15fr) minmax(19rem, 0.9fr);
-      gap: 1rem;
+      grid-template-columns: minmax(0, 1.28fr) minmax(25rem, 1fr);
+      gap: 1.15rem;
       align-items: start;
     }
 
@@ -3015,6 +3015,9 @@
     #app {
       --violet: var(--rose);
       --violet-deep: #9b382a;
+      --progress-rail-width: 9.4rem;
+      --guide-sidebar-width: 214px;
+      --guide-sidebar-offset: -20px;
     }
 
     #app .mode-nav {
@@ -3026,19 +3029,25 @@
       padding: 0.85rem 1rem;
     }
 
+    #app .nav-shell .container-fluid {
+      flex-wrap: nowrap;
+    }
+
     #app .nav-main-grid {
-      width: min(100%, 68rem);
+      flex: 1 1 auto;
+      width: auto;
+      max-width: none;
       display: grid;
-      grid-template-columns: minmax(26rem, 36rem) auto;
+      grid-template-columns: minmax(29rem, 36rem) minmax(0, 1fr);
       align-items: center;
-      gap: 1.6rem;
+      gap: 1rem;
       min-width: 0;
-      margin-left: auto;
+      margin-left: clamp(0.65rem, 1.5vw, 1.35rem);
     }
 
     #app .nav-group-all {
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       gap: 0.6rem;
       justify-content: flex-end;
       justify-self: end;
@@ -3046,7 +3055,8 @@
 
     #app .nav-search-form {
       width: 100%;
-      min-width: 22rem;
+      max-width: 36rem;
+      min-width: 0;
     }
 
     #app .nav-search-group {
@@ -3080,7 +3090,11 @@
 
     #app #beginnerMode {
       position: relative;
-      padding-top: 8rem;
+      padding-top: 2rem;
+    }
+
+    #app #beginnerMode > .container {
+      padding-left: calc(1rem + var(--progress-rail-width) + 0.95rem);
     }
 
     #app .nav-control.is-active,
@@ -3103,16 +3117,21 @@
 
     #app .progress-dock {
       position: fixed;
-      top: 5.6rem;
-      left: 0;
-      right: 0;
+      top: 6.55rem;
+      left: max(8px, calc((100vw - min(1320px, 100vw - 24px)) / 2) - 0.1rem);
+      right: auto;
+      width: var(--progress-rail-width);
       z-index: 136;
-      margin: 0 0 1rem;
-      padding-top: 0.35rem;
+      margin: 0;
+      padding-top: 0;
       pointer-events: none;
     }
 
     #app .progress-dock .container {
+      width: auto;
+      max-width: none;
+      margin: 0;
+      padding: 0;
       pointer-events: auto;
     }
 
@@ -3123,21 +3142,21 @@
       backdrop-filter: blur(16px);
       box-shadow: 0 16px 30px rgba(32, 30, 28, 0.08);
       display: grid;
-      grid-template-columns: minmax(9rem, 13rem) minmax(0, 1fr);
-      gap: 0.75rem;
-      align-items: center;
-      padding: 0.72rem 0.82rem;
+      grid-template-columns: 1fr;
+      gap: 0;
+      align-items: stretch;
+      padding: 0.55rem;
     }
 
     #app .progress-rail {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.5rem;
+      grid-template-columns: 1fr;
+      gap: 0.42rem;
     }
 
     #app .progress-button {
-      border-radius: 18px;
-      padding: 0.52rem 0.68rem;
-      gap: 0.5rem;
+      border-radius: 16px;
+      padding: 0.48rem 0.54rem;
+      gap: 0.45rem;
       background: rgba(245, 244, 242, 0.96);
     }
 
@@ -3147,9 +3166,7 @@
     }
 
     #app .progress-summary {
-      display: grid;
-      gap: 0.18rem;
-      padding-right: 0.2rem;
+      display: none;
     }
 
     #app .progress-eyebrow {
@@ -3161,15 +3178,15 @@
     }
 
     #app .progress-mark {
-      width: 1.8rem;
-      height: 1.8rem;
-      font-size: 0.8rem;
+      width: 1.55rem;
+      height: 1.55rem;
+      font-size: 0.74rem;
       box-shadow: 0 8px 18px rgba(32, 30, 28, 0.08);
     }
 
     #app .progress-label strong {
-      font-size: 0.84rem;
-      line-height: 1.25;
+      font-size: 0.76rem;
+      line-height: 1.2;
     }
 
     #app .progress-label small {
@@ -3501,12 +3518,22 @@
 
     @media (max-width: 1199.98px) {
       #app #beginnerMode {
-        padding-top: 10rem;
+        padding-top: 8.4rem;
+      }
+
+      #app #beginnerMode > .container {
+        padding-left: calc(var(--bs-gutter-x, 0.75rem) * 0.5);
       }
 
       #app .nav-main-grid {
         grid-template-columns: 1fr;
         align-items: stretch;
+        width: 100%;
+        margin-left: 0;
+      }
+
+      #app .nav-shell .container-fluid {
+        flex-wrap: wrap;
       }
 
       #app .nav-search-form {
@@ -3515,6 +3542,7 @@
 
       #app .nav-group-all {
         width: 100%;
+        flex-wrap: wrap;
         justify-content: flex-start;
         justify-self: stretch;
       }
@@ -3523,14 +3551,34 @@
         flex: 1 1 auto;
       }
 
+      #app .progress-dock {
+        top: 5.6rem;
+        left: 0;
+        right: 0;
+        width: auto;
+      }
+
+      #app .progress-dock .container {
+        width: auto;
+        max-width: var(--bs-breakpoint-xxl, 1320px);
+        padding-left: calc(var(--bs-gutter-x, 0.75rem) * 0.5);
+        padding-right: calc(var(--bs-gutter-x, 0.75rem) * 0.5);
+      }
+
       #app .progress-card {
         grid-template-columns: 1fr;
+        gap: 0.65rem;
+        padding: 0.7rem 0.75rem;
+      }
+
+      #app .progress-rail {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
     }
 
     @media (max-width: 767.98px) {
       #app #beginnerMode {
-        padding-top: 10.8rem;
+        padding-top: 9.6rem;
       }
 
       #app .nav-shell {
@@ -3543,15 +3591,6 @@
 
       #app .nav-group-all {
         gap: 0.5rem;
-      }
-
-      #app .progress-card {
-        gap: 0.65rem;
-        padding: 0.7rem 0.75rem;
-      }
-
-      #app .progress-rail {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
 
       #app .progress-button {
@@ -3611,7 +3650,7 @@
                 </span>
               </button>
 
-              <div class="nav-main-grid ms-xl-auto">
+              <div class="nav-main-grid">
                 <form class="nav-search-form" id="navSearchForm" role="search" aria-label="Search across the author guide">
                   <label class="visually-hidden" for="navSearchInput">Search the author guide</label>
                   <div class="search-group nav-search-group">
@@ -3747,7 +3786,7 @@
                     <p>Follow a short sequence from WMS request to GitHub setup to review and publish without making a new author read the entire documentation map first.</p>
                     <ul class="path-points">
                       <li>Three layers only: request, build, review.</li>
-                      <li>Sticky progress strip and Back / Next controls.</li>
+                      <li>Compact step rail and Back / Next controls.</li>
                       <li>Fast Track toggle when you want minimal explanation.</li>
                     </ul>
                     <button class="btn btn-primary btn-lg rounded-pill px-4" type="button" data-mode-target="beginner">Start Guided Path</button>
@@ -3796,14 +3835,14 @@
                 <button class="progress-button" type="button" data-step-target="1" aria-label="Jump to step 2">
                   <span class="progress-mark">2</span>
                   <span class="progress-label">
-                    <strong>Build + GitHub</strong>
+                    <strong>Build</strong>
                   </span>
                 </button>
 
                 <button class="progress-button" type="button" data-step-target="2" aria-label="Jump to step 3">
                   <span class="progress-mark">3</span>
                   <span class="progress-label">
-                    <strong>Review + Publish</strong>
+                    <strong>Publish</strong>
                   </span>
                 </button>
               </div>
@@ -3819,7 +3858,7 @@
                   <div class="mode-overline">Guided Path</div>
                   <h2 class="mode-title" id="beginnerHeading">Follow the shortest route from request to publish.</h2>
                   <p class="mode-copy">
-                    This path compresses the author journey into three layers: request the workshop, create the workshop in GitHub, then review and publish it. The progress strip stays visible under the main navigation so you always know where you are.
+                    This path compresses the author journey into three layers: request the workshop, create it in GitHub, then review and publish it. A compact step rail stays pinned on the left on desktop and shifts under the menu on smaller screens so you can move between steps without losing context.
                   </p>
                   <div class="mode-chip-row">
                     <span class="mode-chip">3 steps</span>
@@ -4135,7 +4174,7 @@ git push origin main
   "help": "my-team@oracle.com",
   "tutorials": [
     {
-      "title": "Start Here",
+      "title": "Start Guide",
       "filename": "./../../01-start-here/start-here.md"
     },
     {
@@ -4473,10 +4512,10 @@ https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-fol
                   <div class="mode-overline">Full Guide</div>
                   <h2 class="mode-title" id="guideHeading">Read the full author map in one custom Redwood-style view.</h2>
                   <p class="mode-copy">
-                    This mode starts at Start Here, keeps only the active sections from the original workshop guide, and turns them into section cards with concrete steps, copy-ready commands, and UI screenshots instead of a contents-only navigation shell.
+                    This mode starts at Start Guide, keeps only the active sections from the original workshop guide, and turns them into section cards with concrete steps, copy-ready commands, and UI screenshots instead of a contents-only navigation shell.
                   </p>
                   <div class="mode-chip-row">
-                    <span class="mode-chip">Starts at Start Here</span>
+                    <span class="mode-chip">Starts at Start Guide</span>
                     <span class="mode-chip">Source-backed steps</span>
                     <span class="mode-chip">Canonical lab links</span>
                   </div>

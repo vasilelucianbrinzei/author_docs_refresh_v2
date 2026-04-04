@@ -7,7 +7,7 @@
                   ],
     "tutorials":  [
                       {
-                          "title":  "Section 1: LiveLabs Start Guide",
+                          "title":  "Section 1: Start Guide",
                           "description":  "Use this orientation section to reopen the path-first home page, or jump directly to the background pages and guide branches when you already know what you need.",
                           "filename":  "./01-start-here/start-here.md"
                       },
