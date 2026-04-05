@@ -3,13 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Oracle LiveLabs Author Guide with guided-path and reference-toolkit standalone experiences.">
+  <meta name="description" content="Oracle LiveLabs Author Guide refresh with a guided path, reference toolkit, full guide, unified search, and a sample workshop demo.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='4' fill='%23C74634'/%3E%3C/svg%3E">
   <title>Oracle LiveLabs Author Guide</title>
   <script>
     (function () {
       var url = new URL(window.location.href);
+      var experience = url.searchParams.get("experience");
       var lab = url.searchParams.get("lab");
       var target;
+
+      if (experience === "classic") {
+        target = new URL("./workshops/livelabs/index.html?lab=start-here", url);
+        window.location.replace(target.toString());
+        return;
+      }
 
       if (!lab) {
         return;
@@ -335,11 +343,11 @@
       pointer-events: none;
     }
 
-    #app .home-side-card.is-guided::after {
+    #app .home-side-card.is-classic::after {
       background: radial-gradient(circle, rgba(199, 70, 52, 0.6), transparent 68%);
     }
 
-    #app .home-side-card.is-toolkit::after {
+    #app .home-side-card.is-modern::after {
       background: radial-gradient(circle, rgba(67, 124, 148, 0.54), transparent 68%);
     }
 
@@ -633,11 +641,11 @@
       pointer-events: none;
     }
 
-    #app .path-card.beginner::after {
+    #app .path-card.classic::after {
       background: radial-gradient(circle, rgba(199, 70, 52, 0.72), transparent 68%);
     }
 
-    #app .path-card.explorer::after {
+    #app .path-card.modern::after {
       background: radial-gradient(circle, rgba(67, 124, 148, 0.68), transparent 68%);
     }
 
@@ -1803,7 +1811,7 @@
     #app .garden-shell::before,
     #app .rabbit-step[data-depth="1"]::after,
     #app .rabbit-step[data-depth="1"] .step-shell::after,
-    #app .path-card.beginner::after {
+    #app .path-card.classic::after {
       background: radial-gradient(circle, rgba(199, 70, 52, 0.14), transparent 68%);
     }
 
@@ -1812,7 +1820,7 @@
     #app .garden-shell::after,
     #app .rabbit-step[data-depth="2"]::after,
     #app .rabbit-step[data-depth="2"] .step-shell::after,
-    #app .path-card.explorer::after {
+    #app .path-card.modern::after {
       background: radial-gradient(circle, rgba(67, 124, 148, 0.12), transparent 68%);
     }
 
@@ -3024,8 +3032,8 @@
       --violet: var(--rose);
       --violet-deep: #9b382a;
       --progress-rail-width: 9.4rem;
-      --guide-sidebar-width: 190px;
-      --guide-sidebar-offset: -34px;
+      --guide-sidebar-width: 176px;
+      --guide-sidebar-offset: -44px;
     }
 
     #app .mode-nav {
@@ -3045,26 +3053,29 @@
       flex: 1 1 auto;
       width: auto;
       max-width: none;
-      display: grid;
-      grid-template-columns: minmax(27rem, 33rem) minmax(0, 1fr);
+      display: flex;
       align-items: center;
-      gap: 1.5rem;
+      gap: clamp(1.55rem, 2vw, 2.15rem);
+      justify-content: space-between;
       min-width: 0;
-      margin-left: clamp(0.3rem, 1vw, 0.85rem);
+      margin-left: clamp(0.1rem, 0.45vw, 0.4rem);
     }
 
     #app .nav-group-all {
       display: flex;
       flex-wrap: nowrap;
-      gap: 0.55rem;
+      gap: 0.48rem;
       justify-content: flex-end;
-      justify-self: end;
+      align-items: center;
+      margin-left: auto;
+      flex: 0 0 auto;
     }
 
     #app .nav-search-form {
       width: 100%;
-      max-width: 33rem;
+      max-width: 32.5rem;
       min-width: 0;
+      flex: 1 1 31rem;
     }
 
     #app .nav-search-group {
@@ -3103,15 +3114,41 @@
 
     #app .nav-control,
     #app .nav-guide-link {
-      min-height: 2.65rem;
-      border-radius: 0.88rem;
-      padding: 0.62rem 0.95rem;
+      min-height: 2.54rem;
+      border-radius: 0.74rem;
+      padding: 0.54rem 0.88rem;
       box-shadow: none;
+      font-size: 0.94rem;
+      white-space: nowrap;
     }
 
     #app .nav-control:hover,
     #app .nav-guide-link:hover {
       box-shadow: 0 10px 18px rgba(32, 30, 28, 0.08);
+    }
+
+    #app .hero-actions,
+    #app .path-card-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.72rem;
+      align-items: flex-start;
+    }
+
+    #app .hero-actions .btn,
+    #app .path-card-actions .btn {
+      margin: 0;
+      max-width: 100%;
+    }
+
+    #app .path-card .card-body {
+      display: flex;
+      flex-direction: column;
+      gap: 0.95rem;
+    }
+
+    #app .path-card-actions {
+      margin-top: auto;
     }
 
     #app #beginnerMode {
@@ -3120,7 +3157,8 @@
     }
 
     #app #beginnerMode > .container {
-      padding-left: calc(1rem + var(--progress-rail-width) + 0.95rem);
+      padding-left: calc(var(--bs-gutter-x, 1.5rem) * 0.5);
+      padding-right: calc(var(--bs-gutter-x, 1.5rem) * 0.5);
     }
 
     #app .nav-control.is-active,
@@ -3141,24 +3179,313 @@
       box-shadow: 0 8px 18px rgba(172, 62, 46, 0.18);
     }
 
-    #app .progress-dock {
-      position: fixed;
-      top: 6.55rem;
-      left: max(8px, calc((100vw - min(1320px, 100vw - 24px)) / 2) - 0.1rem);
-      right: auto;
-      width: var(--progress-rail-width);
-      z-index: 136;
-      margin: 0;
-      padding-top: 0;
-      pointer-events: none;
+    #app .video-placeholder-card {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      gap: 0.95rem;
+      margin: 0 0 1.25rem;
+      padding: 1rem;
+      border: 1px solid rgba(212, 207, 202, 0.92);
+      border-radius: 1.5rem;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(246, 242, 238, 0.96));
+      box-shadow: 0 16px 32px rgba(32, 30, 28, 0.08);
     }
 
-    #app .progress-dock .container {
-      width: auto;
-      max-width: none;
+    #app .video-placeholder-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 0.28rem;
+      background: linear-gradient(90deg, var(--sky), var(--rose));
+    }
+
+    #app .video-placeholder-header {
+      display: grid;
+      gap: 0.3rem;
+    }
+
+    #app .video-placeholder-header h3,
+    #app .video-placeholder-header p {
       margin: 0;
-      padding: 0;
+    }
+
+    #app .video-placeholder-header p {
+      color: var(--ink-soft);
+      line-height: 1.7;
+    }
+
+    #app .video-player-shell {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    #app .video-player-topbar,
+    #app .video-player-controls,
+    #app .video-control-group {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    #app .video-player-topbar {
+      justify-content: space-between;
+      color: var(--ink-soft);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    #app .video-placeholder-screen {
+      position: relative;
+      overflow: hidden;
+      min-height: 15.5rem;
+      border-radius: 1.35rem;
+      border: 1px solid rgba(212, 207, 202, 0.92);
+      background:
+        radial-gradient(circle at top left, rgba(199, 70, 52, 0.16), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(67, 124, 148, 0.18), transparent 34%),
+        linear-gradient(135deg, #1f2428 0%, #2d3940 100%);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+
+    #app .video-placeholder-screen::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 4rem;
+      height: 4rem;
+      margin-left: -2rem;
+      margin-top: -2rem;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.22);
+    }
+
+    #app .video-placeholder-screen::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin-left: -0.28rem;
+      margin-top: -0.72rem;
+      width: 0;
+      height: 0;
+      border-top: 0.72rem solid transparent;
+      border-bottom: 0.72rem solid transparent;
+      border-left: 1.08rem solid #fff;
+    }
+
+    #app .video-scene-strip {
+      position: absolute;
+      left: 1rem;
+      top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      z-index: 1;
+    }
+
+    #app .video-scene-strip span,
+    #app .video-control-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 1.9rem;
+      padding: 0.36rem 0.72rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(15, 22, 27, 0.58);
+      color: rgba(255, 255, 255, 0.88);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      backdrop-filter: blur(10px);
+    }
+
+    #app .video-control-pill.is-primary {
+      border-color: rgba(255, 255, 255, 0.24);
+      background: linear-gradient(135deg, rgba(199, 70, 52, 0.88), rgba(67, 124, 148, 0.82));
+      color: #fff;
+    }
+
+    #app .video-placeholder-copy {
+      position: absolute;
+      left: 1rem;
+      right: 1rem;
+      bottom: 1rem;
+      display: grid;
+      gap: 0.28rem;
+      padding: 0.92rem 1rem;
+      border-radius: 1rem;
+      background: rgba(15, 22, 27, 0.72);
+      color: #fff;
+      backdrop-filter: blur(10px);
+    }
+
+    #app .video-placeholder-copy strong,
+    #app .video-placeholder-copy span {
+      display: block;
+    }
+
+    #app .video-placeholder-copy span {
+      color: rgba(255, 255, 255, 0.82);
+      line-height: 1.55;
+      font-size: 0.88rem;
+    }
+
+    #app .video-player-controls {
+      justify-content: space-between;
+      padding: 0.7rem 0.82rem;
+      border-radius: 1rem;
+      background: rgba(22, 28, 34, 0.92);
+      border: 1px solid rgba(212, 207, 202, 0.16);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+    }
+
+    #app .video-control-group.is-right {
+      justify-content: flex-end;
+    }
+
+    #app .video-progress-track {
+      flex: 1 1 15rem;
+      min-width: 10rem;
+      height: 0.58rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      overflow: hidden;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+    }
+
+    #app .video-progress-track span {
+      display: block;
+      width: 34%;
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--rose), var(--sky));
+    }
+
+    #app .video-player-footnote {
+      color: var(--ink-soft);
+      font-size: 0.82rem;
+      line-height: 1.58;
+    }
+
+    #app .video-placeholder-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    #app .video-placeholder-features span {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.45rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(212, 207, 202, 0.92);
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--ink-soft);
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    #app .back-to-top {
+      position: fixed;
+      right: clamp(0.95rem, 1.9vw, 1.5rem);
+      bottom: clamp(1rem, 2.1vw, 1.45rem);
+      z-index: 138;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      min-height: 2.85rem;
+      padding: 0.68rem 0.92rem;
+      border-radius: 0.95rem;
+      border: 1px solid rgba(197, 69, 50, 0.16);
+      background: rgba(255, 255, 255, 0.96);
+      color: var(--ink);
+      box-shadow: 0 16px 32px rgba(32, 30, 28, 0.12);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(0.75rem);
+      pointer-events: none;
+      transition: opacity 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+
+    #app .guide-layout {
+      margin-top: 2.25rem;
+    }
+
+    #app .guide-sidebar-card .card-body {
+      padding: 0.98rem 0.78rem 0.92rem;
+      gap: 0.5rem;
+    }
+
+    #app .guide-sidebar-card .panel-kicker {
+      margin-bottom: 0.45rem;
+      padding-left: 0.34rem;
+    }
+
+    #app .guide-nav-stack {
+      gap: 0.65rem;
+    }
+
+    #app .guide-nav-link {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.18rem;
+      min-height: 4.4rem;
+      padding: 0.82rem 0.72rem 0.82rem 1rem;
+    }
+
+    #app .guide-stage {
+      margin-left: calc(var(--guide-sidebar-width) + 1.15rem);
+    }
+
+    #app .back-to-top.is-visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
       pointer-events: auto;
+    }
+
+    #app .back-to-top:hover,
+    #app .back-to-top:focus-visible {
+      border-color: rgba(197, 69, 50, 0.3);
+      box-shadow: 0 20px 34px rgba(172, 62, 46, 0.16);
+    }
+
+    #app .back-to-top:focus-visible {
+      outline: 3px solid rgba(199, 70, 52, 0.22);
+      outline-offset: 3px;
+    }
+
+    #app .back-to-top-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.3rem;
+      height: 1.3rem;
+      border-radius: 999px;
+      background: rgba(199, 70, 52, 0.1);
+      color: var(--rose);
+      flex: 0 0 auto;
+    }
+
+    #app .back-to-top-icon svg {
+      width: 0.9rem;
+      height: 0.9rem;
+    }
+
+    #app .back-to-top-label {
+      font-size: 0.88rem;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: 0.01em;
     }
 
     #app .progress-card {
@@ -3552,14 +3879,16 @@
 
     @media (max-width: 1199.98px) {
       #app #beginnerMode {
-        padding-top: 8.4rem;
+        padding-top: 2rem;
       }
 
       #app #beginnerMode > .container {
         padding-left: calc(var(--bs-gutter-x, 0.75rem) * 0.5);
+        padding-right: calc(var(--bs-gutter-x, 0.75rem) * 0.5);
       }
 
       #app .nav-main-grid {
+        display: grid;
         grid-template-columns: 1fr;
         align-items: stretch;
         width: 100%;
@@ -3587,6 +3916,7 @@
 
       #app .nav-group-all .nav-control {
         flex: 1 1 auto;
+        white-space: normal;
       }
 
       #app .progress-dock {
@@ -3601,6 +3931,11 @@
         max-width: var(--bs-breakpoint-xxl, 1320px);
         padding-left: calc(var(--bs-gutter-x, 0.75rem) * 0.5);
         padding-right: calc(var(--bs-gutter-x, 0.75rem) * 0.5);
+      }
+
+      #app .back-to-top {
+        right: 1rem;
+        bottom: 1rem;
       }
 
       #app .progress-card {
@@ -3666,6 +4001,530 @@
       #app #searchBackButton {
         width: 100%;
       }
+
+      #app .back-to-top {
+        min-width: 2.85rem;
+        padding-inline: 0.72rem;
+      }
+
+      #app .back-to-top-label {
+        display: none;
+      }
+    }
+
+    #app .route-map-card .card-body {
+      display: grid;
+      gap: 1.35rem;
+    }
+
+    #app #homeRouteMap {
+      display: grid;
+    }
+
+    #app .route-map-board {
+      display: grid;
+      gap: 1rem;
+    }
+
+    #app .route-map-entry {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) auto;
+      gap: 1rem;
+      align-items: center;
+      padding: 1.2rem 1.25rem;
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(247, 242, 238, 0.96));
+      border: 1px solid rgba(212, 207, 202, 0.92);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.72);
+    }
+
+    #app .route-map-entry h3 {
+      margin: 0 0 0.45rem;
+      font-size: clamp(1.3rem, 1.7vw, 1.7rem);
+      line-height: 1.08;
+    }
+
+    #app .route-map-entry p,
+    #app .guide-nav-summary,
+    #app .route-map-ribbon span {
+      margin: 0;
+      color: var(--ink-soft);
+      line-height: 1.68;
+    }
+
+    #app .route-map-entry-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      justify-content: flex-end;
+    }
+
+    #app .route-map-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    #app .route-map-branch {
+      --route-accent: var(--rose);
+      position: relative;
+      display: grid;
+      gap: 0.72rem;
+      padding: 1rem 1rem 0.94rem;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(212, 207, 202, 0.92);
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.74),
+        0 16px 34px rgba(32, 30, 28, 0.06);
+      overflow: hidden;
+    }
+
+    #app .route-map-branch::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 0.32rem;
+      background: linear-gradient(90deg, var(--route-accent), rgba(255, 255, 255, 0));
+    }
+
+    #app .route-map-branch[data-accent="red"] {
+      --route-accent: var(--rose);
+    }
+
+    #app .route-map-branch[data-accent="ocean"] {
+      --route-accent: var(--sky);
+    }
+
+    #app .route-map-branch[data-accent="pine"] {
+      --route-accent: var(--mint);
+    }
+
+    #app .route-map-branch[data-accent="sienna"] {
+      --route-accent: var(--gold);
+    }
+
+    #app .route-map-branch-head,
+    #app .guide-nav-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.8rem;
+    }
+
+    #app .route-map-branch-head small {
+      display: block;
+      color: var(--ink-soft);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 800;
+      margin-bottom: 0.2rem;
+    }
+
+    #app .route-map-branch-head h4 {
+      margin: 0;
+      font-size: 1.08rem;
+      line-height: 1.16;
+    }
+
+    #app .route-map-branch p {
+      margin: 0;
+      color: var(--ink-soft);
+      line-height: 1.52;
+      font-size: 0.92rem;
+    }
+
+    #app .route-map-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 0.56rem;
+    }
+
+    #app .route-map-list li {
+      display: grid;
+      gap: 0.16rem;
+      padding: 0.68rem 0.76rem;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(212, 207, 202, 0.88);
+    }
+
+    #app .route-map-list li strong {
+      display: block;
+      font-size: 0.9rem;
+      line-height: 1.38;
+    }
+
+    #app .route-map-list li span {
+      display: block;
+      color: var(--ink-soft);
+      line-height: 1.42;
+      font-size: 0.8rem;
+    }
+
+    #app .route-map-list.is-ordered {
+      counter-reset: home-route-step;
+    }
+
+    #app .route-map-list.is-ordered li {
+      grid-template-columns: auto minmax(0, 1fr);
+      column-gap: 0.8rem;
+      align-items: start;
+    }
+
+    #app .route-map-list.is-ordered li::before {
+      counter-increment: home-route-step;
+      content: counter(home-route-step);
+      width: 1.8rem;
+      height: 1.8rem;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 900;
+      color: #fff;
+      background: linear-gradient(135deg, var(--route-accent), var(--sky));
+      box-shadow: 0 10px 18px rgba(32, 30, 28, 0.12);
+      margin-top: 0.05rem;
+    }
+
+    #app .route-map-list.is-ordered li strong,
+    #app .route-map-list.is-ordered li span {
+      grid-column: 2;
+    }
+
+    #app .route-map-branch-foot {
+      color: var(--ink-soft);
+      font-size: 0.82rem;
+      line-height: 1.45;
+    }
+
+    #app .route-map-ribbon {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 1.1rem;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(244, 239, 234, 0.95));
+      border: 1px solid rgba(212, 207, 202, 0.92);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.74);
+    }
+
+    #app .route-map-ribbon strong {
+      display: block;
+      margin-bottom: 0.18rem;
+      font-size: 1rem;
+    }
+
+    #app .guide-layout {
+      display: grid;
+      gap: 0.9rem;
+      margin-top: 2.1rem;
+    }
+
+    #app .guide-quick-nav {
+      position: sticky;
+      top: 5.9rem;
+      z-index: 22;
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 0.6rem;
+      overflow-x: auto;
+      padding: 0.4rem;
+      border-radius: 999px;
+      border: 1px solid rgba(212, 207, 202, 0.9);
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: 0 14px 26px rgba(32, 30, 28, 0.08);
+      scrollbar-width: none;
+    }
+
+    #app .guide-quick-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    #app .guide-quick-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex: 0 0 auto;
+      min-height: 2.45rem;
+      padding: 0.55rem 0.92rem;
+      border-radius: 999px;
+      border: 1px solid rgba(212, 207, 202, 0.9);
+      background: rgba(255, 255, 255, 0.96);
+      color: var(--ink);
+      box-shadow: 0 10px 18px rgba(32, 30, 28, 0.05);
+    }
+
+    #app .guide-quick-link span {
+      color: var(--ink-soft);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    #app .guide-quick-link strong {
+      font-size: 0.86rem;
+      line-height: 1.2;
+      font-weight: 800;
+    }
+
+    #app .guide-quick-link.is-active {
+      border-color: rgba(199, 70, 52, 0.24);
+      background: linear-gradient(135deg, rgba(255, 246, 244, 0.98), rgba(245, 250, 252, 0.98));
+      box-shadow: 0 16px 28px rgba(172, 62, 46, 0.12);
+    }
+
+    #app .guide-map-shell {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      gap: 0.78rem;
+      padding: 0.95rem 1rem 1rem;
+      border-radius: 32px;
+      border: 1px solid rgba(212, 207, 202, 0.92);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(246, 241, 237, 0.98));
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.76),
+        0 20px 38px rgba(32, 30, 28, 0.08);
+    }
+
+    #app .guide-map-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 0.34rem;
+      background: linear-gradient(90deg, var(--rose), var(--sky), var(--mint));
+    }
+
+    #app .guide-map-shell::after {
+      content: "";
+      position: absolute;
+      right: -3rem;
+      top: -3rem;
+      width: 12rem;
+      height: 12rem;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(67, 124, 148, 0.14), transparent 72%);
+      pointer-events: none;
+    }
+
+    #app .guide-map-head {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) auto;
+      gap: 1rem;
+      align-items: start;
+    }
+
+    #app .guide-map-copy {
+      display: grid;
+      gap: 0.28rem;
+    }
+
+    #app .guide-map-copy h3 {
+      margin: 0;
+      font-size: clamp(1.15rem, 1.55vw, 1.45rem);
+      line-height: 1.08;
+    }
+
+    #app .guide-map-copy p {
+      margin: 0;
+      max-width: 46rem;
+      color: var(--ink-soft);
+      line-height: 1.52;
+      font-size: 0.92rem;
+    }
+
+    #app .guide-map-key {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 0.6rem;
+      align-self: start;
+    }
+
+    #app .guide-map-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.44rem 0.72rem;
+      border-radius: 999px;
+      border: 1px solid rgba(212, 207, 202, 0.9);
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--ink-soft);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      box-shadow: 0 10px 20px rgba(32, 30, 28, 0.05);
+    }
+
+    #app .guide-nav-stack {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.75rem;
+      max-height: none;
+      overflow: visible;
+      padding-right: 0;
+    }
+
+    #app .guide-nav-link {
+      display: grid;
+      gap: 0.56rem;
+      min-height: 0;
+      padding: 0.88rem 0.9rem 0.88rem 1rem;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), var(--accent-wash));
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.82),
+        0 16px 28px rgba(32, 30, 28, 0.08);
+    }
+
+    #app .guide-nav-head {
+      align-items: center;
+    }
+
+    #app .guide-nav-meta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.26rem 0.58rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.86);
+      color: var(--ink-soft);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 800;
+      box-shadow: 0 8px 16px rgba(32, 30, 28, 0.06);
+      flex: 0 0 auto;
+    }
+
+    #app .guide-nav-link small {
+      margin-bottom: 0.22rem;
+      font-size: 0.64rem;
+    }
+
+    #app .guide-nav-link strong {
+      font-size: 0.92rem;
+      line-height: 1.32;
+    }
+
+    #app .guide-nav-link p {
+      margin: 0;
+      color: var(--ink-soft);
+      line-height: 1.46;
+      font-size: 0.84rem;
+    }
+
+    #app .guide-nav-preview {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    #app .guide-nav-preview span {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.38rem 0.62rem;
+      border-radius: 999px;
+      border: 1px solid rgba(212, 207, 202, 0.86);
+      background: rgba(255, 255, 255, 0.84);
+      color: var(--ink);
+      font-size: 0.73rem;
+      line-height: 1.3;
+      box-shadow: 0 8px 16px rgba(32, 30, 28, 0.05);
+    }
+
+    #app .guide-nav-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-top: auto;
+      padding-top: 0.62rem;
+      border-top: 1px solid rgba(212, 207, 202, 0.78);
+    }
+
+    #app .guide-nav-state {
+      color: var(--accent-strong);
+      font-size: 0.74rem;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    #app .guide-nav-arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.82rem;
+      height: 1.82rem;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(212, 207, 202, 0.86);
+      color: var(--accent-strong);
+      font-size: 0.92rem;
+      box-shadow: 0 10px 18px rgba(32, 30, 28, 0.06);
+    }
+
+    #app .guide-nav-link.is-active {
+      transform: translateY(-2px);
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.86),
+        0 24px 42px rgba(32, 30, 28, 0.12);
+    }
+
+    #app .guide-nav-link.is-active .guide-nav-arrow {
+      background: linear-gradient(135deg, var(--accent-strong), var(--rose));
+      border-color: transparent;
+      color: #fff;
+    }
+
+    #app .guide-stage {
+      margin-left: 0;
+    }
+
+    @media (max-width: 991.98px) {
+      #app .route-map-entry,
+      #app .route-map-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #app .route-map-entry-actions,
+      #app .route-map-ribbon {
+        align-items: stretch;
+      }
+
+      #app .route-map-entry-actions .btn,
+      #app .route-map-ribbon .btn {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 767.98px) {
+      #app .guide-quick-nav {
+        top: 6.5rem;
+        border-radius: 1rem;
+      }
+
+      #app .guide-map-head,
+      #app .guide-nav-stack {
+        grid-template-columns: 1fr;
+      }
+
+      #app .guide-map-key {
+        justify-content: flex-start;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -3678,6 +4537,8 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="./assets/css/redwood-video-player.css">
+  <link rel="stylesheet" href="./assets/css/guide-refresh-overrides.css">
 </head>
 <body>
   <div id="app">
@@ -3727,7 +4588,7 @@
         </div>
       </header>
 
-      <!-- Entry Hub -->
+      <!-- Entry Hub / Implementation selector -->
       <section class="hub-screen" id="hub" aria-labelledby="hubHeading">
         <div class="container">
           <div class="hub-hero">
@@ -3744,118 +4605,98 @@
                     <span class="hero-lockup-note">Author guide</span>
                   </span>
                 </div>
-                <div class="hero-overline">Guided path plus reference toolkit</div>
-                <h1 class="hero-title" id="hubHeading">Choose the shortest path for your task.</h1>
+                <div class="hero-overline">One front door, multiple working routes</div>
+                <h1 class="hero-title" id="hubHeading">Start from the route that matches the work you need to do.</h1>
                 <p class="hero-subtitle">
-                  New authors can move through three guided layers from request to publish. Returning authors can jump straight to the feature, tool, or QA answer they need.
+                  Follow the Guided Path for sequence, open Toolkit for one answer, use Full Guide for the whole map, or inspect the sample workshop demo.
                 </p>
                 <div class="hero-actions">
-                  <button class="btn btn-primary btn-lg rounded-pill px-4" type="button" data-mode-target="beginner">Choose Guided Path</button>
+                  <button class="btn btn-primary btn-lg rounded-pill px-4" type="button" data-mode-target="beginner">Open Guided Path</button>
                   <button class="btn btn-outline-primary btn-lg rounded-pill px-4" type="button" data-mode-target="explorer">Open Toolkit</button>
                   <button class="btn btn-outline-secondary btn-lg rounded-pill px-4" type="button" data-guide-target="start-here">Open Full Guide</button>
+                  <a class="btn btn-outline-secondary btn-lg rounded-pill px-4" href="./sample-workshops/clinical-first-responder-rag/index.html">Open Sample Workshop Demo</a>
                 </div>
                 <div class="hub-stats mt-4">
-                  <span class="stat-chip">3 guided layers</span>
-                  <span class="stat-chip">Searchable toolkit</span>
-                  <span class="stat-chip">Publish-ready checks</span>
+                  <span class="stat-chip">3-step Guided Path</span>
+                  <span class="stat-chip">Answer-first Toolkit</span>
+                  <span class="stat-chip">7-section Full Guide</span>
+                  <span class="stat-chip">Sample Workshop Demo</span>
                 </div>
               </div>
 
               <div class="col-xl-6">
                 <div class="home-side-stack">
-                  <article class="compact-panel home-side-card is-guided">
-                    <div class="panel-kicker">Guided path preview</div>
-                    <h2>Work the standard author route first.</h2>
-                    <p>Start in WMS, move into GitHub and markdown, then finish with QA and publishing only after the preview is stable.</p>
+                  <article class="compact-panel home-side-card is-classic">
+                    <div class="panel-kicker">Choose by task</div>
+                    <h2>Pick the route that makes the next answer obvious.</h2>
+                    <p>Start with the job: sequence, one blocker, the full map, or the applied workshop surface.</p>
                     <div class="home-mini-flow" aria-hidden="true">
                       <div class="home-mini-step">
                         <span class="home-mini-number">1</span>
                         <div>
-                          <strong>Submit Workshop Request</strong>
-                          <small>Set owner, learner outcome, and delivery shape in WMS.</small>
+                          <strong>Need sequence?</strong>
+                          <small>Open Guided Path for the ordered request, build, and publish flow.</small>
                         </div>
                       </div>
                       <div class="home-mini-step">
                         <span class="home-mini-number">2</span>
                         <div>
-                          <strong>Create Workshop + Add to GitHub</strong>
-                          <small>Build the structure, wire the manifest, and get preview working early.</small>
+                          <strong>Need one answer?</strong>
+                          <small>Open Toolkit for the fastest route to one command, workflow, or QA fix.</small>
                         </div>
                       </div>
                       <div class="home-mini-step">
                         <span class="home-mini-number">3</span>
                         <div>
-                          <strong>Review &amp; Publish</strong>
-                          <small>Run QA, open the PR, and confirm the final publishing details.</small>
+                          <strong>Need the full map?</strong>
+                          <small>Open Full Guide when you want every active section in one place.</small>
                         </div>
                       </div>
                     </div>
                   </article>
 
-                  <article class="compact-panel home-side-card is-toolkit">
-                    <div class="panel-kicker">Toolkit preview</div>
-                    <h2>Use the toolkit when the blocker is specific.</h2>
-                    <p>Search and filter the card deck when you already know the task, instead of walking the full sequence again.</p>
+                  <article class="compact-panel home-side-card is-modern">
+                    <div class="panel-kicker">Applied reference</div>
+                    <h2>See the same design language on a workshop surface.</h2>
+                    <p>The sample workshop demo shows the same design on a fuller end-to-end build flow.</p>
                     <div class="home-toolkit-summary" aria-hidden="true">
-                      <span class="mode-chip">Formatting</span>
-                      <span class="mode-chip">GitHub</span>
-                      <span class="mode-chip">Media</span>
-                      <span class="mode-chip">QA</span>
+                      <span class="mode-chip">Platform setup</span>
+                      <span class="mode-chip">Grounded knowledge</span>
+                      <span class="mode-chip">Guardrails + prompts</span>
+                      <span class="mode-chip">Doctor handoff</span>
                     </div>
                     <div class="home-toolkit-preview" aria-hidden="true">
                       <div class="home-toolkit-card" data-accent="red">
-                        <strong>WMS Request</strong>
-                        <small>Request details, ownership fields, and status flow.</small>
+                        <strong>Video-first intros</strong>
+                        <small>The video slot appears before the detailed lab content.</small>
                       </div>
                       <div class="home-toolkit-card" data-accent="red">
-                        <strong>Sync &amp; Preview</strong>
-                        <small>Fork, clone, merge, and preview URL patterns.</small>
+                        <strong>Architecture map</strong>
+                        <small>The system view is visible before the learner reaches the first command.</small>
                       </div>
                       <div class="home-toolkit-card" data-accent="red">
-                        <strong>Markdown Rules</strong>
-                        <small>Required sections, variables, copy tags, and lint checks.</small>
+                        <strong>Patient chat flow</strong>
+                        <small>The scope is a real pre-visit intake assistant, not a vague AI demo.</small>
                       </div>
                       <div class="home-toolkit-card" data-accent="red">
-                        <strong>QA &amp; Publish</strong>
-                        <small>Checklist save order, PR checks, and WMS publishing.</small>
+                        <strong>Doctor handoff</strong>
+                        <small>The finish line is a clinician-ready summary and escalation path.</small>
                       </div>
                     </div>
-                    <p class="home-side-note">Use the custom Full Guide when you want the whole author map without falling back to the markdown navigation chrome.</p>
+                    <p class="home-side-note">Use it when the review is about workshop feel, not just guide structure.</p>
                   </article>
                 </div>
               </div>
             </div>
 
             <div class="row g-4 mt-1">
-              <div class="col-lg-6">
-                <article class="card path-card beginner h-100">
+              <div class="col-12">
+                <article class="card path-card modern h-100 route-map-card">
                   <div class="card-body">
-                    <div class="path-badge">Guided Path</div>
-                    <h2>Start with the guided path</h2>
-                    <p>Follow a short sequence from WMS request to GitHub setup to review and publish without making a new author read the entire documentation map first.</p>
-                    <ul class="path-points">
-                      <li>Three layers only: request, build, review.</li>
-                      <li>Compact step rail and Back / Next controls.</li>
-                      <li>Fast Track toggle when you want minimal explanation.</li>
-                    </ul>
-                    <button class="btn btn-primary btn-lg rounded-pill px-4" type="button" data-mode-target="beginner">Start Guided Path</button>
-                  </div>
-                </article>
-              </div>
-
-              <div class="col-lg-6">
-                <article class="card path-card explorer h-100">
-                  <div class="card-body">
-                    <div class="path-badge">Reference Toolkit</div>
-                    <h2>Find the exact tool or pattern</h2>
-                    <p>Open a searchable toolkit for formatting, media, quizzes, embeds, QA, and advanced patterns when the goal is finding one answer fast.</p>
-                    <ul class="path-points">
-                      <li>Immediate access for experienced authors in one click.</li>
-                      <li>Search, tag filters, hover states, and a focused detail modal.</li>
-                      <li>Copyable snippets and targeted guidance per feature.</li>
-                    </ul>
-                    <button class="btn btn-outline-primary btn-lg rounded-pill px-4" type="button" data-mode-target="explorer">Open Reference Toolkit</button>
-                    <button class="btn btn-outline-secondary btn-lg rounded-pill px-4" type="button" data-guide-target="start-here">Open Full Guide</button>
+                    <div class="path-badge">Guide Map</div>
+                    <h2>See the full guide, its routes, and where each path leads.</h2>
+                    <p>The map below shows the main routes and where they lead.</p>
+                    <div id="homeRouteMap"></div>
                   </div>
                 </article>
               </div>
@@ -3865,40 +4706,6 @@
       </section>
       <!-- Guided Path -->
       <section class="mode-screen d-none" id="beginnerMode" aria-labelledby="beginnerHeading">
-        <div class="progress-dock" id="progressShell">
-          <div class="container">
-            <div class="progress-card">
-              <div class="progress-summary">
-                <div class="progress-eyebrow">Progress Tracker</div>
-                <div class="small text-muted" id="progressCaption">Step 1 of 3 is active.</div>
-              </div>
-
-              <div class="progress-rail">
-                <button class="progress-button" type="button" data-step-target="0" aria-label="Jump to step 1">
-                  <span class="progress-mark">1</span>
-                  <span class="progress-label">
-                    <strong>Request</strong>
-                  </span>
-                </button>
-
-                <button class="progress-button" type="button" data-step-target="1" aria-label="Jump to step 2">
-                  <span class="progress-mark">2</span>
-                  <span class="progress-label">
-                    <strong>Build</strong>
-                  </span>
-                </button>
-
-                <button class="progress-button" type="button" data-step-target="2" aria-label="Jump to step 3">
-                  <span class="progress-mark">3</span>
-                  <span class="progress-label">
-                    <strong>Publish</strong>
-                  </span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <div class="container">
           <div class="card mode-hero">
             <div class="card-body">
@@ -3907,7 +4714,7 @@
                   <div class="mode-overline">Guided Path</div>
                   <h2 class="mode-title" id="beginnerHeading">Follow the shortest route from request to publish.</h2>
                   <p class="mode-copy">
-                    This path compresses the author journey into three layers: request the workshop, create it in GitHub, then review and publish it. A compact step rail stays pinned on the left on desktop and shifts under the menu on smaller screens so you can move between steps without losing context.
+                    This path compresses the author journey into three layers: request the workshop, create it in GitHub, then review and publish it. The page stays linear on purpose so the content reads top to bottom without a second competing menu.
                   </p>
                   <div class="mode-chip-row">
                     <span class="mode-chip">3 steps</span>
@@ -3952,13 +4759,20 @@
                     <div class="step-meta-row">
                       <span class="meta-pill">Output: approved request</span>
                       <span class="meta-pill">Time: 5 to 10 min</span>
-                      <span class="meta-pill">Unlocks: repo work</span>
+                      <span class="meta-pill">Leads to: repo work</span>
                     </div>
                   </div>
 
                   <div class="guide-panel guided-only mb-4">
                     WMS is not just intake. The same record follows the workshop through approval, Self QA, publishing, and Quarterly QA.
                   </div>
+
+                  <div
+                    data-video-card
+                    data-video-title="Submit Workshop Request walkthrough"
+                    data-video-summary="Watch the WMS request and status path first so the reviewer logic is clear before the longer checklist starts."
+                    data-video-features="WMS form|Status path|Reviewer checks"
+                  ></div>
 
                   <div class="step-sequence">
                     <section class="step-block">
@@ -4095,7 +4909,6 @@
                     </div>
                   </div>
                 </div>
-                <div class="step-lock">Keep moving to unlock this layer.</div>
               </article>
             </section>
 
@@ -4110,13 +4923,20 @@
                     <div class="step-meta-row">
                       <span class="meta-pill">Output: live preview</span>
                       <span class="meta-pill">Time: 15 to 20 min</span>
-                      <span class="meta-pill">Unlocks: content authoring</span>
+                      <span class="meta-pill">Leads to: content authoring</span>
                     </div>
                   </div>
 
                   <div class="guide-panel guided-only mb-4">
                     Most new-author friction lives here. Get account setup, repo hygiene, folder structure, and preview working before you write long sections of content.
                   </div>
+
+                  <div
+                    data-video-card
+                    data-video-title="Create Workshop and GitHub setup walkthrough"
+                    data-video-summary="Lead with the workstation, repo, and preview setup so the written tasks map to a real sequence immediately."
+                    data-video-features="Fork and clone|Sample structure|Preview setup"
+                  ></div>
 
                   <div class="step-sequence">
                     <section class="step-block">
@@ -4228,7 +5048,7 @@ git push origin main
     },
     {
       "title": "Core Workflow",
-      "filename": "./../../02-core-workflow/core-workflow.md"
+      "filename": "./../../02-core-workshop-flow/core-workflow.md"
     }
   ]
 }
@@ -4273,7 +5093,6 @@ https://&lt;github-username&gt;.github.io/&lt;repo-name&gt;/&lt;path&gt;/worksho
                     </div>
                   </div>
                 </div>
-                <div class="step-lock">Keep moving to unlock this layer.</div>
               </article>
             </section>
 
@@ -4288,13 +5107,20 @@ https://&lt;github-username&gt;.github.io/&lt;repo-name&gt;/&lt;path&gt;/worksho
                     <div class="step-meta-row">
                       <span class="meta-pill">Output: reviewed release</span>
                       <span class="meta-pill">Time: 10 to 15 min</span>
-                      <span class="meta-pill">Unlocks: production</span>
+                      <span class="meta-pill">Leads to: production</span>
                     </div>
                   </div>
 
                   <div class="guide-panel guided-only mb-4">
                     The last layer is about precision, not volume. Reviewers should see one stable preview, one saved checklist, one clean PR, and the exact production URLs they expect.
                   </div>
+
+                  <div
+                    data-video-card
+                    data-video-title="Review and Publish walkthrough"
+                    data-video-summary="Show the QA, PR, and publishing handoff first so the release gate is visible before the detailed checklists."
+                    data-video-features="QA checklist|PR checks|Publishing handoff"
+                  ></div>
 
                   <div class="step-sequence">
                     <section class="step-block">
@@ -4468,7 +5294,6 @@ https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-fol
                     </div>
                   </div>
                 </div>
-                <div class="step-lock">Keep moving to unlock this layer.</div>
               </article>
             </section>
           </div>
@@ -4573,7 +5398,7 @@ https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-fol
                 <div class="col-xl-4">
                   <div class="compact-panel h-100">
                     <div class="panel-kicker">How to use it</div>
-                    <p class="panel-copy mb-3">Pick a section on the left, use the card details on the right, and expect this custom view to carry the main instructions. The canonical lab is a source reference, not the page you should need for basic execution.</p>
+                    <p class="panel-copy mb-3">Use the section rail on the left to jump fast, then stay in the detailed cards on the right. The custom view carries the main instructions; canonical labs stay as source references when you need them.</p>
                     <div class="d-flex flex-wrap gap-2">
                       <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="beginner">Need sequence? Guided Path</button>
                       <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-mode-target="explorer">Need one answer? Toolkit</button>
@@ -4585,15 +5410,14 @@ https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-fol
           </div>
 
           <div class="guide-layout">
-            <aside class="guide-sidebar">
-              <div class="card guide-sidebar-card">
-                <div class="card-body">
-                  <div class="panel-kicker">Sections</div>
-                  <div class="guide-nav-stack" id="guideSectionNav"></div>
-                </div>
+            <aside class="guide-sidebar" aria-label="Full guide section navigation">
+              <div class="guide-sidebar-card">
+                <div class="panel-kicker">Section navigation</div>
+                <h3>Open a section</h3>
+                <p class="guide-nav-summary">Use the rail to jump between sections without shrinking the content stage or scrolling back to the top.</p>
+                <div class="guide-nav-stack" id="guideSectionNav"></div>
               </div>
             </aside>
-
             <div class="guide-stage" id="guideSectionMount"></div>
           </div>
         </div>
@@ -4635,6 +5459,14 @@ https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-fol
           </div>
         </div>
       </section>
+      <button type="button" class="back-to-top" id="backToTopButton" aria-label="Back to top" title="Back to top">
+        <span class="back-to-top-icon" aria-hidden="true">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" focusable="false" aria-hidden="true">
+            <path d="M8 3.25 3.75 7.5l.9.9L7.5 5.56V13h1V5.56l2.85 2.84.9-.9L8 3.25Z" fill="currentColor"/>
+          </svg>
+        </span>
+        <span class="back-to-top-label">Back to top</span>
+      </button>
       <!-- Toolkit Detail Modal -->
       <div class="modal fade" id="bubbleModal" tabindex="-1" aria-labelledby="bubbleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -4650,6 +5482,7 @@ https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-fol
             <div class="modal-body">
               <p class="lead mb-3" id="bubbleModalDescription"></p>
               <div class="detail-tags mb-4" id="bubbleModalTags"></div>
+              <div class="modal-support-mount d-none" id="bubbleModalVideoMount"></div>
 
               <div class="card modal-media-card mb-4 d-none" id="bubbleModalMediaCard">
                 <div class="card-body">
@@ -4723,6 +5556,7 @@ https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-fol
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="./assets/js/guide-content.js"></script>
+  <script src="./assets/js/redwood-video-player.js"></script>
   <script src="./assets/js/author-guide-app.js"></script>
 </body>
 </html>

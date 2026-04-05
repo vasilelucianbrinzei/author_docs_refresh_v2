@@ -1,3 +1,5 @@
+// Structured source content for the redesigned guide.
+// Keep workflow text, canonical links, and section metadata here so the UI layer can stay presentation-only.
 window.authorGuideContent = (function () {
   var canonicalRoot = "./workshops/livelabs/index.html?lab=";
   var officialLinks = {
@@ -1066,10 +1068,10 @@ window.authorGuideContent = (function () {
         label: "Section 1",
         title: "Start Guide",
         accent: "red",
-        summary: "Start guide first. This replaces the old behavior that jumped straight into Core Workflow and gives you the real orientation path before hands-on authoring.",
-        purpose: "Use this section when you need the route, the WMS status model, or the GitHub organization model before you start building.",
+        summary: "Start here to understand the redesigned author guide routes, then move into the exact path that matches your job: guided path, toolkit, full guide, search, or the sample workshop demo.",
+        purpose: "Use this section when you need orientation, route selection, or just enough WMS and GitHub context before hands-on authoring starts.",
         highlights: [
-          "Open the custom home page first, not the markdown nav.",
+          "Choose between Guided Path, Toolkit, Full Guide, Search, and the sample workshop demo from one front door.",
           "Use the background labs only when they answer a real blocker.",
           "Archived Live SQL and legacy retired pages stay out of this refreshed route."
         ],
@@ -1079,27 +1081,31 @@ window.authorGuideContent = (function () {
           {
             id: "start-here-home",
             label: "Section landing page",
-            title: "Open the custom guide home first",
-            summary: "Use the refreshed home page as the new front door so you can choose the shortest route instead of landing in the middle of the old markdown navigation.",
+            title: "Choose the right route first",
+            summary: "Use the refreshed home page as the shared front door so you can pick the shortest useful route instead of guessing where to start.",
             steps: [
-              "Open `./index.html` and stay on the custom home screen first.",
-              "Choose Guided Path if you want the standard WMS -> GitHub -> QA and publish order.",
-              "Choose Toolkit if you already know the blocker and only need one focused answer.",
-              "Choose Full Guide if you want the entire active author map without the old markdown navigation chrome."
+              "Open `./index.html` first and choose the route that matches the work you are trying to do before you jump into Core Workflow.",
+              "Choose Guided Path when you want the shortest ordered route from WMS request to publish.",
+              "Choose Toolkit when you already know the blocker and need one focused answer without rereading the whole guide.",
+              "Choose Full Guide when you want the full section map and all supporting details in one redesigned reference view.",
+              "Open the sample workshop demo when you want to study how the same design system can carry an end-to-end workshop surface."
             ],
             checkpoints: [
-              "You can say why you are choosing Guided Path, Toolkit, or Full Guide before you continue.",
-              "You are not using the markdown section list as the primary navigation surface."
+              "You know whether the next stop is Guided Path, Toolkit, Full Guide, Search, or the sample workshop demo.",
+              "You can explain why the chosen route is faster than opening random sections out of order."
             ],
             watchFor: [
-              "Dropping straight into Core Workflow when the real need is orientation.",
+              "Jumping straight into Core Workflow when the real need is route selection or orientation.",
+              "Using the full section guide when the blocker would be faster to solve in Toolkit or Search.",
               "Using retired or archived pages as if they were still part of the active workflow."
             ],
-            snippetTitle: "Choose the route intentionally",
+            snippetTitle: "Pick the shortest useful route",
             snippet: [
-              "Guided Path  -> standard author sequence",
-              "Toolkit      -> one blocker, one answer",
-              "Full Guide   -> section-by-section reference",
+              "Guided Path      -> ordered start-to-publish route",
+              "Toolkit          -> answer-first lookup",
+              "Full Guide       -> section-by-section reference map",
+              "Search           -> jump across all guide surfaces",
+              "Sample Demo      -> applied workshop UX reference",
               "",
               "Start Guide exists so you do not guess which path comes next."
             ].join("\n"),

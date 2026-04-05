@@ -1,3 +1,5 @@
+// Behavior layer for the redesigned guide.
+// Handles mode switching, sticky navigation, search ranking, toolkit detail views, and image expansion.
 (function () {
   var content = window.authorGuideContent || {};
   var stepMeta = content.stepMeta || [];
@@ -72,7 +74,6 @@
   var searchIndex = [];
   var searchEntryMap = {};
   var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var maxUnlockedStep = 0;
   var suppressObserver = false;
 
   var appRoot = document.getElementById("app");
@@ -101,7 +102,9 @@
   var guideSidebar = document.querySelector(".guide-sidebar");
   var guideSidebarCard = document.querySelector(".guide-sidebar-card");
   var guideSectionNav = document.getElementById("guideSectionNav");
+  var guideQuickNav = document.getElementById("guideQuickNav");
   var guideSectionMount = document.getElementById("guideSectionMount");
+  var homeRouteMap = document.getElementById("homeRouteMap");
   var searchResultsMount = document.getElementById("searchResults");
   var searchEmptyState = document.getElementById("searchEmptyState");
   var searchSummary = document.getElementById("searchSummary");
@@ -117,8 +120,9 @@
   var imageLightboxImage = document.getElementById("imageLightboxImage");
   var imageLightboxCaption = document.getElementById("imageLightboxCaption");
   var imageLightboxClose = document.getElementById("imageLightboxClose");
+  var backToTopButton = document.getElementById("backToTopButton");
   var lastExpandedFigure = null;
-  var guideSidebarFrame = 0;
+  var layoutSyncFrame = 0;
 
   bubbleModalElement.addEventListener("hidden.bs.modal", function () {
     closeImageLightbox({ announce: false, restoreFocus: false });
@@ -137,6 +141,17 @@
       .replace(/"/g, "&quot;");
   }
 
+  function compactText(value, maxLength) {
+    var text = String(value || "").trim();
+    var bounded = Math.max(24, maxLength || 120);
+
+    if (!text || text.length <= bounded) {
+      return text;
+    }
+
+    return text.slice(0, bounded).replace(/\s+\S*$/, "").trim() + "...";
+  }
+
   function rootCssPx(name, fallback) {
     var styles;
     var value;
@@ -148,6 +163,24 @@
     styles = window.getComputedStyle(appRoot);
     value = parseFloat(styles.getPropertyValue(name));
     return Number.isFinite(value) ? value : fallback;
+  }
+
+  function firstDirectContainer(parent) {
+    var match = null;
+
+    if (!parent) {
+      return null;
+    }
+
+    Array.prototype.some.call(parent.children, function (child) {
+      if (child.classList && child.classList.contains("container")) {
+        match = child;
+        return true;
+      }
+      return false;
+    });
+
+    return match;
   }
 
   function normalizeText(value) {
@@ -286,18 +319,65 @@
     });
   }
 
+  function resetProgressDock() {
+    if (!progressShell) {
+      return;
+    }
+
+    progressShell.style.position = "";
+    progressShell.style.top = "";
+    progressShell.style.left = "";
+    progressShell.style.width = "";
+  }
+
   function syncProgressDockPosition() {
     var navHeight;
+    var topOffset;
+    var railWidth;
+    var hero;
+    var sectionRect;
+    var heroRect;
+    var heroTop;
+    var heroContainer;
+    var containerRect;
+    var absoluteLeft;
+    var fixedLeft;
 
-    if (!progressShell || window.innerWidth <= 1199 || state.mode !== "beginner") {
-      if (progressShell) {
-        progressShell.style.top = "";
-      }
+    if (!progressShell || window.innerWidth <= 1199 || state.mode !== "beginner" || !beginnerMode || beginnerMode.classList.contains("d-none")) {
+      resetProgressDock();
+      return;
+    }
+
+    hero = beginnerMode.querySelector(".mode-hero");
+    heroContainer = firstDirectContainer(beginnerMode);
+
+    if (!hero || !heroContainer) {
+      resetProgressDock();
       return;
     }
 
     navHeight = modeNav && !modeNav.classList.contains("d-none") ? modeNav.getBoundingClientRect().height : 0;
-    progressShell.style.top = Math.ceil(navHeight + 14) + "px";
+    topOffset = Math.ceil(navHeight + 10);
+    railWidth = rootCssPx("--progress-rail-width", 150);
+    sectionRect = beginnerMode.getBoundingClientRect();
+    heroRect = hero.getBoundingClientRect();
+    heroTop = Math.max(0, Math.round(heroRect.top - sectionRect.top));
+    containerRect = heroContainer.getBoundingClientRect();
+    absoluteLeft = Math.round(containerRect.left - sectionRect.left);
+    fixedLeft = Math.round(containerRect.left);
+
+    progressShell.style.width = railWidth + "px";
+
+    if (heroRect.top > topOffset) {
+      progressShell.style.position = "absolute";
+      progressShell.style.top = heroTop + "px";
+      progressShell.style.left = absoluteLeft + "px";
+      return;
+    }
+
+    progressShell.style.position = "fixed";
+    progressShell.style.top = topOffset + "px";
+    progressShell.style.left = fixedLeft + "px";
   }
 
   function resetGuideSidebar() {
@@ -312,46 +392,36 @@
   }
 
   function syncGuideSidebar() {
-    var navHeight;
-    var topOffset;
-    var layoutRect;
-    var layoutTop;
-    var naturalLeft = rootCssPx("--guide-sidebar-offset", -20);
-    var fixedLeft;
-    var sidebarWidth = rootCssPx("--guide-sidebar-width", 214);
-
-    if (!guideLayout || !guideSidebar || !guideSidebarCard || window.innerWidth <= 1199 || state.mode !== "guide") {
-      resetGuideSidebar();
-      return;
-    }
-
-    navHeight = modeNav && !modeNav.classList.contains("d-none") ? modeNav.getBoundingClientRect().height : 0;
-    topOffset = Math.ceil(navHeight + 8);
-    layoutRect = guideLayout.getBoundingClientRect();
-    layoutTop = window.pageYOffset + layoutRect.top;
-    fixedLeft = Math.round(layoutRect.left + naturalLeft);
-    guideSidebar.style.width = sidebarWidth + "px";
-
-    if (window.pageYOffset + topOffset <= layoutTop) {
-      guideSidebar.style.position = "absolute";
-      guideSidebar.style.top = "0px";
-      guideSidebar.style.left = naturalLeft + "px";
-      return;
-    }
-
-    guideSidebar.style.position = "fixed";
-    guideSidebar.style.top = topOffset + "px";
-    guideSidebar.style.left = fixedLeft + "px";
+    resetGuideSidebar();
   }
 
-  function scheduleGuideSidebarSync() {
-    if (guideSidebarFrame) {
+  function syncBackToTopButton() {
+    var showButton;
+
+    if (!backToTopButton) {
       return;
     }
 
-    guideSidebarFrame = window.requestAnimationFrame(function () {
-      guideSidebarFrame = 0;
+    showButton = (
+      (state.mode === "beginner" || state.mode === "explorer" || state.mode === "guide") &&
+      window.pageYOffset > 320
+    );
+
+    backToTopButton.classList.toggle("is-visible", showButton);
+    backToTopButton.setAttribute("aria-hidden", showButton ? "false" : "true");
+    backToTopButton.tabIndex = showButton ? 0 : -1;
+  }
+
+  function scheduleLayoutSync() {
+    if (layoutSyncFrame) {
+      return;
+    }
+
+    layoutSyncFrame = window.requestAnimationFrame(function () {
+      layoutSyncFrame = 0;
+      syncProgressDockPosition();
       syncGuideSidebar();
+      syncBackToTopButton();
     });
   }
 
@@ -392,6 +462,17 @@
     return (section.labs || []).find(function (lab) {
       return lab.id === state.guideFocusLab;
     }) || null;
+  }
+
+  function pickHomeToolkitMapItems() {
+    var preferredIds = ["wms-request", "github-setup", "markdown-structure", "qa-checklist"];
+    var preferredItems = preferredIds.map(function (id) {
+      return explorerItems.find(function (item) {
+        return item.id === id;
+      });
+    }).filter(Boolean);
+
+    return preferredItems.length === preferredIds.length ? preferredItems : explorerItems.slice(0, 4);
   }
 
   function rememberViewForSearch() {
@@ -491,6 +572,10 @@
   }
 
   function updateProgressCaption() {
+    if (!progressCaption) {
+      return;
+    }
+
     if (state.mode !== "beginner") {
       progressCaption.textContent = "Step 1 of 3 is active.";
       return;
@@ -510,12 +595,11 @@
     progressButtons.forEach(function (button, index) {
       var isActive = index === state.currentStep;
       var isComplete = index < state.currentStep;
-      var isLocked = index > maxUnlockedStep;
       var mark = button.querySelector(".progress-mark");
 
       button.classList.toggle("is-active", isActive);
       button.classList.toggle("is-complete", isComplete);
-      button.classList.toggle("is-locked", isLocked);
+      button.classList.remove("is-locked");
       button.setAttribute("aria-current", isActive ? "step" : "false");
       mark.innerHTML = isComplete ? "&#10003;" : String(index + 1);
     });
@@ -523,7 +607,7 @@
     stepSections.forEach(function (section, index) {
       section.classList.toggle("is-active", index === state.currentStep);
       section.classList.toggle("is-complete", index < state.currentStep);
-      section.classList.toggle("is-locked", index > maxUnlockedStep);
+      section.classList.remove("is-locked");
     });
 
     updateProgressCaption();
@@ -564,6 +648,110 @@
 
     resultCount.textContent = "Showing " + visibleItems.length + " toolkit card" + (visibleItems.length === 1 ? "" : "s");
     emptyState.classList.toggle("d-none", visibleItems.length !== 0);
+  }
+
+  function renderHomeRouteMap() {
+    var toolkitItems = pickHomeToolkitMapItems();
+
+    if (!homeRouteMap) {
+      return;
+    }
+
+    homeRouteMap.innerHTML = [
+      '<div class="route-map-board">',
+      '  <section class="route-map-entry">',
+      '    <div>',
+      '      <div class="panel-kicker">Start here</div>',
+      '      <h3>Pick a route and move.</h3>',
+      '      <p>Choose sequence, one answer, the full map, or the applied workshop demo.</p>',
+      "    </div>",
+      '    <div class="route-map-entry-actions">',
+      '      <button type="button" class="btn btn-primary rounded-pill px-4" data-mode-target="beginner">Open Guided Path</button>',
+      '      <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Toolkit</button>',
+      '      <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-guide-target="start-here">Open Full Guide</button>',
+      "    </div>",
+      "  </section>",
+      '  <div class="route-map-grid">',
+      '    <article class="route-map-branch" data-accent="red">',
+      '      <div class="route-map-branch-head">',
+      '        <div>',
+      '          <small>Ordered route</small>',
+      '          <h4>Guided Path</h4>',
+      "        </div>",
+      '        <button type="button" class="btn btn-outline-primary rounded-pill px-3" data-mode-target="beginner">Open</button>',
+      "      </div>",
+      '      <p>Use when you want the shortest start-to-publish path.</p>',
+      '      <ol class="route-map-list is-ordered">',
+      stepMeta.map(function (step) {
+        return "<li><strong>" + escapeHtml(step.title) + "</strong><span>" + escapeHtml(compactText(step.summary, 74)) + "</span></li>";
+      }).join(""),
+      "      </ol>",
+      '      <div class="route-map-branch-foot">Leads to the same sections in Full Guide.</div>',
+      "    </article>",
+      '    <article class="route-map-branch" data-accent="ocean">',
+      '      <div class="route-map-branch-head">',
+      '        <div>',
+      '          <small>Answer-first route</small>',
+      '          <h4>Toolkit</h4>',
+      "        </div>",
+      '        <button type="button" class="btn btn-outline-primary rounded-pill px-3" data-mode-target="explorer">Open</button>',
+      "      </div>",
+      '      <p>Use when you already know the blocker.</p>',
+      '      <ul class="route-map-list">',
+      toolkitItems.map(function (item) {
+        return "<li><strong>" + escapeHtml(item.title) + "</strong><span>" + escapeHtml(compactText(item.short || item.description || "", 72)) + "</span></li>";
+      }).join(""),
+      "      </ul>",
+      '      <div class="route-map-branch-foot">Leads to focused cards, snippets, and source links.</div>',
+      "    </article>",
+      '    <article class="route-map-branch" data-accent="pine">',
+      '      <div class="route-map-branch-head">',
+      '        <div>',
+      '          <small>Section map</small>',
+      '          <h4>Full Guide</h4>',
+      "        </div>",
+      '        <button type="button" class="btn btn-outline-primary rounded-pill px-3" data-guide-target="start-here">Open</button>',
+      "      </div>",
+      '      <p>Use when you want the whole section map in one place.</p>',
+      '      <ul class="route-map-list">',
+      guideSections.map(function (section) {
+        var count = (section.labs || []).length;
+        return "<li><strong>" + escapeHtml(section.label + " - " + section.title) + "</strong><span>" + escapeHtml(count + " item" + (count === 1 ? "" : "s")) + "</span></li>";
+      }).join(""),
+      "      </ul>",
+      '      <div class="route-map-branch-foot">Leads to detailed section cards and source links.</div>',
+      "    </article>",
+      '    <article class="route-map-branch" data-accent="sienna">',
+      '      <div class="route-map-branch-head">',
+      '        <div>',
+      '          <small>Applied reference</small>',
+      '          <h4>Sample Workshop Demo</h4>',
+      "        </div>",
+      '        <a class="btn btn-outline-primary rounded-pill px-3" href="./sample-workshops/clinical-first-responder-rag/index.html">Open</a>',
+      "      </div>",
+      '      <p>Use when you want to inspect the design on a workshop surface.</p>',
+      '      <ul class="route-map-list">',
+      [
+        "Provision the platform foundation",
+        "Model grounded clinical knowledge",
+        "Build prompts, guardrails, and patient chat",
+        "Validate escalation and doctor handoff"
+      ].map(function (item) {
+        return "<li><strong>" + escapeHtml(item) + "</strong><span>Shows the pattern on a real workshop-style page.</span></li>";
+      }).join(""),
+      "      </ul>",
+      '      <div class="route-map-branch-foot">Leads to an applied workshop example.</div>',
+      "    </article>",
+      "  </div>",
+      '  <div class="route-map-ribbon">',
+      '    <div>',
+      '      <strong>Search crosses every route.</strong>',
+      '      <span>One search surface crosses Guided Path, Toolkit, and Full Guide.</span>',
+      "    </div>",
+      '    <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-mode-target="search">Open Search</button>',
+      "  </div>",
+      "</div>"
+    ].join("");
   }
 
   function setActiveTag(tag) {
@@ -754,6 +942,25 @@
     mount.classList.toggle("d-none", !html);
   }
 
+  function hydrateVideoCards(root) {
+    if (window.RedwoodVideoPlayer && typeof window.RedwoodVideoPlayer.hydrate === "function") {
+      window.RedwoodVideoPlayer.hydrate(root || document);
+    }
+  }
+
+  function renderVideoCardMount(config) {
+    if (!window.RedwoodVideoPlayer || typeof window.RedwoodVideoPlayer.createMountMarkup !== "function") {
+      return "";
+    }
+
+    return window.RedwoodVideoPlayer.createMountMarkup(Object.assign({
+      src: "./assets/media/guide/author-guide-template.mp4",
+      captions: "./assets/media/guide/author-guide-template.vtt",
+      autoplay: true,
+      loop: true
+    }, config || {}));
+  }
+
   function openBubble(id) {
     var item = explorerItems.find(function (candidate) {
       return candidate.id === id;
@@ -800,6 +1007,18 @@
       "bubbleModalResourcesMount",
       buildResourceLinksHtml(item.resourcesTitle || "Useful links", item.resourcesIntro || "", item.resourceLinks, "Resources")
     );
+    setSupportMount(
+      "bubbleModalVideoMount",
+      renderVideoPlaceholderCard(
+        "Recorded walkthrough for " + item.title,
+        "Watch the quick topic pass first, then use the panel details, snippets, and source links underneath.",
+        [
+          "Topic walkthrough",
+          "Captions + transcript",
+          "Autoplay ready"
+        ]
+      )
+    );
 
     snippetCard = document.getElementById("bubbleModalSnippetCard");
     if (item.snippet) {
@@ -829,6 +1048,7 @@
       guideButton.classList.add("d-none");
     }
 
+    hydrateVideoCards(bubbleModalElement);
     bubbleModal.show();
     setLiveMessage(item.title + " opened.");
   }
@@ -839,11 +1059,31 @@
     }
 
     guideSectionNav.innerHTML = guideSections.map(function (section) {
+      var labCount = (section.labs || []).length;
+
       return [
         '<button type="button" class="guide-nav-link',
         section.id === state.guideSection ? " is-active" : "",
         '" data-guide-section="', section.id, '" data-accent="', section.accent, '">',
         '  <small>', escapeHtml(section.label), "</small>",
+        '  <strong>', escapeHtml(section.title), "</strong>",
+        '  <span class="guide-nav-meta">', labCount, " item", labCount === 1 ? "" : "s", "</span>",
+        "</button>"
+      ].join("");
+    }).join("");
+  }
+
+  function renderGuideQuickNav() {
+    if (!guideQuickNav) {
+      return;
+    }
+
+    guideQuickNav.innerHTML = guideSections.map(function (section) {
+      return [
+        '<button type="button" class="guide-quick-link',
+        section.id === state.guideSection ? " is-active" : "",
+        '" data-guide-section="', section.id, '">',
+        '  <span>', escapeHtml(section.label), "</span>",
         '  <strong>', escapeHtml(section.title), "</strong>",
         "</button>"
       ].join("");
@@ -908,6 +1148,30 @@
     ].join("");
   }
 
+  function renderVideoPlaceholderCard(title, summary, featureLabels) {
+    return renderVideoCardMount({
+      title: title,
+      summary: summary,
+      features: featureLabels || [
+        "Controls ready",
+        "Captions + transcript",
+        "Autoplay ready"
+      ]
+    });
+  }
+
+  function guideSectionVideoFeatures(section) {
+    var features = (section.highlights || []).slice(0, 3);
+
+    if (features.length) {
+      return features;
+    }
+
+    return (section.labs || []).slice(0, 3).map(function (lab) {
+      return lab.label || lab.title;
+    });
+  }
+
   function renderGuideLab(section, lab) {
     var snippetId = "guide-snippet-" + section.id + "-" + lab.id;
     var targetedClass = state.guideFocusLab === lab.id ? " is-targeted" : "";
@@ -961,6 +1225,11 @@
       '      <h2 class="guide-section-title">', escapeHtml(section.title), "</h2>",
       '      <p class="guide-section-summary">', escapeHtml(section.summary), "</p>",
       '      <p class="guide-section-purpose">', escapeHtml(section.purpose), "</p>",
+      renderVideoPlaceholderCard(
+        section.title + " walkthrough",
+        section.summary || section.purpose || "Use the recorded walkthrough first, then move through the section cards underneath.",
+        guideSectionVideoFeatures(section)
+      ),
       '      <div class="guide-highlight-row">',
       section.highlights.map(function (item) {
         return '<span class="guide-highlight-chip">' + escapeHtml(item) + "</span>";
@@ -981,10 +1250,10 @@
     ].join("");
 
     renderGuideNav();
+    renderGuideQuickNav();
+    hydrateVideoCards(guideSectionMount);
     decorateExpandableMedia(guideSectionMount);
-    syncProgressDockPosition();
-    syncProgressDockPosition();
-    scheduleGuideSidebarSync();
+    scheduleLayoutSync();
     updateBreadcrumb();
   }
 
@@ -1370,7 +1639,6 @@
     updateNavSearch();
 
     if (mode === "beginner") {
-      maxUnlockedStep = Math.max(maxUnlockedStep, state.currentStep);
       updateBeginnerUI();
       if (config.scroll !== false) {
         if (config.forceTop) {
@@ -1425,7 +1693,7 @@
       }, prefersReducedMotion ? 0 : 220);
     }
 
-    scheduleGuideSidebarSync();
+    scheduleLayoutSync();
 
     if (config.announce !== false) {
       if (mode === "hub") {
@@ -1451,7 +1719,6 @@
     var boundedIndex = Math.max(0, Math.min(index, stepSections.length - 1));
 
     state.currentStep = boundedIndex;
-    maxUnlockedStep = Math.max(maxUnlockedStep, boundedIndex);
 
     if (state.mode !== "beginner") {
       switchMode("beginner", { scroll: false, hash: false, announce: false });
@@ -1593,7 +1860,6 @@
     if (cleaned.indexOf("step-") === 0) {
       index = Number(cleaned.replace("step-", "")) - 1;
       if (!Number.isNaN(index)) {
-        maxUnlockedStep = Math.max(0, Math.min(index, stepSections.length - 1));
         state.currentStep = Math.max(0, Math.min(index, stepSections.length - 1));
         switchMode("beginner", { scroll: false, hash: false, announce: false });
         updateBeginnerUI();
@@ -1627,7 +1893,6 @@
     index = Number(visibleEntry.target.getAttribute("data-step-index") || "0");
     if (index !== state.currentStep) {
       state.currentStep = index;
-      maxUnlockedStep = Math.max(maxUnlockedStep, index);
       updateBeginnerUI();
       updateHashFromState();
     }
@@ -1778,13 +2043,21 @@
     applyHash(window.location.hash);
   });
 
-  window.addEventListener("scroll", scheduleGuideSidebarSync, { passive: true });
+  if (backToTopButton) {
+    backToTopButton.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: smoothBehavior() });
+      setLiveMessage("Returned to the top of the page.");
+    });
+  }
+
+  window.addEventListener("scroll", scheduleLayoutSync, { passive: true });
   window.addEventListener("resize", function () {
-    syncProgressDockPosition();
-    scheduleGuideSidebarSync();
+    scheduleLayoutSync();
   });
 
+  hydrateVideoCards(document);
   decorateExpandableMedia(document);
+  renderHomeRouteMap();
   renderGuideNav();
   updateNav();
   updateNavSearch();
@@ -1792,6 +2065,5 @@
   renderExplorer();
   buildSearchIndex();
   applyHash(window.location.hash);
-  syncProgressDockPosition();
-  scheduleGuideSidebarSync();
+  scheduleLayoutSync();
 }());

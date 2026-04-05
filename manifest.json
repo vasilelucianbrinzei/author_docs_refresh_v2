@@ -8,7 +8,7 @@
     "tutorials":  [
                       {
                           "title":  "Section 1: Start Guide",
-                          "description":  "Use this orientation section to reopen the path-first home page, or jump directly to the background pages and guide branches when you already know what you need.",
+                          "description":  "Use this orientation section to choose the redesigned guide route you need, then pull in only the background pages that answer a real blocker.",
                           "filename":  "./01-start-here/start-here.md"
                       },
                       {
