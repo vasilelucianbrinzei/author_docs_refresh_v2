@@ -1,0 +1,23 @@
+{
+  "consoleErrors": [],
+  "pageErrors": [],
+  "fullGuide": {
+    "top": {
+      "playerCount": 1,
+      "videoSrc": "http://127.0.0.1:4173/assets/media/guide/author-guide-template.mp4",
+      "videoReadyState": 4,
+      "firstVideoBeforeLabs": true,
+      "sidebarTop": 90,
+      "navTexts": [
+        "Section 1 Start Guide 3 items",
+        "Section 2 Core Workflow 4 items",
+        "Section 3 Validation and Publish 4 items"
+      ]
+    },
+    "scrolled": {
+      "sidebarTop": 90,
+      "sidebarCardTop": 90,
+      "stageTop": -2041
+    }
+  }
+}

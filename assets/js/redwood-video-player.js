@@ -216,6 +216,10 @@
   function updateButtons(state) {
     var label = state.video.paused ? "Play" : "Pause";
     var card = state.node.querySelector(".media-player-card");
+    var isFullscreen = (
+      state.fullscreenHost &&
+      document.fullscreenElement === state.fullscreenHost
+    );
 
     state.toggleButtons.forEach(function (button) {
       button.textContent = label;
@@ -227,6 +231,8 @@
     state.transcriptButton.classList.toggle("is-active", !state.transcriptPanel.hidden);
     state.currentTime.textContent = formatTime(state.video.currentTime);
     state.duration.textContent = formatTime(state.video.duration || 0);
+    state.fullscreenButton.textContent = isFullscreen ? "Exit full" : "Full";
+    state.fullscreenButton.setAttribute("aria-label", isFullscreen ? "Exit fullscreen" : "Open fullscreen");
     state.seek.value = state.video.duration
       ? Math.round((state.video.currentTime / state.video.duration) * 1000)
       : 0;
@@ -290,6 +296,7 @@
       transcriptButton: node.querySelector("[data-player-transcript]"),
       transcriptPanel: transcriptPanel,
       fullscreenButton: node.querySelector("[data-player-fullscreen]"),
+      fullscreenHost: node.querySelector(".media-player-shell"),
       rateSelect: node.querySelector("[data-player-rate]"),
       toggleButtons: Array.prototype.slice.call(node.querySelectorAll("[data-player-toggle]")),
       userPaused: false,
@@ -339,16 +346,25 @@
     });
 
     state.fullscreenButton.addEventListener("click", function () {
-      var shell = node.querySelector(".media-player-shell");
+      var requestPromise;
 
       if (document.fullscreenElement) {
         document.exitFullscreen();
         return;
       }
 
-      if (shell && shell.requestFullscreen) {
-        shell.requestFullscreen();
+      if (state.fullscreenHost && state.fullscreenHost.requestFullscreen) {
+        requestPromise = state.fullscreenHost.requestFullscreen();
+        if (requestPromise && typeof requestPromise.catch === "function") {
+          requestPromise.catch(function () {
+            updateButtons(state);
+          });
+        }
       }
+    });
+
+    document.addEventListener("fullscreenchange", function () {
+      updateButtons(state);
     });
 
     state.rateSelect.addEventListener("change", function () {

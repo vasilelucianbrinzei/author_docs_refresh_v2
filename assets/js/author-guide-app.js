@@ -4,11 +4,26 @@
   var content = window.authorGuideContent || {};
   var stepMeta = content.stepMeta || [];
   var explorerItems = content.explorerItems || [];
-  var guideSections = content.guideSections || [];
-  var guideSectionMap = guideSections.reduce(function (accumulator, section) {
-    accumulator[section.id] = section;
-    return accumulator;
-  }, {});
+  var guideSections = [];
+  var guideSectionMap = {};
+  var guideManifestHref = "./workshops/author-guide/manifest.json";
+  var guideHomeHref = "./workshops/author-guide/index.html";
+  var guideCatalogPromise = null;
+  var guideCatalogLoaded = false;
+  var guideSectionSurfaceCache = {};
+  var guideSectionMetaCache = {};
+  var guideSectionSurfaceRequestToken = 0;
+  var guideLegacyTargetMap = {
+    "start-here": "introduction",
+    "core-workflow": "1-labs-wms",
+    "core-workshop-flow": "1-labs-wms",
+    "validation-publish": "5-labs-qa-checks",
+    "reuse-enhancements": "11-create-freesql",
+    "tools-productivity": "13-labs-capture-screens-best-practices",
+    "specialized-workflows": "10-create-sprints-workflow",
+    "help-faq": "introduction"
+  };
+  var guideCurrentAdditionIds = {};
   var stopWords = {
     a: true,
     an: true,
@@ -165,6 +180,17 @@
     return Number.isFinite(value) ? value : fallback;
   }
 
+  function isViewportAnchored(element) {
+    var position;
+
+    if (!element) {
+      return false;
+    }
+
+    position = window.getComputedStyle(element).position;
+    return position === "sticky" || position === "fixed";
+  }
+
   function firstDirectContainer(parent) {
     var match = null;
 
@@ -288,7 +314,11 @@
 
   function stickyOffset(target) {
     var offset = 16;
-    var navHeight = modeNav && !modeNav.classList.contains("d-none") ? modeNav.getBoundingClientRect().height : 0;
+    var navHeight = (
+      modeNav &&
+      !modeNav.classList.contains("d-none") &&
+      isViewportAnchored(modeNav)
+    ) ? modeNav.getBoundingClientRect().height : 0;
     var progressHeight = 0;
 
     if (
@@ -331,7 +361,6 @@
   }
 
   function syncProgressDockPosition() {
-    var navHeight;
     var topOffset;
     var railWidth;
     var hero;
@@ -356,8 +385,7 @@
       return;
     }
 
-    navHeight = modeNav && !modeNav.classList.contains("d-none") ? modeNav.getBoundingClientRect().height : 0;
-    topOffset = Math.ceil(navHeight + 10);
+    topOffset = 14;
     railWidth = rootCssPx("--progress-rail-width", 150);
     sectionRect = beginnerMode.getBoundingClientRect();
     heroRect = hero.getBoundingClientRect();
@@ -381,18 +409,73 @@
   }
 
   function resetGuideSidebar() {
-    if (!guideSidebar) {
+    if (!guideSidebar || !guideSidebarCard) {
       return;
     }
 
     guideSidebar.style.position = "";
-    guideSidebar.style.top = "";
-    guideSidebar.style.left = "";
-    guideSidebar.style.width = "";
+    guideSidebar.style.minHeight = "";
+    guideSidebarCard.style.position = "";
+    guideSidebarCard.style.top = "";
+    guideSidebarCard.style.left = "";
+    guideSidebarCard.style.width = "";
   }
 
   function syncGuideSidebar() {
-    resetGuideSidebar();
+    var topOffset;
+    var sidebarRect;
+    var layoutRect;
+    var sidebarHeight;
+    var sidebarColumnHeight;
+    var fixedLeft;
+    var fixedWidth;
+    var absoluteTop;
+
+    if (
+      !guideLayout ||
+      !guideSidebar ||
+      !guideSidebarCard ||
+      window.innerWidth <= 1199 ||
+      state.mode !== "guide" ||
+      !guideMode ||
+      guideMode.classList.contains("d-none")
+    ) {
+      resetGuideSidebar();
+      return;
+    }
+
+    topOffset = stickyOffset(guideLayout);
+    sidebarRect = guideSidebar.getBoundingClientRect();
+    layoutRect = guideLayout.getBoundingClientRect();
+    sidebarHeight = guideSidebarCard.offsetHeight;
+    sidebarColumnHeight = guideSidebar.offsetHeight;
+    fixedLeft = Math.round(sidebarRect.left);
+    fixedWidth = Math.round(sidebarRect.width);
+    absoluteTop = Math.max(0, sidebarColumnHeight - sidebarHeight);
+
+    guideSidebar.style.position = "relative";
+    guideSidebar.style.minHeight = sidebarHeight + "px";
+
+    if (sidebarRect.top > topOffset) {
+      guideSidebarCard.style.position = "relative";
+      guideSidebarCard.style.top = "0";
+      guideSidebarCard.style.left = "0";
+      guideSidebarCard.style.width = "100%";
+      return;
+    }
+
+    if (layoutRect.bottom <= topOffset + sidebarHeight) {
+      guideSidebarCard.style.position = "absolute";
+      guideSidebarCard.style.top = absoluteTop + "px";
+      guideSidebarCard.style.left = "0";
+      guideSidebarCard.style.width = "100%";
+      return;
+    }
+
+    guideSidebarCard.style.position = "fixed";
+    guideSidebarCard.style.top = topOffset + "px";
+    guideSidebarCard.style.left = fixedLeft + "px";
+    guideSidebarCard.style.width = fixedWidth + "px";
   }
 
   function syncBackToTopButton() {
@@ -402,10 +485,7 @@
       return;
     }
 
-    showButton = (
-      (state.mode === "beginner" || state.mode === "explorer" || state.mode === "guide") &&
-      window.pageYOffset > 320
-    );
+    showButton = window.pageYOffset > 320;
 
     backToTopButton.classList.toggle("is-visible", showButton);
     backToTopButton.setAttribute("aria-hidden", showButton ? "false" : "true");
@@ -438,14 +518,309 @@
       .join(" ");
   }
 
+  function queryLabIdFromHref(href) {
+    try {
+      return new URL(href, window.location.href).searchParams.get("lab") || "";
+    } catch (error) {
+      return "";
+    }
+  }
+
+  function uniqueList(items) {
+    return Array.from(new Set((items || []).filter(Boolean)));
+  }
+
+  function resolveGuideTarget(target, sourceHref) {
+    var requested = String(target || "").trim();
+    var sourceLab = queryLabIdFromHref(sourceHref);
+    var candidates = [requested, sourceLab];
+    var resolved = "";
+
+    candidates.some(function (candidate) {
+      if (!candidate) {
+        return false;
+      }
+
+      if (guideSectionMap[candidate]) {
+        resolved = candidate;
+        return true;
+      }
+
+      if (guideLegacyTargetMap[candidate] && guideSectionMap[guideLegacyTargetMap[candidate]]) {
+        resolved = guideLegacyTargetMap[candidate];
+        return true;
+      }
+
+      return false;
+    });
+
+    if (resolved) {
+      return resolved;
+    }
+
+    return guideSections.length ? guideSections[0].id : "";
+  }
+
+  function guideAccentForEntry(title, description) {
+    var text = normalizeText([title, description].join(" "));
+
+    if (text.indexOf("help") !== -1 || text.indexOf("faq") !== -1 || text.indexOf("sla") !== -1) {
+      return "pine";
+    }
+
+    if (text.indexOf("github") !== -1 || text.indexOf("sql") !== -1) {
+      return "ocean";
+    }
+
+    if (
+      text.indexOf("desktop") !== -1 ||
+      text.indexOf("marketplace") !== -1 ||
+      text.indexOf("screen") !== -1 ||
+      text.indexOf("optishot") !== -1 ||
+      text.indexOf("fixomat") !== -1 ||
+      text.indexOf("sprint") !== -1
+    ) {
+      return "sienna";
+    }
+
+    return "red";
+  }
+
+  function guideHighlightsForEntry(id, title, description) {
+    var text = normalizeText([id, title, description].join(" "));
+    var highlights = [];
+
+    if (text.indexOf("wms") !== -1) {
+      highlights.push("WMS");
+    }
+    if (text.indexOf("github") !== -1) {
+      highlights.push("GitHub");
+    }
+    if (text.indexOf("qa") !== -1 || text.indexOf("pull request") !== -1 || text.indexOf("publish") !== -1) {
+      highlights.push("QA / Publish");
+    }
+    if (text.indexOf("sql") !== -1 || text.indexOf("freesql") !== -1) {
+      highlights.push("FreeSQL");
+    }
+    if (text.indexOf("quiz") !== -1) {
+      highlights.push("Quizzes");
+    }
+    if (text.indexOf("screen") !== -1 || text.indexOf("optishot") !== -1 || text.indexOf("fixomat") !== -1) {
+      highlights.push("Tools");
+    }
+    if (text.indexOf("desktop") !== -1) {
+      highlights.push("Desktop");
+    }
+    if (text.indexOf("marketplace") !== -1) {
+      highlights.push("Marketplace");
+    }
+    if (text.indexOf("help") !== -1 || text.indexOf("faq") !== -1) {
+      highlights.push("Support");
+    }
+    if (text.indexOf("ai") !== -1) {
+      highlights.push("AI");
+    }
+    if (text.indexOf("sprint") !== -1) {
+      highlights.push("Sprints");
+    }
+
+    if (!highlights.length) {
+      highlights.push("Author guide");
+    }
+
+    highlights.push("Original order");
+    highlights.push("Markdown fallback");
+    return uniqueList(highlights).slice(0, 3);
+  }
+
+  function guideTaskSectionLabel(count) {
+    if (count <= 0) {
+      return "No task sections";
+    }
+
+    return count + " task section" + (count === 1 ? "" : "s");
+  }
+
+  function guideSectionCountLabel(count) {
+    if (count <= 0) {
+      return "No sections";
+    }
+
+    return count + " section" + (count === 1 ? "" : "s");
+  }
+
+  function guideNavStateLabel(taskCount, sectionCount) {
+    if (taskCount > 0) {
+      return guideTaskSectionLabel(taskCount);
+    }
+
+    return guideSectionCountLabel(sectionCount);
+  }
+
+  function guideTaskStateLabel(section) {
+    if (section && typeof section.taskCount === "number") {
+      return guideTaskSectionLabel(section.taskCount);
+    }
+
+    return "Loading task sections";
+  }
+
+  function analyzeGuideSourceMarkdown(markdown) {
+    var headings = String(markdown || "").match(/^##\s+.+$/gm) || [];
+    var taskCount = headings.filter(function (line) {
+      return /^\s*##\s+(?:\([^)]+\)\s*)?Task\b/i.test(line);
+    }).length;
+
+    return {
+      taskCount: taskCount,
+      panelCount: headings.length
+    };
+  }
+
+  function applyGuideSourceMeta(section, meta) {
+    if (!section || !meta) {
+      return;
+    }
+
+    section.taskCount = meta.taskCount;
+    section.panelCount = meta.panelCount;
+    section.navState = guideNavStateLabel(meta.taskCount, meta.panelCount);
+  }
+
+  function loadGuideSourceMeta(section) {
+    if (!section || !section.id || !section.sourcePath) {
+      return Promise.resolve(null);
+    }
+
+    if (guideSectionMetaCache[section.id]) {
+      return guideSectionMetaCache[section.id];
+    }
+
+    guideSectionMetaCache[section.id] = fetch(section.sourcePath, { cache: "no-store" })
+      .then(function (response) {
+        if (!response.ok) {
+          throw new Error("Guide source markdown request failed with status " + response.status + ".");
+        }
+
+        return response.text();
+      })
+      .then(function (markdown) {
+        var meta = analyzeGuideSourceMarkdown(markdown);
+
+        applyGuideSourceMeta(section, meta);
+
+        if (guideSectionNav) {
+          renderGuideNav();
+        }
+
+        if (state.mode === "guide" && currentGuideSection() && currentGuideSection().id === section.id) {
+          renderGuideSection();
+        }
+
+        return meta;
+      })
+      .catch(function () {
+        var fallbackMeta = {
+          taskCount: 0,
+          panelCount: 0
+        };
+
+        applyGuideSourceMeta(section, fallbackMeta);
+
+        if (guideSectionNav) {
+          renderGuideNav();
+        }
+
+        return fallbackMeta;
+      });
+
+    return guideSectionMetaCache[section.id];
+  }
+
+  function buildGuideEntry(tutorial, index) {
+    var filename = String((tutorial && tutorial.filename) || "");
+    var title = String((tutorial && tutorial.title) || "Guide Page");
+    var summary = String((tutorial && tutorial.description) || "").trim();
+    var basename = filename.split("/").pop() || "";
+    var id = basename.replace(/\.md$/i, "");
+
+    return {
+      id: id,
+      label: "Section " + String(index + 1).padStart(2, "0"),
+      title: title,
+      summary: summary,
+      purpose: "Original author-guide content, rendered inside the redesigned Full Guide with native section controls and markdown fallback access.",
+      accent: guideAccentForEntry(title, summary),
+      highlights: guideHighlightsForEntry(id, title, summary),
+      navState: "Loading sections",
+      labs: [],
+      sourcePath: filename,
+      sectionHref: guideHomeHref + "?lab=" + encodeURIComponent(id),
+      sectionLabel: "Open Markdown Version",
+      embedHref: guideHomeHref + "?lab=" + encodeURIComponent(id) + "&embed=1"
+    };
+  }
+
+  function loadGuideCatalog() {
+    if (guideCatalogPromise) {
+      return guideCatalogPromise;
+    }
+
+    guideCatalogPromise = fetch(guideManifestHref, { cache: "no-store" })
+      .then(function (response) {
+        if (!response.ok) {
+          throw new Error("Guide manifest request failed with status " + response.status + ".");
+        }
+
+        return response.json();
+      })
+      .then(function (manifest) {
+        guideSections = (manifest.tutorials || []).map(buildGuideEntry).filter(function (entry) {
+          return entry.id;
+        });
+        guideSectionMap = guideSections.reduce(function (accumulator, entry) {
+          accumulator[entry.id] = entry;
+          return accumulator;
+        }, {});
+        guideCatalogLoaded = true;
+        state.guideSection = resolveGuideTarget(state.guideSection);
+        previousView.guideSection = resolveGuideTarget(previousView.guideSection);
+        guideSections.forEach(function (section) {
+          loadGuideSourceMeta(section);
+        });
+        return guideSections;
+      })
+      .catch(function (error) {
+        guideCatalogLoaded = false;
+        console.error(error);
+        return guideSections;
+      });
+
+    return guideCatalogPromise.then(function (entries) {
+      renderHomeRouteMap();
+      renderGuideNav();
+      buildSearchIndex();
+
+      if (state.mode === "guide") {
+        renderGuideSection();
+      } else if (state.mode === "search") {
+        renderSearchResults();
+      }
+
+      return entries;
+    });
+  }
+
   function currentGuideTarget() {
+    var preferred = "";
+
     if (state.mode === "guide" && state.guideSection) {
-      return state.guideSection;
+      preferred = state.guideSection;
+    } else if (state.mode === "beginner" && stepMeta[state.currentStep]) {
+      preferred = stepMeta[state.currentStep].guideTarget;
     }
-    if (state.mode === "beginner" && stepMeta[state.currentStep]) {
-      return stepMeta[state.currentStep].guideTarget;
-    }
-    return guideSections.length ? guideSections[0].id : "start-here";
+
+    return resolveGuideTarget(preferred) || (guideSections[0] && guideSections[0].id) || "introduction";
   }
 
   function currentGuideSection() {
@@ -773,7 +1148,7 @@
       return;
     }
 
-    root.querySelectorAll(".step-figure, .guide-figure, .modal-media-figure, .evidence-figure").forEach(function (figure) {
+    root.querySelectorAll(".step-figure, .guide-figure, .modal-media-figure, .evidence-figure, .guide-source-panel-prose figure, .guide-source-prose figure").forEach(function (figure) {
       var image = figure.querySelector("img");
       var caption = figure.querySelector("figcaption");
       var captionText;
@@ -1041,8 +1416,8 @@
     }
 
     guideButton = document.getElementById("bubbleModalGuideButton");
-    if (item.guideTarget) {
-      guideButton.setAttribute("data-guide-target", item.guideTarget);
+    if (resolveGuideTarget(item.guideTarget, item.sourceHref)) {
+      guideButton.setAttribute("data-guide-target", resolveGuideTarget(item.guideTarget, item.sourceHref));
       guideButton.classList.remove("d-none");
     } else {
       guideButton.classList.add("d-none");
@@ -1059,15 +1434,13 @@
     }
 
     guideSectionNav.innerHTML = guideSections.map(function (section) {
-      var labCount = (section.labs || []).length;
-
       return [
         '<button type="button" class="guide-nav-link',
         section.id === state.guideSection ? " is-active" : "",
         '" data-guide-section="', section.id, '" data-accent="', section.accent, '">',
         '  <small>', escapeHtml(section.label), "</small>",
         '  <strong>', escapeHtml(section.title), "</strong>",
-        '  <span class="guide-nav-meta">', labCount, " item", labCount === 1 ? "" : "s", "</span>",
+        '  <span class="guide-nav-meta">', escapeHtml(section.navState || "Loading sections"), "</span>",
         "</button>"
       ].join("");
     }).join("");
@@ -1161,15 +1534,17 @@
   }
 
   function guideSectionVideoFeatures(section) {
-    var features = (section.highlights || []).slice(0, 3);
+    var features = [
+      section && typeof section.taskCount === "number"
+        ? guideTaskStateLabel(section)
+        : "Redesigned controls"
+    ].concat(section.highlights || []);
 
-    if (features.length) {
-      return features;
+    if (!features.length) {
+      return ["Redesigned controls", "Transcript", "Markdown fallback"];
     }
 
-    return (section.labs || []).slice(0, 3).map(function (lab) {
-      return lab.label || lab.title;
-    });
+    return uniqueList(features).slice(0, 3);
   }
 
   function renderGuideLab(section, lab) {
@@ -1533,6 +1908,1093 @@
     updateBreadcrumb();
   }
 
+  function renderHomeRouteMap() {
+    var firstGuideId = guideSections.length ? guideSections[0].id : "introduction";
+    var guidePreviewItems = guideSections.slice(0, 4);
+    var guideSummary = guideSections.length
+      ? guideSections.length + " guide sections in the active manifest order"
+      : "Loading guide pages...";
+    var toolkitItems = pickHomeToolkitMapItems();
+
+    if (!homeRouteMap) {
+      return;
+    }
+
+    homeRouteMap.innerHTML = [
+      '<div class="route-map-board">',
+      '  <section class="route-map-entry">',
+      '    <div>',
+      '      <div class="panel-kicker">Start here</div>',
+      '      <h3>Pick the route that matches the job.</h3>',
+      '      <p>Choose sequence, one answer, the flat full guide, the markdown fallback, or the applied workshop demo.</p>',
+      "    </div>",
+      '    <div class="route-map-entry-actions">',
+      '      <button type="button" class="btn btn-primary rounded-pill px-4" data-mode-target="beginner">Open Guided Path</button>',
+      '      <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Toolkit</button>',
+      '      <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-guide-target="', firstGuideId, '">Open Full Guide</button>',
+      '      <a class="btn btn-outline-secondary rounded-pill px-4" href="', guideHomeHref, '">Open Markdown Guide</a>',
+      "    </div>",
+      "  </section>",
+      '  <div class="route-map-grid">',
+      '    <article class="route-map-branch" data-accent="red">',
+      '      <div class="route-map-branch-head">',
+      '        <div>',
+      '          <small>Ordered route</small>',
+      '          <h4>Guided Path</h4>',
+      "        </div>",
+      '        <button type="button" class="btn btn-outline-primary rounded-pill px-3" data-mode-target="beginner">Open</button>',
+      "      </div>",
+      '      <p>Use when you want the shortest start-to-publish path.</p>',
+      '      <ol class="route-map-list is-ordered">',
+      stepMeta.map(function (step) {
+        return "<li><strong>" + escapeHtml(step.title) + "</strong><span>" + escapeHtml(compactText(step.summary, 74)) + "</span></li>";
+      }).join(""),
+      "      </ol>",
+      '      <div class="route-map-branch-foot">Leads into the same canonical guide pages when you need more detail.</div>',
+      "    </article>",
+      '    <article class="route-map-branch" data-accent="ocean">',
+      '      <div class="route-map-branch-head">',
+      '        <div>',
+      '          <small>Answer-first route</small>',
+      '          <h4>Toolkit</h4>',
+      "        </div>",
+      '        <button type="button" class="btn btn-outline-primary rounded-pill px-3" data-mode-target="explorer">Open</button>',
+      "      </div>",
+      '      <p>Use when you already know the blocker.</p>',
+      '      <ul class="route-map-list">',
+      toolkitItems.map(function (item) {
+        return "<li><strong>" + escapeHtml(item.title) + "</strong><span>" + escapeHtml(compactText(item.short || item.description || "", 72)) + "</span></li>";
+      }).join(""),
+      "      </ul>",
+      '      <div class="route-map-branch-foot">Leads to focused cards, snippets, and source links.</div>',
+      "    </article>",
+      '    <article class="route-map-branch" data-accent="pine">',
+      '      <div class="route-map-branch-head">',
+      '        <div>',
+      '          <small>Redesigned route</small>',
+      '          <h4>Full Guide</h4>',
+      "        </div>",
+      '        <button type="button" class="btn btn-outline-primary rounded-pill px-3" data-guide-target="', firstGuideId, '">Open</button>',
+      "      </div>",
+      '      <p>Use when you want the original flat guide order inside the redesigned shell.</p>',
+      '      <ul class="route-map-list">',
+      guidePreviewItems.map(function (entry) {
+        return "<li><strong>" + escapeHtml(entry.title) + "</strong><span>" + escapeHtml(compactText(entry.summary || entry.navState, 72)) + "</span></li>";
+      }).join(""),
+      "      </ul>",
+      '      <div class="route-map-branch-foot">', escapeHtml(guideSummary), ".</div>",
+      "    </article>",
+      '    <article class="route-map-branch" data-accent="sienna">',
+      '      <div class="route-map-branch-head">',
+      '        <div>',
+      '          <small>Fallback route</small>',
+      '          <h4>Markdown Guide</h4>',
+      "        </div>",
+      '        <a class="btn btn-outline-primary rounded-pill px-3" href="', guideHomeHref, '">Open</a>',
+      "      </div>",
+      '      <p>Use when you want the full-page markdown version as the fallback route.</p>',
+      '      <ul class="route-map-list">',
+      [
+        "Full-page Redwood shell",
+        "Same flat manifest as the redesign",
+        "Page-local search and media lightbox",
+        "Management-safe fallback option"
+      ].map(function (item) {
+        return "<li><strong>" + escapeHtml(item) + "</strong><span>Backed by the same canonical content tree.</span></li>";
+      }).join(""),
+      "      </ul>",
+      '      <div class="route-map-branch-foot">Leads to the first-class markdown alternative.</div>',
+      "    </article>",
+      '    <article class="route-map-branch" data-accent="sienna">',
+      '      <div class="route-map-branch-head">',
+      '        <div>',
+      '          <small>Applied reference</small>',
+      '          <h4>Sample Workshop Demo</h4>',
+      "        </div>",
+      '        <a class="btn btn-outline-primary rounded-pill px-3" href="./sample-workshops/clinical-first-responder-rag/index.html">Open</a>',
+      "      </div>",
+      '      <p>Use when you want to inspect the design on a workshop surface.</p>',
+      '      <ul class="route-map-list">',
+      [
+        "Provision the platform foundation",
+        "Model grounded clinical knowledge",
+        "Build prompts, guardrails, and patient chat",
+        "Validate escalation and doctor handoff"
+      ].map(function (item) {
+        return "<li><strong>" + escapeHtml(item) + "</strong><span>Shows the pattern on a real workshop-style page.</span></li>";
+      }).join(""),
+      "      </ul>",
+      '      <div class="route-map-branch-foot">Leads to an applied workshop example.</div>',
+      "    </article>",
+      "  </div>",
+      '  <div class="route-map-ribbon">',
+      '    <div>',
+      '      <strong>Search crosses every redesigned route.</strong>',
+      '      <span>One search surface crosses Guided Path, Toolkit, and the redesigned Full Guide.</span>',
+      "    </div>",
+      '    <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-mode-target="search">Open Search</button>',
+      "  </div>",
+      "</div>"
+    ].join("");
+  }
+
+  function renderGuideNav() {
+    if (!guideSectionNav) {
+      return;
+    }
+
+    if (!guideSections.length) {
+      guideSectionNav.innerHTML = '<div class="guide-empty-state">Loading guide sections...</div>';
+      return;
+    }
+
+    guideSectionNav.innerHTML = guideSections.map(function (section) {
+      return [
+        '<button type="button" class="guide-nav-link',
+        section.id === state.guideSection ? " is-active" : "",
+        '" data-guide-section="', section.id, '" data-accent="', section.accent, '">',
+        '  <small>', escapeHtml(section.label), "</small>",
+        '  <strong>', escapeHtml(section.title), "</strong>",
+        '  <span class="guide-nav-meta">', escapeHtml(section.navState || "Loading sections"), "</span>",
+        "</button>"
+      ].join("");
+    }).join("");
+  }
+
+  function renderGuideQuickNav() {
+    if (!guideQuickNav) {
+      return;
+    }
+
+    guideQuickNav.innerHTML = guideSections.map(function (section) {
+      return [
+        '<button type="button" class="guide-quick-link',
+        section.id === state.guideSection ? " is-active" : "",
+        '" data-guide-section="', section.id, '">',
+        '  <span>', escapeHtml(section.label), "</span>",
+        '  <strong>', escapeHtml(section.title), "</strong>",
+        "</button>"
+      ].join("");
+    }).join("");
+  }
+
+  function createGuideSourceLoader(section) {
+    var frame = document.createElement("iframe");
+
+    frame.className = "guide-source-loader";
+    frame.setAttribute("aria-hidden", "true");
+    frame.tabIndex = -1;
+    frame.src = section.embedHref || section.sectionHref || "";
+    return frame;
+  }
+
+  function waitForGuideModuleContent(frame, remainingChecks) {
+    return new Promise(function (resolve, reject) {
+      function check() {
+        var moduleContent;
+        var textLength;
+
+        try {
+          moduleContent = frame.contentDocument && frame.contentDocument.getElementById("module-content");
+          textLength = moduleContent ? moduleContent.textContent.replace(/\s+/g, " ").trim().length : 0;
+        } catch (error) {
+          moduleContent = null;
+          textLength = 0;
+        }
+
+        if (moduleContent && textLength > 80) {
+          resolve(moduleContent);
+          return;
+        }
+
+        if (remainingChecks <= 0) {
+          reject(new Error("Guide source content did not finish rendering in time."));
+          return;
+        }
+
+        remainingChecks -= 1;
+        window.setTimeout(check, 250);
+      }
+
+      check();
+    });
+  }
+
+  function guideSourceSlug(value) {
+    var slug = normalizeText(value || "").replace(/\s+/g, "-").replace(/[^a-z0-9\-]/g, "").replace(/\-+/g, "-");
+    return slug || "section";
+  }
+
+  function stripGuideSourceDisplay(node) {
+    var styleValue;
+
+    if (!node || !node.getAttribute) {
+      return;
+    }
+
+    styleValue = node.getAttribute("style");
+
+    if (!styleValue || !/display\s*:\s*none/i.test(styleValue)) {
+      return;
+    }
+
+    styleValue = styleValue
+      .replace(/\bdisplay\s*:\s*none;?/ig, "")
+      .replace(/\s{2,}/g, " ")
+      .trim();
+
+    if (styleValue) {
+      node.setAttribute("style", styleValue);
+      return;
+    }
+
+    node.removeAttribute("style");
+  }
+
+  function pruneGuideSourceArtifacts(root) {
+    if (!root) {
+      return;
+    }
+
+    Array.prototype.forEach.call(root.querySelectorAll(".hol-ToggleRegions, #btn_toggle, #modalWindow, #modalCaption, #modalClose, #modalImg, #markdownMediaLightbox, .md-lightbox, .md-expand-pill"), function (node) {
+      node.remove();
+    });
+
+    Array.prototype.forEach.call(root.querySelectorAll("[data-md-expandable]"), function (node) {
+      node.removeAttribute("data-md-expandable");
+      node.removeAttribute("role");
+      node.removeAttribute("tabindex");
+      node.removeAttribute("aria-label");
+    });
+
+    Array.prototype.forEach.call(root.querySelectorAll("[style]"), function (node) {
+      stripGuideSourceDisplay(node);
+    });
+
+    Array.prototype.forEach.call(root.querySelectorAll("p"), function (paragraph) {
+      var contentLength = paragraph.textContent.replace(/\s+/g, "").trim().length;
+      var keep = paragraph.querySelector("img, video, iframe, figure, table, pre, code, details, button");
+
+      if (!contentLength && !keep) {
+        paragraph.remove();
+      }
+    });
+  }
+
+  function guideSourceSectionKind(title) {
+    var text = String(title || "").trim();
+
+    if (/^(?:\([^)]+\)\s*)?Task\b/i.test(text)) {
+      return "task";
+    }
+
+    if (/^Acknowledgements?$/i.test(text)) {
+      return "acknowledgements";
+    }
+
+    if (/^Learn More$/i.test(text)) {
+      return "learn-more";
+    }
+
+    if (/^Introduction$/i.test(text)) {
+      return "introduction";
+    }
+
+    if (/^Summary$/i.test(text)) {
+      return "summary";
+    }
+
+    if (/^FAQ$/i.test(text)) {
+      return "faq";
+    }
+
+    if (/^Appendix\b/i.test(text)) {
+      return "appendix";
+    }
+
+    return "section";
+  }
+
+  function guideSourceSectionLabel(kind) {
+    switch (kind) {
+      case "task":
+        return "Task section";
+      case "acknowledgements":
+        return "Acknowledgements";
+      case "learn-more":
+        return "Reference";
+      case "introduction":
+        return "Overview";
+      case "summary":
+        return "Summary";
+      case "faq":
+        return "FAQ";
+      case "appendix":
+        return "Appendix";
+      default:
+        return "Section";
+    }
+  }
+
+  function guideSourceSectionMeta(kind, stepCount) {
+    if (kind === "task" && stepCount > 0) {
+      return stepCount + " step" + (stepCount === 1 ? "" : "s");
+    }
+
+    switch (kind) {
+      case "acknowledgements":
+        return "Owner and update note";
+      case "learn-more":
+        return "Additional links";
+      case "introduction":
+        return "Start here";
+      case "summary":
+        return "Wrap-up";
+      case "faq":
+        return "Support answers";
+      case "appendix":
+        return "Reference";
+      default:
+        return "Expandable section";
+    }
+  }
+
+  function guideSourceSectionDefaultOpen(kind, index, hasTaskPanels) {
+    if (kind === "introduction") {
+      return true;
+    }
+
+    return !hasTaskPanels && index === 0;
+  }
+
+  function countGuideSourceListItems(node, tagName) {
+    var list = null;
+
+    if (!node) {
+      return 0;
+    }
+
+    Array.prototype.some.call(node.children || [], function (child) {
+      if (child.tagName === tagName) {
+        list = child;
+        return true;
+      }
+
+      return false;
+    });
+
+    if (!list) {
+      return 0;
+    }
+
+    return Array.prototype.filter.call(list.children || [], function (child) {
+      return child.tagName === "LI";
+    }).length;
+  }
+
+  function guideSourceSectionStepCount(node) {
+    return countGuideSourceListItems(node, "OL") || countGuideSourceListItems(node, "UL");
+  }
+
+  function guideSourceHeadingAlias(node) {
+    var aliasNode;
+
+    if (!node) {
+      return "";
+    }
+
+    aliasNode = node.querySelector("div[name], [data-unique]");
+
+    if (!aliasNode) {
+      return "";
+    }
+
+    return aliasNode.getAttribute("name") || aliasNode.getAttribute("data-unique") || "";
+  }
+
+  function buildGuideSourcePanel(sectionNode, index, hasTaskPanels) {
+    var heading = sectionNode.querySelector("h2, h3, h4");
+    var title = heading ? heading.textContent.trim() : "Section " + String(index + 1).padStart(2, "0");
+    var clonedSection = sectionNode.cloneNode(true);
+    var clonedHeading = clonedSection.querySelector("h2, h3, h4");
+    var kind = guideSourceSectionKind(title);
+    var panelId = heading && heading.id ? heading.id : guideSourceSlug(title) + "-" + (index + 1);
+    var aliasId = guideSourceHeadingAlias(sectionNode);
+    var stepCount = guideSourceSectionStepCount(sectionNode);
+    var bodyHtml;
+
+    pruneGuideSourceArtifacts(clonedSection);
+
+    Array.prototype.forEach.call(clonedSection.querySelectorAll("div[name], [data-unique]"), function (node) {
+      if (!node.textContent.replace(/\s+/g, "").trim().length && !node.children.length) {
+        node.remove();
+      }
+    });
+
+    if (clonedHeading) {
+      clonedHeading.remove();
+    }
+
+    bodyHtml = clonedSection.innerHTML.trim();
+
+    return {
+      id: panelId,
+      aliasId: aliasId && aliasId !== panelId ? aliasId : "",
+      title: title,
+      kind: kind,
+      label: guideSourceSectionLabel(kind),
+      meta: guideSourceSectionMeta(kind, stepCount),
+      stepCount: stepCount,
+      open: guideSourceSectionDefaultOpen(kind, index, hasTaskPanels),
+      bodyHtml: bodyHtml || "<p>No additional content in this section.</p>"
+    };
+  }
+
+  function collectGuideSourcePanels(root) {
+    var article = root.querySelector("article") || root;
+    var sectionNodes = Array.prototype.filter.call(article.children || [], function (child) {
+      return child.tagName === "SECTION";
+    });
+    var hasTaskPanels = sectionNodes.some(function (sectionNode) {
+      var heading = sectionNode.querySelector("h2, h3, h4");
+      return guideSourceSectionKind(heading ? heading.textContent.trim() : "") === "task";
+    });
+
+    return sectionNodes.map(function (sectionNode, index) {
+      return buildGuideSourcePanel(sectionNode, index, hasTaskPanels);
+    }).filter(Boolean);
+  }
+
+  function normalizeGuideSourceNodes(root, baseHref) {
+    var baseUrl = new URL(baseHref, window.location.href);
+    var firstHeading = root.querySelector("article > h1");
+    var seenIds = {};
+
+    if (firstHeading) {
+      firstHeading.remove();
+    }
+
+    Array.prototype.forEach.call(root.querySelectorAll("script, style"), function (node) {
+      node.remove();
+    });
+
+    Array.prototype.forEach.call(root.querySelectorAll("h2, h3"), function (heading) {
+      var nextId = heading.id || guideSourceSlug(heading.textContent);
+
+      while (seenIds[nextId]) {
+        seenIds[nextId] += 1;
+        nextId = nextId + "-" + seenIds[nextId];
+      }
+
+      seenIds[nextId] = 1;
+      heading.id = nextId;
+    });
+
+    Array.prototype.forEach.call(root.querySelectorAll("img[src], iframe[src], source[src], video[src]"), function (node) {
+      var currentSrc = node.getAttribute("src");
+
+      if (!currentSrc) {
+        return;
+      }
+
+      node.setAttribute("src", new URL(currentSrc, baseUrl).toString());
+    });
+
+    Array.prototype.forEach.call(root.querySelectorAll("img[srcset], source[srcset]"), function (node) {
+      if (node.srcset) {
+        node.setAttribute("srcset", node.srcset);
+      }
+    });
+
+    Array.prototype.forEach.call(root.querySelectorAll("a[href]"), function (link) {
+      var rawHref = link.getAttribute("href");
+      var resolvedHref;
+
+      if (!rawHref || rawHref.indexOf("javascript:") === 0) {
+        return;
+      }
+
+      if (rawHref.charAt(0) === "#") {
+        return;
+      }
+
+      resolvedHref = new URL(rawHref, baseUrl);
+
+      if (
+        resolvedHref.origin === baseUrl.origin &&
+        resolvedHref.pathname === baseUrl.pathname &&
+        resolvedHref.search === baseUrl.search &&
+        resolvedHref.hash
+      ) {
+        link.setAttribute("href", resolvedHref.hash);
+        return;
+      }
+
+      link.setAttribute("href", resolvedHref.toString());
+
+      if (resolvedHref.origin !== window.location.origin) {
+        link.setAttribute("target", "_blank");
+        link.setAttribute("rel", "noreferrer");
+      }
+    });
+
+    Array.prototype.forEach.call(root.querySelectorAll("table"), function (table) {
+      table.classList.add("guide-source-table");
+    });
+
+    Array.prototype.forEach.call(root.querySelectorAll("pre"), function (block) {
+      block.classList.add("guide-source-pre");
+    });
+  }
+
+  function collectGuideSourceOutline(items) {
+    return (items || []).map(function (item) {
+      return {
+        id: item.id,
+        title: item.title
+      };
+    }).filter(function (item) {
+      return item.id && item.title;
+    });
+  }
+
+  function renderGuideSourceToolbar(taskCount, panelCount) {
+    var sectionSummary = guideSectionCountLabel(panelCount).toLowerCase();
+    var detailCopy = taskCount > 0
+      ? guideTaskSectionLabel(taskCount) + " available below, with the remaining reference sections still preserved."
+      : "Open the original guide sections below inside the redesigned Full Guide surface.";
+
+    return [
+      '<div class="guide-source-toolbar">',
+      '  <div class="guide-source-toolbar-copy">',
+      '    <div class="panel-kicker">Section content</div>',
+      '    <h3>Open ', escapeHtml(sectionSummary), ' in the original guide order.</h3>',
+      '    <p>', escapeHtml(detailCopy), "</p>",
+      "  </div>",
+      '  <div class="guide-source-toolbar-actions">',
+      taskCount > 0 ? '    <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-guide-source-expand-all="tasks">Expand all tasks</button>' : "",
+      "  </div>",
+      "</div>"
+    ].join("");
+  }
+
+  function renderGuideSourcePanels(items) {
+    if (!items.length) {
+      return "";
+    }
+
+    return [
+      '<div class="guide-source-panels">',
+      items.map(function (item) {
+        return [
+          '<section class="guide-source-panel-card',
+          item.open ? " is-open" : "",
+          '" data-guide-source-card="', escapeHtml(item.id), '" data-guide-source-kind="', escapeHtml(item.kind), '" id="', escapeHtml(item.id), '">',
+          item.aliasId ? '<span class="guide-source-anchor" id="' + escapeHtml(item.aliasId) + '" aria-hidden="true"></span>' : "",
+          '  <button type="button" class="guide-source-panel-toggle" data-guide-source-toggle="', escapeHtml(item.id), '" aria-expanded="', item.open ? "true" : "false", '">',
+          '    <span class="guide-source-panel-head">',
+          '      <span class="guide-source-panel-label">', escapeHtml(item.label), "</span>",
+          '      <span class="guide-source-panel-title">', escapeHtml(item.title), "</span>",
+          "    </span>",
+          '    <span class="guide-source-panel-side">',
+          '      <span class="guide-source-panel-meta">', escapeHtml(item.meta), "</span>",
+          '      <span class="guide-source-panel-icon" aria-hidden="true">+</span>',
+          "    </span>",
+          "  </button>",
+          '  <div class="guide-source-panel-body"', item.open ? "" : ' hidden', ">",
+          '    <div class="guide-source-prose guide-source-panel-prose">',
+          item.bodyHtml,
+          "    </div>",
+          "  </div>",
+          "</section>"
+        ].join("");
+      }).join(""),
+      "</div>"
+    ].join("");
+  }
+
+  function renderGuideSourceOutline(items) {
+    if (!items.length) {
+      return "";
+    }
+
+    return [
+      '<nav class="guide-source-outline" aria-label="Section outline">',
+      items.map(function (item) {
+        return '<button type="button" class="guide-source-outline-link" data-guide-source-jump="' + escapeHtml(item.id) + '">' + escapeHtml(item.title) + "</button>";
+      }).join(""),
+      "</nav>"
+    ].join("");
+  }
+
+  function loadGuideRenderedSection(section) {
+    if (!section || !section.id) {
+      return Promise.reject(new Error("Guide section is missing."));
+    }
+
+    if (guideSectionSurfaceCache[section.id]) {
+      return guideSectionSurfaceCache[section.id];
+    }
+
+    guideSectionSurfaceCache[section.id] = new Promise(function (resolve, reject) {
+      var frame = createGuideSourceLoader(section);
+      var settled = false;
+
+      function finish(error, payload) {
+        if (settled) {
+          return;
+        }
+
+        settled = true;
+
+        if (frame.parentNode) {
+          frame.parentNode.removeChild(frame);
+        }
+
+        if (error) {
+          reject(error);
+          return;
+        }
+
+        resolve(payload);
+      }
+
+      frame.addEventListener("error", function () {
+        finish(new Error("Guide source page could not be loaded."));
+      }, { once: true });
+
+      frame.addEventListener("load", function () {
+        waitForGuideModuleContent(frame, 48).then(function (moduleContent) {
+          var clonedContent = moduleContent.cloneNode(true);
+          var panels;
+          var taskCount;
+
+          clonedContent.removeAttribute("id");
+          clonedContent.removeAttribute("title");
+          clonedContent.className = "";
+          normalizeGuideSourceNodes(clonedContent, frame.contentWindow.location.href);
+          panels = collectGuideSourcePanels(clonedContent);
+          taskCount = panels.filter(function (panel) {
+            return panel.kind === "task";
+          }).length;
+
+          finish(null, {
+            html: panels.length
+              ? renderGuideSourcePanels(panels)
+              : '<div class="guide-source-prose">' + clonedContent.innerHTML + "</div>",
+            outline: collectGuideSourceOutline(panels),
+            taskCount: taskCount,
+            panelCount: panels.length
+          });
+        }).catch(function (error) {
+          finish(error);
+        });
+      }, { once: true });
+
+      document.body.appendChild(frame);
+    }).catch(function (error) {
+      delete guideSectionSurfaceCache[section.id];
+      throw error;
+    });
+
+    return guideSectionSurfaceCache[section.id];
+  }
+
+  function buildGuideBreadcrumb(section) {
+    return [
+      '<div class="guide-inline-breadcrumb" aria-label="Current guide section">',
+      "  <span>Full Guide</span>",
+      "  <span>/</span>",
+      "  <span>", escapeHtml(section.label), "</span>",
+      "  <span>/</span>",
+      "  <strong>", escapeHtml(section.title), "</strong>",
+      "</div>"
+    ].join("");
+  }
+
+  function syncGuideSectionStateBadges(section) {
+    var taskBadge;
+    var panelBadge;
+
+    if (!guideSectionMount || !section || !currentGuideSection() || currentGuideSection().id !== section.id) {
+      return;
+    }
+
+    taskBadge = guideSectionMount.querySelector("[data-guide-section-task-state]");
+    panelBadge = guideSectionMount.querySelector("[data-guide-section-panel-state]");
+
+    if (taskBadge) {
+      taskBadge.textContent = guideTaskStateLabel(section);
+    }
+
+    if (panelBadge) {
+      panelBadge.textContent = section.panelCount > 0
+        ? guideSectionCountLabel(section.panelCount)
+        : "Loading sections";
+    }
+  }
+
+  function renderGuideSection() {
+    var section = currentGuideSection();
+    var currentRequestToken;
+
+    if (!guideSectionMount) {
+      return;
+    }
+
+    if (!section) {
+      guideSectionMount.innerHTML = '<article class="guide-section-card"><p class="guide-section-summary">The full guide is still loading.</p></article>';
+      renderGuideNav();
+      updateBreadcrumb();
+      return;
+    }
+
+    loadGuideSourceMeta(section);
+
+    guideSectionMount.innerHTML = [
+      '<article class="guide-section-card" data-accent="', escapeHtml(section.accent), '">',
+      '  <div class="guide-section-hero">',
+      '    <div class="guide-section-copy">',
+      buildGuideBreadcrumb(section),
+      '      <div class="panel-kicker">', escapeHtml(section.label), "</div>",
+      '      <h2 class="guide-section-title">', escapeHtml(section.title), "</h2>",
+      section.summary ? '      <p class="guide-section-summary">' + escapeHtml(section.summary) + "</p>" : "",
+      '      <p class="guide-section-purpose">', escapeHtml(section.purpose || ""), "</p>",
+      '      <div class="guide-highlight-row">',
+      '        <span class="guide-highlight-chip" data-guide-section-task-state>', escapeHtml(guideTaskStateLabel(section)), "</span>",
+      '        <span class="guide-highlight-chip" data-guide-section-panel-state>', escapeHtml(section.panelCount > 0 ? guideSectionCountLabel(section.panelCount) : "Loading sections"), "</span>",
+      (section.highlights || []).map(function (item) {
+        return '<span class="guide-highlight-chip">' + escapeHtml(item) + "</span>";
+      }).join(""),
+      "      </div>",
+      renderVideoPlaceholderCard(
+        section.title + " walkthrough",
+        section.summary || section.purpose || "Use the section player first, then open the redesigned source sections underneath.",
+        guideSectionVideoFeatures(section)
+      ),
+      '      <div class="guide-section-actions">',
+      '        <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Toolkit</button>',
+      section.sectionHref ? '<a class="btn btn-outline-secondary rounded-pill px-4" href="' + escapeHtml(section.sectionHref) + '" target="_blank" rel="noreferrer">' + escapeHtml(section.sectionLabel || "Open Markdown Version") + "</a>" : "",
+      "      </div>",
+      "    </div>",
+      "  </div>",
+      '  <section class="guide-source-shell">',
+      '    <div class="guide-source-loading">Loading the redesigned section surface for this guide entry...</div>',
+      "  </section>",
+      "</article>"
+    ].join("");
+
+    renderGuideNav();
+    renderGuideQuickNav();
+    hydrateVideoCards(guideSectionMount);
+    scheduleLayoutSync();
+    updateBreadcrumb();
+
+    currentRequestToken = ++guideSectionSurfaceRequestToken;
+
+    loadGuideRenderedSection(section).then(function (payload) {
+      var sourceShell;
+
+      if (
+        currentRequestToken !== guideSectionSurfaceRequestToken ||
+        !currentGuideSection() ||
+        currentGuideSection().id !== section.id
+      ) {
+        return;
+      }
+
+      sourceShell = guideSectionMount.querySelector(".guide-source-shell");
+
+      if (!sourceShell) {
+        return;
+      }
+
+      applyGuideSourceMeta(section, {
+        taskCount: payload.taskCount,
+        panelCount: payload.panelCount
+      });
+      renderGuideNav();
+      syncGuideSectionStateBadges(section);
+
+      sourceShell.innerHTML = [
+        renderGuideSourceOutline(payload.outline),
+        '<div class="guide-source-body">',
+        renderGuideSourceToolbar(payload.taskCount, payload.panelCount),
+        payload.html,
+        "</div>"
+      ].join("");
+
+      Array.from(sourceShell.querySelectorAll("[data-guide-source-card]")).forEach(function (card) {
+        setGuideSourcePanelState(card, card.classList.contains("is-open"));
+      });
+      syncGuideSourceExpandButton(sourceShell.querySelector(".guide-source-body"));
+      hydrateVideoCards(sourceShell);
+      decorateExpandableMedia(sourceShell);
+      scheduleLayoutSync();
+    }).catch(function () {
+      var sourceShell = guideSectionMount.querySelector(".guide-source-shell");
+
+      if (!sourceShell || currentRequestToken !== guideSectionSurfaceRequestToken) {
+        return;
+      }
+
+      sourceShell.innerHTML = [
+        '<div class="guide-source-error">',
+        "  <strong>Source content could not be rendered in the redesigned guide right now.</strong>",
+        "  <p>Open the markdown version for this page while the redesigned surface is refreshed.</p>",
+        section.sectionHref ? '  <a class="btn btn-outline-secondary rounded-pill px-4" href="' + escapeHtml(section.sectionHref) + '" target="_blank" rel="noreferrer">' + escapeHtml(section.sectionLabel || "Open Markdown Version") + "</a>" : "",
+        "</div>"
+      ].join("");
+      scheduleLayoutSync();
+    });
+  }
+
+  function guideSourceCardById(cardId) {
+    if (!guideSectionMount || !cardId) {
+      return null;
+    }
+
+    return guideSectionMount.querySelector('[data-guide-source-card="' + cardId + '"]');
+  }
+
+  function syncGuideSourceExpandButton(root) {
+    var expandButton;
+    var taskCards;
+    var allOpen;
+
+    if (!root) {
+      return;
+    }
+
+    expandButton = root.querySelector("[data-guide-source-expand-all]");
+
+    if (!expandButton) {
+      return;
+    }
+
+    taskCards = Array.from(root.querySelectorAll('[data-guide-source-kind="task"]'));
+
+    if (!taskCards.length) {
+      expandButton.remove();
+      return;
+    }
+
+    allOpen = taskCards.every(function (card) {
+      return card.classList.contains("is-open");
+    });
+
+    expandButton.textContent = allOpen ? "Collapse all tasks" : "Expand all tasks";
+    expandButton.setAttribute("aria-label", allOpen ? "Collapse all task sections" : "Expand all task sections");
+  }
+
+  function setGuideSourcePanelState(card, openState) {
+    var toggle;
+    var body;
+    var icon;
+
+    if (!card) {
+      return;
+    }
+
+    toggle = card.querySelector("[data-guide-source-toggle]");
+    body = card.querySelector(".guide-source-panel-body");
+    icon = card.querySelector(".guide-source-panel-icon");
+
+    card.classList.toggle("is-open", openState);
+
+    if (toggle) {
+      toggle.setAttribute("aria-expanded", openState ? "true" : "false");
+    }
+
+    if (body) {
+      if (openState) {
+        body.removeAttribute("hidden");
+      } else {
+        body.setAttribute("hidden", "");
+      }
+    }
+
+    if (icon) {
+      icon.textContent = openState ? "−" : "+";
+    }
+  }
+
+  function toggleGuideSourcePanel(cardId, forceOpen, scrollIntoView) {
+    var card = guideSourceCardById(cardId);
+    var sourceBody;
+    var nextOpenState;
+
+    if (!card) {
+      return;
+    }
+
+    nextOpenState = typeof forceOpen === "boolean" ? forceOpen : !card.classList.contains("is-open");
+    setGuideSourcePanelState(card, nextOpenState);
+
+    if (scrollIntoView) {
+      scrollToTarget(card);
+    }
+
+    sourceBody = card.closest(".guide-source-body");
+
+    if (sourceBody) {
+      syncGuideSourceExpandButton(sourceBody);
+    }
+  }
+
+  function toggleGuideSourceTaskPanels(button) {
+    var sourceBody = button && button.closest(".guide-source-body");
+    var taskCards;
+    var shouldOpen;
+
+    if (!sourceBody) {
+      return;
+    }
+
+    taskCards = Array.from(sourceBody.querySelectorAll('[data-guide-source-kind="task"]'));
+
+    if (!taskCards.length) {
+      return;
+    }
+
+    shouldOpen = taskCards.some(function (card) {
+      return !card.classList.contains("is-open");
+    });
+
+    taskCards.forEach(function (card) {
+      setGuideSourcePanelState(card, shouldOpen);
+    });
+
+    syncGuideSourceExpandButton(sourceBody);
+
+    if (taskCards[0]) {
+      scrollToTarget(taskCards[0]);
+    }
+  }
+
+  function copyGuideSourceCode(button) {
+    var block = button && button.closest("pre");
+    var target = block ? block.querySelector(".copy-code") : null;
+    var fallbackTarget = block ? block.querySelector("code") : null;
+    var text = target ? target.textContent : (fallbackTarget ? fallbackTarget.textContent : "");
+
+    if (!text.trim()) {
+      return;
+    }
+
+    copyWithFallback(text).then(function () {
+      var original = button.textContent;
+
+      button.textContent = "Copied";
+      button.classList.add("is-copied");
+      setLiveMessage("Code snippet copied to clipboard.");
+      window.setTimeout(function () {
+        button.textContent = original;
+        button.classList.remove("is-copied");
+      }, 1400);
+    }).catch(function () {
+      setLiveMessage("Copy failed. Select the code manually.");
+    });
+  }
+
+  function buildSearchIndex() {
+    searchIndex = [];
+    searchEntryMap = {};
+
+    stepMeta.forEach(function (meta, index) {
+      var entry = createSearchEntry({
+        id: "guided-" + meta.id,
+        typeLabel: "Guided Path",
+        title: meta.title,
+        summary: meta.summary || "",
+        path: "Guided Path / Step " + (index + 1),
+        body: stepSections[index] ? stepSections[index].textContent : "",
+        keywords: meta.keywords || [],
+        open: {
+          kind: "guided",
+          step: index
+        }
+      });
+
+      searchIndex.push(entry);
+      searchEntryMap[entry.id] = entry;
+    });
+
+    explorerItems.forEach(function (item) {
+      var entry = createSearchEntry({
+        id: "toolkit-" + item.id,
+        typeLabel: "Toolkit",
+        title: item.title,
+        summary: item.description || item.short || "",
+        path: "Toolkit / " + item.title,
+        steps: item.steps,
+        checkpoints: item.checkpoints,
+        watchFor: item.watchFor,
+        snippet: item.snippet,
+        exampleFields: item.exampleFields,
+        resourceLinks: item.resourceLinks,
+        milestones: item.milestones,
+        tags: item.tags,
+        sourceHref: item.sourceHref,
+        sourceLabel: item.sourceLabel,
+        open: {
+          kind: "toolkit",
+          itemId: item.id
+        }
+      });
+
+      searchIndex.push(entry);
+      searchEntryMap[entry.id] = entry;
+    });
+
+    guideSections.forEach(function (section) {
+      var sectionEntry = createSearchEntry({
+        id: "guide-section-" + section.id,
+        typeLabel: "Full Guide",
+        title: section.title,
+        summary: section.summary || section.purpose || "",
+        path: "Full Guide / " + section.label + " / " + section.title,
+        body: [section.purpose || "", flattenList(section.highlights)].join(" "),
+        sourceHref: section.sectionHref,
+        sourceLabel: section.sectionLabel,
+        open: {
+          kind: "guide-section",
+          sectionId: section.id
+        }
+      });
+
+      searchIndex.push(sectionEntry);
+      searchEntryMap[sectionEntry.id] = sectionEntry;
+
+      (section.labs || []).forEach(function (lab) {
+        var labEntry = createSearchEntry({
+          id: "guide-lab-" + section.id + "-" + lab.id,
+          typeLabel: "Full Guide",
+          title: lab.title,
+          summary: lab.summary || "",
+          path: "Full Guide / " + section.label + " / " + (lab.label || "Lab") + " / " + lab.title,
+          steps: lab.steps,
+          checkpoints: lab.checkpoints,
+          watchFor: lab.watchFor,
+          snippet: lab.snippet,
+          exampleFields: lab.exampleFields,
+          resourceLinks: lab.resourceLinks,
+          milestones: lab.milestones,
+          sourceHref: lab.sourceHref,
+          sourceLabel: lab.sourceLabel,
+          open: {
+            kind: "guide-lab",
+            sectionId: section.id,
+            labId: lab.id
+          }
+        });
+
+        searchIndex.push(labEntry);
+        searchEntryMap[labEntry.id] = labEntry;
+      });
+    });
+  }
+
   function runGlobalSearch(rawQuery) {
     state.searchQuery = String(rawQuery || "").trim();
     rememberViewForSearch();
@@ -1606,10 +3068,17 @@
     }, options || {});
     var guideTarget;
 
+    if ((mode === "guide" || mode === "search") && !guideCatalogLoaded) {
+      loadGuideCatalog().then(function () {
+        switchMode(mode, options);
+      });
+      return;
+    }
+
     closeImageLightbox({ announce: false, restoreFocus: false });
 
-    if (config.guideSection && guideSectionMap[config.guideSection]) {
-      state.guideSection = config.guideSection;
+    if (mode === "guide" || config.guideSection) {
+      state.guideSection = resolveGuideTarget(config.guideSection || state.guideSection);
     }
 
     if (mode !== "guide") {
@@ -1810,6 +3279,7 @@
     var cleaned = (hash || "").replace("#", "").trim();
     var index;
     var query;
+    var guideHashTarget;
 
     if (!cleaned || cleaned === "home" || cleaned === "hub") {
       switchMode("hub", { scroll: false, hash: false, announce: false });
@@ -1838,12 +3308,14 @@
       return;
     }
 
-    if (cleaned.indexOf("guide-") === 0 && guideSectionMap[cleaned.replace("guide-", "")]) {
+    guideHashTarget = cleaned.indexOf("guide-") === 0 ? resolveGuideTarget(cleaned.replace("guide-", "")) : "";
+
+    if (guideHashTarget) {
       switchMode("guide", {
         scroll: false,
         hash: false,
         announce: false,
-        guideSection: cleaned.replace("guide-", ""),
+        guideSection: guideHashTarget,
         guideFocusLab: ""
       });
       return;
@@ -1910,6 +3382,11 @@
     var actionButton = event.target.closest("[data-action]");
     var guideButton = event.target.closest("[data-guide-target]");
     var guideSectionButton = event.target.closest("[data-guide-section]");
+    var guideSourceJumpButton = event.target.closest("[data-guide-source-jump]");
+    var guideSourceToggleButton = event.target.closest("[data-guide-source-toggle]");
+    var guideSourceExpandButton = event.target.closest("[data-guide-source-expand-all]");
+    var guideSourceCopyButton = event.target.closest(".guide-source-panel-prose .copy-button, .guide-source-prose .copy-button");
+    var guideSourceHashLink = event.target.closest(".guide-source-shell a[href^=\"#\"]");
     var shortcutBubble = event.target.closest("[data-open-bubble-direct]");
     var bubbleButton = event.target.closest("[data-open-bubble]");
     var copyButton = event.target.closest("[data-copy-target]");
@@ -1919,13 +3396,51 @@
 
     if (modeButton) {
       if (modeButton.getAttribute("data-mode-target") === "guide" && modeButton.getAttribute("data-guide-target")) {
-        switchMode("guide", { guideSection: modeButton.getAttribute("data-guide-target"), guideFocusLab: "", forceTop: isPrimaryNav });
+        switchMode("guide", {
+          guideSection: resolveGuideTarget(modeButton.getAttribute("data-guide-target")) || currentGuideTarget(),
+          guideFocusLab: "",
+          forceTop: isPrimaryNav
+        });
       } else if (modeButton.getAttribute("data-mode-target") === "beginner") {
         switchMode("beginner", { resetStep: true, forceTop: isPrimaryNav || !!modeButton.closest(".hero-actions") });
       } else {
         switchMode(modeButton.getAttribute("data-mode-target"), { forceTop: isPrimaryNav });
       }
       return;
+    }
+
+    if (guideSourceJumpButton) {
+      toggleGuideSourcePanel(guideSourceJumpButton.getAttribute("data-guide-source-jump"), true, true);
+      return;
+    }
+
+    if (guideSourceToggleButton) {
+      toggleGuideSourcePanel(guideSourceToggleButton.getAttribute("data-guide-source-toggle"));
+      return;
+    }
+
+    if (guideSourceExpandButton) {
+      toggleGuideSourceTaskPanels(guideSourceExpandButton);
+      return;
+    }
+
+    if (guideSourceCopyButton) {
+      event.preventDefault();
+      copyGuideSourceCode(guideSourceCopyButton);
+      return;
+    }
+
+    if (guideSourceHashLink) {
+      var hashTargetId = guideSourceHashLink.getAttribute("href").replace(/^#/, "");
+      var hashTargetNode = hashTargetId ? document.getElementById(hashTargetId) : null;
+      var hashTargetCard = hashTargetNode && hashTargetNode.closest ? hashTargetNode.closest("[data-guide-source-card]") : null;
+
+      if (hashTargetCard) {
+        event.preventDefault();
+        toggleGuideSourcePanel(hashTargetCard.getAttribute("data-guide-source-card"), true);
+        scrollToTarget(hashTargetNode);
+        return;
+      }
     }
 
     if (event.target === imageLightboxClose || event.target.closest("[data-lightbox-close]")) {
@@ -1955,7 +3470,10 @@
     }
 
     if (guideButton) {
-      switchMode("guide", { guideSection: guideButton.getAttribute("data-guide-target") || currentGuideTarget(), guideFocusLab: "" });
+      switchMode("guide", {
+        guideSection: resolveGuideTarget(guideButton.getAttribute("data-guide-target")) || currentGuideTarget(),
+        guideFocusLab: ""
+      });
       return;
     }
 
@@ -2057,13 +3575,14 @@
 
   hydrateVideoCards(document);
   decorateExpandableMedia(document);
-  renderHomeRouteMap();
-  renderGuideNav();
   updateNav();
   updateNavSearch();
   updateBeginnerUI();
   renderExplorer();
-  buildSearchIndex();
-  applyHash(window.location.hash);
-  scheduleLayoutSync();
+  renderHomeRouteMap();
+  renderGuideNav();
+  loadGuideCatalog().finally(function () {
+    applyHash(window.location.hash);
+    scheduleLayoutSync();
+  });
 }());

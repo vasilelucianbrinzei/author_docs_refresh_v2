@@ -1,2 +1,5 @@
-image_gen_assets/
+# Local-only workbench, generated assets, and draft sample content.
+project-assets/
+
+# Validation output stays local unless it is intentionally copied into tracked docs.
 VALIDATION-RESULT.md

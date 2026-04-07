@@ -1,3 +1,5 @@
+// Classic markdown wrapper enhancement.
+// Hides child lab links in the left nav so the improved markdown experience stays section-first instead of exposing every lab in the TOC.
 (function () {
     var hiddenTitles = [
         "Lab 1: WMS lifecycle, QA, and publishing flow",
@@ -22,6 +24,7 @@
         "Lab 20: Update the image on your sandbox environment",
         "Lab 21: Secure Desktop environments in LiveLabs",
         "Lab 22: Request and access Secure Desktop environments",
+        "Lab 23: Get started with the LiveLabs AI Developer Hub",
         "Need Help?",
         "LiveLabs FAQ"
     ];

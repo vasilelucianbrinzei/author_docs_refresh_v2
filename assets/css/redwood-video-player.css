@@ -253,6 +253,14 @@
 .media-player-rate {
   appearance: none;
   padding-right: 1.8rem;
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--player-ink);
+  border-color: rgba(255, 255, 255, 0.26);
+}
+
+.media-player-rate option {
+  color: var(--player-ink);
+  background: #fff;
 }
 
 .media-player-progress {
@@ -406,6 +414,46 @@
 
 .media-player-card.is-playing .media-player-stage-toggle::after {
   content: " live";
+}
+
+.media-player-shell:fullscreen,
+.media-player-shell:-webkit-full-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.35rem 1.5rem;
+  border-radius: 0;
+  border-color: rgba(255, 255, 255, 0.14);
+  background: #000;
+}
+
+.media-player-shell:fullscreen .media-player-stage,
+.media-player-shell:-webkit-full-screen .media-player-stage {
+  width: min(100%, 96rem);
+  height: min(76vh, calc(100vh - 8rem));
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 26px;
+  background: #000;
+}
+
+.media-player-shell:fullscreen .media-player-video,
+.media-player-shell:-webkit-full-screen .media-player-video {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  max-height: none;
+  object-fit: contain;
+  background: #000;
+}
+
+.media-player-shell:fullscreen .media-player-controls,
+.media-player-shell:-webkit-full-screen .media-player-controls {
+  width: min(100%, 96rem);
 }
 
 @media (max-width: 900px) {
