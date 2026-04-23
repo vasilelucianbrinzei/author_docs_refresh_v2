@@ -8,6 +8,7 @@
   var guideSectionMap = {};
   var guideManifestHref = "./workshops/author-guide/manifest.json";
   var guideHomeHref = "./workshops/author-guide/index.html";
+  var fullGuideHref = "https://oracle-livelabs.github.io/common/sample-livelabs-templates/create-labs/labs/workshops/livelabs/";
   var guideCatalogPromise = null;
   var guideCatalogLoaded = false;
   var guideSectionSurfaceCache = {};
@@ -290,12 +291,12 @@
 
   function updateHashFromState() {
     if (state.mode === "beginner") {
-      setHash(state.currentStep === 0 ? "#guided" : "#step-" + (state.currentStep + 1));
+      setHash(state.currentStep === 0 ? "#quickstart" : "#step-" + (state.currentStep + 1));
       return;
     }
 
     if (state.mode === "explorer") {
-      setHash("#toolkit");
+      setHash("#quick-reference");
       return;
     }
 
@@ -755,8 +756,8 @@
       navState: "Loading sections",
       labs: [],
       sourcePath: filename,
-      sectionHref: guideHomeHref + "?lab=" + encodeURIComponent(id),
-      sectionLabel: "Open Markdown Version",
+      sectionHref: fullGuideHref,
+      sectionLabel: "Open Full Guide",
       embedHref: guideHomeHref + "?lab=" + encodeURIComponent(id) + "&embed=1"
     };
   }
@@ -827,6 +828,14 @@
     return guideSectionMap[state.guideSection] || guideSections[0];
   }
 
+  function openFullGuide(url) {
+    var target = url || fullGuideHref;
+    if (!target) {
+      return;
+    }
+    window.open(target, "_blank", "noopener,noreferrer");
+  }
+
   function currentGuideLab() {
     var section = currentGuideSection();
 
@@ -865,11 +874,11 @@
 
   function previousViewLabel() {
     if (previousView.mode === "beginner") {
-      return "Back to Guided Path";
+      return "Back to Quickstart";
     }
 
     if (previousView.mode === "explorer") {
-      return "Back to Toolkit";
+      return "Back to Quick Reference";
     }
 
     if (previousView.mode === "guide") {
@@ -908,11 +917,11 @@
     }
 
     if (state.mode === "beginner" && stepMeta[state.currentStep]) {
-      parts.push("Guided Path");
+      parts.push("Quickstart");
       parts.push("Step " + (state.currentStep + 1));
       parts.push(stepMeta[state.currentStep].title);
     } else if (state.mode === "explorer") {
-      parts.push("Toolkit");
+      parts.push("Quick Reference");
       if (state.activeTag !== "all") {
         parts.push(titleCaseTag(state.activeTag));
       }
@@ -1021,7 +1030,7 @@
       ].join("");
     }).join("");
 
-    resultCount.textContent = "Showing " + visibleItems.length + " toolkit card" + (visibleItems.length === 1 ? "" : "s");
+    resultCount.textContent = "Showing " + visibleItems.length + " quick reference card" + (visibleItems.length === 1 ? "" : "s");
     emptyState.classList.toggle("d-none", visibleItems.length !== 0);
   }
 
@@ -1041,8 +1050,8 @@
       '      <p>Choose sequence, one answer, the full map, or the applied workshop demo.</p>',
       "    </div>",
       '    <div class="route-map-entry-actions">',
-      '      <button type="button" class="btn btn-primary rounded-pill px-4" data-mode-target="beginner">Open Guided Path</button>',
-      '      <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Toolkit</button>',
+      '      <button type="button" class="btn btn-primary rounded-pill px-4" data-mode-target="beginner">Open Quickstart</button>',
+      '      <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Quick Reference</button>',
       '      <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-guide-target="start-here">Open Full Guide</button>',
       "    </div>",
       "  </section>",
@@ -1051,7 +1060,7 @@
       '      <div class="route-map-branch-head">',
       '        <div>',
       '          <small>Ordered route</small>',
-      '          <h4>Guided Path</h4>',
+      '          <h4>Quickstart</h4>',
       "        </div>",
       '        <button type="button" class="btn btn-outline-primary rounded-pill px-3" data-mode-target="beginner">Open</button>',
       "      </div>",
@@ -1067,7 +1076,7 @@
       '      <div class="route-map-branch-head">',
       '        <div>',
       '          <small>Answer-first route</small>',
-      '          <h4>Toolkit</h4>',
+      '          <h4>Quick Reference</h4>',
       "        </div>",
       '        <button type="button" class="btn btn-outline-primary rounded-pill px-3" data-mode-target="explorer">Open</button>',
       "      </div>",
@@ -1121,7 +1130,7 @@
       '  <div class="route-map-ribbon">',
       '    <div>',
       '      <strong>Search crosses every route.</strong>',
-      '      <span>One search surface crosses Guided Path, Toolkit, and Full Guide.</span>',
+      '      <span>One search surface crosses Quickstart, Quick Reference, and Full Guide.</span>',
       "    </div>",
       '    <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-mode-target="search">Open Search</button>',
       "  </div>",
@@ -1409,7 +1418,7 @@
     sourceLink = document.getElementById("bubbleModalSourceLink");
     if (item.sourceHref) {
       sourceLink.setAttribute("href", item.sourceHref);
-      sourceLink.textContent = item.sourceLabel || "Open Canonical Source";
+      sourceLink.textContent = item.sourceLabel || "Open Full Guide";
       sourceLink.classList.remove("d-none");
     } else {
       sourceLink.classList.add("d-none");
@@ -1577,7 +1586,7 @@
       supportBlocks ? '<div class="guide-lab-panels">' + supportBlocks + "</div>" : "",
       renderGuideSnippetCard(snippetId, lab.snippet, lab.snippetTitle || "Snippet", lab.snippetMeta || "Copy-ready detail"),
       '  <div class="guide-lab-actions">',
-      lab.sourceHref ? '<a class="btn btn-outline-secondary rounded-pill px-4" href="' + escapeHtml(lab.sourceHref) + '" target="_blank" rel="noreferrer">' + escapeHtml(lab.sourceLabel || "Open Canonical Lab") + "</a>" : "",
+      lab.sourceHref ? '<a class="btn btn-outline-secondary rounded-pill px-4" href="' + escapeHtml(lab.sourceHref) + '" target="_blank" rel="noreferrer">' + escapeHtml(lab.sourceLabel || "Open Full Guide") + "</a>" : "",
       "  </div>",
       "</article>"
     ].join("");
@@ -1611,8 +1620,8 @@
       }).join(""),
       "      </div>",
       '      <div class="guide-section-actions">',
-      '        <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Reference Toolkit</button>',
-      section.sectionHref ? '<a class="btn btn-outline-secondary rounded-pill px-4" href="' + escapeHtml(section.sectionHref) + '" target="_blank" rel="noreferrer">' + escapeHtml(section.sectionLabel || "Open Canonical Section") + "</a>" : "",
+      '        <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Quick Reference</button>',
+      section.sectionHref ? '<a class="btn btn-outline-secondary rounded-pill px-4" href="' + escapeHtml(section.sectionHref) + '" target="_blank" rel="noreferrer">' + escapeHtml(section.sectionLabel || "Open Full Guide") + "</a>" : "",
       "      </div>",
       "    </div>",
       "  </div>",
@@ -1681,10 +1690,10 @@
     stepMeta.forEach(function (meta, index) {
       var entry = createSearchEntry({
         id: "guided-" + meta.id,
-        typeLabel: "Guided Path",
+        typeLabel: "Quickstart",
         title: meta.title,
         summary: meta.summary || "",
-        path: "Guided Path / Step " + (index + 1),
+        path: "Quickstart / Step " + (index + 1),
         body: stepSections[index] ? stepSections[index].textContent : "",
         keywords: meta.keywords || [],
         open: {
@@ -1700,10 +1709,10 @@
     explorerItems.forEach(function (item) {
       var entry = createSearchEntry({
         id: "toolkit-" + item.id,
-        typeLabel: "Toolkit",
+        typeLabel: "Quick Reference",
         title: item.title,
         summary: item.description || item.short || "",
-        path: "Toolkit / " + item.title,
+        path: "Quick Reference / " + item.title,
         steps: item.steps,
         checkpoints: item.checkpoints,
         watchFor: item.watchFor,
@@ -1843,7 +1852,7 @@
       '  <p class="search-result-summary">', escapeHtml(result.summary), "</p>",
       '  <div class="search-result-actions">',
       '    <button type="button" class="btn btn-primary rounded-pill px-4" data-search-open="', result.id, '">Open Result</button>',
-      result.sourceHref ? '<a class="btn btn-outline-secondary rounded-pill px-4" href="' + escapeHtml(result.sourceHref) + '" target="_blank" rel="noreferrer">' + escapeHtml(result.sourceLabel || "Open Canonical Source") + "</a>" : "",
+      result.sourceHref ? '<a class="btn btn-outline-secondary rounded-pill px-4" href="' + escapeHtml(result.sourceHref) + '" target="_blank" rel="noreferrer">' + escapeHtml(result.sourceLabel || "Open Full Guide") + "</a>" : "",
       "  </div>",
       "</article>"
     ].join("");
@@ -1866,7 +1875,7 @@
     }
 
     if (!query) {
-      searchSummary.textContent = "Enter keywords or a short question in the menu search. Results link back into the exact guided step, toolkit card, or full-guide section that best matches the query.";
+      searchSummary.textContent = "Enter keywords or a short question in the menu search. Results link back into the exact Quickstart step, Quick Reference card, or full-guide section that best matches the query.";
       searchCountChip.textContent = "0 results";
       searchResultsMount.innerHTML = "";
       searchEmptyState.innerHTML = "Use the search field in the menu to search by keywords such as <strong>WMS</strong>, <strong>Self QA</strong>, <strong>GitHub Pages</strong>, <strong>validator</strong>, or a short question such as <strong>how do I publish</strong>.";
@@ -1897,7 +1906,7 @@
     searchCountChip.textContent = results.length + " result" + (results.length === 1 ? "" : "s");
 
     if (results.length) {
-      searchSummary.textContent = "Results are ranked by title match, keyword overlap, path relevance, and deeper body matches across the guided path, toolkit, and full guide.";
+      searchSummary.textContent = "Results are ranked by title match, keyword overlap, path relevance, and deeper body matches across Quickstart, Quick Reference, and Full Guide.";
       searchEmptyState.classList.add("d-none");
     } else {
       searchSummary.textContent = "The guide did not find a strong match for that query yet.";
@@ -1929,10 +1938,10 @@
       '      <p>Choose sequence, one answer, the flat full guide, the markdown fallback, or the applied workshop demo.</p>',
       "    </div>",
       '    <div class="route-map-entry-actions">',
-      '      <button type="button" class="btn btn-primary rounded-pill px-4" data-mode-target="beginner">Open Guided Path</button>',
-      '      <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Toolkit</button>',
+      '      <button type="button" class="btn btn-primary rounded-pill px-4" data-mode-target="beginner">Open Quickstart</button>',
+      '      <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Quick Reference</button>',
       '      <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-guide-target="', firstGuideId, '">Open Full Guide</button>',
-      '      <a class="btn btn-outline-secondary rounded-pill px-4" href="', guideHomeHref, '">Open Markdown Guide</a>',
+      '      <a class="btn btn-outline-secondary rounded-pill px-4" href="', guideHomeHref, '">Open Full Guide</a>',
       "    </div>",
       "  </section>",
       '  <div class="route-map-grid">',
@@ -1940,7 +1949,7 @@
       '      <div class="route-map-branch-head">',
       '        <div>',
       '          <small>Ordered route</small>',
-      '          <h4>Guided Path</h4>',
+      '          <h4>Quickstart</h4>',
       "        </div>",
       '        <button type="button" class="btn btn-outline-primary rounded-pill px-3" data-mode-target="beginner">Open</button>',
       "      </div>",
@@ -1950,13 +1959,13 @@
         return "<li><strong>" + escapeHtml(step.title) + "</strong><span>" + escapeHtml(compactText(step.summary, 74)) + "</span></li>";
       }).join(""),
       "      </ol>",
-      '      <div class="route-map-branch-foot">Leads into the same canonical guide pages when you need more detail.</div>',
+      '      <div class="route-map-branch-foot">Leads into the same Full Guide pages when you need more detail.</div>',
       "    </article>",
       '    <article class="route-map-branch" data-accent="ocean">',
       '      <div class="route-map-branch-head">',
       '        <div>',
       '          <small>Answer-first route</small>',
-      '          <h4>Toolkit</h4>',
+      '          <h4>Quick Reference</h4>',
       "        </div>",
       '        <button type="button" class="btn btn-outline-primary rounded-pill px-3" data-mode-target="explorer">Open</button>',
       "      </div>",
@@ -2000,7 +2009,7 @@
         "Page-local search and media lightbox",
         "Management-safe fallback option"
       ].map(function (item) {
-        return "<li><strong>" + escapeHtml(item) + "</strong><span>Backed by the same canonical content tree.</span></li>";
+        return "<li><strong>" + escapeHtml(item) + "</strong><span>Backed by the same Full Guide content.</span></li>";
       }).join(""),
       "      </ul>",
       '      <div class="route-map-branch-foot">Leads to the first-class markdown alternative.</div>',
@@ -2030,7 +2039,7 @@
       '  <div class="route-map-ribbon">',
       '    <div>',
       '      <strong>Search crosses every redesigned route.</strong>',
-      '      <span>One search surface crosses Guided Path, Toolkit, and the redesigned Full Guide.</span>',
+      '      <span>One search surface crosses Quickstart, Quick Reference, and the redesigned Full Guide.</span>',
       "    </div>",
       '    <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-mode-target="search">Open Search</button>',
       "  </div>",
@@ -2673,8 +2682,8 @@
         guideSectionVideoFeatures(section)
       ),
       '      <div class="guide-section-actions">',
-      '        <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Toolkit</button>',
-      section.sectionHref ? '<a class="btn btn-outline-secondary rounded-pill px-4" href="' + escapeHtml(section.sectionHref) + '" target="_blank" rel="noreferrer">' + escapeHtml(section.sectionLabel || "Open Markdown Version") + "</a>" : "",
+      '        <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Quick Reference</button>',
+      section.sectionHref ? '<a class="btn btn-outline-secondary rounded-pill px-4" href="' + escapeHtml(section.sectionHref) + '" target="_blank" rel="noreferrer">' + escapeHtml(section.sectionLabel || "Open Full Guide") + "</a>" : "",
       "      </div>",
       "    </div>",
       "  </div>",
@@ -2742,7 +2751,7 @@
         '<div class="guide-source-error">',
         "  <strong>Source content could not be rendered in the redesigned guide right now.</strong>",
         "  <p>Open the markdown version for this page while the redesigned surface is refreshed.</p>",
-        section.sectionHref ? '  <a class="btn btn-outline-secondary rounded-pill px-4" href="' + escapeHtml(section.sectionHref) + '" target="_blank" rel="noreferrer">' + escapeHtml(section.sectionLabel || "Open Markdown Version") + "</a>" : "",
+        section.sectionHref ? '  <a class="btn btn-outline-secondary rounded-pill px-4" href="' + escapeHtml(section.sectionHref) + '" target="_blank" rel="noreferrer">' + escapeHtml(section.sectionLabel || "Open Full Guide") + "</a>" : "",
         "</div>"
       ].join("");
       scheduleLayoutSync();
@@ -2904,10 +2913,10 @@
     stepMeta.forEach(function (meta, index) {
       var entry = createSearchEntry({
         id: "guided-" + meta.id,
-        typeLabel: "Guided Path",
+        typeLabel: "Quickstart",
         title: meta.title,
         summary: meta.summary || "",
-        path: "Guided Path / Step " + (index + 1),
+        path: "Quickstart / Step " + (index + 1),
         body: stepSections[index] ? stepSections[index].textContent : "",
         keywords: meta.keywords || [],
         open: {
@@ -2923,10 +2932,10 @@
     explorerItems.forEach(function (item) {
       var entry = createSearchEntry({
         id: "toolkit-" + item.id,
-        typeLabel: "Toolkit",
+        typeLabel: "Quick Reference",
         title: item.title,
         summary: item.description || item.short || "",
-        path: "Toolkit / " + item.title,
+        path: "Quick Reference / " + item.title,
         steps: item.steps,
         checkpoints: item.checkpoints,
         watchFor: item.watchFor,
@@ -3168,9 +3177,9 @@
       if (mode === "hub") {
         setLiveMessage("Returned to the guide home.");
       } else if (mode === "beginner") {
-        setLiveMessage("Guided path opened.");
+        setLiveMessage("Quickstart opened.");
       } else if (mode === "explorer") {
-        setLiveMessage("Reference toolkit opened.");
+        setLiveMessage("Quick Reference opened.");
       } else if (mode === "guide") {
         setLiveMessage("Full Guide opened at " + (currentGuideSection() ? currentGuideSection().title : "Start Guide") + ".");
       } else if (mode === "search") {
@@ -3286,13 +3295,13 @@
       return;
     }
 
-    if (cleaned === "guided") {
+    if (cleaned === "guided" || cleaned === "quickstart") {
       switchMode("beginner", { scroll: false, hash: false, announce: false });
       updateBeginnerUI();
       return;
     }
 
-    if (cleaned === "toolkit" || cleaned === "explorer") {
+    if (cleaned === "toolkit" || cleaned === "quick-reference" || cleaned === "explorer") {
       switchMode("explorer", { scroll: false, hash: false, announce: false });
       return;
     }

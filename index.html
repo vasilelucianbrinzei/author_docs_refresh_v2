@@ -5589,28 +5589,22 @@
 
                 <div class="nav-group nav-group-all" role="group" aria-label="Primary navigation">
                   <button class="btn nav-control" type="button" data-mode-target="hub" aria-label="Open the author guide home">Home</button>
-                  <button class="btn nav-control" type="button" data-mode-target="beginner" aria-label="Open the guided path">Guided Path</button>
-                  <button class="btn nav-control" type="button" data-mode-target="explorer" aria-label="Open the reference toolkit">Toolkit</button>
-                  <button class="btn nav-control" type="button" data-mode-target="guide" data-guide-target="start-here" aria-label="Open the full guide">Full Guide</button>
+                  <button class="btn nav-control" type="button" data-mode-target="beginner" aria-label="Open quickstart">Quickstart</button>
+                  <button class="btn nav-control" type="button" data-mode-target="explorer" aria-label="Open quick reference">Quick Reference</button>
+                  <a class="btn nav-control" href="https://oracle-livelabs.github.io/common/sample-livelabs-templates/create-labs/labs/workshops/livelabs/" target="_blank" rel="noreferrer" aria-label="Open full guide">Full Guide</a>
                 </div>
               </div>
             </div>
           </nav>
         </div>
       </header>
-
       <!-- Entry Hub / Implementation selector -->
       <section class="hub-screen" id="hub" aria-labelledby="hubHeading">
         <div class="container">
           <div class="hub-hero">
             <div class="row g-4 align-items-center">
-              <div class="col-xl-6">
+              <div class="col-xl-12">
                 <div class="hero-lockup">
-                  <span class="hero-wordmark" aria-hidden="true">
-                    <svg viewBox="0 0 109.36 22.96" xmlns="http://www.w3.org/2000/svg" role="img" focusable="false" aria-hidden="true">
-                      <path d="M47.9122 13.4234 54.459 13.4234 51 7.84135 44.6505 17.9233 41.75 17.9233 49.4805 5.82375C49.8106 5.33355 50.377 5.03665 50.9962 5.03665 51.6017 5.03665 52.1582 5.32375 52.4883 5.80225L60.2422 17.9233 57.3497 17.9233 55.9865 15.6694 49.3574 15.6694 47.9122 13.4234M77.9512 15.6694 77.9512 5.15975 75.4922 5.15975 75.4922 16.7027C75.4922 17.0172 75.6251 17.3258 75.8556 17.5483 76.09 17.7906 76.4121 17.9233 76.75 17.9233L87.9317 17.9233 89.3887 15.6694 77.9512 15.6694M37.3512 13.7906C39.7407 13.7906 41.6622 11.8569 41.6622 9.47415 41.6622 7.09135 39.7407 5.15975 37.3512 5.15975L26.6129 5.15975 26.6129 17.9233 29.0669 17.9233 29.0669 7.41555 37.188 7.41555C38.3278 7.41555 39.2515 8.33555 39.2515 9.47415 39.2515 10.6109 38.3278 11.5464 37.188 11.5464L30.2672 11.5406 37.5973 17.9233 41.1582 17.9233 36.235 13.7906 37.3512 13.7906M11.5142 17.9233 18.9331 17.9233C22.4625 17.9233 25.3043 15.0718 25.3043 11.5464 25.3043 8.01715 22.4625 5.15975 18.9331 5.15975L11.5142 5.15975C7.98886 5.15975 5.12945 8.01715 5.12945 11.5464 5.12945 15.0718 7.98886 17.9233 11.5142 17.9233M18.7633 15.6772 11.6774 15.6772C9.39705 15.6772 7.54935 13.8237 7.54935 11.5464 7.54935 9.25935 9.39705 7.41555 11.6774 7.41555L18.7633 7.41555C21.0513 7.41555 22.8971 9.25935 22.8971 11.5464 22.8971 13.8237 21.0513 15.6772 18.7633 15.6772M65.3672 17.9233 72.9415 17.9233 74.375 15.6772 65.5352 15.6772C63.2442 15.6772 61.3985 13.8237 61.3985 11.5464 61.3985 9.25935 63.2442 7.41555 65.5352 7.41555L72.7305 7.41555 74.1817 5.15975 65.3672 5.15975C61.8399 5.15975 58.9746 8.01715 58.9746 11.5464 58.9747 15.0718 61.84 17.9233 65.3672 17.9233M95.381 15.6772C93.4903 15.6772 91.8965 14.4078 91.4044 12.6714L101.893 12.6714 103.338 10.4214 91.4044 10.4214C91.8947 8.68125 93.4903 7.41555 95.381 7.41555L102.582 7.41555 104.022 5.15975 95.2169 5.15975C91.6953 5.15975 88.8379 8.01715 88.8379 11.5464 88.8379 15.0718 91.6953 17.9233 95.2169 17.9233L102.791 17.9233 104.231 15.6772 95.381 15.6772" fill="#C74634"/>
-                    </svg>
-                  </span>
                   <span>
                     <span class="hero-lockup-label">Oracle LiveLabs</span>
                     <span class="hero-lockup-note">Author guide</span>
@@ -5618,107 +5612,27 @@
                 </div>
                 <h1 class="hero-title" id="hubHeading">One front door, multiple working routes.</h1>
                 <p class="hero-subtitle">
-                  Follow the Guided Path for sequence, open Toolkit for one answer, use Full Guide for the flat original guide inside the redesign, open the Markdown version for the fallback route, or inspect the sample workshop demo.
+                  Start with Quickstart for sequence, use Quick Reference when you need one focused answer, and open Full Guide to jump into the original author guide.
                 </p>
                 <div class="hero-actions">
-                  <button class="btn btn-primary btn-lg rounded-pill px-4" type="button" data-mode-target="beginner">Open Guided Path</button>
-                  <button class="btn btn-outline-primary btn-lg rounded-pill px-4" type="button" data-mode-target="explorer">Open Toolkit</button>
-                  <button class="btn btn-outline-secondary btn-lg rounded-pill px-4" type="button" data-guide-target="start-here">Open Full Guide</button>
-                  <a class="btn btn-outline-secondary btn-lg rounded-pill px-4" href="./workshops/author-guide/index.html">Markdown Version</a>
-                  <a class="btn btn-outline-secondary btn-lg rounded-pill px-4" href="./sample-workshops/clinical-first-responder-rag/index.html">Open Sample Workshop Demo</a>
-                </div>
-                <div class="hub-stats mt-4">
-                  <span class="stat-chip">3-step Guided Path</span>
-                  <span class="stat-chip">Answer-first Toolkit</span>
-                  <span class="stat-chip">Flat Full Guide</span>
-                  <span class="stat-chip">Markdown version</span>
-                  <span class="stat-chip">Sample Workshop Demo</span>
-                </div>
-              </div>
-
-              <div class="col-xl-6">
-                <div class="home-side-stack">
-                  <article class="compact-panel home-side-card is-classic">
-                    <div class="panel-kicker">Choose by task</div>
-                    <h2>Pick the route that makes the next answer obvious.</h2>
-                    <p>Start with the job: sequence, one blocker, the full map, or the applied workshop surface.</p>
-                    <div class="home-mini-flow">
-                      <button class="home-mini-step" type="button" data-mode-target="beginner">
-                        <span class="home-mini-number">1</span>
-                        <div>
-                          <strong>Need sequence?</strong>
-                          <small>Open Guided Path for the ordered request, build, and publish flow.</small>
-                        </div>
-                      </button>
-                      <button class="home-mini-step" type="button" data-mode-target="explorer">
-                        <span class="home-mini-number">2</span>
-                        <div>
-                          <strong>Need one answer?</strong>
-                          <small>Open Toolkit for the fastest route to one command, workflow, or QA fix.</small>
-                        </div>
-                      </button>
-                      <button class="home-mini-step" type="button" data-guide-target="introduction">
-                        <span class="home-mini-number">3</span>
-                        <div>
-                          <strong>Need the full map?</strong>
-                          <small>Open Full Guide when you want the flat original guide inside the redesigned shell.</small>
-                        </div>
-                      </button>
-                      <a class="home-mini-step" href="./workshops/author-guide/index.html">
-                        <span class="home-mini-number">4</span>
-                        <div>
-                          <strong>Need the markdown version?</strong>
-                          <small>Open the full-page markdown version as the fallback route.</small>
-                        </div>
-                      </a>
-                    </div>
-                  </article>
-
-                  <article class="compact-panel home-side-card is-modern">
-                    <div class="panel-kicker">Applied reference</div>
-                    <h2>See the same design language on a workshop surface.</h2>
-                    <p>The sample workshop demo shows the same design on a fuller end-to-end build flow.</p>
-                    <div class="home-toolkit-summary" aria-hidden="true">
-                      <span class="mode-chip">Platform setup</span>
-                      <span class="mode-chip">Grounded knowledge</span>
-                      <span class="mode-chip">Guardrails + prompts</span>
-                      <span class="mode-chip">Doctor handoff</span>
-                    </div>
-                    <div class="home-toolkit-preview" aria-hidden="true">
-                      <div class="home-toolkit-card" data-accent="red">
-                        <strong>Video-first intros</strong>
-                        <small>The video slot appears before the detailed lab content.</small>
-                      </div>
-                      <div class="home-toolkit-card" data-accent="red">
-                        <strong>Architecture map</strong>
-                        <small>The system view is visible before the learner reaches the first command.</small>
-                      </div>
-                      <div class="home-toolkit-card" data-accent="red">
-                        <strong>Patient chat flow</strong>
-                        <small>The scope is a real pre-visit intake assistant, not a vague AI demo.</small>
-                      </div>
-                      <div class="home-toolkit-card" data-accent="red">
-                        <strong>Doctor handoff</strong>
-                        <small>The finish line is a clinician-ready summary and escalation path.</small>
-                      </div>
-                    </div>
-                    <p class="home-side-note">Use it when the review is about workshop feel, not just guide structure.</p>
-                  </article>
+                  <button class="btn btn-primary btn-lg rounded-pill px-4" type="button" data-mode-target="beginner">Open Quickstart</button>
+                  <button class="btn btn-outline-primary btn-lg rounded-pill px-4" type="button" data-mode-target="explorer">Open Quick Reference</button>
+                  <a class="btn btn-outline-secondary btn-lg rounded-pill px-4" href="https://oracle-livelabs.github.io/common/sample-livelabs-templates/create-labs/labs/workshops/livelabs/" target="_blank" rel="noreferrer">Open Full Guide</a>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </section>
-      <!-- Guided Path -->
+      <!-- Quickstart -->
+
       <section class="mode-screen d-none" id="beginnerMode" aria-labelledby="beginnerHeading">
         <div class="container">
           <div class="card mode-hero">
             <div class="card-body">
               <div class="row g-4 align-items-start">
                 <div class="col-xl-8">
-                  <div class="mode-overline">Guided Path</div>
+                  <div class="mode-overline">Quickstart</div>
                   <h2 class="mode-title" id="beginnerHeading">Follow the shortest route from request to publish.</h2>
                   <p class="mode-copy">
                     This path compresses the author journey into three layers: request the workshop, create it in GitHub, then review and publish it. The page stays linear on purpose so the content reads top to bottom without a second competing menu.
@@ -5733,18 +5647,22 @@
                 <div class="col-xl-4">
                   <div class="hero-side-stack">
                     <div class="compact-panel">
-                      <div class="panel-kicker">Route controls</div>
-                      <div class="feature-switch">
+                      <div class="panel-kicker">Agenda</div>
+                      <p class="panel-copy mb-3">Use this Quickstart table of contents to jump to the section you need.</p>
+                      <div class="d-grid gap-2">
+                        <a class="btn btn-outline-secondary rounded-pill px-4 text-start" href="#step-1">1. Submit Workshop Request</a>
+                        <a class="btn btn-outline-secondary rounded-pill px-4 text-start" href="#step-2">2. Create Workshop + Add to GitHub</a>
+                        <a class="btn btn-outline-secondary rounded-pill px-4 text-start" href="#step-3">3. Review &amp; Publish</a>
+                      </div>
+                      <div class="d-flex flex-wrap gap-2 mt-3">
+                        <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Quick Reference</button>
+                        <a class="btn btn-outline-secondary rounded-pill px-4" href="https://oracle-livelabs.github.io/common/sample-livelabs-templates/create-labs/labs/workshops/livelabs/" target="_blank" rel="noreferrer">Open Full Guide</a>
+                      </div>
+                      <div class="feature-switch d-none">
                         <label class="form-check-label" for="fastTrackToggle">Fast Track</label>
                         <input class="form-check-input" type="checkbox" role="switch" id="fastTrackToggle" aria-label="Toggle fast track mode">
                       </div>
-                      <p class="panel-copy" id="fastTrackStatus">Guided mode keeps notes, common mistakes, and extra context visible.</p>
-                    </div>
-
-                    <div class="compact-panel">
-                      <div class="panel-kicker">Need a fast lookup?</div>
-                      <p class="panel-copy mb-3">Leave the sequence and jump directly to the reference toolkit whenever the problem is really about one feature, one tool, or one QA question.</p>
-                      <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Reference Toolkit</button>
+                      <p class="panel-copy d-none" id="fastTrackStatus">Guided mode keeps notes, common mistakes, and extra context visible.</p>
                     </div>
                   </div>
                 </div>
@@ -5911,7 +5829,7 @@
                     <div class="step-note">This layer exists so the rest of the work starts from an approved request instead of assumptions.</div>
                     <div class="d-flex flex-wrap gap-2">
                       <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-action="surface">Back to Home</button>
-                      <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Reference Toolkit</button>
+                      <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Quick Reference</button>
                       <button type="button" class="btn btn-primary rounded-pill px-4" data-action="next">Next Step</button>
                     </div>
                   </div>
@@ -6095,7 +6013,7 @@ https://&lt;github-username&gt;.github.io/&lt;repo-name&gt;/&lt;path&gt;/worksho
                     <div class="step-note">This layer combines workstation setup, repo hygiene, sample structure, and preview into one stable build checkpoint.</div>
                     <div class="d-flex flex-wrap gap-2">
                       <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-action="prev">Back</button>
-                      <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Reference Toolkit</button>
+                      <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Quick Reference</button>
                       <button type="button" class="btn btn-primary rounded-pill px-4" data-action="next">Next Step</button>
                     </div>
                   </div>
@@ -6296,7 +6214,7 @@ https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-fol
                     <div class="step-note">At the end of this layer, the workshop is in a clean state for review, publishing, and later Quarterly QA follow-up.</div>
                     <div class="d-flex flex-wrap gap-2">
                       <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-action="prev">Back</button>
-                      <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Reference Toolkit</button>
+                      <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Quick Reference</button>
                       <button type="button" class="btn btn-primary rounded-pill px-4" data-guide-target="5-labs-qa-checks">Open Full Guide</button>
                     </div>
                   </div>
@@ -6306,17 +6224,17 @@ https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-fol
           </div>
         </div>
       </section>
-      <!-- Reference Toolkit -->
+      <!-- Quick Reference -->
       <section class="mode-screen d-none" id="explorerMode" aria-labelledby="explorerHeading">
         <div class="container">
           <div class="card mode-hero">
             <div class="card-body">
               <div class="row g-4 align-items-start">
                 <div class="col-xl-7">
-                  <div class="mode-overline">Reference Toolkit</div>
+                  <div class="mode-overline">Quick Reference</div>
                   <h2 class="mode-title" id="explorerHeading">Go straight to the feature, tool, or QA answer you need.</h2>
                   <p class="mode-copy">
-                    Use this toolkit deck when you already know where you are stuck. Search, filter, open a card, copy the real command or workflow pattern, and return to authoring without walking the full guided path.
+                    Use this quick reference deck when you already know where you are stuck. Search, filter, open a card, copy the real command or workflow pattern, and return to authoring without walking the full quickstart flow.
                   </p>
                   <div class="mode-chip-row">
                     <span class="mode-chip">Search + filter</span>
@@ -6334,7 +6252,7 @@ https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-fol
                       <button type="button" class="shortcut-chip" data-open-bubble-direct="screenshots">Screenshot Standards</button>
                       <button type="button" class="shortcut-chip" data-open-bubble-direct="pr-checks">PR Checks</button>
                     </div>
-                    <p class="panel-copy mt-3">If the real problem is sequence rather than lookup, go back to the guided path and move through the three layers from top to bottom.</p>
+                    <p class="panel-copy mt-3">If the real problem is sequence rather than lookup, go back to Quickstart and move through the three layers from top to bottom.</p>
                   </div>
                 </div>
               </div>
@@ -6345,17 +6263,17 @@ https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-fol
             <div class="card-body">
               <div class="row g-3 align-items-end">
                 <div class="col-xl-5">
-                  <label for="bubbleSearch" class="form-label filter-label">Search toolkit</label>
+                  <label for="bubbleSearch" class="form-label filter-label">Search quick reference</label>
                   <div class="input-group input-group-lg search-group">
                     <span class="input-group-text">Search</span>
-                    <input id="bubbleSearch" class="form-control" type="search" placeholder="WMS, FAQ, FreeSQL, validator" aria-label="Search reference toolkit cards">
+                    <input id="bubbleSearch" class="form-control" type="search" placeholder="WMS, FAQ, FreeSQL, validator" aria-label="Search quick reference cards">
                     <button type="button" class="btn btn-outline-secondary" id="clearSearch">Clear</button>
                   </div>
                 </div>
 
                 <div class="col-xl-7">
                   <div class="filter-label">Filter by tag</div>
-                  <div class="tag-pills" id="tagPills" aria-label="Reference toolkit tag filters">
+                  <div class="tag-pills" id="tagPills" aria-label="Quick reference tag filters">
                     <button type="button" class="tag-pill is-active" data-tag="all">All</button>
                     <button type="button" class="tag-pill" data-tag="workflow">Workflow</button>
                     <button type="button" class="tag-pill" data-tag="markdown">Markdown</button>
@@ -6369,17 +6287,17 @@ https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-fol
 
               <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-2 mt-3">
                 <div class="result-line">
-                  <strong id="resultCount">Showing toolkit cards</strong>
+                  <strong id="resultCount">Showing quick reference cards</strong>
                   <span class="ms-lg-2">Open any card for a focused detail panel.</span>
                 </div>
-                <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-mode-target="beginner">Need sequence? Open Guided Path</button>
+                <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-mode-target="beginner">Need sequence? Open Quickstart</button>
               </div>
             </div>
           </div>
 
           <div class="garden-shell">
             <div class="bubble-grid row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4" id="bubbleGrid"></div>
-            <div class="empty-state d-none" id="emptyState">No toolkit cards match that search yet. Clear the search or change the tag filter.</div>
+            <div class="empty-state d-none" id="emptyState">No quick reference cards match that search yet. Clear the search or change the tag filter.</div>
           </div>
         </div>
       </section>
@@ -6407,8 +6325,8 @@ https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-fol
                     <div class="panel-kicker">How to use it</div>
                     <p class="panel-copy mb-3">Use the rail on the left to jump between sections. Each section keeps the original content, but the page itself now behaves like the redesigned app instead of an embedded markdown window.</p>
                     <div class="d-flex flex-wrap gap-2">
-                      <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="beginner">Need sequence? Guided Path</button>
-                      <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-mode-target="explorer">Need one answer? Toolkit</button>
+                      <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="beginner">Need sequence? Quickstart</button>
+                      <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-mode-target="explorer">Need one answer? Quick Reference</button>
                     </div>
                   </div>
                 </div>
@@ -6434,12 +6352,12 @@ https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-fol
               <div class="row g-4 align-items-start">
                 <div class="col-xl-8">
                   <div class="mode-overline">Search</div>
-                  <h2 class="mode-title" id="searchHeading">Search the guided path, toolkit, and full guide from one place.</h2>
-                  <p class="mode-copy" id="searchSummary">Enter keywords or a short question in the menu search. Results link back into the exact guided step, toolkit card, or full-guide section that best matches the query.</p>
+                  <h2 class="mode-title" id="searchHeading">Search Quickstart, Quick Reference, and Full Guide from one place.</h2>
+                  <p class="mode-copy" id="searchSummary">Enter keywords or a short question in the menu search. Results link back into the exact Quickstart step, Quick Reference card, or full-guide section that best matches the query.</p>
                   <div class="mode-chip-row">
                     <span class="mode-chip" id="searchQueryChip">No query yet</span>
                     <span class="mode-chip" id="searchCountChip">0 results</span>
-                    <span class="mode-chip">Guided Path + Toolkit + Full Guide</span>
+                    <span class="mode-chip">Quickstart + Quick Reference + Full Guide</span>
                   </div>
                 </div>
 
@@ -6471,14 +6389,14 @@ https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-fol
         </span>
         <span class="back-to-top-label">Back to top</span>
       </button>
-      <!-- Toolkit Detail Modal -->
+      <!-- Quick Reference Detail Modal -->
       <div class="modal fade" id="bubbleModal" tabindex="-1" aria-labelledby="bubbleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
               <div>
-                <div class="modal-kicker" id="bubbleModalKicker">Toolkit Detail</div>
-                <h2 class="modal-title h3 mb-0" id="bubbleModalLabel">Toolkit detail</h2>
+                <div class="modal-kicker" id="bubbleModalKicker">Quick Reference Detail</div>
+                <h2 class="modal-title h3 mb-0" id="bubbleModalLabel">Quick reference detail</h2>
               </div>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close detail view"></button>
             </div>
@@ -6534,7 +6452,7 @@ https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-fol
             </div>
 
             <div class="modal-footer">
-              <a class="btn btn-outline-secondary rounded-pill px-4 d-none" id="bubbleModalSourceLink" href="#" target="_blank" rel="noreferrer">Open Canonical Source</a>
+              <a class="btn btn-outline-secondary rounded-pill px-4 d-none" id="bubbleModalSourceLink" href="#" target="_blank" rel="noreferrer">Open Full Guide</a>
               <button type="button" class="btn btn-outline-primary rounded-pill px-4 d-none" id="bubbleModalGuideButton" data-guide-target="start-here">Open Full Guide</button>
               <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Close</button>
             </div>
