@@ -5580,7 +5580,7 @@
                       class="form-control"
                       type="search"
                       placeholder="WMS, QA, GitHub, validator"
-                      aria-label="Search across guided path, toolkit, and full guide"
+                      aria-label="Search across Quickstart, Cheatsheet, and Full Guide"
                     >
                     <button type="submit" class="btn btn-primary">Go</button>
                     <button type="button" class="btn btn-outline-secondary" id="navSearchClear">Clear</button>
@@ -5590,7 +5590,7 @@
                 <div class="nav-group nav-group-all" role="group" aria-label="Primary navigation">
                   <button class="btn nav-control" type="button" data-mode-target="hub" aria-label="Open the author guide home">Home</button>
                   <button class="btn nav-control" type="button" data-mode-target="beginner" aria-label="Open quickstart">Quickstart</button>
-                  <button class="btn nav-control" type="button" data-mode-target="explorer" aria-label="Open quick reference">Quick Reference</button>
+                  <button class="btn nav-control" type="button" data-mode-target="explorer" aria-label="Open cheatsheet">Cheatsheet</button>
                   <a class="btn nav-control" href="https://oracle-livelabs.github.io/common/sample-livelabs-templates/create-labs/labs/workshops/livelabs/" target="_blank" rel="noreferrer" aria-label="Open full guide">Full Guide</a>
                 </div>
               </div>
@@ -5603,21 +5603,53 @@
         <div class="container">
           <div class="hub-hero">
             <div class="row g-4 align-items-center">
-              <div class="col-xl-12">
+              <div class="col-xl-8">
                 <div class="hero-lockup">
                   <span>
                     <span class="hero-lockup-label">Oracle LiveLabs</span>
                     <span class="hero-lockup-note">Author guide</span>
                   </span>
                 </div>
-                <h1 class="hero-title" id="hubHeading">One front door, multiple working routes.</h1>
+                <h1 class="hero-title" id="hubHeading">Author quick guide from request to publish.</h1>
                 <p class="hero-subtitle">
-                  Start with Quickstart for sequence, use Quick Reference when you need one focused answer, and open Full Guide to jump into the original author guide.
+                  Start in Quickstart for the ordered path, move to Cheatsheet for targeted answers, and use Full Guide for the complete section-by-section reference.
                 </p>
                 <div class="hero-actions">
                   <button class="btn btn-primary btn-lg rounded-pill px-4" type="button" data-mode-target="beginner">Open Quickstart</button>
-                  <button class="btn btn-outline-primary btn-lg rounded-pill px-4" type="button" data-mode-target="explorer">Open Quick Reference</button>
+                  <button class="btn btn-outline-primary btn-lg rounded-pill px-4" type="button" data-mode-target="explorer">Open Cheatsheet</button>
                   <a class="btn btn-outline-secondary btn-lg rounded-pill px-4" href="https://oracle-livelabs.github.io/common/sample-livelabs-templates/create-labs/labs/workshops/livelabs/" target="_blank" rel="noreferrer">Open Full Guide</a>
+                </div>
+              </div>
+
+              <div class="col-xl-4">
+                <div class="home-side-stack">
+                  <article class="compact-panel home-side-card is-modern h-100">
+                    <div class="panel-kicker">Guide at a glance</div>
+                    <p class="panel-copy">Quickstart walks the sequence, Cheatsheet solves focused blockers, and Full Guide keeps the complete canonical flow.</p>
+                    <div class="home-mini-flow mt-2">
+                      <button type="button" class="home-mini-step" data-mode-target="beginner">
+                        <span class="home-mini-number">1</span>
+                        <span>
+                          <strong>Quickstart</strong>
+                          <small>Follow three steps from request to publish.</small>
+                        </span>
+                      </button>
+                      <button type="button" class="home-mini-step" data-mode-target="explorer">
+                        <span class="home-mini-number">2</span>
+                        <span>
+                          <strong>Cheatsheet</strong>
+                          <small>Find one answer fast and jump back to work.</small>
+                        </span>
+                      </button>
+                      <a class="home-mini-step" href="https://oracle-livelabs.github.io/common/sample-livelabs-templates/create-labs/labs/workshops/livelabs/" target="_blank" rel="noreferrer">
+                        <span class="home-mini-number">3</span>
+                        <span>
+                          <strong>Full Guide</strong>
+                          <small>Open the full source guide when you need depth.</small>
+                        </span>
+                      </a>
+                    </div>
+                  </article>
                 </div>
               </div>
             </div>
@@ -5635,13 +5667,8 @@
                   <div class="mode-overline">Quickstart</div>
                   <h2 class="mode-title" id="beginnerHeading">Follow the shortest route from request to publish.</h2>
                   <p class="mode-copy">
-                    This path compresses the author journey into three layers: request the workshop, create it in GitHub, then review and publish it. The page stays linear on purpose so the content reads top to bottom without a second competing menu.
+                    This path keeps authoring to three steps: submit the request, build in GitHub, then review and publish.
                   </p>
-                  <div class="mode-chip-row">
-                    <span class="mode-chip">3 steps</span>
-                    <span class="mode-chip">Progressive reveal</span>
-                    <span class="mode-chip">Examples + commands</span>
-                  </div>
                 </div>
 
                 <div class="col-xl-4">
@@ -5655,7 +5682,7 @@
                         <a class="btn btn-outline-secondary rounded-pill px-4 text-start" href="#step-3">3. Review &amp; Publish</a>
                       </div>
                       <div class="d-flex flex-wrap gap-2 mt-3">
-                        <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Quick Reference</button>
+                        <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Cheatsheet</button>
                         <a class="btn btn-outline-secondary rounded-pill px-4" href="https://oracle-livelabs.github.io/common/sample-livelabs-templates/create-labs/labs/workshops/livelabs/" target="_blank" rel="noreferrer">Open Full Guide</a>
                       </div>
                       <div class="feature-switch d-none">
@@ -5678,7 +5705,7 @@
               <article class="step-shell">
                 <div class="lockable">
                   <div class="step-heading">
-                    <div class="step-kicker">Layer 1 / WMS gate</div>
+                    <div class="step-kicker">Step 1 / WMS gate</div>
                     <h2 class="step-title">Submit Workshop Request</h2>
                     <p class="step-summary">Create the WMS record first, fill it like a reviewer will read it, and understand the status path before you spend real time building the workshop.</p>
                     <div class="step-meta-row">
@@ -5826,10 +5853,10 @@
                   </div>
 
                   <div class="step-footer">
-                    <div class="step-note">This layer exists so the rest of the work starts from an approved request instead of assumptions.</div>
+                    <div class="step-note">This step exists so the rest of the work starts from an approved request instead of assumptions.</div>
                     <div class="d-flex flex-wrap gap-2">
                       <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-action="surface">Back to Home</button>
-                      <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Quick Reference</button>
+                      <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Cheatsheet</button>
                       <button type="button" class="btn btn-primary rounded-pill px-4" data-action="next">Next Step</button>
                     </div>
                   </div>
@@ -5842,7 +5869,7 @@
               <article class="step-shell">
                 <div class="lockable">
                   <div class="step-heading">
-                    <div class="step-kicker">Layer 2 / GitHub build</div>
+                    <div class="step-kicker">Step 2 / GitHub build</div>
                     <h2 class="step-title">Create Workshop + Add to GitHub</h2>
                     <p class="step-summary">Set up the workstation, fork and clone the right repositories, copy the sample structure, and make preview work early so the workshop is cheap to fix.</p>
                     <div class="step-meta-row">
@@ -6010,10 +6037,10 @@ https://&lt;github-username&gt;.github.io/&lt;repo-name&gt;/&lt;path&gt;/worksho
                   </div>
 
                   <div class="step-footer">
-                    <div class="step-note">This layer combines workstation setup, repo hygiene, sample structure, and preview into one stable build checkpoint.</div>
+                    <div class="step-note">This step combines workstation setup, repo hygiene, sample structure, and preview into one stable build checkpoint.</div>
                     <div class="d-flex flex-wrap gap-2">
                       <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-action="prev">Back</button>
-                      <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Quick Reference</button>
+                      <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Cheatsheet</button>
                       <button type="button" class="btn btn-primary rounded-pill px-4" data-action="next">Next Step</button>
                     </div>
                   </div>
@@ -6026,7 +6053,7 @@ https://&lt;github-username&gt;.github.io/&lt;repo-name&gt;/&lt;path&gt;/worksho
               <article class="step-shell">
                 <div class="lockable">
                   <div class="step-heading">
-                    <div class="step-kicker">Layer 3 / QA and release</div>
+                    <div class="step-kicker">Step 3 / QA and release</div>
                     <h2 class="step-title">Review &amp; Publish</h2>
                     <p class="step-summary">Complete Self QA in the right order, fix PR blockers by class, and submit the final publishing details only after the workshop is genuinely ready to move to production.</p>
                     <div class="step-meta-row">
@@ -6037,7 +6064,7 @@ https://&lt;github-username&gt;.github.io/&lt;repo-name&gt;/&lt;path&gt;/worksho
                   </div>
 
                   <div class="guide-panel guided-only mb-4">
-                    The last layer is about precision, not volume. Reviewers should see one stable preview, one saved checklist, one clean PR, and the exact production URLs they expect.
+                    The last step is about precision, not volume. Reviewers should see one stable preview, one saved checklist, one clean PR, and the exact production URLs they expect.
                   </div>
 
                   <div
@@ -6211,10 +6238,10 @@ https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-fol
                   </div>
 
                   <div class="step-footer">
-                    <div class="step-note">At the end of this layer, the workshop is in a clean state for review, publishing, and later Quarterly QA follow-up.</div>
+                    <div class="step-note">At the end of this step, the workshop is in a clean state for review, publishing, and later Quarterly QA follow-up.</div>
                     <div class="d-flex flex-wrap gap-2">
                       <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-action="prev">Back</button>
-                      <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Quick Reference</button>
+                      <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Cheatsheet</button>
                       <button type="button" class="btn btn-primary rounded-pill px-4" data-guide-target="5-labs-qa-checks">Open Full Guide</button>
                     </div>
                   </div>
@@ -6224,56 +6251,26 @@ https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-fol
           </div>
         </div>
       </section>
-      <!-- Quick Reference -->
+      <!-- Cheatsheet -->
       <section class="mode-screen d-none" id="explorerMode" aria-labelledby="explorerHeading">
         <div class="container">
-          <div class="card mode-hero">
-            <div class="card-body">
-              <div class="row g-4 align-items-start">
-                <div class="col-xl-7">
-                  <div class="mode-overline">Quick Reference</div>
-                  <h2 class="mode-title" id="explorerHeading">Go straight to the feature, tool, or QA answer you need.</h2>
-                  <p class="mode-copy">
-                    Use this quick reference deck when you already know where you are stuck. Search, filter, open a card, copy the real command or workflow pattern, and return to authoring without walking the full quickstart flow.
-                  </p>
-                  <div class="mode-chip-row">
-                    <span class="mode-chip">Search + filter</span>
-                    <span class="mode-chip">Focused detail</span>
-                    <span class="mode-chip">Copyable snippets</span>
-                  </div>
-                </div>
-
-                <div class="col-xl-5">
-                  <div class="compact-panel h-100">
-                    <div class="panel-kicker">Popular shortcuts</div>
-                    <div class="quick-links mt-3">
-                      <button type="button" class="shortcut-chip" data-open-bubble-direct="qa-checklist">QA Checklist</button>
-                      <button type="button" class="shortcut-chip" data-open-bubble-direct="markdown-structure">Markdown Rules</button>
-                      <button type="button" class="shortcut-chip" data-open-bubble-direct="screenshots">Screenshot Standards</button>
-                      <button type="button" class="shortcut-chip" data-open-bubble-direct="pr-checks">PR Checks</button>
-                    </div>
-                    <p class="panel-copy mt-3">If the real problem is sequence rather than lookup, go back to Quickstart and move through the three layers from top to bottom.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <h2 class="visually-hidden" id="explorerHeading">Cheatsheet</h2>
 
           <div class="card toolbar-card">
             <div class="card-body">
               <div class="row g-3 align-items-end">
                 <div class="col-xl-5">
-                  <label for="bubbleSearch" class="form-label filter-label">Search quick reference</label>
+                  <label for="bubbleSearch" class="form-label filter-label">Search cheatsheet</label>
                   <div class="input-group input-group-lg search-group">
                     <span class="input-group-text">Search</span>
-                    <input id="bubbleSearch" class="form-control" type="search" placeholder="WMS, FAQ, FreeSQL, validator" aria-label="Search quick reference cards">
+                    <input id="bubbleSearch" class="form-control" type="search" placeholder="WMS, FAQ, FreeSQL, validator" aria-label="Search cheatsheet cards">
                     <button type="button" class="btn btn-outline-secondary" id="clearSearch">Clear</button>
                   </div>
                 </div>
 
                 <div class="col-xl-7">
                   <div class="filter-label">Filter by tag</div>
-                  <div class="tag-pills" id="tagPills" aria-label="Quick reference tag filters">
+                  <div class="tag-pills" id="tagPills" aria-label="Cheatsheet tag filters">
                     <button type="button" class="tag-pill is-active" data-tag="all">All</button>
                     <button type="button" class="tag-pill" data-tag="workflow">Workflow</button>
                     <button type="button" class="tag-pill" data-tag="markdown">Markdown</button>
@@ -6287,7 +6284,7 @@ https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-fol
 
               <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-2 mt-3">
                 <div class="result-line">
-                  <strong id="resultCount">Showing quick reference cards</strong>
+                  <strong id="resultCount">Showing cheatsheet cards</strong>
                   <span class="ms-lg-2">Open any card for a focused detail panel.</span>
                 </div>
                 <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-mode-target="beginner">Need sequence? Open Quickstart</button>
@@ -6297,7 +6294,7 @@ https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-fol
 
           <div class="garden-shell">
             <div class="bubble-grid row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4" id="bubbleGrid"></div>
-            <div class="empty-state d-none" id="emptyState">No quick reference cards match that search yet. Clear the search or change the tag filter.</div>
+            <div class="empty-state d-none" id="emptyState">No cheatsheet cards match that search yet. Clear the search or change the tag filter.</div>
           </div>
         </div>
       </section>
@@ -6326,7 +6323,7 @@ https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-fol
                     <p class="panel-copy mb-3">Use the rail on the left to jump between sections. Each section keeps the original content, but the page itself now behaves like the redesigned app instead of an embedded markdown window.</p>
                     <div class="d-flex flex-wrap gap-2">
                       <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="beginner">Need sequence? Quickstart</button>
-                      <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-mode-target="explorer">Need one answer? Quick Reference</button>
+                      <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-mode-target="explorer">Need one answer? Cheatsheet</button>
                     </div>
                   </div>
                 </div>
@@ -6352,12 +6349,12 @@ https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-fol
               <div class="row g-4 align-items-start">
                 <div class="col-xl-8">
                   <div class="mode-overline">Search</div>
-                  <h2 class="mode-title" id="searchHeading">Search Quickstart, Quick Reference, and Full Guide from one place.</h2>
-                  <p class="mode-copy" id="searchSummary">Enter keywords or a short question in the menu search. Results link back into the exact Quickstart step, Quick Reference card, or full-guide section that best matches the query.</p>
+                  <h2 class="mode-title" id="searchHeading">Search Quickstart, Cheatsheet, and Full Guide from one place.</h2>
+                  <p class="mode-copy" id="searchSummary">Enter keywords or a short question in the menu search. Results link back into the exact Quickstart step, Cheatsheet card, or full-guide section that best matches the query.</p>
                   <div class="mode-chip-row">
                     <span class="mode-chip" id="searchQueryChip">No query yet</span>
                     <span class="mode-chip" id="searchCountChip">0 results</span>
-                    <span class="mode-chip">Quickstart + Quick Reference + Full Guide</span>
+                    <span class="mode-chip">Quickstart + Cheatsheet + Full Guide</span>
                   </div>
                 </div>
 
@@ -6389,14 +6386,14 @@ https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-fol
         </span>
         <span class="back-to-top-label">Back to top</span>
       </button>
-      <!-- Quick Reference Detail Modal -->
+      <!-- Cheatsheet Detail Modal -->
       <div class="modal fade" id="bubbleModal" tabindex="-1" aria-labelledby="bubbleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
               <div>
-                <div class="modal-kicker" id="bubbleModalKicker">Quick Reference Detail</div>
-                <h2 class="modal-title h3 mb-0" id="bubbleModalLabel">Quick reference detail</h2>
+                <div class="modal-kicker" id="bubbleModalKicker">Cheatsheet Detail</div>
+                <h2 class="modal-title h3 mb-0" id="bubbleModalLabel">Cheatsheet detail</h2>
               </div>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close detail view"></button>
             </div>

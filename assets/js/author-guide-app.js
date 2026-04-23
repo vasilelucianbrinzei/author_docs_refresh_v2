@@ -878,7 +878,7 @@
     }
 
     if (previousView.mode === "explorer") {
-      return "Back to Quick Reference";
+      return "Back to Cheatsheet";
     }
 
     if (previousView.mode === "guide") {
@@ -921,7 +921,7 @@
       parts.push("Step " + (state.currentStep + 1));
       parts.push(stepMeta[state.currentStep].title);
     } else if (state.mode === "explorer") {
-      parts.push("Quick Reference");
+      parts.push("Cheatsheet");
       if (state.activeTag !== "all") {
         parts.push(titleCaseTag(state.activeTag));
       }
@@ -1030,7 +1030,7 @@
       ].join("");
     }).join("");
 
-    resultCount.textContent = "Showing " + visibleItems.length + " quick reference card" + (visibleItems.length === 1 ? "" : "s");
+    resultCount.textContent = "Showing " + visibleItems.length + " cheatsheet card" + (visibleItems.length === 1 ? "" : "s");
     emptyState.classList.toggle("d-none", visibleItems.length !== 0);
   }
 
@@ -1051,7 +1051,7 @@
       "    </div>",
       '    <div class="route-map-entry-actions">',
       '      <button type="button" class="btn btn-primary rounded-pill px-4" data-mode-target="beginner">Open Quickstart</button>',
-      '      <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Quick Reference</button>',
+      '      <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Cheatsheet</button>',
       '      <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-guide-target="start-here">Open Full Guide</button>',
       "    </div>",
       "  </section>",
@@ -1076,7 +1076,7 @@
       '      <div class="route-map-branch-head">',
       '        <div>',
       '          <small>Answer-first route</small>',
-      '          <h4>Quick Reference</h4>',
+      '          <h4>Cheatsheet</h4>',
       "        </div>",
       '        <button type="button" class="btn btn-outline-primary rounded-pill px-3" data-mode-target="explorer">Open</button>',
       "      </div>",
@@ -1130,7 +1130,7 @@
       '  <div class="route-map-ribbon">',
       '    <div>',
       '      <strong>Search crosses every route.</strong>',
-      '      <span>One search surface crosses Quickstart, Quick Reference, and Full Guide.</span>',
+      '      <span>One search surface crosses Quickstart, Cheatsheet, and Full Guide.</span>',
       "    </div>",
       '    <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-mode-target="search">Open Search</button>',
       "  </div>",
@@ -1620,7 +1620,7 @@
       }).join(""),
       "      </div>",
       '      <div class="guide-section-actions">',
-      '        <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Quick Reference</button>',
+      '        <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Cheatsheet</button>',
       section.sectionHref ? '<a class="btn btn-outline-secondary rounded-pill px-4" href="' + escapeHtml(section.sectionHref) + '" target="_blank" rel="noreferrer">' + escapeHtml(section.sectionLabel || "Open Full Guide") + "</a>" : "",
       "      </div>",
       "    </div>",
@@ -1709,10 +1709,10 @@
     explorerItems.forEach(function (item) {
       var entry = createSearchEntry({
         id: "toolkit-" + item.id,
-        typeLabel: "Quick Reference",
+        typeLabel: "Cheatsheet",
         title: item.title,
         summary: item.description || item.short || "",
-        path: "Quick Reference / " + item.title,
+        path: "Cheatsheet / " + item.title,
         steps: item.steps,
         checkpoints: item.checkpoints,
         watchFor: item.watchFor,
@@ -1875,7 +1875,7 @@
     }
 
     if (!query) {
-      searchSummary.textContent = "Enter keywords or a short question in the menu search. Results link back into the exact Quickstart step, Quick Reference card, or full-guide section that best matches the query.";
+      searchSummary.textContent = "Enter keywords or a short question in the menu search. Results link back into the exact Quickstart step, Cheatsheet card, or full-guide section that best matches the query.";
       searchCountChip.textContent = "0 results";
       searchResultsMount.innerHTML = "";
       searchEmptyState.innerHTML = "Use the search field in the menu to search by keywords such as <strong>WMS</strong>, <strong>Self QA</strong>, <strong>GitHub Pages</strong>, <strong>validator</strong>, or a short question such as <strong>how do I publish</strong>.";
@@ -1906,7 +1906,7 @@
     searchCountChip.textContent = results.length + " result" + (results.length === 1 ? "" : "s");
 
     if (results.length) {
-      searchSummary.textContent = "Results are ranked by title match, keyword overlap, path relevance, and deeper body matches across Quickstart, Quick Reference, and Full Guide.";
+      searchSummary.textContent = "Results are ranked by title match, keyword overlap, path relevance, and deeper body matches across Quickstart, Cheatsheet, and Full Guide.";
       searchEmptyState.classList.add("d-none");
     } else {
       searchSummary.textContent = "The guide did not find a strong match for that query yet.";
@@ -1939,7 +1939,7 @@
       "    </div>",
       '    <div class="route-map-entry-actions">',
       '      <button type="button" class="btn btn-primary rounded-pill px-4" data-mode-target="beginner">Open Quickstart</button>',
-      '      <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Quick Reference</button>',
+      '      <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Cheatsheet</button>',
       '      <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-guide-target="', firstGuideId, '">Open Full Guide</button>',
       '      <a class="btn btn-outline-secondary rounded-pill px-4" href="', guideHomeHref, '">Open Full Guide</a>',
       "    </div>",
@@ -1965,7 +1965,7 @@
       '      <div class="route-map-branch-head">',
       '        <div>',
       '          <small>Answer-first route</small>',
-      '          <h4>Quick Reference</h4>',
+      '          <h4>Cheatsheet</h4>',
       "        </div>",
       '        <button type="button" class="btn btn-outline-primary rounded-pill px-3" data-mode-target="explorer">Open</button>',
       "      </div>",
@@ -2039,7 +2039,7 @@
       '  <div class="route-map-ribbon">',
       '    <div>',
       '      <strong>Search crosses every redesigned route.</strong>',
-      '      <span>One search surface crosses Quickstart, Quick Reference, and the redesigned Full Guide.</span>',
+      '      <span>One search surface crosses Quickstart, Cheatsheet, and the redesigned Full Guide.</span>',
       "    </div>",
       '    <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-mode-target="search">Open Search</button>',
       "  </div>",
@@ -2682,7 +2682,7 @@
         guideSectionVideoFeatures(section)
       ),
       '      <div class="guide-section-actions">',
-      '        <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Quick Reference</button>',
+      '        <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Cheatsheet</button>',
       section.sectionHref ? '<a class="btn btn-outline-secondary rounded-pill px-4" href="' + escapeHtml(section.sectionHref) + '" target="_blank" rel="noreferrer">' + escapeHtml(section.sectionLabel || "Open Full Guide") + "</a>" : "",
       "      </div>",
       "    </div>",
@@ -2932,10 +2932,10 @@
     explorerItems.forEach(function (item) {
       var entry = createSearchEntry({
         id: "toolkit-" + item.id,
-        typeLabel: "Quick Reference",
+        typeLabel: "Cheatsheet",
         title: item.title,
         summary: item.description || item.short || "",
-        path: "Quick Reference / " + item.title,
+        path: "Cheatsheet / " + item.title,
         steps: item.steps,
         checkpoints: item.checkpoints,
         watchFor: item.watchFor,
@@ -3179,7 +3179,7 @@
       } else if (mode === "beginner") {
         setLiveMessage("Quickstart opened.");
       } else if (mode === "explorer") {
-        setLiveMessage("Quick Reference opened.");
+        setLiveMessage("Cheatsheet opened.");
       } else if (mode === "guide") {
         setLiveMessage("Full Guide opened at " + (currentGuideSection() ? currentGuideSection().title : "Start Guide") + ".");
       } else if (mode === "search") {
@@ -3301,7 +3301,7 @@
       return;
     }
 
-    if (cleaned === "toolkit" || cleaned === "quick-reference" || cleaned === "explorer") {
+    if (cleaned === "toolkit" || cleaned === "quick-reference" || cleaned === "cheatsheet" || cleaned === "explorer") {
       switchMode("explorer", { scroll: false, hash: false, announce: false });
       return;
     }
