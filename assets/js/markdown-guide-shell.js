@@ -28,6 +28,7 @@
     var activeSearchHit = null;
     var lastFocusedMedia = null;
     var workshopSearchPromise = null;
+    var fullGuideHref = "https://oracle-livelabs.github.io/common/sample-livelabs-templates/create-labs/labs/workshops/livelabs/";
 
     function currentUrl() {
         return new URL(window.location.href);
@@ -73,8 +74,8 @@
                 label: "Compute Variant",
                 title: "Read the compute-image workflow in the markdown shell.",
                 summary: "This route keeps the focused compute-image workflow in the same polished markdown wrapper while still pointing at the shared canonical author-guide content tree.",
-                guideHomeHref: new URL("../../author-guide/index.html", window.location.href).toString(),
-                redesignedHref: new URL("../../../index.html#guide-6-labs-setup-graphical-remote-desktop", window.location.href).toString(),
+                guideHomeHref: fullGuideHref,
+                redesignedHref: fullGuideHref,
                 sampleHref: new URL("../../../sample-workshops/clinical-first-responder-rag/index.html", window.location.href).toString()
             };
         }
@@ -84,8 +85,8 @@
                 label: "Marketplace Variant",
                 title: "Read the Marketplace-image workflow in the markdown shell.",
                 summary: "This route keeps the Marketplace publishing subset in the same markdown wrapper and uses the same canonical content tree as the main author guide.",
-                guideHomeHref: new URL("../../author-guide/index.html", window.location.href).toString(),
-                redesignedHref: new URL("../../../index.html#guide-7-labs-create-custom-image-for-marketplace", window.location.href).toString(),
+                guideHomeHref: fullGuideHref,
+                redesignedHref: fullGuideHref,
                 sampleHref: new URL("../../../sample-workshops/clinical-first-responder-rag/index.html", window.location.href).toString()
             };
         }
@@ -95,8 +96,8 @@
                 label: "Markdown Version",
                 title: "Read the full author guide in the markdown shell.",
                 summary: "This fallback route keeps the updated original guide structure intact while adding a cleaner shell, workshop-wide search, and media handling that match the redesigned experience more closely.",
-                guideHomeHref: new URL("./index.html", window.location.href).toString(),
-                redesignedHref: new URL("../../index.html#guide-start-here", window.location.href).toString(),
+                guideHomeHref: fullGuideHref,
+                redesignedHref: fullGuideHref,
                 sampleHref: new URL("../../sample-workshops/clinical-first-responder-rag/index.html", window.location.href).toString()
             };
         }
@@ -105,8 +106,8 @@
             label: "Markdown Page",
             title: "Read this guide page in the markdown shell.",
             summary: "This page is being rendered inside the shared markdown wrapper used by the author-guide project.",
-            guideHomeHref: new URL("../author-guide/index.html", window.location.href).toString(),
-            redesignedHref: new URL("../../index.html#guide-start-here", window.location.href).toString(),
+            guideHomeHref: fullGuideHref,
+            redesignedHref: fullGuideHref,
             sampleHref: new URL("../../sample-workshops/clinical-first-responder-rag/index.html", window.location.href).toString()
         };
     }
@@ -227,7 +228,7 @@
             '    <p>Search across the current workshop pages, review the strongest matches, and open the right page without leaving the markdown shell.</p>',
             '    <form class="markdown-search-form" id="markdownWorkshopSearchForm" role="search" aria-label="Search this workshop">',
             '      <div class="markdown-search-row">',
-            '        <input class="markdown-search-input" id="markdownWorkshopSearchInput" type="search" placeholder="Self QA, GitHub Pages, validator">',
+            '        <input class="markdown-search-input" id="markdownWorkshopSearchInput" type="search" placeholder="Self Quality Assurance, GitHub Pages, validator">',
             '        <button class="markdown-guide-button is-primary" type="submit">Find</button>',
             '        <button class="markdown-guide-button" type="button" id="markdownWorkshopSearchClear">Clear</button>',
             "      </div>",

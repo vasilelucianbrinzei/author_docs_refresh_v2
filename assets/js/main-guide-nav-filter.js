@@ -2,14 +2,14 @@
 // Hides child lab links in the left nav so the improved markdown experience stays section-first instead of exposing every lab in the TOC.
 (function () {
     var hiddenTitles = [
-        "Lab 1: WMS lifecycle, QA, and publishing flow",
+        "Lab 1: WMS lifecycle, Quality Assurance, and publishing flow",
         "Lab 2: GitHub foundations",
         "Lab 3: Submit new workshop in WMS",
         "Lab 4: Set up GitHub and install tools",
         "Lab 5: Stay in sync with GitHub",
         "Lab 6: Develop Markdown and content",
-        "Lab 7: QA checks and steps",
-        "Lab 8: Review, QA, and publishing timelines",
+        "Lab 7: Quality Assurance checks and steps",
+        "Lab 8: Review, Quality Assurance, and publishing timelines",
         "Lab 9: Pull Request automated checks",
         "Lab 10: Publish your workshop",
         "Lab 11: Embed SQL Developer with FreeSQL",

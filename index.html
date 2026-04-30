@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -11,6 +11,7 @@
       var url = new URL(window.location.href);
       var experience = url.searchParams.get("experience");
       var lab = url.searchParams.get("lab");
+      var fullGuideHref = "https://oracle-livelabs.github.io/common/sample-livelabs-templates/create-labs/labs/workshops/livelabs/";
       var markdownLabMap = {
         "start-here": "introduction",
         "core-workflow": "1-labs-wms",
@@ -24,7 +25,7 @@
       var target;
 
       if (experience === "classic" || experience === "markdown") {
-        target = new URL("./workshops/author-guide/index.html?lab=introduction", url);
+        target = new URL(fullGuideHref);
         window.location.replace(target.toString());
         return;
       }
@@ -37,9 +38,8 @@
         url.searchParams.set("lab", markdownLabMap[lab]);
       }
 
-      target = new URL("./workshops/author-guide/index.html", url);
+      target = new URL(fullGuideHref);
       target.search = url.search;
-      target.hash = url.hash;
       window.location.replace(target.toString());
     }());
   </script>
@@ -3845,7 +3845,6 @@
 
     #app .brand-token {
       align-self: flex-start;
-      margin-top: -0.3rem;
     }
 
     #app .nav-control,
@@ -5566,6 +5565,7 @@
     }
   </style>
   <link rel="stylesheet" href="./assets/css/redwood-video-player.css">
+  <link rel="stylesheet" href="./assets/css/author-guide-improvements.css">
 </head>
 <body>
   <div id="app">
@@ -5595,7 +5595,7 @@
                       id="navSearchInput"
                       class="form-control"
                       type="search"
-                      placeholder="WMS, QA, GitHub, validator"
+                      placeholder="WMS, Quality Assurance, GitHub, validator"
                       aria-label="Search across Quickstart, Cheatsheet, and Full Guide"
                     >
                     <button type="submit" class="btn btn-primary">Go</button>
@@ -5608,6 +5608,10 @@
                   <button class="btn nav-control" type="button" data-mode-target="beginner" aria-label="Open quickstart">Quickstart</button>
                   <button class="btn nav-control" type="button" data-mode-target="explorer" aria-label="Open cheatsheet">Cheatsheet</button>
                   <a class="btn nav-control" href="https://oracle-livelabs.github.io/common/sample-livelabs-templates/create-labs/labs/workshops/livelabs/" target="_blank" rel="noreferrer" aria-label="Open full guide">Full Guide</a>
+                </div>
+
+                <div class="breadcrumb-shell" aria-label="Breadcrumb">
+                  <div class="breadcrumb-trail" id="breadcrumbTrail"></div>
                 </div>
               </div>
             </div>
@@ -5721,15 +5725,15 @@
                     <div class="step-kicker">Step 1 / WMS gate</div>
                     <h2 class="step-title">Submit Workshop Request</h2>
                     <p class="step-summary">Create the WMS record first, fill it like a reviewer will read it, and understand the status path before you spend real time building the workshop.</p>
-                    <div class="step-meta-row">
-                      <span class="meta-pill">Output: approved request</span>
-                      <span class="meta-pill">Time: 5 to 10 min</span>
-                      <span class="meta-pill">Leads to: repo work</span>
-                    </div>
+                    <ul class="step-meta-row step-meta-list step-meta-list-right">
+                      <li class="meta-pill">Output: approved request</li>
+                      <li class="meta-pill">Time: 5 to 10 minutes</li>
+                      <li class="meta-pill">Leads to: repository work</li>
+                    </ul>
                   </div>
 
                   <div class="guide-panel guided-only mb-4">
-                    WMS is not just intake. The same record follows the workshop through approval, Self QA, publishing, and Quarterly QA.
+                    WMS is not just intake. The same record follows the workshop through approval, Self Quality Assurance, publishing, and Quarterly Quality Assurance.
                   </div>
 
                   <div
@@ -5756,8 +5760,8 @@
                     </section>
 
                     <figure class="step-figure evidence-figure">
-                      <img src="./content/author-guide/1-labs-wms/images/submit_workshop.png" alt="Submit new workshop request form in WMS">
                       <figcaption>This is the first screen reviewers use to approve or send the request back for more information.</figcaption>
+                      <img src="./content/author-guide/1-labs-wms/images/submit_workshop.png" alt="Submit new workshop request form in WMS">
                     </figure>
 
                     <section class="step-block">
@@ -5774,12 +5778,17 @@
                         </article>
                         <article class="detail-field-card">
                           <span class="detail-field-label">Workshop Abstract</span>
-                          <p class="detail-field-value">Authors learn how to request a workshop in WMS, prepare GitHub Desktop and VS Code, build from the LiveLabs sample structure, complete Self QA, and request publishing.</p>
+                          <p class="detail-field-value">Authors learn how to request a workshop in WMS, prepare GitHub Desktop and Visual Studio Code, build from the LiveLabs sample structure, complete Self Quality Assurance, and request publishing.</p>
                           <p class="detail-field-note">A council reviewer should understand the end-to-end learner goal after reading two or three sentences.</p>
                         </article>
                         <article class="detail-field-card">
                           <span class="detail-field-label">Workshop Outline</span>
-                          <p class="detail-field-value">1. Submit and track the WMS request. 2. Set up GitHub and preview tooling. 3. Build the workshop structure and labs. 4. Run Self QA, fix PR issues, and publish.</p>
+                          <ol class="detail-inline-list">
+                            <li>Submit and track the WMS request.</li>
+                            <li>Set up GitHub and preview tooling.</li>
+                            <li>Build the workshop structure and labs.</li>
+                            <li>Run Self Quality Assurance, fix pull request issues, and publish.</li>
+                          </ol>
                           <p class="detail-field-note">Outline the build flow in the same order the learner or author will execute it.</p>
                         </article>
                         <article class="detail-field-card">
@@ -5794,7 +5803,13 @@
                         </article>
                         <article class="detail-field-card">
                           <span class="detail-field-label">Required Tags</span>
-                          <p class="detail-field-value">Use the actual WMS tags for the workshop's level, audience role, focus area, and primary product. Example pattern: <strong>Level</strong> = Beginner, <strong>Role</strong> = Developer, <strong>Focus Area</strong> = the main solution area, <strong>Product</strong> = the service being taught.</p>
+                          <p class="detail-field-value">Use the actual WMS tags for the workshop's level, audience role, focus area, and primary product.</p>
+                          <ul class="detail-inline-list">
+                            <li>Level = Beginner</li>
+                            <li>Role = Developer</li>
+                            <li>Focus Area = the main solution area</li>
+                            <li>Product = the service being taught</li>
+                          </ul>
                           <p class="detail-field-note">Tags are mandatory search and routing metadata, not optional cleanup.</p>
                         </article>
                       </div>
@@ -5804,7 +5819,7 @@
                       <div class="step-block-header">
                         <div class="panel-kicker">Status flow</div>
                         <h3>Understand the handoff path before you build</h3>
-                        <p>The workshop is not publish-ready just because the request exists. WMS status controls when heavy work starts, when QA is valid, and when publishing can move ahead.</p>
+                        <p>The workshop is not publish-ready just because the request exists. WMS status controls when heavy work starts, when Quality Assurance is valid, and when publishing can move ahead.</p>
                       </div>
                       <div class="detail-milestone-grid">
                         <article class="detail-milestone-card">
@@ -5820,7 +5835,7 @@
                           <p>Use this after real authoring starts in GitHub and the preview path exists.</p>
                         </article>
                         <article class="detail-milestone-card">
-                          <strong>Self QA to Self QA Complete</strong>
+                          <strong>Self Quality Assurance to Self Quality Assurance Complete</strong>
                           <p>Run end-to-end testing, save the checklist, and certify the handoff only after the workshop is stable.</p>
                         </article>
                         <article class="detail-milestone-card">
@@ -5828,15 +5843,15 @@
                           <p>Stakeholders have verified the workshop and it is ready for final publish handling.</p>
                         </article>
                         <article class="detail-milestone-card">
-                          <strong>Quarterly QA</strong>
-                          <p>Published workshops cycle back through QA later. If QA is missed, the production entry can be disabled.</p>
+                          <strong>Quarterly Quality Assurance</strong>
+                          <p>Published workshops cycle back through Quality Assurance later. If Quality Assurance is missed, the production entry can be disabled.</p>
                         </article>
                       </div>
                     </section>
 
                     <figure class="step-figure evidence-figure">
+                      <figcaption>Use the workflow diagram when deciding whether the workshop is still in request review, ready for Self Quality Assurance, or ready for publish handling.</figcaption>
                       <img src="./content/author-guide/introduction/images/livelabs-publishing-flow.png" alt="LiveLabs publishing workflow diagram">
-                      <figcaption>Use the workflow diagram when deciding whether the workshop is still in request review, ready for Self QA, or ready for publish handling.</figcaption>
                     </figure>
 
                     <section class="step-block step-block-quiet">
@@ -5848,7 +5863,7 @@
                         <li>The title, abstract, outline, and prerequisites tell a reviewer exactly what the workshop will accomplish.</li>
                         <li>Stakeholder, council, owner group, and required tags are already correct in WMS.</li>
                         <li>You know whether the request is still waiting for council review or has been approved to move into development.</li>
-                        <li>You understand that later Self QA, stakeholder review, and Quarterly QA all reuse this same WMS record.</li>
+                        <li>You understand that later Self Quality Assurance, stakeholder review, and Quarterly Quality Assurance all reuse this same WMS record.</li>
                       </ul>
                     </section>
 
@@ -5887,54 +5902,112 @@
                     <p class="step-summary">Set up the workstation, fork and clone the right repositories, copy the sample structure, and make preview work early so the workshop is cheap to fix.</p>
                     <div class="step-meta-row">
                       <span class="meta-pill">Output: live preview</span>
-                      <span class="meta-pill">Time: 15 to 20 min</span>
+                      <span class="meta-pill">Time: 15 to 20 minutes</span>
                       <span class="meta-pill">Leads to: content authoring</span>
                     </div>
                   </div>
 
                   <div class="guide-panel guided-only mb-4">
-                    Most new-author friction lives here. Get account setup, repo hygiene, folder structure, and preview working before you write long sections of content.
+                    Most new-author friction lives here. Get account setup, repository hygiene, folder structure, and preview working before you write long sections of content.
                   </div>
 
                   <div
                     data-video-card
                     data-video-title="Create Workshop and GitHub setup walkthrough"
-                    data-video-summary="Lead with the workstation, repo, and preview setup so the written tasks map to a real sequence immediately."
+                    data-video-summary="Lead with the workstation, repository, and preview setup so the written tasks map to a real sequence immediately."
                     data-video-features="Fork and clone|Sample structure|Preview setup"
                   ></div>
 
                   <div class="step-sequence">
                     <section class="step-block">
                       <div class="step-block-header">
-                        <div class="panel-kicker">Install once</div>
-                        <h3>Set up the account and authoring tools before you touch the template</h3>
+                        <div class="panel-kicker">Setup</div>
+                        <h3>Install GitHub Desktop</h3>
                         <p>Use the official downloads, sign in early, and make preview available before you start building labs.</p>
                       </div>
-                      <div class="detail-resource-grid">
-                        <a class="detail-resource-link" href="https://github.com/" target="_blank" rel="noreferrer">
-                          <strong>GitHub account</strong>
-                          <span>Use your @oracle.com email, complete profile details, and enable two-factor authentication.</span>
-                        </a>
-                        <a class="detail-resource-link" href="https://desktop.github.com/" target="_blank" rel="noreferrer">
-                          <strong>GitHub Desktop</strong>
-                          <span>This is the main fork, clone, commit, sync, and PR handoff surface used in the guide.</span>
-                        </a>
-                        <a class="detail-resource-link" href="https://code.visualstudio.com/download" target="_blank" rel="noreferrer">
-                          <strong>Visual Studio Code</strong>
-                          <span>Use VS Code for markdown editing, search, file moves, and manifest work.</span>
-                        </a>
-                        <a class="detail-resource-link" href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer" target="_blank" rel="noreferrer">
-                          <strong>Live Server extension</strong>
-                          <span>Install it before you begin so local preview is always available while you edit.</span>
-                        </a>
-                        <a class="detail-resource-link" href="https://github.com/orgs/oracle-livelabs/repositories" target="_blank" rel="noreferrer">
-                          <strong>Oracle LiveLabs repositories</strong>
-                          <span>Pick the product repository that will own the workshop in production.</span>
-                        </a>
-                        <a class="detail-resource-link" href="https://github.com/oracle-livelabs/common/tree/main/sample-livelabs-templates/sample-workshop" target="_blank" rel="noreferrer">
-                          <strong>Sample workshop template</strong>
-                          <span>Copy from the canonical sample instead of improvising a new folder layout.</span>
-                        </a>
+                      <figure class="step-figure evidence-figure install-figure">
+                        <figcaption>Finish GitHub Desktop sign-in before you clone, sync, or create a pull request.</figcaption>
+                        <img src="./content/author-guide/2-labs-github/images/git-hub-desktop-login-screen.png" alt="GitHub Desktop login screen">
+                      </figure>
+                      <div class="detail-resource-grid install-card-grid">
+                        <article class="detail-resource-link detail-resource-card install-card" data-install-card="github-account" aria-pressed="false">
+                          <div class="detail-resource-main">
+                            <span class="detail-resource-number">1</span>
+                            <span>
+                              <strong>GitHub account</strong>
+                              <span>Use your @oracle.com email, complete profile details, and enable two-factor authentication.</span>
+                            </span>
+                          </div>
+                          <div class="detail-resource-actions">
+                            <a class="btn btn-outline-primary rounded-pill px-3" href="https://github.com/" target="_blank" rel="noreferrer">Open</a>
+                            <button class="copy-snippet copy-link-button" type="button" data-copy-text="https://github.com/">Copy link</button>
+                          </div>
+                        </article>
+                        <article class="detail-resource-link detail-resource-card install-card" data-install-card="github-desktop" aria-pressed="false">
+                          <div class="detail-resource-main">
+                            <span class="detail-resource-number">2</span>
+                            <span>
+                              <strong>GitHub Desktop</strong>
+                              <span>This is the main fork, clone, commit, sync, and pull request handoff surface used in the guide.</span>
+                            </span>
+                          </div>
+                          <div class="detail-resource-actions">
+                            <a class="btn btn-outline-primary rounded-pill px-3" href="https://desktop.github.com/" target="_blank" rel="noreferrer">Open</a>
+                            <button class="copy-snippet copy-link-button" type="button" data-copy-text="https://desktop.github.com/">Copy link</button>
+                          </div>
+                        </article>
+                        <article class="detail-resource-link detail-resource-card install-card" data-install-card="vscode" aria-pressed="false">
+                          <div class="detail-resource-main">
+                            <span class="detail-resource-number">3</span>
+                            <span>
+                              <strong>Visual Studio Code</strong>
+                              <span>Use Visual Studio Code for markdown editing, search, file moves, and manifest work.</span>
+                            </span>
+                          </div>
+                          <div class="detail-resource-actions">
+                            <a class="btn btn-outline-primary rounded-pill px-3" href="https://code.visualstudio.com/download" target="_blank" rel="noreferrer">Open</a>
+                            <button class="copy-snippet copy-link-button" type="button" data-copy-text="https://code.visualstudio.com/download">Copy link</button>
+                          </div>
+                        </article>
+                        <article class="detail-resource-link detail-resource-card install-card" data-install-card="live-server" aria-pressed="false">
+                          <div class="detail-resource-main">
+                            <span class="detail-resource-number">4</span>
+                            <span>
+                              <strong>Live Server extension</strong>
+                              <span>Install it before you begin so local preview is always available while you edit.</span>
+                            </span>
+                          </div>
+                          <div class="detail-resource-actions">
+                            <a class="btn btn-outline-primary rounded-pill px-3" href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer" target="_blank" rel="noreferrer">Open</a>
+                            <button class="copy-snippet copy-link-button" type="button" data-copy-text="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer">Copy link</button>
+                          </div>
+                        </article>
+                        <article class="detail-resource-link detail-resource-card install-card" data-install-card="repositories" aria-pressed="false">
+                          <div class="detail-resource-main">
+                            <span class="detail-resource-number">5</span>
+                            <span>
+                              <strong>Oracle LiveLabs repositories</strong>
+                              <span>Pick the product repository that will own the workshop in production.</span>
+                            </span>
+                          </div>
+                          <div class="detail-resource-actions">
+                            <a class="btn btn-outline-primary rounded-pill px-3" href="https://github.com/orgs/oracle-livelabs/repositories" target="_blank" rel="noreferrer">Open</a>
+                            <button class="copy-snippet copy-link-button" type="button" data-copy-text="https://github.com/orgs/oracle-livelabs/repositories">Copy link</button>
+                          </div>
+                        </article>
+                        <article class="detail-resource-link detail-resource-card install-card" data-install-card="sample-template" aria-pressed="false">
+                          <div class="detail-resource-main">
+                            <span class="detail-resource-number">6</span>
+                            <span>
+                              <strong>Sample workshop template</strong>
+                              <span>Copy from the canonical sample instead of improvising a new folder layout.</span>
+                            </span>
+                          </div>
+                          <div class="detail-resource-actions">
+                            <a class="btn btn-outline-primary rounded-pill px-3" href="https://github.com/oracle-livelabs/common/tree/main/sample-livelabs-templates/sample-workshop" target="_blank" rel="noreferrer">Open</a>
+                            <button class="copy-snippet copy-link-button" type="button" data-copy-text="https://github.com/oracle-livelabs/common/tree/main/sample-livelabs-templates/sample-workshop">Copy link</button>
+                          </div>
+                        </article>
                       </div>
                       <ol class="action-list mt-4">
                         <li>Create or confirm the GitHub account that uses your Oracle email, then finish profile name, username, profile photo, and two-factor authentication in GitHub Settings.</li>
@@ -5943,19 +6016,14 @@
                       </ol>
                     </section>
 
-                    <figure class="step-figure evidence-figure">
-                      <img src="./content/author-guide/2-labs-github/images/git-hub-desktop-login-screen.png" alt="GitHub Desktop login screen">
-                      <figcaption>Finish GitHub Desktop sign-in before you try to clone, sync, or create a pull request.</figcaption>
-                    </figure>
-
                     <section class="step-block">
                       <div class="step-block-header">
                         <div class="panel-kicker">Fork, clone, sync</div>
-                        <h3>Build the repo in the same order the canonical guide expects</h3>
+                        <h3>Build the repository in the same order the canonical guide expects</h3>
                         <p>Keep production, your fork, and your local clone clearly separated. New authoring gets much harder when those roles blur.</p>
                       </div>
                       <ol class="action-list">
-                        <li>After the workshop is approved, fork the target <strong>oracle-livelabs</strong> product repository and also fork <strong>common</strong> so you have both the production content repo and the shared sample assets.</li>
+                        <li>After the workshop is approved, fork the target <strong>oracle-livelabs</strong> product repository and also fork <strong>common</strong> so you have both the production content repository and the shared sample assets.</li>
                         <li>Clone your fork with GitHub Desktop and select <strong>To contribute to the parent project</strong> when prompted so <strong>upstream/main</strong> stays connected.</li>
                         <li>Before editing each day, click <strong>Fetch origin</strong>, then open <strong>Branch &gt; Merge into Current Branch</strong> and merge <strong>upstream/main</strong> into <strong>main</strong>.</li>
                         <li>After the merge succeeds, click <strong>Push origin</strong> so your local clone and your fork stay aligned before you author anything new.</li>
@@ -5964,8 +6032,8 @@
                     </section>
 
                     <figure class="step-figure evidence-figure">
-                      <img src="./content/author-guide/3-labs-sync-github/images/sample-workshop-structure.png" alt="Sample workshop structure in Visual Studio Code">
                       <figcaption>Use the sample structure as the starting point. It is much easier to trim or rename the template than to repair an improvised workshop layout later.</figcaption>
+                      <img src="./content/author-guide/3-labs-sync-github/images/sample-workshop-structure.png" alt="Sample workshop structure in Visual Studio Code">
                     </figure>
 
                     <section class="step-block">
@@ -5982,28 +6050,58 @@
                     </section>
 
                     <figure class="step-figure evidence-figure">
-                      <img src="./content/author-guide/3-labs-sync-github/images/branch-main.png" alt="GitHub Pages branch selection screen">
                       <figcaption>GitHub Pages on your fork is a required checkpoint. It is the review URL you will share before production exists.</figcaption>
+                      <img src="./content/author-guide/3-labs-sync-github/images/branch-main.png" alt="GitHub Pages branch selection screen">
                     </figure>
 
-                    <div class="card snippet-card">
-                      <div class="card-body">
-                        <div class="snippet-header">
-                          <div>
-                            <div class="snippet-meta">Commands and baseline</div>
-                            <h3 class="mb-0">Use these commands and a minimal manifest before long authoring sessions</h3>
+                    <section class="step-block">
+                      <div class="step-block-header">
+                        <div class="panel-kicker">Commands and baseline</div>
+                        <h3>Group GitHub commands by the job they perform</h3>
+                        <p>Copy only the command group you need. Keep setup, synchronization, and manifest baseline work separate so review problems are easier to diagnose.</p>
+                      </div>
+                      <div class="command-card-grid">
+                        <article class="card snippet-card command-card">
+                          <div class="card-body">
+                            <div class="snippet-header">
+                              <div>
+                                <div class="snippet-meta">Git settings</div>
+                                <h3 class="mb-0">Configure paths and filename case</h3>
+                              </div>
+                              <button class="copy-snippet" type="button" data-copy-target="snippet-step-2-settings">Copy</button>
+                            </div>
+                            <p class="snippet-description">Run this once on a workstation before you work with long paths or case-sensitive filenames.</p>
+                            <pre><code id="snippet-step-2-settings">git config --global core.longpaths true
+git config --global core.ignorecase false</code></pre>
                           </div>
-                          <button class="copy-snippet" type="button" data-copy-target="snippet-step-2">Copy</button>
-                        </div>
-                        <pre><code id="snippet-step-2">git config --global core.longpaths true
-git config --global core.ignorecase false
-
-git remote -v
+                        </article>
+                        <article class="card snippet-card command-card">
+                          <div class="card-body">
+                            <div class="snippet-header">
+                              <div>
+                                <div class="snippet-meta">Repository synchronization</div>
+                                <h3 class="mb-0">Sync your fork before editing</h3>
+                              </div>
+                              <button class="copy-snippet" type="button" data-copy-target="snippet-step-2-sync">Copy</button>
+                            </div>
+                            <p class="snippet-description">Use this group before a new authoring session so your fork and local clone start from the current upstream branch.</p>
+                            <pre><code id="snippet-step-2-sync">git remote -v
 git fetch upstream
 git merge upstream/main -m "Sync with main"
-git push origin main
-
-{
+git push origin main</code></pre>
+                          </div>
+                        </article>
+                        <article class="card snippet-card command-card">
+                          <div class="card-body">
+                            <div class="snippet-header">
+                              <div>
+                                <div class="snippet-meta">Manifest baseline</div>
+                                <h3 class="mb-0">Start with a minimal manifest</h3>
+                              </div>
+                              <button class="copy-snippet" type="button" data-copy-target="snippet-step-2-manifest">Copy</button>
+                            </div>
+                            <p class="snippet-description">Use this as the baseline shape before you add more labs, variables, or special workshop options.</p>
+                            <pre><code id="snippet-step-2-manifest">{
   "workshoptitle": "My Workshop Title",
   "help": "my-team@oracle.com",
   "tutorials": [
@@ -6016,12 +6114,32 @@ git push origin main
       "filename": "./../../1-build-environment/1-build-environment.md"
     }
   ]
-}
-
-Preview URL
-https://&lt;github-username&gt;.github.io/&lt;repo-name&gt;/&lt;path&gt;/workshops/&lt;variant&gt;/index.html?qa=true</code></pre>
+}</code></pre>
+                          </div>
+                        </article>
                       </div>
-                    </div>
+                    </section>
+
+                    <section class="step-block">
+                      <div class="step-block-header">
+                        <div class="panel-kicker">Preview URL</div>
+                        <h3>Keep the GitHub Pages preview URL separate</h3>
+                        <p>Use the personal GitHub Pages preview for review and quality checks before production publishing exists.</p>
+                      </div>
+                      <article class="card snippet-card command-card">
+                        <div class="card-body">
+                          <div class="snippet-header">
+                            <div>
+                              <div class="snippet-meta">Preview pattern</div>
+                              <h3 class="mb-0">Personal GitHub Pages URL</h3>
+                            </div>
+                            <button class="copy-snippet" type="button" data-copy-target="snippet-step-2-preview-url">Copy</button>
+                          </div>
+                          <p class="snippet-description">Replace the placeholders with your GitHub username, repository name, workshop path, and variant.</p>
+                          <pre><code id="snippet-step-2-preview-url">https://&lt;github-username&gt;.github.io/&lt;repository-name&gt;/&lt;path&gt;/workshops/&lt;variant&gt;/index.html?qa=true</code></pre>
+                        </div>
+                      </article>
+                    </section>
 
                     <section class="step-block step-block-quiet">
                       <div class="step-block-header">
@@ -6029,8 +6147,8 @@ https://&lt;github-username&gt;.github.io/&lt;repo-name&gt;/&lt;path&gt;/worksho
                         <h3>Step 2 exit criteria</h3>
                       </div>
                       <ul class="check-list">
-                        <li>GitHub Desktop, VS Code, and Live Server are installed and working with the Oracle-linked GitHub account.</li>
-                        <li>The target repo and <strong>common</strong> are both forked or available, and the local clone still points to <strong>upstream/main</strong>.</li>
+                        <li>GitHub Desktop, Visual Studio Code, and Live Server are installed and working with the Oracle-linked GitHub account.</li>
+                        <li>The target repository and <strong>common</strong> are both forked or available, and the local clone still points to <strong>upstream/main</strong>.</li>
                         <li>Folder names, file names, and manifest paths are lowercase and case-correct.</li>
                         <li>Your personal GitHub Pages URL renders the same workshop path you intend to share for review.</li>
                       </ul>
@@ -6043,14 +6161,14 @@ https://&lt;github-username&gt;.github.io/&lt;repo-name&gt;/&lt;path&gt;/worksho
                       </div>
                       <ul class="mistake-list">
                         <li>Using the wrong GitHub account or cloning the wrong repository before the workshop path is confirmed.</li>
-                        <li>Skipping the daily upstream merge and only discovering conflicts or stale templates at PR time.</li>
+                        <li>Skipping the daily upstream merge and only discovering conflicts or stale templates at pull request time.</li>
                         <li>Leaving sample manifest fields, mixed-case filenames, or broken tutorial paths behind.</li>
                       </ul>
                     </section>
                   </div>
 
                   <div class="step-footer">
-                    <div class="step-note">This step combines workstation setup, repo hygiene, sample structure, and preview into one stable build checkpoint.</div>
+                    <div class="step-note">This step combines workstation setup, repository hygiene, sample structure, and preview into one stable build checkpoint.</div>
                     <div class="d-flex flex-wrap gap-2">
                       <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-action="prev">Back</button>
                       <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Cheatsheet</button>
@@ -6066,61 +6184,61 @@ https://&lt;github-username&gt;.github.io/&lt;repo-name&gt;/&lt;path&gt;/worksho
               <article class="step-shell">
                 <div class="lockable">
                   <div class="step-heading">
-                    <div class="step-kicker">Step 3 / QA and release</div>
+                    <div class="step-kicker">Step 3 / Quality Assurance and release</div>
                     <h2 class="step-title">Review &amp; Publish</h2>
-                    <p class="step-summary">Complete Self QA in the right order, fix PR blockers by class, and submit the final publishing details only after the workshop is genuinely ready to move to production.</p>
+                    <p class="step-summary">Complete Self Quality Assurance in the right order, fix pull request blockers by class, and submit the final publishing details only after the workshop is genuinely ready to move to production.</p>
                     <div class="step-meta-row">
                       <span class="meta-pill">Output: reviewed release</span>
-                      <span class="meta-pill">Time: 10 to 15 min</span>
+                      <span class="meta-pill">Time: 10 to 15 minutes</span>
                       <span class="meta-pill">Leads to: production</span>
                     </div>
                   </div>
 
                   <div class="guide-panel guided-only mb-4">
-                    The last step is about precision, not volume. Reviewers should see one stable preview, one saved checklist, one clean PR, and the exact production URLs they expect.
+                    The last step is about precision, not volume. Reviewers should see one stable preview, one saved checklist, one clean pull request, and the exact production URLs they expect.
                   </div>
 
                   <div
                     data-video-card
                     data-video-title="Review and Publish walkthrough"
-                    data-video-summary="Show the QA, PR, and publishing handoff first so the release gate is visible before the detailed checklists."
-                    data-video-features="QA checklist|PR checks|Publishing handoff"
+                    data-video-summary="Show the Quality Assurance, pull request, and publishing handoff first so the release gate is visible before the detailed checklists."
+                    data-video-features="Quality Assurance checklist|pull request checks|Publishing handoff"
                   ></div>
 
                   <div class="step-sequence">
                     <section class="step-block">
                       <div class="step-block-header">
-                        <div class="panel-kicker">Self QA order</div>
-                        <h3>Run Self QA in WMS before you open the final publish handoff</h3>
-                        <p>This is the part that most often breaks the process. Save the checklist first, then certify the status change. Publishing only makes sense after Self QA is complete and stakeholder review is underway or finished.</p>
+                        <div class="panel-kicker">Self Quality Assurance order</div>
+                        <h3>Run Self Quality Assurance in WMS before you open the final publish handoff</h3>
+                        <p>This is the part that most often breaks the process. Save the checklist first, then certify the status change. Publishing only makes sense after Self Quality Assurance is complete and stakeholder review is underway or finished.</p>
                       </div>
                       <ol class="action-list">
                         <li>Open the personal <code>github.io</code> workshop URL, append <code>?qa=true</code>, and run the workshop end to end before you ask anyone else to review it.</li>
                         <li>On the WMS details page, update title, short description, long description, outline, prerequisites, tags, and <strong>Development GitHub/GitLab URL</strong> so WMS matches the actual workshop reviewers will open.</li>
-                        <li>Open <strong>Self QA Checklist</strong>, check every required box, upload the requested evidence, add the pull request link when you create one, and add your personal <code>github.io</code> workshop link.</li>
-                        <li>Click <strong>Save</strong> on the checklist first. Only after the save succeeds should you move to <strong>Self QA Complete</strong> and certify the change.</li>
-                        <li>Stakeholders verify the workshop from <strong>Self QA Complete</strong>. Once they move it to <strong>Completed</strong>, the workshop is in the right place for final publishing handling.</li>
+                        <li>Open <strong>Self Quality Assurance Checklist</strong>, check every required box, upload the requested evidence, add the pull request link when you create one, and add your personal <code>github.io</code> workshop link.</li>
+                        <li>Click <strong>Save</strong> on the checklist first. Only after the save succeeds should you move to <strong>Self Quality Assurance Complete</strong> and certify the change.</li>
+                        <li>Stakeholders verify the workshop from <strong>Self Quality Assurance Complete</strong>. Once they move it to <strong>Completed</strong>, the workshop is in the right place for final publishing handling.</li>
                       </ol>
                     </section>
 
                     <figure class="step-figure evidence-figure">
-                      <img src="./content/author-guide/5-labs-qa-checks/images/self-qa-checklist-1.png" alt="Self QA checklist in WMS">
-                      <figcaption>The checklist must be fully saved before the status can move cleanly to Self QA Complete or Quarterly QA Complete.</figcaption>
+                      <figcaption>The checklist must be fully saved before the status can move cleanly to Self Quality Assurance Complete or Quarterly Quality Assurance Complete.</figcaption>
+                      <img src="./content/author-guide/5-labs-qa-checks/images/self-qa-checklist-1.png" alt="Self Quality Assurance checklist in WMS">
                     </figure>
 
                     <section class="step-block guided-only">
                       <div class="step-block-header">
                         <div class="panel-kicker">Status gate</div>
                         <h3>Keep the release flow aligned with the real review state</h3>
-                        <p>Publishing is not the next step after draft content. It happens after Self QA, stakeholder verification, and a clean PR handoff.</p>
+                        <p>Publishing is not the next step after draft content. It happens after Self Quality Assurance, stakeholder verification, and a clean pull request handoff.</p>
                       </div>
                       <div class="detail-milestone-grid">
                         <article class="detail-milestone-card">
-                          <strong>Self QA</strong>
+                          <strong>Self Quality Assurance</strong>
                           <p>The workshop is stable enough to test end to end and complete the checklist.</p>
                         </article>
                         <article class="detail-milestone-card">
-                          <strong>Self QA Complete</strong>
+                          <strong>Self Quality Assurance Complete</strong>
                           <p>The checklist is saved and certified, and stakeholders receive the workshop for verification.</p>
                         </article>
                         <article class="detail-milestone-card">
@@ -6132,95 +6250,163 @@ https://&lt;github-username&gt;.github.io/&lt;repo-name&gt;/&lt;path&gt;/worksho
                           <p>The production publishing entry is in motion and the merged workshop can roll out.</p>
                         </article>
                         <article class="detail-milestone-card">
-                          <strong>Quarterly QA</strong>
-                          <p>Published workshops cycle back into QA later, so keep WMS accurate after release too.</p>
+                          <strong>Quarterly Quality Assurance</strong>
+                          <p>Published workshops cycle back into Quality Assurance later, so keep WMS accurate after release too.</p>
                         </article>
                       </div>
                     </section>
 
                     <section class="step-block">
                       <div class="step-block-header">
-                        <div class="panel-kicker">PR checks</div>
+                        <div class="panel-kicker">Pull request checks</div>
                         <h3>Fix review blockers by class instead of guessing</h3>
-                        <p>When the PR shows a red X, name the failing workflow first. Image-size problems, markdown-structure problems, and publishing metadata problems are different repairs.</p>
+                        <p>When the pull request shows a red X, name the failing workflow first. Image-size problems, markdown-structure problems, and publishing metadata problems are different repairs.</p>
                       </div>
                       <ol class="action-list">
-                        <li>If the PR fails <strong>LiveLabs Image Validation</strong>, resize the blocking image to 1280px or less in either dimension and rerun the checks.</li>
-                        <li>If the PR fails <strong>LiveLabs Markdown Validation</strong>, fix the exact file and rule: required sections, task format, alt text, filename case, copy tags, or inline HTML.</li>
+                        <li>If the pull request fails <strong>LiveLabs Image Validation</strong>, resize the blocking image to 1280px or less in either dimension and rerun the checks.</li>
+                        <li>If the pull request fails <strong>LiveLabs Markdown Validation</strong>, fix the exact file and rule: required sections, task format, alt text, filename case, copy tags, or inline HTML.</li>
                         <li>Use the local validator when you want faster repair loops than waiting for GitHub Actions after every commit.</li>
                       </ol>
                     </section>
 
-                    <div class="card snippet-card">
-                      <div class="card-body">
-                        <div class="snippet-header">
-                          <div>
-                            <div class="snippet-meta">Validator commands</div>
-                            <h3 class="mb-0">Run the markdown validator locally before the next push</h3>
-                          </div>
-                          <button class="copy-snippet" type="button" data-copy-target="snippet-step-3-validator">Copy</button>
-                        </div>
-                        <pre><code id="snippet-step-3-validator">Bash
-curl -O https://raw.githubusercontent.com/oracle-livelabs/common/main/md-validator/.github/scripts/validate-livelabs-markdown.sh
+                    <section class="step-block">
+                      <div class="step-block-header">
+                        <div class="panel-kicker">Validator commands</div>
+                        <h3>Run the markdown validator locally before the next push</h3>
+                        <p>Choose the command block for your terminal environment and copy only that block.</p>
+                      </div>
+                      <div class="command-card-grid">
+                        <article class="card snippet-card command-card">
+                          <div class="card-body">
+                            <div class="snippet-header">
+                              <div>
+                                <div class="snippet-meta">Bash</div>
+                                <h3 class="mb-0">Linux or macOS terminal</h3>
+                              </div>
+                              <button class="copy-snippet" type="button" data-copy-target="snippet-step-3-validator-bash">Copy</button>
+                            </div>
+                            <p class="snippet-description">Use this command block when Bash is your normal terminal.</p>
+                            <pre><code id="snippet-step-3-validator-bash">curl -O https://raw.githubusercontent.com/oracle-livelabs/common/main/md-validator/.github/scripts/validate-livelabs-markdown.sh
 chmod +x validate-livelabs-markdown.sh
-./validate-livelabs-markdown.sh /path/to/workshop
-
-PowerShell
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/oracle-livelabs/common/main/md-validator/.github/scripts/validate-livelabs-markdown.ps1" -OutFile "validate-livelabs-markdown.ps1"
+./validate-livelabs-markdown.sh /path/to/workshop</code></pre>
+                          </div>
+                        </article>
+                        <article class="card snippet-card command-card">
+                          <div class="card-body">
+                            <div class="snippet-header">
+                              <div>
+                                <div class="snippet-meta">PowerShell</div>
+                                <h3 class="mb-0">Windows terminal</h3>
+                              </div>
+                              <button class="copy-snippet" type="button" data-copy-target="snippet-step-3-validator-powershell">Copy</button>
+                            </div>
+                            <p class="snippet-description">Use this command block on Windows and keep the execution policy bypass scoped to the current process.</p>
+                            <pre><code id="snippet-step-3-validator-powershell">Invoke-WebRequest -Uri "https://raw.githubusercontent.com/oracle-livelabs/common/main/md-validator/.github/scripts/validate-livelabs-markdown.ps1" -OutFile "validate-livelabs-markdown.ps1"
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
 .\validate-livelabs-markdown.ps1 C:\path\to\your\workshop</code></pre>
+                          </div>
+                        </article>
                       </div>
-                    </div>
+                    </section>
 
                     <figure class="step-figure evidence-figure">
-                      <img src="./content/author-guide/prcheck/images/prerror.png" alt="Failed pull request checks in GitHub">
                       <figcaption>Start with the failing workflow name so you fix the real blocker instead of editing the wrong files.</figcaption>
+                      <img src="./content/author-guide/prcheck/images/prerror.png" alt="Failed pull request checks in GitHub">
                     </figure>
 
                     <section class="step-block">
                       <div class="step-block-header">
                         <div class="panel-kicker">Publish handoff</div>
-                        <h3>Open the PR with the WMS ID and fill the Publishing tab with production URLs</h3>
+                        <h3>Open the pull request with the WMS ID and fill the Publishing tab with production URLs</h3>
                         <p>The preview URL belongs in development review. The oracle-livelabs URL belongs in production publishing. Keep those two surfaces separate.</p>
                       </div>
                       <ol class="action-list">
-                        <li>Create the pull request from GitHub Desktop after the QA fixes are pushed, and include the <strong>WMS ID</strong> in the PR title because review will not start without it.</li>
-                        <li>On the PR page, fill the required checklist and general requirements from the QA handoff so reviewers can tell the workshop is ready for merge.</li>
+                        <li>Create the pull request from GitHub Desktop after the Quality Assurance fixes are pushed, and include the <strong>WMS ID</strong> in the pull request title because review will not start without it.</li>
+                        <li>On the pull request page, fill the required checklist and general requirements from the Quality Assurance handoff so reviewers can tell the workshop is ready for merge.</li>
                         <li>Confirm the branch is up to date with <strong>main</strong> and has no merge conflicts before you request approval.</li>
                         <li>Open <strong>WMS &gt; Publishing</strong>, click <strong>Publish to LiveLabs</strong>, set the publish type and workshop time, and replace any personal preview URL with the final <strong>oracle-livelabs</strong> production path.</li>
-                        <li>After merge and publishing approval, verify the production workshop and leave WMS aligned for the next Quarterly QA cycle.</li>
+                        <li>After merge and publishing approval, verify the production workshop and leave WMS aligned for the next Quarterly Quality Assurance cycle.</li>
                       </ol>
                     </section>
 
-                    <div class="card snippet-card">
-                      <div class="card-body">
-                        <div class="snippet-header">
-                          <div>
-                            <div class="snippet-meta">Review handoff</div>
-                            <h3 class="mb-0">PR title and URL pattern</h3>
-                          </div>
-                          <button class="copy-snippet" type="button" data-copy-target="snippet-step-3-publish">Copy</button>
-                        </div>
-                        <pre><code id="snippet-step-3-publish">PR title
-Publish My Workshop Name (WMS 12345)
-
-Preview URL
-https://&lt;github-username&gt;.github.io/&lt;repo-name&gt;/&lt;path&gt;/workshops/&lt;variant&gt;/index.html?qa=true
-
-Production URL
-https://oracle-livelabs.github.io/&lt;repo-name&gt;/&lt;path&gt;/workshops/&lt;variant&gt;/
-
-Brown Button URL
-https://oracle-livelabs.github.io/&lt;repo-name&gt;/&lt;path&gt;/workshops/tenancy/
-
-Sprint URL
-https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-folder&gt;/</code></pre>
+                    <section class="step-block">
+                      <div class="step-block-header">
+                        <div class="panel-kicker">Review handoff</div>
+                        <h3>Split the pull request title and URL patterns into separate copy blocks</h3>
+                        <p>Copy the one value you need instead of copying the entire handoff bundle.</p>
                       </div>
-                    </div>
+                      <div class="command-card-grid">
+                        <article class="card snippet-card command-card">
+                          <div class="card-body">
+                            <div class="snippet-header">
+                              <div>
+                                <div class="snippet-meta">Pull request title</div>
+                                <h3 class="mb-0">Include the WMS ID</h3>
+                              </div>
+                              <button class="copy-snippet" type="button" data-copy-target="snippet-step-3-pull-request-title">Copy</button>
+                            </div>
+                            <p class="snippet-description">Use this pattern so reviewers can associate the pull request with the WMS record.</p>
+                            <pre><code id="snippet-step-3-pull-request-title">Publish My Workshop Name (WMS 12345)</code></pre>
+                          </div>
+                        </article>
+                        <article class="card snippet-card command-card">
+                          <div class="card-body">
+                            <div class="snippet-header">
+                              <div>
+                                <div class="snippet-meta">Preview URL</div>
+                                <h3 class="mb-0">Personal GitHub Pages review link</h3>
+                              </div>
+                              <button class="copy-snippet" type="button" data-copy-target="snippet-step-3-preview-url">Copy</button>
+                            </div>
+                            <p class="snippet-description">Use this for quality checks and review before the workshop is published in production.</p>
+                            <pre><code id="snippet-step-3-preview-url">https://&lt;github-username&gt;.github.io/&lt;repository-name&gt;/&lt;path&gt;/workshops/&lt;variant&gt;/index.html?qa=true</code></pre>
+                          </div>
+                        </article>
+                        <article class="card snippet-card command-card">
+                          <div class="card-body">
+                            <div class="snippet-header">
+                              <div>
+                                <div class="snippet-meta">Production URL</div>
+                                <h3 class="mb-0">Final Oracle LiveLabs path</h3>
+                              </div>
+                              <button class="copy-snippet" type="button" data-copy-target="snippet-step-3-production-url">Copy</button>
+                            </div>
+                            <p class="snippet-description">Use this after merge and publishing approval, when the workshop is available from the production repository.</p>
+                            <pre><code id="snippet-step-3-production-url">https://oracle-livelabs.github.io/&lt;repository-name&gt;/&lt;path&gt;/workshops/&lt;variant&gt;/</code></pre>
+                          </div>
+                        </article>
+                        <article class="card snippet-card command-card">
+                          <div class="card-body">
+                            <div class="snippet-header">
+                              <div>
+                                <div class="snippet-meta">Brown Button URL</div>
+                                <h3 class="mb-0">Tenancy launch path</h3>
+                              </div>
+                              <button class="copy-snippet" type="button" data-copy-target="snippet-step-3-brown-button-url">Copy</button>
+                            </div>
+                            <p class="snippet-description">Use this pattern when the workshop launch button should open the tenancy variant.</p>
+                            <pre><code id="snippet-step-3-brown-button-url">https://oracle-livelabs.github.io/&lt;repository-name&gt;/&lt;path&gt;/workshops/tenancy/</code></pre>
+                          </div>
+                        </article>
+                        <article class="card snippet-card command-card">
+                          <div class="card-body">
+                            <div class="snippet-header">
+                              <div>
+                                <div class="snippet-meta">Sprint URL</div>
+                                <h3 class="mb-0">Sprint launch path</h3>
+                              </div>
+                              <button class="copy-snippet" type="button" data-copy-target="snippet-step-3-sprint-url">Copy</button>
+                            </div>
+                            <p class="snippet-description">Use this pattern only for sprint content that belongs under the Oracle LiveLabs sprints site.</p>
+                            <pre><code id="snippet-step-3-sprint-url">https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-folder&gt;/</code></pre>
+                          </div>
+                        </article>
+                      </div>
+                    </section>
 
                     <figure class="step-figure evidence-figure">
-                      <img src="./content/author-guide/6-labs-publish/images/publishing-tab.png" alt="Publishing tab in WMS">
                       <figcaption>The Publishing tab is where the final production metadata is created and approved after the workshop is already in the right WMS state.</figcaption>
+                      <img src="./content/author-guide/6-labs-publish/images/publishing-tab.png" alt="Publishing tab in WMS">
                     </figure>
 
                     <section class="step-block step-block-quiet">
@@ -6230,10 +6416,10 @@ https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-fol
                       </div>
                       <ul class="check-list">
                         <li>The preview works end to end with <code>?qa=true</code> and the WMS metadata matches the real workshop.</li>
-                        <li>The Self QA checklist is saved before any status change and stakeholder verification has a clean handoff surface.</li>
-                        <li>The PR title includes the WMS ID, the branch is current, and the failing check class is understood if CI is red.</li>
+                        <li>The Self Quality Assurance checklist is saved before any status change and stakeholder verification has a clean handoff surface.</li>
+                        <li>The pull request title includes the WMS ID, the branch is current, and the failing check class is understood if continuous integration is red.</li>
                         <li>The Publishing tab uses oracle-livelabs production URLs, not the personal preview link.</li>
-                        <li>The production workshop is verified after merge, and WMS stays accurate for future Quarterly QA.</li>
+                        <li>The production workshop is verified after merge, and WMS stays accurate for future Quarterly Quality Assurance.</li>
                       </ul>
                     </section>
 
@@ -6245,17 +6431,17 @@ https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-fol
                       <ul class="mistake-list">
                         <li>Sharing a preview before checking tutorial order, links, images, and copy flows end to end.</li>
                         <li>Changing WMS status before the checklist is saved and certified.</li>
-                        <li>Mixing development and production URLs or opening a PR from a stale branch.</li>
+                        <li>Mixing development and production URLs or opening a pull request from a stale branch.</li>
                       </ul>
                     </section>
                   </div>
 
                   <div class="step-footer">
-                    <div class="step-note">At the end of this step, the workshop is in a clean state for review, publishing, and later Quarterly QA follow-up.</div>
+                    <div class="step-note">At the end of this step, the workshop is in a clean state for review, publishing, and later Quarterly Quality Assurance follow-up.</div>
                     <div class="d-flex flex-wrap gap-2">
                       <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-action="prev">Back</button>
                       <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-mode-target="explorer">Open Cheatsheet</button>
-                      <button type="button" class="btn btn-primary rounded-pill px-4" data-guide-target="5-labs-qa-checks">Open Full Guide</button>
+                      <a class="btn btn-primary rounded-pill px-4" href="https://oracle-livelabs.github.io/common/sample-livelabs-templates/create-labs/labs/workshops/livelabs/" target="_blank" rel="noreferrer">Open Full Guide</a>
                     </div>
                   </div>
                 </div>
@@ -6289,7 +6475,7 @@ https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-fol
                     <button type="button" class="tag-pill" data-tag="markdown">Markdown</button>
                     <button type="button" class="tag-pill" data-tag="media">Media</button>
                     <button type="button" class="tag-pill" data-tag="interactivity">Interactivity</button>
-                    <button type="button" class="tag-pill" data-tag="qa">QA / Publish</button>
+                    <button type="button" class="tag-pill" data-tag="Quality Assurance">Quality Assurance / Publish</button>
                     <button type="button" class="tag-pill" data-tag="advanced">Advanced</button>
                   </div>
                 </div>
@@ -6298,7 +6484,7 @@ https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-fol
               <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-2 mt-3">
                 <div class="result-line">
                   <strong id="resultCount">Showing cheatsheet cards</strong>
-                  <span class="ms-lg-2">Open any card for a focused detail panel.</span>
+                  <span class="result-helper">Open any cards for focused detail.</span>
                 </div>
                 <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-mode-target="beginner">Need sequence? Open Quickstart</button>
               </div>
@@ -6386,7 +6572,7 @@ https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-fol
           </div>
 
           <div class="search-results-shell">
-            <div class="search-empty-state" id="searchEmptyState">Use the menu search to search by keywords such as <strong>WMS</strong>, <strong>Self QA</strong>, <strong>GitHub Pages</strong>, <strong>validator</strong>, or a short question such as <strong>how do I publish</strong>.</div>
+            <div class="search-empty-state" id="searchEmptyState">Use the menu search to search by keywords such as <strong>WMS</strong>, <strong>Self Quality Assurance</strong>, <strong>GitHub Pages</strong>, <strong>validator</strong>, or a short question such as <strong>how do I publish</strong>.</div>
             <div class="search-results-grid" id="searchResults"></div>
           </div>
         </div>
@@ -6419,8 +6605,8 @@ https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-fol
               <div class="card modal-media-card mb-4 d-none" id="bubbleModalMediaCard">
                 <div class="card-body">
                   <figure class="modal-media-figure mb-0">
-                    <img id="bubbleModalImage" src="" alt="">
                     <figcaption id="bubbleModalImageCaption"></figcaption>
+                    <img id="bubbleModalImage" src="" alt="">
                   </figure>
                 </div>
               </div>
@@ -6463,7 +6649,6 @@ https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-fol
 
             <div class="modal-footer">
               <a class="btn btn-outline-secondary rounded-pill px-4 d-none" id="bubbleModalSourceLink" href="#" target="_blank" rel="noreferrer">Open Full Guide</a>
-              <button type="button" class="btn btn-outline-primary rounded-pill px-4 d-none" id="bubbleModalGuideButton" data-guide-target="start-here">Open Full Guide</button>
               <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Close</button>
             </div>
           </div>
@@ -6483,6 +6668,9 @@ https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-fol
         </div>
       </div>
       <div class="visually-hidden-live" aria-live="polite" id="liveRegion"></div>
+      <footer class="app-footer" aria-label="Site footer">
+        <div class="container">Oracle © 2026</div>
+      </footer>
     </div>
   </div>
 
@@ -6492,5 +6680,3 @@ https://oracle-livelabs.github.io/sprints/&lt;category-folder&gt;/&lt;sprint-fol
   <script src="./assets/js/author-guide-app.js"></script>
 </body>
 </html>
-
-

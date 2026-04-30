@@ -12,8 +12,8 @@
       "filename": "./../../01-start-here/start-here.md"
     },
     {
-      "title": "Lab 1: WMS lifecycle, QA, and publishing flow",
-      "description": "Explains workshop statuses, approval handoffs, stakeholder QA, and publishing flow before authors begin the hands-on workflow.",
+      "title": "Lab 1: WMS lifecycle, Quality Assurance, and publishing flow",
+      "description": "Explains workshop statuses, approval handoffs, stakeholder Quality Assurance, and publishing flow before authors begin the hands-on workflow.",
       "filename": "./../../02-core-workshop-flow/sections/00-understand-wms-lifecycle/wms-workflows.md"
     },
     {

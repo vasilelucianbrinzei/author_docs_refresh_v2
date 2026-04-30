@@ -1,7 +1,7 @@
 // Structured source content for the redesigned guide.
 // Keep Guided Path and Toolkit content here; the Full Guide now comes from the flat author-guide manifest.
 window.authorGuideContent = (function () {
-  var canonicalRoot = "./workshops/author-guide/index.html?lab=";
+  var canonicalRoot = "https://oracle-livelabs.github.io/common/sample-livelabs-templates/create-labs/labs/workshops/livelabs/?lab=";
   var officialLinks = {
     github: "https://github.com/",
     githubDesktop: "https://desktop.github.com/",
@@ -52,22 +52,22 @@ window.authorGuideContent = (function () {
         id: "step-1",
         title: "Submit Workshop Request",
         guideTarget: "1-labs-wms",
-        summary: "Start in WMS, fill the reviewer-facing request fields with real detail, and understand the approval to QA status flow before development begins.",
-        keywords: ["wms", "workshop request", "stakeholder", "council", "tags", "approved", "self qa", "quarterly qa"]
+        summary: "Start in WMS, fill the reviewer-facing request fields with real detail, and understand the approval to Quality Assurance status flow before development begins.",
+        keywords: ["wms", "workshop request", "stakeholder", "council", "tags", "approved", "self Quality Assurance", "quarterly Quality Assurance"]
       },
       {
         id: "step-2",
         title: "Create Workshop + Add to GitHub",
         guideTarget: "2-labs-github",
-        summary: "Set up GitHub Desktop and VS Code, fork and clone the right repos, copy the sample workshop, and validate preview early.",
+        summary: "Set up GitHub Desktop and Visual Studio Code, fork and clone the right repos, copy the sample workshop, and validate preview early.",
         keywords: ["github", "fork", "clone", "upstream", "git config", "github pages", "preview", "manifest"]
       },
       {
         id: "step-3",
         title: "Review & Publish",
         guideTarget: "5-labs-qa-checks",
-        summary: "Complete Self QA in the right order, fix PR check failures by class, create the PR with the WMS ID, and request publishing with production URLs.",
-        keywords: ["self qa", "quarterly qa", "validator", "pr", "publish", "production", "wms id"]
+        summary: "Complete Self Quality Assurance in the right order, fix pull request check failures by class, create the pull request with the WMS ID, and request publishing with production URLs.",
+        keywords: ["self Quality Assurance", "quarterly Quality Assurance", "validator", "pull request", "publish", "production", "wms id"]
       }
     ],
 
@@ -83,7 +83,7 @@ window.authorGuideContent = (function () {
           "Connect to Corporate VPN, open Oracle Workshop Management System, and click Submit a New Workshop Request.",
           "Fill Workshop Basic Information completely, including Stakeholder, Workshop Council, Workshop Owner Group, Workshop Abstract, Workshop Outline, and Workshop Prerequisites.",
           "Open the Tags tab and set the required Level, Role, Focus Area, and Product tags before you create the record.",
-          "Track the request through Submitted, More Info Needed, Approved, In Development, Self QA, and Self QA Complete so your WMS record stays aligned with the real build status."
+          "Track the request through Submitted, More Info Needed, Approved, In Development, Self Quality Assurance, and Self Quality Assurance Complete so your WMS record stays aligned with the real build status."
         ],
         checkpoints: [
           "The title says what the learner will build or achieve, not only the product name.",
@@ -93,27 +93,27 @@ window.authorGuideContent = (function () {
         watchFor: [
           "Starting repository work before the council record is aligned.",
           "Leaving abstract, outline, or prerequisites too vague and forcing council follow-up.",
-          "Forgetting that later Self QA and publishing steps depend on the same WMS record."
+          "Forgetting that later Self Quality Assurance and publishing steps depend on the same WMS record."
         ],
         exampleTitle: "Example completion",
         exampleIntro: "These are the kinds of answers reviewers should see. The exact stakeholder or council name changes, but the level of detail should not.",
         exampleFields: [
           exampleField("Workshop Title", "Build and publish an Oracle LiveLabs workshop from WMS to GitHub Pages", "Lead with the learner outcome, not only the product name."),
-          exampleField("Workshop Abstract", "Authors learn how to request a workshop in WMS, prepare GitHub Desktop and VS Code, build from the LiveLabs sample structure, complete Self QA, and request publishing.", "A reviewer should understand the end-to-end goal after two or three sentences."),
-          exampleField("Workshop Outline", "1. Submit and track the WMS request. 2. Set up GitHub and preview tooling. 3. Build the workshop structure and labs. 4. Run Self QA, fix PR issues, and publish.", "Keep the outline in the same order the work will really happen."),
+          exampleField("Workshop Abstract", "Authors learn how to request a workshop in WMS, prepare GitHub Desktop and Visual Studio Code, build from the LiveLabs sample structure, complete Self Quality Assurance, and request publishing.", "A reviewer should understand the end-to-end goal after two or three sentences."),
+          exampleField("Workshop Outline", "Outline the build flow in order.\nSubmit and track the WMS request.\nSet up GitHub and preview tooling.\nBuild the workshop structure and labs.\nRun Self Quality Assurance, fix pull request issues, and publish.", "Keep the outline in the same order the work will really happen."),
           exampleField("Workshop Prerequisites", "Oracle VPN access, GitHub account tied to @oracle.com, GitHub Desktop, Visual Studio Code, Live Server, and permission to work in the target oracle-livelabs repository.", "If a prerequisite can block setup or review later, surface it here."),
           exampleField("Stakeholder / Council / Owner Group", "Choose the named stakeholder who will verify the workshop, the council aligned to the production repository, and the team that will maintain the workshop after publish.", "Do not leave these on temporary contributors or generic defaults."),
-          exampleField("Required Tags", "Use the actual WMS tags for Level, Role, Focus Area, and Product. Example pattern: Level = Beginner, Role = Developer, Product = the Oracle service being taught.", "Tags are required routing and discovery metadata.")
+          exampleField("Required Tags", "Use the actual WMS tags for the workshop.\nLevel = Beginner\nRole = Developer\nFocus Area = the main solution area\nProduct = the Oracle service being taught.", "Tags are required routing and discovery metadata.")
         ],
         milestonesTitle: "Status flow",
-        milestonesIntro: "The same WMS record stays with the workshop all the way through approval, QA, publishing, and later maintenance.",
+        milestonesIntro: "The same WMS record stays with the workshop all the way through approval, Quality Assurance, publishing, and later maintenance.",
         milestones: [
           milestone("Submitted", "Council review starts here."),
           milestone("More Info Needed or Approved", "Answer follow-up questions or wait for approval before heavy build work."),
           milestone("In Development", "Move here when real GitHub authoring starts."),
-          milestone("Self QA to Self QA Complete", "Run the checklist, save it, and certify the handoff only after the workshop is stable."),
+          milestone("Self Quality Assurance to Self Quality Assurance Complete", "Run the checklist, save it, and certify the handoff only after the workshop is stable."),
           milestone("Completed", "Stakeholders have verified the workshop and it is ready for publish handling."),
-          milestone("Quarterly QA", "Published workshops cycle back into QA later, and missed QA can disable the entry.")
+          milestone("Quarterly Quality Assurance", "Published workshops cycle back into Quality Assurance later, and missed Quality Assurance can disable the entry.")
         ],
         image: {
           src: "./content/author-guide/1-labs-wms/images/submit_workshop.png",
@@ -121,18 +121,18 @@ window.authorGuideContent = (function () {
           caption: "The reviewer-facing request page is where the workshop scope and ownership are established."
         },
         sourceHref: labLink("1-labs-wms"),
-        sourceLabel: "Open Canonical Lab",
+        sourceLabel: "Open Full Guide",
         guideTarget: "start-here"
       },
       {
         id: "github-setup",
         title: "GitHub Setup",
-        short: "Oracle email account, GitHub Desktop, VS Code, Live Server, and authoring-ready settings.",
+        short: "Oracle email account, GitHub Desktop, Visual Studio Code, Live Server, and authoring-ready settings.",
         accent: "ocean",
         tags: ["workflow", "beginner"],
         description: "Use this card when the blocker is workstation setup. It focuses on the exact tools and UI steps the workshop uses for first-time authoring.",
         steps: [
-          "Create or confirm one GitHub account tied to your Oracle email, then finish GitHub Settings with your real name, profile photo, and username before you request repo access.",
+          "Create or confirm one GitHub account tied to your Oracle email, then finish GitHub Settings with your real name, profile photo, and username before you request repository access.",
           "Enable two-factor authentication in GitHub Security and make sure you are not using a secondary personal account for LiveLabs work.",
           "Install GitHub Desktop, open File > Options > Sign in, and confirm the client is authenticated against the same account you will fork and clone with.",
           "Install Visual Studio Code, then install Live Server from the Extensions view so local preview exists before you start rewriting markdown.",
@@ -141,7 +141,7 @@ window.authorGuideContent = (function () {
         checkpoints: [
           "GitHub profile, username, and 2FA are complete on the Oracle-linked account.",
           "GitHub Desktop is signed in and ready to clone or open repositories.",
-          "VS Code has Live Server and Markdown indentation set to 4 before you start nesting steps, images, or code blocks."
+          "Visual Studio Code has Live Server and Markdown indentation set to 4 before you start nesting steps, images, or code blocks."
         ],
         watchFor: [
           "Creating or using a second GitHub account instead of the Oracle-linked one.",
@@ -153,7 +153,7 @@ window.authorGuideContent = (function () {
         resourceLinks: [
           resourceLink("GitHub account", officialLinks.github, "Create or confirm the account that uses your @oracle.com email."),
           resourceLink("GitHub Desktop", officialLinks.githubDesktop, "Install the desktop client before you try to clone or push."),
-          resourceLink("Visual Studio Code", officialLinks.vscode, "Use VS Code for markdown, manifests, and file structure work."),
+          resourceLink("Visual Studio Code", officialLinks.vscode, "Use Visual Studio Code for markdown, manifests, and file structure work."),
           resourceLink("Live Server", officialLinks.liveServer, "Install the extension before you start authoring so local preview is available.")
         ],
         snippetMeta: "Minimum toolchain",
@@ -169,7 +169,7 @@ window.authorGuideContent = (function () {
           "- Visual Studio Code",
           "- Live Server",
           "",
-          "VS Code setup",
+          "Visual Studio Code setup",
           "- Markdown indentation -> tabs, size 4",
           "- markdownlint",
           "- Code Spell Checker",
@@ -179,10 +179,10 @@ window.authorGuideContent = (function () {
         image: {
           src: "./content/author-guide/2-labs-github/images/git-hub-desktop-login-screen.png",
           alt: "GitHub Desktop sign-in screen",
-          caption: "GitHub Desktop is the main fork, clone, commit, and PR surface used throughout the guide."
+          caption: "GitHub Desktop is the main fork, clone, commit, and pull request surface used throughout the guide."
         },
         sourceHref: labLink("2-labs-github"),
-        sourceLabel: "Open Canonical Lab",
+        sourceLabel: "Open Full Guide",
         guideTarget: "core-workflow"
       },
       {
@@ -193,20 +193,20 @@ window.authorGuideContent = (function () {
         tags: ["workflow", "advanced"],
         description: "Use this when the question is really about repository hygiene: where to fork, how to stay synced, what the folder structure should look like, and how preview URLs are derived.",
         steps: [
-          "After approval, fork the target oracle-livelabs repository and the common repository from the GitHub web UI so you have both the product repo and the shared sample assets.",
+          "After approval, fork the target oracle-livelabs repository and the common repository from the GitHub web UI so you have both the product repository and the shared sample assets.",
           "Clone your fork in GitHub Desktop, pick a real local path, and when prompted choose To contribute to the parent project so upstream/oracle-livelabs remains connected.",
-          "Before you edit each day, switch to the repo you are using, click Fetch origin, then Branch > Merge into Current Branch and merge upstream/main into main.",
+          "Before you edit each day, switch to the repository you are using, click Fetch origin, then Branch > Merge into Current Branch and merge upstream/main into main.",
           "After a successful merge, click Push origin so your local clone and your fork both stay aligned with production before you start new work.",
-          "Copy the sample-workshop structure from common, keep folder and file names lowercase, and commit only after manifest.json points to real labs and the repo structure is clean.",
+          "Copy the sample-workshop structure from common, keep folder and file names lowercase, and commit only after manifest.json points to real labs and the repository structure is clean.",
           "Enable GitHub Pages on your fork under Settings > Pages, save the main branch, wait for publication, and verify the preview URL before a long authoring session."
         ],
         checkpoints: [
           "Your local clone tracks your fork and still knows upstream/main.",
-          "Both the target repo and common are available locally when you need sample templates or shared assets.",
+          "Both the target repository and common are available locally when you need sample templates or shared assets.",
           "GitHub Pages publishes the exact workshop variant path you plan to share."
         ],
         watchFor: [
-          "Skipping the daily upstream merge and opening a PR from stale content.",
+          "Skipping the daily upstream merge and opening a pull request from stale content.",
           "Working directly in the production repository or forgetting to fork common as well.",
           "Waiting until late review to discover path, case, or Pages publication problems."
         ],
@@ -216,7 +216,7 @@ window.authorGuideContent = (function () {
           resourceLink("Oracle LiveLabs repositories", officialLinks.oracleRepos, "Choose the product repository that will own the workshop in production."),
           resourceLink("Sample workshop template", officialLinks.sampleWorkshop, "Copy the canonical sample structure instead of improvising a new one.")
         ],
-        snippetMeta: "Repo sync",
+        snippetMeta: "repository sync",
         snippetTitle: "Daily sync commands and preview pattern",
         snippet: [
           "git config --global core.longpaths true",
@@ -228,7 +228,7 @@ window.authorGuideContent = (function () {
           "git push origin main",
           "",
           "Preview URL",
-          "https://<user>.github.io/<repo>/<path>/workshops/<variant>/index.html"
+          "https://<user>.github.io/<repository>/<path>/workshops/<variant>/index.html"
         ].join("\n"),
         image: {
           src: "./content/author-guide/3-labs-sync-github/images/sample-workshop-structure.png",
@@ -236,7 +236,7 @@ window.authorGuideContent = (function () {
           caption: "The sample structure is the cleanest baseline for new authoring work."
         },
         sourceHref: labLink("3-labs-sync-github"),
-        sourceLabel: "Open Canonical Lab",
+        sourceLabel: "Open Full Guide",
         guideTarget: "core-workflow"
       },
       {
@@ -247,7 +247,7 @@ window.authorGuideContent = (function () {
         tags: ["markdown"],
         description: "Use this card when you need the core authoring rules that make a workshop render, validate, and survive review without structural rework.",
         steps: [
-          "Create the workshop folder inside the cloned product repo, then copy sample lab folders plus the workshops folder from common/sample-livelabs-templates/sample-workshop.",
+          "Create the workshop folder inside the cloned product repository, then copy sample lab folders plus the workshops folder from common/sample-livelabs-templates/sample-workshop.",
           "Rename the copied lab folder and its markdown file together, delete the copied files folder when you do not need it, and add images only inside that lab's images folder.",
           "Copy the introduction folder when the workshop needs a dedicated landing lab, then add a README only when that variant actually needs one.",
           "Edit manifest.json in workshops/tenancy, workshops/sandbox, and/or workshops/desktop so workshoptitle, help, tutorial order, and any variant settings match the real workshop.",
@@ -289,10 +289,10 @@ window.authorGuideContent = (function () {
         image: {
           src: "./content/author-guide/4-labs-markdown-develop-content/images/lintchecker.png",
           alt: "LintChecker enabled in preview with qa=true",
-          caption: "Add ?qa=true while previewing so structural issues surface before PR review."
+          caption: "Add ?qa=true while previewing so structural issues surface before pull request review."
         },
         sourceHref: labLink("4-labs-markdown-develop-content"),
-        sourceLabel: "Open Canonical Lab",
+        sourceLabel: "Open Full Guide",
         guideTarget: "core-workflow"
       },
       {
@@ -333,7 +333,7 @@ window.authorGuideContent = (function () {
           caption: "GitHub Pages is case-sensitive even when a local machine is not."
         },
         sourceHref: labLink("4-labs-markdown-develop-content"),
-        sourceLabel: "Open Canonical Lab",
+        sourceLabel: "Open Full Guide",
         guideTarget: "core-workflow"
       },
       {
@@ -368,7 +368,7 @@ window.authorGuideContent = (function () {
           "Use alt text that tells the learner what the image proves or what UI they should recognize."
         ].join("\n"),
         sourceHref: labLink("4-labs-markdown-develop-content"),
-        sourceLabel: "Open Canonical Lab",
+        sourceLabel: "Open Full Guide",
         guideTarget: "core-workflow"
       },
       {
@@ -405,7 +405,7 @@ window.authorGuideContent = (function () {
           "```"
         ].join("\n"),
         sourceHref: labLink("4-labs-markdown-develop-content"),
-        sourceLabel: "Open Canonical Lab",
+        sourceLabel: "Open Full Guide",
         guideTarget: "core-workflow"
       },
       {
@@ -449,7 +449,7 @@ window.authorGuideContent = (function () {
           caption: "Conditional content should stay obvious enough that another author can follow it."
         },
         sourceHref: labLink("4-labs-markdown-develop-content"),
-        sourceLabel: "Open Canonical Lab",
+        sourceLabel: "Open Full Guide",
         guideTarget: "reuse-enhancements"
       },
       {
@@ -483,7 +483,7 @@ window.authorGuideContent = (function () {
           "* 1280 pixels",
           "- 1600 pixels",
           "- 1920 pixels",
-          "> PR checks block images over 1280px in either dimension.",
+          "> pull request checks block images over 1280px in either dimension.",
           "```",
           "",
           "```quiz-config",
@@ -497,7 +497,7 @@ window.authorGuideContent = (function () {
           caption: "Use quiz-config only when scoring or badges are really part of the learning flow."
         },
         sourceHref: labLink("quiz"),
-        sourceLabel: "Open Canonical Lab",
+        sourceLabel: "Open Full Guide",
         guideTarget: "reuse-enhancements"
       },
       {
@@ -532,7 +532,7 @@ window.authorGuideContent = (function () {
           "4. Preview the rendered lab before review"
         ].join("\n"),
         sourceHref: labLink("freesqlembed"),
-        sourceLabel: "Open Canonical Lab",
+        sourceLabel: "Open Full Guide",
         guideTarget: "reuse-enhancements"
       },
       {
@@ -546,7 +546,7 @@ window.authorGuideContent = (function () {
           "Capture only the part of the UI that supports the step instead of full-screen monitor shots.",
           "Resize screenshots to 1280 pixels or less in width or height and prefer PNG for UI or text-heavy images.",
           "Redact sensitive values by deleting the underlying pixels, filling with an opaque shape, and flattening the image before save.",
-          "Run the Check Unused Images tool before PR time so each lab images folder contains only the screenshots the markdown actually references."
+          "Run the Check Unused Images tool before pull request time so each lab images folder contains only the screenshots the markdown actually references."
         ],
         checkpoints: [
           "The learner can tell exactly which UI control to click next.",
@@ -554,7 +554,7 @@ window.authorGuideContent = (function () {
           "Every image is in an images folder and referenced by markdown with alt text."
         ],
         watchFor: [
-          "Oversized screenshots that pass local review but fail PR validation.",
+          "Oversized screenshots that pass local review but fail pull request validation.",
           "Pseudo-redaction tricks such as translucent shapes or unflattened layers.",
           "Leaving five or ten stale screenshots in a lab folder after rewriting the steps."
         ],
@@ -573,7 +573,7 @@ window.authorGuideContent = (function () {
           caption: "The screenshot standards page is the authoritative checklist for capture quality and privacy."
         },
         sourceHref: labLink("13-labs-capture-screens-best-practices"),
-        sourceLabel: "Open Canonical Lab",
+        sourceLabel: "Open Full Guide",
         guideTarget: "tools-productivity"
       },
       {
@@ -581,18 +581,18 @@ window.authorGuideContent = (function () {
         title: "OptiShot",
         short: "Install, pick the folder, keep max size at 1280, and read the summary before you rerun checks.",
         accent: "ocean",
-        tags: ["media", "qa"],
-        description: "Use this card when the PR is blocked on image size or when you want a fast cleanup pass across a screenshot-heavy workshop.",
+        tags: ["media", "Quality Assurance"],
+        description: "Use this card when the pull request is blocked on image size or when you want a fast cleanup pass across a screenshot-heavy workshop.",
         steps: [
           "Install OptiShot for your platform and launch it so the folder picker opens immediately.",
           "Select the workshop or images folder you want to process and let OptiShot recurse through subfolders while skipping .git.",
           "Use the default 1280px maximum unless you have a smaller target in mind, and use dry-run first when you want to inspect what would change.",
-          "Read the summary at the end so you know what was resized, skipped, or optimized before you re-open the PR checks."
+          "Read the summary at the end so you know what was resized, skipped, or optimized before you re-open the pull request checks."
         ],
         checkpoints: [
           "The folder you selected is the one that actually contains the images under review.",
           "The max dimension stays at the LiveLabs limit of 1280 pixels.",
-          "You rerun preview or PR checks after the tool finishes."
+          "You rerun preview or pull request checks after the tool finishes."
         ],
         watchFor: [
           "Running it against the wrong directory and thinking your screenshots were fixed.",
@@ -614,7 +614,7 @@ window.authorGuideContent = (function () {
           caption: "The summary tells you which images were resized, skipped, or optimized."
         },
         sourceHref: labLink("optishot"),
-        sourceLabel: "Open Canonical Lab",
+        sourceLabel: "Open Full Guide",
         guideTarget: "tools-productivity"
       },
       {
@@ -622,13 +622,13 @@ window.authorGuideContent = (function () {
         title: "Fixomat",
         short: "Select the workshop root, choose the mode, and review FIXED versus MANUAL output carefully.",
         accent: "pine",
-        tags: ["advanced", "qa"],
+        tags: ["advanced", "Quality Assurance"],
         description: "Use this card late in the workflow when the workshop already exists and you want help cleaning markdown or images before review.",
         steps: [
           "Launch LiveLabs Fixomat 2000 and select the workshop root directory, not an arbitrary nested lab folder.",
           "Choose Fix Markdown only, Optimize images only, or the combined mode depending on what the review actually found.",
           "Run the scan and read both the summary and the console output instead of assuming every issue was auto-fixed.",
-          "Follow up on MANUAL findings, then rerun Fixomat or preview again before you open or update the PR."
+          "Follow up on MANUAL findings, then rerun Fixomat or preview again before you open or update the pull request."
         ],
         checkpoints: [
           "The mode you chose matches the actual problem.",
@@ -650,81 +650,81 @@ window.authorGuideContent = (function () {
           "1. Run Fixomat",
           "2. Review MANUAL items",
           "3. Preview again",
-          "4. Re-open PR checks"
+          "4. Re-open pull request checks"
         ].join("\n"),
         sourceHref: labLink("fixomat"),
-        sourceLabel: "Open Canonical Lab",
+        sourceLabel: "Open Full Guide",
         guideTarget: "tools-productivity"
       },
       {
-        id: "qa-checklist",
-        title: "QA Checklist",
-        short: "Share the preview, set status correctly, save the checklist, and certify Self QA in WMS.",
+        id: "Quality Assurance-checklist",
+        title: "Quality Assurance Checklist",
+        short: "Share the preview, set status correctly, save the checklist, and certify Self Quality Assurance in WMS.",
         accent: "red",
-        tags: ["qa", "workflow"],
-        description: "Use this card when the workshop is ready for review and you need the exact order for Self QA or Quarterly QA without guessing.",
+        tags: ["Quality Assurance", "workflow"],
+        description: "Use this card when the workshop is ready for review and you need the exact order for Self Quality Assurance or Quarterly Quality Assurance without guessing.",
         steps: [
-          "Open the personal GitHub Pages workshop URL and share that preview for review before you touch the QA status in WMS.",
-          "Set Workshop Status to In Development while build work is still active, or Self QA when the workshop is stable enough to test end to end.",
+          "Open the personal GitHub Pages workshop URL and share that preview for review before you touch the Quality Assurance status in WMS.",
+          "Set Workshop Status to In Development while build work is still active, or Self Quality Assurance when the workshop is stable enough to test end to end.",
           "On Workshop Details, update title, short description, long description, outline, prerequisites, and tags so WMS matches the real workshop that reviewers will open.",
           "Update Development GitHub/GitLab URL to your personal github.io preview, and after merge replace your username with oracle-livelabs in Production GitHub/GitLab URL.",
-          "Open Self QA Checklist, check every box, upload the requested evidence, add both the PR link and the personal github.io workshop link, then click Save.",
-          "Only after the checklist save succeeds should you set Self QA Complete or Quarterly QA Complete, certify the submission, and wait for stakeholder verification."
+          "Open Self Quality Assurance Checklist, check every box, upload the requested evidence, add both the pull request link and the personal github.io workshop link, then click Save.",
+          "Only after the checklist save succeeds should you set Self Quality Assurance Complete or Quarterly Quality Assurance Complete, certify the submission, and wait for stakeholder verification."
         ],
         checkpoints: [
           "Development URL points to your fork preview and Production URL points to oracle-livelabs only after merge.",
-          "Every checklist field, evidence image, PR link, and github.io link was saved before the status changed.",
-          "Stakeholders can review a consistent WMS record, preview URL, and PR."
+          "Every checklist field, evidence image, pull request link, and github.io link was saved before the status changed.",
+          "Stakeholders can review a consistent WMS record, preview URL, and pull request."
         ],
         watchFor: [
           "Changing status before checklist save and triggering the blocking warning.",
           "Leaving outdated descriptions or tags in WMS while the GitHub content has already changed.",
-          "Skipping Quarterly QA because the workshop is already published."
+          "Skipping Quarterly Quality Assurance because the workshop is already published."
         ],
-        exampleTitle: "Bring this into Self QA",
-        exampleIntro: "The checklist is easiest to save when these fields are already collected and consistent across WMS, the preview, and the PR.",
+        exampleTitle: "Bring this into Self Quality Assurance",
+        exampleIntro: "The checklist is easiest to save when these fields are already collected and consistent across WMS, the preview, and the pull request.",
         exampleFields: [
           exampleField("Preview URL", "Your personal github.io workshop link with ?qa=true", "This is the review surface before production exists."),
-          exampleField("Pull Request link", "The open PR that contains the latest workshop changes", "Add it once the PR exists so reviewers can move between WMS and GitHub easily."),
+          exampleField("Pull Request link", "The open pull request that contains the latest workshop changes", "Add it once the pull request exists so reviewers can move between WMS and GitHub easily."),
           exampleField("Development URL", "The personal github.io preview path for the workshop", "Do not replace this with oracle-livelabs until after merge."),
           exampleField("Production URL", "The oracle-livelabs production path after merge", "This is filled or corrected once the workshop is actually in production."),
           exampleField("Metadata", "Updated title, descriptions, outline, prerequisites, and tags in WMS", "The WMS record should match the workshop the stakeholder will open."),
-          exampleField("Evidence", "Checklist boxes checked, images uploaded, and certification ready", "Save the checklist before you try to move to Self QA Complete or Quarterly QA Complete.")
+          exampleField("Evidence", "Checklist boxes checked, images uploaded, and certification ready", "Save the checklist before you try to move to Self Quality Assurance Complete or Quarterly Quality Assurance Complete.")
         ],
-        milestonesTitle: "QA status flow",
-        milestonesIntro: "Publishing starts only after the workshop moves through the QA and stakeholder handoff states cleanly.",
+        milestonesTitle: "Quality Assurance status flow",
+        milestonesIntro: "Publishing starts only after the workshop moves through the Quality Assurance and stakeholder handoff states cleanly.",
         milestones: [
-          milestone("Self QA", "The workshop is stable enough to test end to end."),
-          milestone("Self QA Complete", "The checklist is saved and certified, and stakeholders are notified."),
+          milestone("Self Quality Assurance", "The workshop is stable enough to test end to end."),
+          milestone("Self Quality Assurance Complete", "The checklist is saved and certified, and stakeholders are notified."),
           milestone("Completed", "Stakeholders have verified the workshop and it is ready for publishing action."),
-          milestone("Quarterly QA", "Published workshops cycle back into QA later to stay current.")
+          milestone("Quarterly Quality Assurance", "Published workshops cycle back into Quality Assurance later to stay current.")
         ],
         image: {
           src: "./content/author-guide/5-labs-qa-checks/images/self-qa-checklist-1.png",
-          alt: "Self QA checklist in WMS",
-          caption: "The checklist must be fully saved before Self QA Complete can succeed."
+          alt: "Self Quality Assurance checklist in WMS",
+          caption: "The checklist must be fully saved before Self Quality Assurance Complete can succeed."
         },
         sourceHref: labLink("5-labs-qa-checks"),
-        sourceLabel: "Open Canonical Lab",
+        sourceLabel: "Open Full Guide",
         guideTarget: "validation-publish"
       },
       {
-        id: "pr-checks",
-        title: "PR Checks",
+        id: "pull request-checks",
+        title: "pull request Checks",
         short: "Know the 1280px image limit, markdown validator rules, and how to run the scripts locally.",
         accent: "ocean",
-        tags: ["qa", "advanced"],
+        tags: ["Quality Assurance", "advanced"],
         description: "Use this card when GitHub Actions is blocking the pull request and you need the exact failure class instead of guessing from the red X.",
         steps: [
-          "Open the Checks area on the PR and name the exact failing workflow before you edit anything: LiveLabs Image Validation or LiveLabs Markdown Validation.",
-          "Resize any PNG, JPG, or JPEG that exceeds 1280px in width or height, then rerun the PR checks instead of assuming the next push will be clean.",
+          "Open the Checks area on the pull request and name the exact failing workflow before you edit anything: LiveLabs Image Validation or LiveLabs Markdown Validation.",
+          "Resize any PNG, JPG, or JPEG that exceeds 1280px in width or height, then rerun the pull request checks instead of assuming the next push will be clean.",
           "Use the markdown error log to fix the exact file and rule: missing required sections, bad task header format, missing alt text, inline HTML, unbalanced copy tags, or uppercase filenames.",
           "Run the validator locally on the workshop root when you want faster repair loops than waiting for GitHub Actions after each commit.",
           "On Windows, use the PowerShell script if Bash is not your normal workflow, and temporarily bypass execution policy only for the current session when needed."
         ],
         checkpoints: [
           "Each failure was fixed by class instead of mixing image cleanup with markdown repair.",
-          "Local validator output matches the files and errors shown in the PR.",
+          "Local validator output matches the files and errors shown in the pull request.",
           "Image dimensions, alt text, task headers, and acknowledgements are clean before the next push."
         ],
         watchFor: [
@@ -757,56 +757,56 @@ window.authorGuideContent = (function () {
           caption: "Start with the failing workflow name so you fix the real blocker."
         },
         sourceHref: labLink("prcheck"),
-        sourceLabel: "Open Canonical Lab",
+        sourceLabel: "Open Full Guide",
         guideTarget: "validation-publish"
       },
       {
         id: "publish-request",
         title: "Publish Request",
-        short: "Create the PR with the WMS ID, fill the Publishing tab correctly, and supply the final URLs.",
+        short: "Create the pull request with the WMS ID, fill the Publishing tab correctly, and supply the final URLs.",
         accent: "red",
-        tags: ["qa", "workflow"],
-        description: "Use this card when the workshop and checklist are ready and you need the final production handoff sequence for the PR and WMS publishing request.",
+        tags: ["Quality Assurance", "workflow"],
+        description: "Use this card when the workshop and checklist are ready and you need the final production handoff sequence for the pull request and WMS publishing request.",
         steps: [
-          "Create the pull request from GitHub Desktop after QA fixes are pushed, and include the WMS ID in the PR title because review will not start without it.",
-          "On the GitHub PR page, fill the general requirements and checklist text from Self QA so reviewers can see the workshop is ready for merge.",
+          "Create the pull request from GitHub Desktop after Quality Assurance fixes are pushed, and include the WMS ID in the pull request title because review will not start without it.",
+          "On the GitHub pull request page, fill the general requirements and checklist text from Self Quality Assurance so reviewers can see the workshop is ready for merge.",
           "Confirm the branch has no merge conflicts and is up to date with main before you ask for approval or publishing.",
           "Open WMS > Publishing, click Publish to LiveLabs, set Publish Type and Workshop Time, and provide the oracle-livelabs production URL that replaces your personal preview URL.",
           "Enable Brown Button or LiveLabs Sprint only when the workshop really supports those delivery modes, then fill the corresponding URL pattern correctly.",
           "Save the publishing entry, track Publish Requested and Publish Approved, then verify the production workshop after merge and rollout."
         ],
         checkpoints: [
-          "PR title includes the WMS ID and the branch is not behind main.",
+          "pull request title includes the WMS ID and the branch is not behind main.",
           "Publishing details use oracle-livelabs production URLs instead of personal preview URLs.",
           "Brown Button, Sprint, and video fields are filled only when they apply and use the right pattern."
         ],
         watchFor: [
-          "Opening the PR while the fork is behind main or still contains conflicts.",
+          "Opening the pull request while the fork is behind main or still contains conflicts.",
           "Using the personal github.io preview link in a production publishing field.",
-          "Skipping the Publishing tab because the PR was already created."
+          "Skipping the Publishing tab because the pull request was already created."
         ],
         milestonesTitle: "Final release flow",
         milestonesIntro: "Keep the production handoff aligned with the real workshop state instead of mixing preview, review, and production URLs.",
         milestones: [
-          milestone("PR opened", "The title includes the WMS ID and the branch is current."),
+          milestone("pull request opened", "The title includes the WMS ID and the branch is current."),
           milestone("Publish Requested", "The Publishing tab is filled with production metadata and URL patterns."),
           milestone("Publish Approved", "LiveLabs publishers have approved the production handoff."),
           milestone("Production verified", "The oracle-livelabs workshop matches the preview you already reviewed.")
         ],
         snippetMeta: "Review handoff",
-        snippetTitle: "PR and publishing URL patterns",
+        snippetTitle: "pull request and publishing URL patterns",
         snippet: [
-          "PR title",
+          "pull request title",
           "Publish My Workshop Name (WMS 12345)",
           "",
           "Preview URL",
-          "https://<github-username>.github.io/<repo-name>/<path>/workshops/<variant>/index.html?qa=true",
+          "https://<github-username>.github.io/<repository-name>/<path>/workshops/<variant>/index.html?qa=true",
           "",
           "Production URL",
-          "https://oracle-livelabs.github.io/<repo-name>/<path>/workshops/<variant>/",
+          "https://oracle-livelabs.github.io/<repository-name>/<path>/workshops/<variant>/",
           "",
           "Brown Button URL",
-          "https://oracle-livelabs.github.io/<repo-name>/<path>/workshops/tenancy/",
+          "https://oracle-livelabs.github.io/<repository-name>/<path>/workshops/tenancy/",
           "",
           "Sprint URL",
           "https://oracle-livelabs.github.io/sprints/<category-folder>/<sprint-folder>/"
@@ -817,7 +817,7 @@ window.authorGuideContent = (function () {
           caption: "The Publishing tab is where the final production metadata is created and approved."
         },
         sourceHref: labLink("6-labs-publish"),
-        sourceLabel: "Open Canonical Lab",
+        sourceLabel: "Open Full Guide",
         guideTarget: "validation-publish"
       },
       {
@@ -831,7 +831,7 @@ window.authorGuideContent = (function () {
           "Check the workflow lab or FAQ first so you do not escalate something the guide already answers clearly.",
           "Use WMS Message the Team for workshop-specific approval, stakeholder, or publishing questions tied to one workshop record.",
           "Use the shared mailbox or #workshop-authors-help Slack channel for tooling, documentation, or shared platform blockers.",
-          "Bring the WMS ID, preview URL, repository or PR, exact blocker, and what you already tried."
+          "Bring the WMS ID, preview URL, repository or pull request, exact blocker, and what you already tried."
         ],
         checkpoints: [
           "The support request goes to the channel that actually owns the blocker.",
@@ -848,24 +848,24 @@ window.authorGuideContent = (function () {
         snippet: [
           "WMS ID:",
           "Preview URL:",
-          "Repository / branch or PR:",
+          "Repository / branch or pull request:",
           "Current workflow status:",
           "Exact blocker:",
           "What you already tried:"
         ].join("\n"),
         sourceHref: labLink("need-help"),
-        sourceLabel: "Open Canonical Lab",
+        sourceLabel: "Open Full Guide",
         guideTarget: "help-faq"
       },
       {
         id: "livelabs-faq",
         title: "LiveLabs FAQ",
-        short: "Use the FAQ for repeat author questions such as VPN, preview versus production links, and Quarterly QA.",
+        short: "Use the FAQ for repeat author questions such as VPN, preview versus production links, and Quarterly Quality Assurance.",
         accent: "pine",
         tags: ["workflow"],
         description: "Use this card when the question is common and you need a fast answer before diving back into the deeper workflow lab.",
         steps: [
-          "Use FAQ first for repeat questions such as VPN access, who can submit a workshop, and where the Self QA checklist appears.",
+          "Use FAQ first for repeat questions such as VPN access, who can submit a workshop, and where the Self Quality Assurance checklist appears.",
           "Use it again for maintenance questions such as which link to share during development, which link to share after publish, and how to handle minor or major updates.",
           "Return to the workflow lab when you need execution detail instead of a short answer."
         ],
@@ -885,10 +885,10 @@ window.authorGuideContent = (function () {
           "Need VPN for WMS?",
           "Which link should I share in development?",
           "Which link should I share after publish?",
-          "What happens if Quarterly QA is missed?"
+          "What happens if Quarterly Quality Assurance is missed?"
         ].join("\n"),
         sourceHref: labLink("livelabs-faq"),
-        sourceLabel: "Open Canonical Lab",
+        sourceLabel: "Open Full Guide",
         guideTarget: "help-faq"
       },
       {
@@ -896,16 +896,16 @@ window.authorGuideContent = (function () {
         title: "Review SLA",
         short: "Use the expected review and publishing windows before you escalate, and include the real deadline when timing matters.",
         accent: "pine",
-        tags: ["workflow", "qa"],
-        description: "Use this card when the blocker is timing rather than content quality and you need the normal review windows for PRs, council review, QA, or publishing.",
+        tags: ["workflow", "Quality Assurance"],
+        description: "Use this card when the blocker is timing rather than content quality and you need the normal review windows for PRs, council review, Quality Assurance, or publishing.",
         steps: [
-          "Plan around 1 business day for PR review, 2 to 3 business days for workshop submission review, 2 business days for stakeholder QA verification, and 1 business day for publishing after approval.",
+          "Plan around 1 business day for pull request review, 2 to 3 business days for workshop submission review, 2 business days for stakeholder Quality Assurance verification, and 1 business day for publishing after approval.",
           "Wait for the normal response window before escalating routine review work.",
           "If the workshop is tied to an event or hard deadline, state that explicitly instead of assuming the urgency is obvious."
         ],
         checkpoints: [
           "You know whether the current wait time is still inside the expected SLA window.",
-          "Escalations include the WMS ID, preview URL, PR, and the real deadline.",
+          "Escalations include the WMS ID, preview URL, pull request, and the real deadline.",
           "Timing expectations are grounded in the published workflow instead of guesswork."
         ],
         watchFor: [
@@ -916,13 +916,13 @@ window.authorGuideContent = (function () {
         snippetMeta: "Core checkpoints",
         snippetTitle: "Use these SLA windows before escalating",
         snippet: [
-          "GitHub PR review            -> 1 business day",
+          "GitHub pull request review            -> 1 business day",
           "Workshop submission review -> 2-3 business days",
-          "Stakeholder QA             -> 2 business days",
+          "Stakeholder Quality Assurance             -> 2 business days",
           "Workshop publishing        -> 1 business day"
         ].join("\n"),
         sourceHref: labLink("sla"),
-        sourceLabel: "Open Canonical Lab",
+        sourceLabel: "Open Full Guide",
         guideTarget: "validation-publish"
       },
       {
@@ -964,7 +964,7 @@ window.authorGuideContent = (function () {
           "5. For 100+ users, start planning earlier and test more than once"
         ].join("\n"),
         sourceHref: labLink("secure-desktop"),
-        sourceLabel: "Open Canonical Lab",
+        sourceLabel: "Open Full Guide",
         guideTarget: "specialized-workflows"
       },
       {
@@ -1012,13 +1012,13 @@ window.authorGuideContent = (function () {
           "- Logged out of OCI tenants"
         ].join("\n"),
         sourceHref: labLink("secure-desktop-how-to-request"),
-        sourceLabel: "Open Canonical Lab",
+        sourceLabel: "Open Full Guide",
         guideTarget: "specialized-workflows"
       },
       {
         id: "ai-developer-hub",
         title: "AI Developer Hub",
-        short: "Use the AI Developer Hub guide, repo, and skill bundles to speed up authoring work without replacing the canonical workflow.",
+        short: "Use the AI Developer Hub guide, repository, and skill bundles to speed up authoring work without replacing the canonical workflow.",
         accent: "pine",
         tags: ["workflow", "advanced"],
         description: "Use this card when you want AI-assisted help for drafting, restructuring, or automating LiveLabs authoring tasks, but still need the output anchored to the canonical guide and validator rules.",
@@ -1039,10 +1039,10 @@ window.authorGuideContent = (function () {
           "Committing AI-generated content without preview or validator checks."
         ],
         resourcesTitle: "Hub entry points",
-        resourcesIntro: "Start with the guide, then use the repo and skill bundle as the reusable working set.",
+        resourcesIntro: "Start with the guide, then use the repository and skill bundle as the reusable working set.",
         resourceLinks: [
           resourceLink("AI Developer Hub guide", officialLinks.aiHubGuide, "Open the how-to workflow first."),
-          resourceLink("AI Developer Hub repository", officialLinks.aiHubRepo, "Use the repo when you want the source materials locally."),
+          resourceLink("AI Developer Hub repository", officialLinks.aiHubRepo, "Use the repository when you want the source materials locally."),
           resourceLink("LiveLabs AI Developer skills", officialLinks.aiHubSkills, "Review the authoring skill bundle before you create a new flow.")
         ],
         snippetMeta: "Quick start",
@@ -1057,7 +1057,7 @@ window.authorGuideContent = (function () {
           "https://github.com/lfoinding/livelabs-ai-playground/tree/main/LiveLabs-AI-Developer"
         ].join("\n"),
         sourceHref: labLink("15-labs-livelabs-ai-developer-hub"),
-        sourceLabel: "Open Canonical Lab",
+        sourceLabel: "Open Full Guide",
         guideTarget: "help-faq"
       }
     ]

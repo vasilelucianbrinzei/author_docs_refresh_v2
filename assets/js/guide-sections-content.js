@@ -15,7 +15,7 @@
   explorerItems = content.explorerItems;
 
   function guideLabLink(labId) {
-    return "./workshops/author-guide/index.html?lab=" + encodeURIComponent(labId);
+    return "https://oracle-livelabs.github.io/common/sample-livelabs-templates/create-labs/labs/workshops/livelabs/?lab=" + encodeURIComponent(labId);
   }
 
   function cloneArray(items) {
@@ -69,7 +69,7 @@
       resourceLinks: cloneObjectArray(item.resourceLinks),
       image: cloneImage(item.image),
       sourceHref: item.sourceHref || "",
-      sourceLabel: item.sourceLabel || "Open Canonical Lab"
+      sourceLabel: item.sourceLabel || "Open Full Guide"
     }, overrides || {});
   }
 
@@ -91,7 +91,7 @@
       resourcesTitle: "",
       resourcesIntro: "",
       resourceLinks: [],
-      sourceLabel: "Open Canonical Page"
+      sourceLabel: "Open Full Guide"
     }, config || {});
   }
 
@@ -125,7 +125,7 @@
         "Keep the GitHub ownership model clear before you build."
       ],
       sectionHref: guideLabLink("introduction"),
-      sectionLabel: "Open Canonical Page",
+      sectionLabel: "Open Full Guide",
       image: {
         src: "./content/author-guide/introduction/images/livelabs-publishing-flow.png",
         alt: "LiveLabs publishing workflow diagram",
@@ -139,7 +139,7 @@
           summary: "Choose the shortest route before you open the markdown fallback or the deeper section cards.",
           steps: [
             "Open the author guide home and stay on that page long enough to choose the right route.",
-            "Use Guided Path when you want the standard request, build, QA, and publish sequence.",
+            "Use Guided Path when you want the standard request, build, Quality Assurance, and publish sequence.",
             "Use Toolkit when you already know the blocker and need one focused answer.",
             "Use Full Guide when you want the section-by-section map in the redesigned shell."
           ],
@@ -154,7 +154,7 @@
           snippetMeta: "Route choice",
           snippetTitle: "Choose one route deliberately",
           snippet: [
-            "Guided Path  -> ordered request, build, QA, publish flow",
+            "Guided Path  -> ordered request, build, Quality Assurance, publish flow",
             "Toolkit      -> one blocker, one answer",
             "Full Guide   -> section-by-section reference map",
             "Markdown     -> fallback, not the default front door"
@@ -166,12 +166,12 @@
           id: "guide-wms-lifecycle",
           label: "WMS flow",
           title: "Understand the WMS lifecycle before you build",
-          summary: "Know when review, Self QA, stakeholder verification, and publishing handoffs actually happen so the rest of the workflow makes sense.",
+          summary: "Know when review, Self Quality Assurance, stakeholder verification, and publishing handoffs actually happen so the rest of the workflow makes sense.",
           steps: [
-            "Read the Submitted, More Info Needed, Approved, In Development, Self QA, and Completed states before heavy build work starts.",
+            "Read the Submitted, More Info Needed, Approved, In Development, Self Quality Assurance, and Completed states before heavy build work starts.",
             "Move into In Development only when active authoring is underway.",
-            "Use Self QA Complete to signal stakeholder-ready review, not unfinished draft work.",
-            "Return later for Quarterly QA once the workshop is already published."
+            "Use Self Quality Assurance Complete to signal stakeholder-ready review, not unfinished draft work.",
+            "Return later for Quarterly Quality Assurance once the workshop is already published."
           ],
           checkpoints: [
             "You know which status comes next after the current one.",
@@ -179,7 +179,7 @@
           ],
           watchFor: [
             "Treating status updates like paperwork instead of workflow gates.",
-            "Skipping the stakeholder handoff after Self QA Complete."
+            "Skipping the stakeholder handoff after Self Quality Assurance Complete."
           ],
           snippetMeta: "Status ladder",
           snippetTitle: "The WMS flow to remember",
@@ -187,10 +187,10 @@
             "Submitted",
             "More Info Needed / Approved",
             "In Development",
-            "Self QA",
-            "Self QA Complete",
+            "Self Quality Assurance",
+            "Self Quality Assurance Complete",
             "Completed",
-            "Quarterly QA"
+            "Quarterly Quality Assurance"
           ].join("\n"),
           sourceHref: guideLabLink("wms-workflows")
         }),
@@ -198,7 +198,7 @@
           id: "guide-github-model",
           label: "GitHub model",
           title: "Understand the Oracle LiveLabs GitHub model",
-          summary: "Keep the production repo, your fork, the common repo, and the local clone distinct so files and manifests do not land in the wrong place.",
+          summary: "Keep the production repository, your fork, the common repository, and the local clone distinct so files and manifests do not land in the wrong place.",
           steps: [
             "Identify the production oracle-livelabs repository that should own the workshop.",
             "Treat oracle-livelabs as production, your fork as the writable remote, and the local clone as the authoring workspace.",
@@ -209,14 +209,14 @@
             "You know why a fork is required before normal authoring work starts."
           ],
           watchFor: [
-            "Confusing the common repo with the product repo that owns the workshop.",
+            "Confusing the common repository with the product repository that owns the workshop.",
             "Starting from a random old workshop instead of the supported sample structure."
           ],
           snippetMeta: "Repository roles",
-          snippetTitle: "Keep the repo model straight",
+          snippetTitle: "Keep the repository model straight",
           snippet: [
-            "oracle-livelabs/<repo> -> production source of truth",
-            "<your-user>/<repo>     -> your fork",
+            "oracle-livelabs/<repository> -> production source of truth",
+            "<your-user>/<repository>     -> your fork",
             "common                 -> shared templates and assets",
             "local clone            -> edit, preview, validate"
           ].join("\n"),
@@ -237,7 +237,7 @@
         "Keep structure, paths, and copy patterns clean from day one."
       ],
       sectionHref: guideLabLink("1-labs-wms"),
-      sectionLabel: "Open Canonical Page",
+      sectionLabel: "Open Full Guide",
       image: {
         src: "./content/author-guide/3-labs-sync-github/images/sample-workshop-structure.png",
         alt: "Sample workshop structure in Visual Studio Code",
@@ -258,23 +258,23 @@
       label: "Section 3",
       title: "Validation and Publish",
       accent: "red",
-      summary: "Turn the working draft into a releasable workshop through Self QA, PR checks, realistic review windows, and the publishing request.",
+      summary: "Turn the working draft into a releasable workshop through Self Quality Assurance, pull request checks, realistic review windows, and the publishing request.",
       purpose: "Use this section once the workshop renders and the work shifts from building to verifying, reviewing, and releasing.",
       highlights: [
         "Save the checklist before touching the status.",
-        "Fix PR issues by class, not by guesswork.",
+        "Fix pull request issues by class, not by guesswork.",
         "Publish only with production URLs and metadata."
       ],
       sectionHref: guideLabLink("5-labs-qa-checks"),
-      sectionLabel: "Open Canonical Page",
+      sectionLabel: "Open Full Guide",
       image: {
         src: "./content/author-guide/5-labs-qa-checks/images/self-qa-checklist-1.png",
-        alt: "Self QA checklist in WMS",
+        alt: "Self Quality Assurance checklist in WMS",
         caption: "Validation is a sequence: metadata, checklist, checks, review windows, then publish."
       },
       labs: [
-        labFromItem("qa-checklist", "QA"),
-        labFromItem("pr-checks", "Checks"),
+        labFromItem("Quality Assurance-checklist", "Quality Assurance"),
+        labFromItem("pull request-checks", "Checks"),
         labFromItem("review-sla", "SLA"),
         labFromItem("publish-request", "Publish")
       ]
@@ -292,7 +292,7 @@
         "Preview every enhanced pattern before review."
       ],
       sectionHref: guideLabLink("12-freesql-integration"),
-      sectionLabel: "Open Canonical Page",
+      sectionLabel: "Open Full Guide",
       image: {
         src: "./content/author-guide/quiz/images/quizconfig.png",
         alt: "Quiz configuration example",
@@ -383,12 +383,12 @@
       summary: "Use the tooling layer to keep screens clean and late-stage cleanup manageable, but do not let the tools replace basic authoring discipline.",
       purpose: "These tools help late in the workflow after the structure and content are already real.",
       highlights: [
-        "Fix capture quality before the PR does it for you.",
+        "Fix capture quality before the pull request does it for you.",
         "Use OptiShot for image-size cleanup.",
         "Use Fixomat late and still review the output."
       ],
       sectionHref: guideLabLink("13-labs-capture-screens-best-practices"),
-      sectionLabel: "Open Canonical Page",
+      sectionLabel: "Open Full Guide",
       image: {
         src: "./content/author-guide/13-labs-capture-screens-best-practices/images/screen-captures-general-guidelines.png",
         alt: "General screenshot guidelines reference",
@@ -413,7 +413,7 @@
         "Return to validation after the specialized setup is stable."
       ],
       sectionHref: guideLabLink("10-create-sprints-workflow"),
-      sectionLabel: "Open Canonical Page",
+      sectionLabel: "Open Full Guide",
       image: {
         src: "./content/author-guide/10-labs-create-sprints-workflow/images/sprints-workflow.png",
         alt: "LiveLabs sprint workflow diagram",
@@ -428,7 +428,7 @@
           steps: [
             "Check the sprint inventory first so you are not rebuilding an existing sprint in parallel.",
             "Fork and clone the sprints repository, then copy the sample sprint structure into the correct domain folder.",
-            "Update the sprint manifest, preview the sprint, create the PR, and request sprint publishing in WMS."
+            "Update the sprint manifest, preview the sprint, create the pull request, and request sprint publishing in WMS."
           ],
           checkpoints: [
             "The sprint lives in the correct domain folder and uses sprint-specific metadata.",
@@ -436,7 +436,7 @@
           ],
           watchFor: [
             "Using a workshop repository or workshop manifest pattern for sprint work.",
-            "Forgetting to connect the WMS request and the PR back to the sprint flow."
+            "Forgetting to connect the WMS request and the pull request back to the sprint flow."
           ],
           snippetMeta: "Sprint URL pattern",
           snippetTitle: "Plan around the sprint production path",
@@ -446,7 +446,7 @@
           image: {
             src: "./content/author-guide/10-labs-create-sprints-workflow/images/sprints-workflow.png",
             alt: "Sprint workflow overview",
-            caption: "Sprints are a separate delivery model with their own repo and publish flow."
+            caption: "Sprints are a separate delivery model with their own repository and publish flow."
           },
           sourceHref: guideLabLink("10-create-sprints-workflow")
         }),
@@ -542,7 +542,7 @@
           image: {
             src: "./content/author-guide/8-labs-publish-custom-image-to-marketplace/images/publish-listing-1.png",
             alt: "Publish listing action in Oracle Marketplace",
-            caption: "Marketplace review and publish time is separate from the normal LiveLabs PR flow."
+            caption: "Marketplace review and publish time is separate from the normal LiveLabs pull request flow."
           },
           sourceHref: guideLabLink("8-labs-publish-custom-image-to-marketplace")
         }),
@@ -594,10 +594,10 @@
       highlights: [
         "FAQ first for repeat questions.",
         "Use the owner or channel that fits the blocker.",
-        "Bring WMS ID, preview URL, and repo or PR context."
+        "Bring WMS ID, preview URL, and repository or pull request context."
       ],
       sectionHref: guideLabLink("need-help"),
-      sectionLabel: "Open Canonical Page",
+      sectionLabel: "Open Full Guide",
       image: {
         src: "./content/author-guide/5-labs-qa-checks/images/message-team.png",
         alt: "Message the Team option in WMS",

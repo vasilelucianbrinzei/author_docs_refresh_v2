@@ -158,8 +158,6 @@
       '        <div class="media-player-time"><span data-player-current>00:00</span><span data-player-duration>00:00</span></div>',
       "      </div>",
       '      <div class="media-player-control-group is-right">',
-      '        <button class="media-player-control" type="button" data-player-captions>CC</button>',
-      '        <button class="media-player-control" type="button" data-player-transcript>Transcript</button>',
       '        <select class="media-player-rate" data-player-rate aria-label="Playback speed">',
       '          <option value="0.75">0.75x</option>',
       '          <option value="1" selected>1x</option>',
@@ -169,30 +167,6 @@
       '        <button class="media-player-control" type="button" data-player-fullscreen>Full</button>',
       "      </div>",
       "    </div>",
-      "  </div>",
-      '  <div class="media-player-features">',
-      (options.features || []).map(function (feature) {
-        return "<span>" + escapeHtml(feature) + "</span>";
-      }).join(""),
-      "  </div>",
-      '  <div class="media-player-transcript" hidden>',
-      '    <div class="media-player-transcript-head">',
-      "      <div>",
-      '        <h4>', escapeHtml(options.transcriptTitle), "</h4>",
-      '        <p>', escapeHtml(options.transcriptIntro), "</p>",
-      "      </div>",
-      '      <button class="media-player-control" type="button" data-player-transcript-close>Hide</button>',
-      "    </div>",
-      '    <ol class="media-player-transcript-list">',
-      options.transcript.map(function (entry) {
-        return [
-          "<li>",
-          '  <time datetime="', escapeAttribute(entry.time), '">', escapeHtml(entry.time), "</time>",
-          '  <span>', escapeHtml(entry.text), "</span>",
-          "</li>"
-        ].join("");
-      }).join(""),
-      "    </ol>",
       "  </div>",
       "</section>"
     ].join("");
@@ -227,8 +201,13 @@
     });
 
     state.muteButton.textContent = state.video.muted ? "Muted" : "Sound on";
-    state.captionsButton.classList.toggle("is-active", state.captionsVisible);
-    state.transcriptButton.classList.toggle("is-active", !state.transcriptPanel.hidden);
+    if (state.captionsButton) {
+      state.captionsButton.classList.toggle("is-active", state.captionsVisible);
+    }
+
+    if (state.transcriptButton && state.transcriptPanel) {
+      state.transcriptButton.classList.toggle("is-active", !state.transcriptPanel.hidden);
+    }
     state.currentTime.textContent = formatTime(state.video.currentTime);
     state.duration.textContent = formatTime(state.video.duration || 0);
     state.fullscreenButton.textContent = isFullscreen ? "Exit full" : "Full";
@@ -305,7 +284,7 @@
 
     node.__playerState = state;
 
-    if (!options.captions) {
+    if (state.captionsButton && !options.captions) {
       state.captionsButton.disabled = true;
     }
 
@@ -329,21 +308,20 @@
       updateButtons(state);
     });
 
-    state.captionsButton.addEventListener("click", function () {
-      state.captionsVisible = !state.captionsVisible;
-      setTrackMode(state.video, state.captionsVisible);
-      updateButtons(state);
-    });
+    if (state.captionsButton) {
+      state.captionsButton.addEventListener("click", function () {
+        state.captionsVisible = !state.captionsVisible;
+        setTrackMode(state.video, state.captionsVisible);
+        updateButtons(state);
+      });
+    }
 
-    state.transcriptButton.addEventListener("click", function () {
-      state.transcriptPanel.hidden = !state.transcriptPanel.hidden;
-      updateButtons(state);
-    });
-
-    node.querySelector("[data-player-transcript-close]").addEventListener("click", function () {
-      state.transcriptPanel.hidden = true;
-      updateButtons(state);
-    });
+    if (state.transcriptButton && state.transcriptPanel) {
+      state.transcriptButton.addEventListener("click", function () {
+        state.transcriptPanel.hidden = !state.transcriptPanel.hidden;
+        updateButtons(state);
+      });
+    }
 
     state.fullscreenButton.addEventListener("click", function () {
       var requestPromise;

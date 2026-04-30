@@ -8,17 +8,17 @@
   "tutorials": [
     {
       "title": "Section 3: Validation and Publish",
-      "description": "Use this section for review readiness, pull request checks, self-QA, publishing, and timeline expectations.",
+      "description": "Use this section for review readiness, pull request checks, Self Quality Assurance, publishing, and timeline expectations.",
       "filename": "./../../03-validation-qa-publish/validation-qa-publish.md"
     },
     {
-      "title": "Lab 7: QA checks and steps",
-      "description": "Explains how to share previews, complete self-QA, handle quarterly QA, and prepare the workshop for stakeholder review.",
+      "title": "Lab 7: Quality Assurance checks and steps",
+      "description": "Explains how to share previews, complete Self Quality Assurance, handle Quarterly Quality Assurance, and prepare the workshop for stakeholder review.",
       "filename": "./../../03-validation-qa-publish/sections/01-qa-checks/5-labs-qa-checks.md"
     },
     {
-      "title": "Lab 8: Review, QA, and publishing timelines",
-      "description": "Summarizes expected turnaround times for review, stakeholder QA, publishing, and support follow-up.",
+      "title": "Lab 8: Review, Quality Assurance, and publishing timelines",
+      "description": "Summarizes expected turnaround times for review, stakeholder Quality Assurance, publishing, and support follow-up.",
       "filename": "./../../07-help-faq-support/sections/03-sla/sla.md"
     },
     {

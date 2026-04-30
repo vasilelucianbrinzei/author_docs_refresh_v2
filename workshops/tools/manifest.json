@@ -23,7 +23,7 @@
     },
     {
       "title": "Lab 15: Clean up content with Fixomat",
-      "description": "Explains how to use Fixomat for Markdown cleanup and asset optimization before review or QA.",
+      "description": "Explains how to use Fixomat for Markdown cleanup and asset optimization before review or Quality Assurance.",
       "filename": "./../../05-tools/sections/03-fixomat/fixomat.md"
     }
   ]
