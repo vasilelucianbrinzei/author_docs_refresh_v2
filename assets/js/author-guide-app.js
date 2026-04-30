@@ -972,82 +972,11 @@
   }
 
   function updateBreadcrumb() {
-    var parts = ["Home"];
-    var section;
-    var lab;
-
     if (!breadcrumbTrail) {
       return;
     }
 
-    if (state.mode === "beginner" && stepMeta[state.currentStep]) {
-      parts.push("Quickstart");
-      parts.push("Step " + (state.currentStep + 1));
-      parts.push(stepMeta[state.currentStep].title);
-    } else if (state.mode === "explorer") {
-      parts.push("Cheatsheet");
-      if (state.activeTag !== "all") {
-        parts.push(titleCaseTag(state.activeTag));
-      }
-    } else if (state.mode === "guide") {
-      section = currentGuideSection();
-      lab = currentGuideLab();
-
-      if (section) {
-        parts.push("Full Guide");
-        parts.push(section.label);
-        parts.push(section.title);
-      }
-
-      if (lab) {
-        parts.push(lab.label || "Lab");
-        parts.push(lab.title);
-      }
-    } else if (state.mode === "search") {
-      parts.push("Search");
-      parts.push(state.searchQuery ? '"' + state.searchQuery + '"' : "Results");
-    }
-
-    function breadcrumbTarget(part) {
-      if (part === "Home") {
-        return "hub";
-      }
-
-      if (part === "Quickstart") {
-        return "beginner";
-      }
-
-      if (part === "Cheatsheet") {
-        return "explorer";
-      }
-
-      if (part === "Search") {
-        return "search";
-      }
-
-      return "";
-    }
-
-    breadcrumbTrail.innerHTML = parts.map(function (part, index) {
-      var isCurrent = index === parts.length - 1;
-      var target = breadcrumbTarget(part);
-
-      if (!isCurrent && target) {
-        return [
-          '<button type="button" class="breadcrumb-label breadcrumb-link" data-mode-target="', target, '">',
-          escapeHtml(part),
-          "</button>",
-          '<span class="breadcrumb-separator">/</span>'
-        ].join("");
-      }
-
-      return [
-        isCurrent ? "<strong>" : '<span class="breadcrumb-label">',
-        escapeHtml(part),
-        isCurrent ? "</strong>" : "</span>",
-        isCurrent ? "" : '<span class="breadcrumb-separator">/</span>'
-      ].join("");
-    }).join("");
+    breadcrumbTrail.innerHTML = "";
   }
 
   function updateProgressCaption() {
